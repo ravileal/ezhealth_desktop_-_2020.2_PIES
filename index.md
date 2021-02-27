@@ -1,37 +1,17 @@
-## Welcome to GitHub Pages
+## Bem vindo ao EzHealth Versão Desktop
 
-You can use the [editor on GitHub](https://github.com/ravileal/ezhealth_desktop_-_2020.2_PIES/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Com o mundo cada vez mais acelerado, as pessoas necessitam ter um controle maior sobre sua rotina alimentar, montando uma dieta de acordo com suas necessidades. As mesmas reclamam constantemente que as aplicações atuais são incompletas e não abordam toda sua necessidade. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Pensando nisso, o sistema desktop "EzHealth", oferece uma aplicação que aborda em seu banco de dados doenças crônicas, entregando informação necessária aos usuários que sejam portadoras de tais doenças. O “EzHealth” mostra a esse público mais específico alimentos que possuam substancias nocivas ao seu organismo, de acordo com cada doença/intolerância que o usuário manifestar, como é o caso das pessoas com diabetes e aquelas que possuam doenças que necessitam acompanhar o que se ingere, como é o caso de pessoas com intolerância à lactose.
 
-### Markdown
+Além dessas doenças citadas, também há suporte à hipertensão, que afeta boa parte da população. O EzHealth vem com a proposta de facilitar a vida dos portadores dessas doenças, que precisam seguir uma dieta rigorosa e praticar exercícios, sejam eles na academia ou esporadicamente. Qualquer uma das pessoas que possua essa necessidade se encaixa no perfil de usuário do sistema.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Autores
 
-```markdown
-Syntax highlighted code block
+Nome | Email
+--- | --- 
+Ravi Leal | [pauloravileal@outlook.com](pauloravileal@outlook.com)
+Pedro Anderson | [pedroanderson10@gmail.com](pedroanderson10@gmail.com)
+Aurislânia Pereira | [laninha73pereira@gmail.com](laninha73pereira@gmail.com)
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ravileal/ezhealth_desktop_-_2020.2_PIES/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
