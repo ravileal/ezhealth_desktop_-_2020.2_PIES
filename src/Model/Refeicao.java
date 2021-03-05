@@ -4,23 +4,9 @@ import java.util.*;
 
 public class Refeicao extends AbstractAlimentacao {
 
-	private Collection<Alimento> listAlimento;
 	private Date data;
 	private String tipo;
-
-	public ArrayList<Alimento> getListAlimento() {
-		// TODO - implement Refeicao.getListAlimento
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * 
-	 * @param listAlimento
-	 */
-	public void setListAlimento(ArrayList<Alimento> listAlimento) {
-		// TODO - implement Refeicao.setListAlimento
-		throw new UnsupportedOperationException();
-	}
+	private Collection<Alimento> listAlimento;
 
 	public Date getData() {
 		return this.data;
@@ -44,6 +30,20 @@ public class Refeicao extends AbstractAlimentacao {
 	 */
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public ArrayList<Alimento> getListAlimento() {
+		// TODO - implement Refeicao.getListAlimento
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * 
+	 * @param listAlimento
+	 */
+	public void setListAlimento(ArrayList<Alimento> listAlimento) {
+		// TODO - implement Refeicao.setListAlimento
+		throw new UnsupportedOperationException();
 	}
 
 	/**

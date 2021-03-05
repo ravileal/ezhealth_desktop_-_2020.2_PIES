@@ -2,9 +2,9 @@ package Model;
 
 public class Exercicio {
 
+	private String nome;
 	private float calorias;
 	private String duracao;
-	private String nome;
 	private Date data;
 
 	public float getCalorias() {

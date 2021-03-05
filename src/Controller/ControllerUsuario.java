@@ -1,10 +1,9 @@
 package Controller;
 
+import Util.*;
 import Model.*;
 
-public class ControllerUsuario implements IController {
-
-	String a;
+public class ControllerUsuario implements CRUD {
 
 	/**
 	 * 

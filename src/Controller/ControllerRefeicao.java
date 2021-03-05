@@ -1,8 +1,9 @@
 package Controller;
 
+import Util.*;
 import Model.*;
 
-public class ControllerRefeicao implements IAlimentacao, IController {
+public class ControllerRefeicao implements CRUD, IAlimentacao {
 
 	/**
 	 * 

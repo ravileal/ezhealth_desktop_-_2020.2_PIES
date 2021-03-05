@@ -1,4 +1,6 @@
 package Controller;
 
-public class ControllerExercicios implements IController {
+import Util.*;
+
+public class ControllerExercicios implements CRUD {
 }

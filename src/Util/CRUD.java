@@ -1,6 +1,6 @@
-package Controller;
+package Util;
 
-public interface IController<T> {
+public interface CRUD<T> {
 
 	/**
 	 * 
@@ -25,11 +25,5 @@ public interface IController<T> {
 	 * @param id
 	 */
 	boolean remover(String id);
-
-	/**
-	 * 
-	 * @param obj
-	 */
-	boolean validarCampos(T obj);
 
 }

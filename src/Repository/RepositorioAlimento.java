@@ -1,4 +1,6 @@
 package Repository;
 
-public class RepositorioAlimento extends AbstractRepository implements IRepository {
+import Util.*;
+
+public class RepositorioAlimento implements CRUD {
 }

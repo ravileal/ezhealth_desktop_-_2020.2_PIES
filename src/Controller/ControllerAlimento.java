@@ -1,4 +1,6 @@
 package Controller;
 
-public class ControllerAlimento implements IController, IAlimentacao {
+import Util.*;
+
+public class ControllerAlimento implements IAlimentacao, CRUD {
 }
