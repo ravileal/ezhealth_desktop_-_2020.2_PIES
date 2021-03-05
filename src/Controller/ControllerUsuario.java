@@ -47,6 +47,8 @@ public class ControllerUsuario implements CRUD<Usuario> {
 
 	@Override
 	public boolean adicionar(Usuario obj) {
+		if(obj.getNome().equals("") || obj.getSenha().equals(""))
+			return false;
 		// TODO Auto-generated method stub
 		return rep.adicionar(obj);
 	}
@@ -54,17 +56,23 @@ public class ControllerUsuario implements CRUD<Usuario> {
 	@Override
 	public ArrayList<Usuario> buscar(String nome) {
 		// TODO Auto-generated method stub
+		if(nome.equals(""))
+			return null;
 		return rep.buscar(nome);
 	}
 
 	@Override
 	public boolean editar(String nome, Usuario obj) {
+		if(nome.equals(""))
+			return false;
 		// TODO Auto-generated method stub
 		return rep.editar(nome, obj);
 	}
 
 	@Override
 	public boolean remover(String nome) {
+		if(nome.equals(""))
+			return false;
 		// TODO Auto-generated method stub
 		return rep.remover(nome);
 	}
