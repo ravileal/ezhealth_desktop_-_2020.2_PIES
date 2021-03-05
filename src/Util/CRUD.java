@@ -1,5 +1,7 @@
 package Util;
 
+import java.util.ArrayList;
+
 public interface CRUD<T> {
 
 	/**
@@ -12,13 +14,13 @@ public interface CRUD<T> {
 	 * 
 	 * @param id
 	 */
-	ArrayList<T> buscar(String id);
+	ArrayList<T> buscar(String nome);
 
 	/**
 	 * 
 	 * @param obj
 	 */
-	boolean editar(T obj);
+	boolean editar(String nome, T obj);
 
 	/**
 	 * 
