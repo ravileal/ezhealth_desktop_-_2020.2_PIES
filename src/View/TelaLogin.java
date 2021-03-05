@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import Controller.ControllerUsuario;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -93,7 +96,14 @@ public class TelaLogin {
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null,"Logado com sucesso!");
+				
+				boolean logado = new ControllerUsuario()
+						.validarLogin(campoLogin.getText(), campoSenha.getText());
+				
+				JOptionPane.showMessageDialog(null, 
+							(logado)? 
+							"Logado com sucesso!" :
+							"Erro ao tentar realizar login!");
 			}
 		});
 		btnLogin.setBounds(788, 492, 89, 36);
@@ -128,13 +138,14 @@ public class TelaLogin {
 		panel.add(btnCadastro);
 		
 		JLabel jLabelImagemLogin1 = new JLabel("");
-		ImageIcon imgLogin1 = new ImageIcon(this.getClass().getResource("/imagemlogin1.png"));
+		ImageIcon imgLogin1 = new ImageIcon(this.getClass().getResource("/Images/imagemlogin1.png"));
 		jLabelImagemLogin1.setIcon(imgLogin1);
-		jLabelImagemLogin1.setBounds(-32, 109, 468, 355);
+		jLabelImagemLogin1.setBounds(46, 109, 468, 355);
 		panel.add(jLabelImagemLogin1);
 		
 		JLabel imgLogin2 = new JLabel("");
-		ImageIcon icon = new ImageIcon(this.getClass().getResource("/hospital.png"));
+		imgLogin2.setIcon(new ImageIcon(TelaLogin.class.getResource("/Images/hospital.png")));
+		ImageIcon icon = new ImageIcon(this.getClass().getResource("/Images/hospital.png"));
 		Image img2 = icon.getImage();
 		Image imgScale = img2.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
 		icon = new ImageIcon(imgScale);
