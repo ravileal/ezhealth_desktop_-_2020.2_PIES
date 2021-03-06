@@ -138,15 +138,8 @@ public class TelaRefeicoes {
 		lblListaDeAlimentos.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		frame.getContentPane().add(lblListaDeAlimentos);
 		
-		JLabel lblVerTabelaNutricional = new JLabel("Ver tabela nutricional");
-		lblVerTabelaNutricional.setBounds(136, 494, 169, 30);
-		lblVerTabelaNutricional.setVerticalAlignment(SwingConstants.TOP);
-		lblVerTabelaNutricional.setHorizontalAlignment(SwingConstants.LEFT);
-		lblVerTabelaNutricional.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		frame.getContentPane().add(lblVerTabelaNutricional);
-		
 		Button buttonSalvar = new Button("Salvar");
-		buttonSalvar.setBounds(460, 494, 70, 22);
+		buttonSalvar.setBounds(136, 503, 70, 22);
 		buttonSalvar.setBackground(SystemColor.menu);
 		frame.getContentPane().add(buttonSalvar);
 		
