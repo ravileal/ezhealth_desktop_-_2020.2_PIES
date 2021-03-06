@@ -18,6 +18,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JToolBar;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+
+import Controller.ControllerUsuario;
+
 import javax.swing.JInternalFrame;
 import javax.swing.JDesktopPane;
 import java.awt.Panel;
@@ -80,6 +83,13 @@ public class TelaHome {
 		panel.setLayout(null);
 		
 		JLabel labelHome = new JLabel("Home");
+		labelHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaHome().main(null);
+			}
+		});
+		
 		labelHome.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelHome.setBounds(10, 33, 63, 27);
 		panel.add(labelHome);
@@ -89,11 +99,23 @@ public class TelaHome {
 		labelRefeicoes.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelRefeicoes.setBounds(10, 59, 144, 35);
 		panel.add(labelRefeicoes);
+		labelRefeicoes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaRefeicoesPersonalizadas().main(null);
+			}
+		});
 		
 		JLabel labelPersonalizadas = new JLabel("Personalizadas");
 		labelPersonalizadas.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelPersonalizadas.setBounds(10, 80, 86, 27);
 		panel.add(labelPersonalizadas);
+		labelPersonalizadas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaCriarRefeicoesPersonalizadas().main(null);
+			}
+		});
 		
 		JLabel lblNewLabel_7 = new JLabel("Menu");
 		lblNewLabel_7.setVerticalAlignment(SwingConstants.TOP);
@@ -107,6 +129,12 @@ public class TelaHome {
 		labelExercicios.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelExercicios.setBounds(10, 106, 144, 35);
 		panel.add(labelExercicios);
+		labelExercicios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaExercicios().main(null);
+			}
+		});
 		
 		JLabel labelMeusDados = new JLabel("Meus Dados");
 		labelMeusDados.setHorizontalAlignment(SwingConstants.LEFT);
@@ -119,6 +147,12 @@ public class TelaHome {
 		labelSair.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelSair.setBounds(10, 170, 144, 35);
 		panel.add(labelSair);
+		labelSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+		});
 		
 		Panel panel_1 = new Panel();
 		panel_1.setBackground(new Color(0, 0, 51));
@@ -200,10 +234,17 @@ public class TelaHome {
 		labelCafedaManha.setBounds(71, 0, 125, 45);
 		panel_4.add(labelCafedaManha);
 		
+		
 		JLabel labelAdicionarCafe = new JLabel("+");
 		labelAdicionarCafe.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		labelAdicionarCafe.setBounds(217, 11, 20, 45);
 		panel_4.add(labelAdicionarCafe);
+		labelAdicionarCafe.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaaddAlimentos().main(null);
+			}
+		});
 		
 		JPanel panel_4_1 = new JPanel();
 		panel_4_1.setLayout(null);
@@ -221,6 +262,12 @@ public class TelaHome {
 		panel_4_1.add(labelLancheTarde);
 		
 		JLabel labelAdicionarLancheTarde = new JLabel("+");
+		labelAdicionarLancheTarde.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaaddAlimentos().main(null);
+			}
+		});
 		labelAdicionarLancheTarde.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		labelAdicionarLancheTarde.setBounds(217, 11, 20, 45);
 		panel_4_1.add(labelAdicionarLancheTarde);
@@ -244,6 +291,12 @@ public class TelaHome {
 		labelAdicionarLancheManha.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		labelAdicionarLancheManha.setBounds(217, 11, 20, 45);
 		panel_4_2.add(labelAdicionarLancheManha);
+		labelAdicionarLancheManha.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaaddAlimentos().main(null);
+			}
+		});
 		
 		JPanel panel_4_3 = new JPanel();
 		panel_4_3.setLayout(null);
@@ -264,6 +317,12 @@ public class TelaHome {
 		labelAdicionarAlmoco.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		labelAdicionarAlmoco.setBounds(217, 11, 20, 45);
 		panel_4_3.add(labelAdicionarAlmoco);
+		labelAdicionarAlmoco.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaaddAlimentos().main(null);
+			}
+		});
 		
 		JPanel panel_4_4 = new JPanel();
 		panel_4_4.setLayout(null);
@@ -284,6 +343,12 @@ public class TelaHome {
 		labelAdicionarJanta.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		labelAdicionarJanta.setBounds(217, 11, 20, 45);
 		panel_4_4.add(labelAdicionarJanta);
+		labelAdicionarJanta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaaddAlimentos().main(null);
+			}
+		});
 		
 		JPanel panel_4_5 = new JPanel();
 		panel_4_5.setLayout(null);
@@ -304,5 +369,11 @@ public class TelaHome {
 		labelAdicionarLancheNoite.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		labelAdicionarLancheNoite.setBounds(217, 11, 20, 45);
 		panel_4_5.add(labelAdicionarLancheNoite);
+		labelAdicionarLancheNoite.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaaddAlimentos().main(null);
+			}
+		});
 	}
 }

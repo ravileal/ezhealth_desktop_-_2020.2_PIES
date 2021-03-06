@@ -8,6 +8,9 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JScrollPane;
 import java.awt.Panel;
 import java.awt.Color;
@@ -84,17 +87,35 @@ public class TelaRefeicoesPersonalizadas {
 		labelHome.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelHome.setBounds(10, 33, 63, 27);
 		panel.add(labelHome);
+		labelHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaHome().main(null);
+			}
+		});
 		
 		JLabel labelRefeicoes = new JLabel("Refei\u00E7\u00F5es ");
 		labelRefeicoes.setHorizontalAlignment(SwingConstants.LEFT);
 		labelRefeicoes.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelRefeicoes.setBounds(10, 59, 144, 35);
 		panel.add(labelRefeicoes);
+		labelRefeicoes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaCriarRefeicoesPersonalizadas().main(null);
+			}
+		});
 		
 		JLabel labelPersonalizadas = new JLabel("Personalizadas");
 		labelPersonalizadas.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelPersonalizadas.setBounds(10, 80, 86, 27);
 		panel.add(labelPersonalizadas);
+		labelPersonalizadas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaRefeicoesPersonalizadas().main(null);
+			}
+		});
 		
 		JLabel lblNewLabel_7 = new JLabel("Menu");
 		lblNewLabel_7.setVerticalAlignment(SwingConstants.TOP);
@@ -108,6 +129,12 @@ public class TelaRefeicoesPersonalizadas {
 		labelExercicios.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelExercicios.setBounds(10, 106, 144, 35);
 		panel.add(labelExercicios);
+		labelExercicios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaExercicios().main(null);
+			}
+		});
 		
 		JLabel labelMeusDados = new JLabel("Meus Dados");
 		labelMeusDados.setHorizontalAlignment(SwingConstants.LEFT);
@@ -120,6 +147,12 @@ public class TelaRefeicoesPersonalizadas {
 		labelSair.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelSair.setBounds(10, 170, 144, 35);
 		panel.add(labelSair);
+		labelSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+		});
 		
 		JLabel labeRefeicao = new JLabel("Refei\u00E7\u00F5es Personalizadas");
 		labeRefeicao.setVerticalAlignment(SwingConstants.TOP);
@@ -145,6 +178,12 @@ public class TelaRefeicoesPersonalizadas {
 		labelCriarRefeicao.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		labelCriarRefeicao.setBounds(155, 555, 354, 30);
 		frame.getContentPane().add(labelCriarRefeicao);
+		labelCriarRefeicao.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaCriarRefeicoesPersonalizadas().main(null);
+			}
+		});
 		
 		JLabel lblBuscarAlimentos_2 = new JLabel("+");
 		lblBuscarAlimentos_2.setVerticalAlignment(SwingConstants.TOP);

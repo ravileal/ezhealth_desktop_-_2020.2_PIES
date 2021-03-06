@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import java.awt.Panel;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -71,17 +74,35 @@ public class TelaaddAlimentos {
 		labelHome.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelHome.setBounds(10, 33, 63, 27);
 		panel.add(labelHome);
+		labelHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaHome().main(null);
+			}
+		});
 		
 		JLabel labelRefeicoes = new JLabel("Refei\u00E7\u00F5es ");
 		labelRefeicoes.setHorizontalAlignment(SwingConstants.LEFT);
 		labelRefeicoes.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelRefeicoes.setBounds(10, 59, 144, 35);
 		panel.add(labelRefeicoes);
+		labelRefeicoes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaCriarRefeicoesPersonalizadas().main(null);
+			}
+		});
 		
 		JLabel labelPersonalizadas = new JLabel("Personalizadas");
 		labelPersonalizadas.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelPersonalizadas.setBounds(10, 80, 86, 27);
 		panel.add(labelPersonalizadas);
+		labelPersonalizadas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaRefeicoesPersonalizadas().main(null);
+			}
+		});
 		
 		JLabel lblNewLabel_7 = new JLabel("Menu");
 		lblNewLabel_7.setVerticalAlignment(SwingConstants.TOP);
@@ -95,6 +116,12 @@ public class TelaaddAlimentos {
 		labelExercicios.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelExercicios.setBounds(10, 106, 144, 35);
 		panel.add(labelExercicios);
+		labelExercicios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaExercicios().main(null);
+			}
+		});
 		
 		JLabel labelMeusDados = new JLabel("Meus Dados");
 		labelMeusDados.setHorizontalAlignment(SwingConstants.LEFT);
@@ -107,6 +134,12 @@ public class TelaaddAlimentos {
 		labelSair.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelSair.setBounds(10, 170, 144, 35);
 		panel.add(labelSair);
+		labelSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+		});
 		
 		JLabel labelNomeRefeicao = new JLabel("Caf\u00E9 da Manh\u00E3");
 		labelNomeRefeicao.setBounds(136, 91, 113, 30);
@@ -130,6 +163,12 @@ public class TelaaddAlimentos {
 		buttonVoltar.setBounds(908, 101, 70, 22);
 		buttonVoltar.setBackground(SystemColor.control);
 		frame.getContentPane().add(buttonVoltar);
+		buttonVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaHome().main(null);
+			}
+		});
 		
 		JLabel lblListaDeAlimentos = new JLabel("Lista de Alimentos");
 		lblListaDeAlimentos.setBounds(136, 181, 141, 30);
