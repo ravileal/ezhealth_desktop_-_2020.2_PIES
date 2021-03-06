@@ -18,18 +18,18 @@ public class ControllerUsuario implements CRUD<Usuario> {
 	 * @param nome
 	 * @param senha
 	 */
-	public boolean validarLogin(String nome, String senha) {
+	public boolean validarLogin(String usuario, String senha) {
 		// TODO - implement ControllerUsuario.validarLogin
 		
-		ArrayList<Usuario> list = rep.buscar(nome);
+		ArrayList<Usuario> list = rep.buscar(usuario);
 		if(list.size() == 0)
 			return false;
 		
-		Usuario u = rep.buscar(nome).get(0);
+		Usuario u = rep.buscar(usuario).get(0);
 		
 		if( u == null 
 		|| !u.getSenha().equals(senha) 
-		|| !u.getNome().equals(nome)
+		|| !u.getUsuario().equals(usuario)
 		) return false;
 		
 		return true;

@@ -13,7 +13,7 @@ public class RepositorioUsuario implements CRUD<Usuario> {
 		list = new ArrayList<>();
 		
 		Usuario u = new Usuario();
-		u.setNome("admin");
+		u.setUsuario("admin");
 		u.setSenha("admin");
 		list.add(u);
 	}
@@ -24,33 +24,33 @@ public class RepositorioUsuario implements CRUD<Usuario> {
 	}
 
 	@Override
-	public ArrayList<Usuario> buscar(String nome) {
+	public ArrayList<Usuario> buscar(String usuario) {
 		// TODO Auto-generated method stub
 		ArrayList<Usuario> listResult = new ArrayList<>();
 		
 		for(Usuario u: list)
-			if( u.getNome().equals(nome) )
+			if( u.getUsuario().equals(usuario) )
 				listResult.add(u);
 				
 		return listResult;
 	}
 
 	@Override
-	public boolean editar(String nome, Usuario obj) {
+	public boolean editar(String usuario, Usuario obj) {
 		// TODO Auto-generated method stub
-		return (list.set(getIdForName(nome), obj) != null)? true: false;
+		return (list.set(getIdForUsuario(usuario), obj) != null)? true: false;
 	}
 
 	@Override
-	public boolean remover(String nome) {
+	public boolean remover(String usuario) {
 		// TODO Auto-generated method stub
-		return (list.remove(getIdForName(nome)) != null)? true: false;
+		return (list.remove(getIdForUsuario(usuario)) != null)? true: false;
 	
 	}
 	
-	private int getIdForName(String nome) {
+	private int getIdForUsuario(String usuario) {
 		for(int i=0; i<list.size(); i++)
-			if( list.get(i).getNome().equals(nome) )
+			if( list.get(i).getUsuario().equals(usuario) )
 				return i;
 		return -1;
 	}
