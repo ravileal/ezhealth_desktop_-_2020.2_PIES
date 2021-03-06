@@ -170,15 +170,15 @@ public class TelaHome {
 		panel_2.add(panel_3);
 		panel_3.setBackground(SystemColor.activeCaption);
 		
-		JLabel lblNewLabel_1_1_1_1_1_1 = new JLabel("Segunda - 10/02");
-		lblNewLabel_1_1_1_1_1_1.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
-		lblNewLabel_1_1_1_1_1_1.setBounds(139, 103, 125, 22);
-		frame.getContentPane().add(lblNewLabel_1_1_1_1_1_1);
+		JLabel labelData = new JLabel("Segunda - 10/02");
+		labelData.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
+		labelData.setBounds(139, 103, 125, 22);
+		frame.getContentPane().add(labelData);
 		
-		JLabel lblNewLabel_4 = new JLabel("Fevereiro 2021");
-		lblNewLabel_4.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblNewLabel_4.setBounds(139, 71, 125, 45);
-		frame.getContentPane().add(lblNewLabel_4);
+		JLabel labelMes = new JLabel("Fevereiro 2021");
+		labelMes.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
+		labelMes.setBounds(139, 71, 125, 45);
+		frame.getContentPane().add(labelMes);
 		
 		JLabel lblNewLabel_4_1 = new JLabel("Refei\u00E7\u00F5es");
 		lblNewLabel_4_1.setFont(new Font("Quicksand Light", Font.PLAIN, 16));

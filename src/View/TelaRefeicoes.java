@@ -14,10 +14,14 @@ import javax.swing.Box;
 import javax.swing.JSeparator;
 import java.awt.Button;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JList;
+import javax.swing.ScrollPaneConstants;
 
 public class TelaRefeicoes {
 
 	private JFrame frame;
+	private JTextField txtPesquise;
 
 	/**
 	 * Launch the application.
@@ -52,15 +56,15 @@ public class TelaRefeicoes {
 		frame.getContentPane().setLayout(null);
 		
 		Panel panel_1 = new Panel();
+		panel_1.setBounds(0, 0, 1014, 73);
 		panel_1.setLayout(null);
 		panel_1.setBackground(new Color(0, 0, 51));
-		panel_1.setBounds(0, 0, 1014, 73);
 		frame.getContentPane().add(panel_1);
 		
 		Panel panel = new Panel();
+		panel.setBounds(0, 73, 119, 474);
 		panel.setLayout(null);
 		panel.setBackground(SystemColor.activeCaption);
-		panel.setBounds(0, 73, 119, 474);
 		frame.getContentPane().add(panel);
 		
 		JLabel labelHome = new JLabel("Home");
@@ -105,17 +109,17 @@ public class TelaRefeicoes {
 		panel.add(labelSair);
 		
 		JLabel labelNomeRefeicao = new JLabel("Caf\u00E9 da Manh\u00E3");
+		labelNomeRefeicao.setBounds(136, 91, 113, 30);
 		labelNomeRefeicao.setVerticalAlignment(SwingConstants.TOP);
 		labelNomeRefeicao.setHorizontalAlignment(SwingConstants.LEFT);
 		labelNomeRefeicao.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelNomeRefeicao.setBounds(136, 91, 113, 30);
 		frame.getContentPane().add(labelNomeRefeicao);
 		
 		JLabel labelData = new JLabel("Quarta - 10/02");
+		labelData.setBounds(136, 112, 92, 30);
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
 		labelData.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		labelData.setBounds(136, 112, 92, 30);
 		frame.getContentPane().add(labelData);
 		
 		JSeparator separator = new JSeparator();
@@ -123,37 +127,67 @@ public class TelaRefeicoes {
 		frame.getContentPane().add(separator);
 		
 		Button buttonVoltar = new Button("Voltar");
-		buttonVoltar.setBackground(SystemColor.control);
 		buttonVoltar.setBounds(908, 101, 70, 22);
+		buttonVoltar.setBackground(SystemColor.control);
 		frame.getContentPane().add(buttonVoltar);
 		
 		JLabel lblListaDeAlimentos = new JLabel("Lista de Alimentos");
+		lblListaDeAlimentos.setBounds(136, 181, 141, 30);
 		lblListaDeAlimentos.setVerticalAlignment(SwingConstants.TOP);
 		lblListaDeAlimentos.setHorizontalAlignment(SwingConstants.LEFT);
 		lblListaDeAlimentos.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblListaDeAlimentos.setBounds(136, 181, 141, 30);
 		frame.getContentPane().add(lblListaDeAlimentos);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(125, 458, 429, -223);
-		frame.getContentPane().add(scrollPane);
-		
 		JLabel lblVerTabelaNutricional = new JLabel("Ver tabela nutricional");
+		lblVerTabelaNutricional.setBounds(136, 494, 169, 30);
 		lblVerTabelaNutricional.setVerticalAlignment(SwingConstants.TOP);
 		lblVerTabelaNutricional.setHorizontalAlignment(SwingConstants.LEFT);
 		lblVerTabelaNutricional.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblVerTabelaNutricional.setBounds(136, 494, 169, 30);
 		frame.getContentPane().add(lblVerTabelaNutricional);
 		
 		Button buttonSalvar = new Button("Salvar");
-		buttonSalvar.setBackground(SystemColor.menu);
 		buttonSalvar.setBounds(460, 494, 70, 22);
+		buttonSalvar.setBackground(SystemColor.menu);
 		frame.getContentPane().add(buttonSalvar);
 		
+		JLabel lblAdicionarAlimentos = new JLabel("Adicionar Alimentos ou Refei\u00E7\u00F5es Personalizadas");
+		lblAdicionarAlimentos.setBounds(643, 181, 354, 30);
+		lblAdicionarAlimentos.setVerticalAlignment(SwingConstants.TOP);
+		lblAdicionarAlimentos.setHorizontalAlignment(SwingConstants.LEFT);
+		lblAdicionarAlimentos.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		frame.getContentPane().add(lblAdicionarAlimentos);
+		
+		txtPesquise = new JTextField();
+		txtPesquise.setBounds(643, 231, 335, 35);
+		txtPesquise.setForeground(SystemColor.scrollbar);
+		txtPesquise.setToolTipText("Pesquisar");
+		txtPesquise.setText("Pesquisar Alimentos/Refei\u00E7\u00F5es");
+		frame.getContentPane().add(txtPesquise);
+		txtPesquise.setColumns(10);
+		
+		JLabel lblUltimasPesquisas = new JLabel("Ultimas pesquisas");
+		lblUltimasPesquisas.setBounds(643, 308, 354, 30);
+		lblUltimasPesquisas.setVerticalAlignment(SwingConstants.TOP);
+		lblUltimasPesquisas.setHorizontalAlignment(SwingConstants.LEFT);
+		lblUltimasPesquisas.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		frame.getContentPane().add(lblUltimasPesquisas);
+		
+		JScrollPane scrollPaneUltimasPesquisas = new JScrollPane();
+		scrollPaneUltimasPesquisas.setBounds(642, 336, 344, 188);
+		frame.getContentPane().add(scrollPaneUltimasPesquisas);
+		
+		JLabel labelAlimento_1 = new JLabel("Suco de uva    200ml - 300kcal");
+		labelAlimento_1.setHorizontalAlignment(SwingConstants.LEFT);
+		labelAlimento_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		scrollPaneUltimasPesquisas.setColumnHeaderView(labelAlimento_1);
+		
+		JScrollPane scrollPaneListaAlimentos = new JScrollPane();
+		scrollPaneListaAlimentos.setBounds(135, 222, 395, 242);
+		frame.getContentPane().add(scrollPaneListaAlimentos);
+		
 		JLabel labelAlimento = new JLabel("Suco de uva    200ml - 300kcal");
+		scrollPaneListaAlimentos.setColumnHeaderView(labelAlimento);
 		labelAlimento.setHorizontalAlignment(SwingConstants.LEFT);
 		labelAlimento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		labelAlimento.setBounds(136, 236, 200, 30);
-		frame.getContentPane().add(labelAlimento);
 	}
 }
