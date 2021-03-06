@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.ScrollPaneConstants;
 
-public class TelaRefeicoes {
+public class TelaaddAlimentos {
 
 	private JFrame frame;
 	private JTextField txtPesquise;
@@ -30,7 +30,7 @@ public class TelaRefeicoes {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaRefeicoes window = new TelaRefeicoes();
+					TelaaddAlimentos window = new TelaaddAlimentos();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +42,7 @@ public class TelaRefeicoes {
 	/**
 	 * Create the application.
 	 */
-	public TelaRefeicoes() {
+	public TelaaddAlimentos() {
 		initialize();
 	}
 
