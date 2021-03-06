@@ -1,6 +1,10 @@
 package Controller;
 
 import Util.*;
+
+import java.util.ArrayList;
+import java.util.Date;
+
 import Model.*;
 
 public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao> {
@@ -34,7 +38,7 @@ public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao
 	}
 
 	@Override
-	public boolean editar(Refeicao obj) {
+	public boolean editar(String nome, Refeicao obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
