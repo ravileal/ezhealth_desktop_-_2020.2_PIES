@@ -1,5 +1,10 @@
 /bin/
 /View/
 /Images/
+<<<<<<< Updated upstream
 /Repository/
 /Controller/
+=======
+/Controller/
+/Repository/
+>>>>>>> Stashed changes
