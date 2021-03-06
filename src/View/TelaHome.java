@@ -243,7 +243,7 @@ public class TelaHome {
 		labelAdicionarCafe.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaaddAlimentos().main(null);
+				new TelaAlimentos().main(null);
 			}
 		});
 		
@@ -266,7 +266,7 @@ public class TelaHome {
 		labelAdicionarLancheTarde.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaaddAlimentos().main(null);
+				new TelaAlimentos().main(null);
 			}
 		});
 		labelAdicionarLancheTarde.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -295,7 +295,7 @@ public class TelaHome {
 		labelAdicionarLancheManha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaaddAlimentos().main(null);
+				new TelaAlimentos().main(null);
 			}
 		});
 		
@@ -321,7 +321,7 @@ public class TelaHome {
 		labelAdicionarAlmoco.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaaddAlimentos().main(null);
+				new TelaAlimentos().main(null);
 			}
 		});
 		
@@ -347,7 +347,7 @@ public class TelaHome {
 		labelAdicionarJanta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaaddAlimentos().main(null);
+				new TelaAlimentos().main(null);
 			}
 		});
 		
@@ -373,7 +373,7 @@ public class TelaHome {
 		labelAdicionarLancheNoite.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaaddAlimentos().main(null);
+				new TelaAlimentos().main(null);
 			}
 		});
 	}

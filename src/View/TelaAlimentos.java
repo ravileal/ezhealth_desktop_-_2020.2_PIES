@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.ScrollPaneConstants;
 
-public class TelaaddAlimentos {
+public class TelaAlimentos {
 
 	private JFrame frame;
 	private JTextField txtPesquise;
@@ -33,7 +33,7 @@ public class TelaaddAlimentos {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaaddAlimentos window = new TelaaddAlimentos();
+					TelaAlimentos window = new TelaAlimentos();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class TelaaddAlimentos {
 	/**
 	 * Create the application.
 	 */
-	public TelaaddAlimentos() {
+	public TelaAlimentos() {
 		initialize();
 	}
 
