@@ -21,12 +21,13 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JPasswordField;
 
 public class TelaLogin {
 
 	private JFrame frame;
-	private JTextField campoSenha;
 	private JTextField campoLogin;
+	private JPasswordField campoSenha;
 	
 
 	/**
@@ -65,11 +66,6 @@ public class TelaLogin {
 		panel.setBounds(0, 0, 1042, 564);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-		
-		campoSenha = new JTextField();
-		campoSenha.setBounds(687, 345, 277, 36);
-		panel.add(campoSenha);
-		campoSenha.setColumns(10);
 		
 		campoLogin = new JTextField();
 		campoLogin.setColumns(10);
@@ -135,7 +131,7 @@ public class TelaLogin {
 		btnCadastro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null,"Inicio de cadastro!");
+				new TelaCadastro().main(null);
 			}
 		});
 		btnCadastro.setBackground(new Color(0, 0, 128));
@@ -157,6 +153,10 @@ public class TelaLogin {
 		icon = new ImageIcon(imgScale);
 		imgLogin2.setBounds(676, 26, 105, 83);
 		panel.add(imgLogin2);
+		
+		campoSenha = new JPasswordField();
+		campoSenha.setBounds(687, 351, 277, 36);
+		panel.add(campoSenha);
 	}
 	
 }
