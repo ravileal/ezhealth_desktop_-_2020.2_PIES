@@ -8,6 +8,9 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import Model.Usuario;
+
 import javax.swing.JTextField;
 import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
@@ -18,12 +21,14 @@ import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaCadastro {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textFieldNome;
+	private JTextField textFieldNascimento;
 	private JTextField textFieldPeso;
 	private JTextField textFieldAltura;
 	private JTextField Email;
@@ -84,10 +89,10 @@ public class TelaCadastro {
 		lblNomeCompleto.setBounds(10, 104, 253, 30);
 		frame.getContentPane().add(lblNomeCompleto);
 		
-		textField = new JTextField();
-		textField.setBounds(133, 96, 381, 30);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		textFieldNome = new JTextField();
+		textFieldNome.setBounds(133, 96, 381, 30);
+		frame.getContentPane().add(textFieldNome);
+		textFieldNome.setColumns(10);
 		
 		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento");
 		lblDataDeNascimento.setVerticalAlignment(SwingConstants.TOP);
@@ -96,10 +101,10 @@ public class TelaCadastro {
 		lblDataDeNascimento.setBounds(570, 104, 253, 30);
 		frame.getContentPane().add(lblDataDeNascimento);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(719, 96, 166, 30);
-		frame.getContentPane().add(textField_1);
+		textFieldNascimento = new JTextField();
+		textFieldNascimento.setColumns(10);
+		textFieldNascimento.setBounds(719, 96, 166, 30);
+		frame.getContentPane().add(textFieldNascimento);
 		
 		JLabel lblSexo = new JLabel("Sexo");
 		lblSexo.setVerticalAlignment(SwingConstants.TOP);
@@ -244,6 +249,13 @@ public class TelaCadastro {
 		frame.getContentPane().add(lblConfirmarSenha);
 		
 		JButton Cadastrar = new JButton("Finalizar");
+		Cadastrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaHome().main(null);
+				
+			}
+		});
 		Cadastrar.setForeground(new Color(255, 255, 255));
 		Cadastrar.setBackground(new Color(0, 0, 51));
 		Cadastrar.setFont(new Font("Tahoma", Font.PLAIN, 14));

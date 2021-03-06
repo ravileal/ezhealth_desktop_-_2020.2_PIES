@@ -90,7 +90,7 @@ public class TelaLogin {
 		JButton btnLogin = new JButton("Entrar");
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnLogin.setForeground(new Color(255, 255, 255));
-		btnLogin.setBackground(new Color(0, 0, 102));
+		btnLogin.setBackground(new Color(0, 0, 51));
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -134,7 +134,7 @@ public class TelaLogin {
 				new TelaCadastro().main(null);
 			}
 		});
-		btnCadastro.setBackground(new Color(0, 0, 128));
+		btnCadastro.setBackground(new Color(0, 0, 51));
 		btnCadastro.setForeground(new Color(255, 255, 255));
 		btnCadastro.setBounds(102, 487, 277, 46);
 		panel.add(btnCadastro);

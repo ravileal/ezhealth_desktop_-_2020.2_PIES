@@ -20,6 +20,7 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import Controller.ControllerUsuario;
+import Model.Usuario;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JDesktopPane;
