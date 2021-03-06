@@ -7,11 +7,44 @@ import java.util.ArrayList;
 import Model.Exercicio;
 import Model.Refeicao;
 import Model.Usuario;
+import Repository.RepositorioRefeicao;
 import Repository.RepositorioUsuario;
 
 public class ControllerUsuario implements CRUD<Usuario> {
 
-	RepositorioUsuario rep = new RepositorioUsuario();
+	private ControllerUsuario rep;
+	
+	public ControllerUsuario() {
+		rep = new ControllerUsuario();
+	}
+	
+	/* -----------------------------
+	 * 		Métodos do CRUD
+	 * -----------------------------*/
+	@Override
+	public boolean adicionar(Usuario obj) {
+		return (obj.getNome().equals("") || obj.getSenha().equals(""))?
+			 false : rep.adicionar(obj);
+	}
+
+	@Override
+	public ArrayList<Usuario> buscar(String nome) {
+		return (nome.equals(""))? null: rep.buscar(nome);
+	}
+
+	@Override
+	public boolean editar(String nome, Usuario obj) {
+		return (nome.equals(""))? false: rep.editar(nome, obj);
+	}
+
+	@Override
+	public boolean remover(String nome) {
+		return (nome.equals(""))? false: rep.remover(nome);
+	}
+	
+	/* -----------------------------
+	 * 		Métodos do dominio
+	 * -----------------------------*/
 	
 	/**
 	 * 
@@ -45,36 +78,6 @@ public class ControllerUsuario implements CRUD<Usuario> {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public boolean adicionar(Usuario obj) {
-		if(obj.getNome().equals("") || obj.getSenha().equals(""))
-			return false;
-		// TODO Auto-generated method stub
-		return rep.adicionar(obj);
-	}
 
-	@Override
-	public ArrayList<Usuario> buscar(String nome) {
-		// TODO Auto-generated method stub
-		if(nome.equals(""))
-			return null;
-		return rep.buscar(nome);
-	}
-
-	@Override
-	public boolean editar(String nome, Usuario obj) {
-		if(nome.equals(""))
-			return false;
-		// TODO Auto-generated method stub
-		return rep.editar(nome, obj);
-	}
-
-	@Override
-	public boolean remover(String nome) {
-		if(nome.equals(""))
-			return false;
-		// TODO Auto-generated method stub
-		return rep.remover(nome);
-	}
 
 }
