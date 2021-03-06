@@ -7,15 +7,7 @@ import Util.*;
 
 public class RepositorioExercicioRealizado implements CRUD<Exercicio> {
 
-	private static ArrayList<Exercicio> list;
-
-	public RepositorioExercicioRealizado() {
-		list = new ArrayList<>();
-		
-		Exercicio obj = new Exercicio();
-		obj.setNome("Correr");
-		list.add(obj);
-	}
+	private static ArrayList<Exercicio> list = new ArrayList<>();
 
 	@Override
 	public boolean adicionar(Exercicio obj) {
@@ -24,7 +16,6 @@ public class RepositorioExercicioRealizado implements CRUD<Exercicio> {
 
 	@Override
 	public ArrayList<Exercicio> buscar(String nome) {
-		// TODO Auto-generated method stub
 		ArrayList<Exercicio> listResult = new ArrayList<>();
 		
 		for(Exercicio obj: list)
@@ -36,15 +27,12 @@ public class RepositorioExercicioRealizado implements CRUD<Exercicio> {
 
 	@Override
 	public boolean editar(String nome, Exercicio obj) {
-		// TODO Auto-generated method stub
 		return (list.set(getIdForName(nome), obj) != null)? true: false;
 	}
 
 	@Override
 	public boolean remover(String nome) {
-		// TODO Auto-generated method stub
 		return (list.remove(getIdForName(nome)) != null)? true: false;
-	
 	}
 	
 	private int getIdForName(String nome) {

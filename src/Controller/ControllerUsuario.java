@@ -12,10 +12,11 @@ import Repository.RepositorioUsuario;
 
 public class ControllerUsuario implements CRUD<Usuario> {
 
-	private ControllerUsuario rep;
+	private RepositorioUsuario rep;
 	
 	public ControllerUsuario() {
-		rep = new ControllerUsuario();
+		Popular.getInstance();
+		rep = new RepositorioUsuario();
 	}
 	
 	/* -----------------------------
