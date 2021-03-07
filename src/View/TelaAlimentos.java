@@ -14,12 +14,16 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.DefaultListModel;
 import javax.swing.JSeparator;
 import java.awt.Button;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JList;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JPanel;
+import java.awt.Scrollbar;
 
 public class TelaAlimentos {
 
@@ -204,22 +208,20 @@ public class TelaAlimentos {
 		lblUltimasPesquisas.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		frame.getContentPane().add(lblUltimasPesquisas);
 		
-		JScrollPane scrollPaneUltimasPesquisas = new JScrollPane();
-		scrollPaneUltimasPesquisas.setBounds(642, 336, 344, 188);
-		frame.getContentPane().add(scrollPaneUltimasPesquisas);
 		
-		JLabel labelAlimento_1 = new JLabel("Suco de uva    200ml - 300kcal");
-		labelAlimento_1.setHorizontalAlignment(SwingConstants.LEFT);
-		labelAlimento_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		scrollPaneUltimasPesquisas.setColumnHeaderView(labelAlimento_1);
+		DefaultListModel listModel = new DefaultListModel<>();
 		
-		JScrollPane scrollPaneListaAlimentos = new JScrollPane();
-		scrollPaneListaAlimentos.setBounds(135, 222, 395, 242);
-		frame.getContentPane().add(scrollPaneListaAlimentos);
+		for(int i=0; i<25; i++) {
+			listModel.addElement("Lable: "+i);
+		}
 		
-		JLabel labelAlimento = new JLabel("Suco de uva    200ml - 300kcal");
-		scrollPaneListaAlimentos.setColumnHeaderView(labelAlimento);
-		labelAlimento.setHorizontalAlignment(SwingConstants.LEFT);
-		labelAlimento.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JList<DefaultListModel> list = new JList(listModel);
+		list.setBounds(136, 222, 426, 247);
+		frame.getContentPane().add(list);
+		
+		JScrollPane scrollPane = new JScrollPane(list);
+		scrollPane.setBounds(135, 222, 427, 247);
+		frame.getContentPane().add(scrollPane);
+		
 	}
 }
