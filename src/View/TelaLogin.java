@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 
 import javax.swing.JButton;
 import java.awt.Color;
@@ -146,14 +147,23 @@ public class TelaLogin {
 		jLabelImagemLogin1.setBounds(46, 109, 468, 355);
 		panel.add(jLabelImagemLogin1);
 		
-		JLabel imgLogin2 = new JLabel("");
-		imgLogin2.setIcon(new ImageIcon(TelaLogin.class.getResource("/Images/hospital.png")));
-		ImageIcon icon = new ImageIcon(this.getClass().getResource("/Images/hospital.png"));
-		Image img2 = icon.getImage();
-		Image imgScale = img2.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
-		icon = new ImageIcon(imgScale);
-		imgLogin2.setBounds(676, 26, 105, 83);
-		panel.add(imgLogin2);
+		
+		// ---- Label da imagem hospital ---- Inicio
+		JLabel lblImgHospital = new JLabel(""); // Criação da label
+		lblImgHospital.setBounds(692, 26, 89, 83); // Dimensões e posicionamento da label
+		
+		// criação do icone gerenando a iamgem a partir da path passado como argumento
+		ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/Images/hospital.png")); 
+		
+		Image imagem = imageIcon.getImage(); // extrai a imagem encontrada que está no icone
+		// redimensiona a imagem para a largura e altura da label
+		imagem = imagem.getScaledInstance(lblImgHospital.getWidth(), lblImgHospital.getHeight(), Image.SCALE_DEFAULT);
+		
+		imageIcon = new ImageIcon(imagem); // define a imagem com dimensões atualizadas para o icone
+		lblImgHospital.setIcon(imageIcon); // define o icone atualizado como icone da label
+		 
+		panel.add(lblImgHospital); // adiciona a label ao painel
+		// ---- Label da imagem hospital ---- Fim
 		
 		campoSenha = new JPasswordField();
 		campoSenha.setBounds(687, 351, 277, 36);
