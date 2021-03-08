@@ -16,6 +16,8 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Panel;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaEditarCadastro {
 
@@ -233,7 +235,7 @@ public class TelaEditarCadastro {
 		Cadastrar.setForeground(Color.WHITE);
 		Cadastrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Cadastrar.setBackground(new Color(0, 0, 51));
-		Cadastrar.setBounds(446, 631, 89, 30);
+		Cadastrar.setBounds(504, 631, 89, 30);
 		frame.getContentPane().add(Cadastrar);
 		
 		Panel panel_1 = new Panel();
@@ -255,6 +257,18 @@ public class TelaEditarCadastro {
 		textField_4.setColumns(10);
 		textField_4.setBounds(718, 94, 139, 30);
 		frame.getContentPane().add(textField_4);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaMeusDados().main(null);
+			}
+		});
+		btnCancelar.setForeground(Color.WHITE);
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCancelar.setBackground(new Color(0, 0, 51));
+		btnCancelar.setBounds(376, 631, 89, 30);
+		frame.getContentPane().add(btnCancelar);
 	}
-
 }
