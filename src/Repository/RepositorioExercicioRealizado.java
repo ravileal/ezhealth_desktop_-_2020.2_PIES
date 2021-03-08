@@ -16,6 +16,7 @@ public class RepositorioExercicioRealizado implements CRUD<Exercicio> {
 
 	@Override
 	public ArrayList<Exercicio> buscar(String nome) {
+		if(nome == null) return RepositorioExercicioRealizado.list;
 		ArrayList<Exercicio> listResult = new ArrayList<>();
 		
 		for(Exercicio obj: list)

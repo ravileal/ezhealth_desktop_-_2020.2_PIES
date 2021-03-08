@@ -3,14 +3,14 @@ package Model;
 public class Usuario {
 
 	private String nome;
-	private int idade;
-	private float altura;
-	private float peso;
+	private String idade;
+	private String altura;
+	private String peso;
 	private String sexo;
 	private String usuario;
 	private String senha;
 	private String objetivo;
-	private int caloriasMeta;
+	private String caloriasMeta;
 
 	public String getNome() {
 		return this.nome;
@@ -24,7 +24,7 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public int getIdade() {
+	public String getIdade() {
 		return this.idade;
 	}
 
@@ -32,11 +32,11 @@ public class Usuario {
 	 * 
 	 * @param idade
 	 */
-	public void setIdade(int idade) {
+	public void setIdade(String idade) {
 		this.idade = idade;
 	}
 
-	public float getAltura() {
+	public String getAltura() {
 		return this.altura;
 	}
 
@@ -44,11 +44,11 @@ public class Usuario {
 	 * 
 	 * @param altura
 	 */
-	public void setAltura(float altura) {
+	public void setAltura(String altura) {
 		this.altura = altura;
 	}
 
-	public float getPeso() {
+	public String getPeso() {
 		return this.peso;
 	}
 
@@ -56,7 +56,7 @@ public class Usuario {
 	 * 
 	 * @param peso
 	 */
-	public void setPeso(float peso) {
+	public void setPeso(String peso) {
 		this.peso = peso;
 	}
 
@@ -108,7 +108,7 @@ public class Usuario {
 		this.objetivo = objetivo;
 	}
 
-	public int getCaloriasMeta() {
+	public String getCaloriasMeta() {
 		return this.caloriasMeta;
 	}
 
@@ -116,7 +116,7 @@ public class Usuario {
 	 * 
 	 * @param caloriasMeta
 	 */
-	public void setCaloriasMeta(int caloriasMeta) {
+	public void setCaloriasMeta(String caloriasMeta) {
 		this.caloriasMeta = caloriasMeta;
 	}
 

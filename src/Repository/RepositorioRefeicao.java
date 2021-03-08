@@ -17,6 +17,7 @@ public class RepositorioRefeicao implements CRUD<Refeicao> {
 
 	@Override
 	public ArrayList<Refeicao> buscar(String nome) {
+		if(nome == null) return RepositorioRefeicao.list;
 		ArrayList<Refeicao> listResult = new ArrayList<>();
 		
 		for(Refeicao obj: list)

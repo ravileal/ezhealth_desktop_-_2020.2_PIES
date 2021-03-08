@@ -16,6 +16,7 @@ public class RepositorioAlimento implements CRUD<Alimento> {
 
 	@Override
 	public ArrayList<Alimento> buscar(String nome) {
+		if(nome == null) return RepositorioAlimento.list;
 		ArrayList<Alimento> listResult = new ArrayList<>();
 		
 		for(Alimento obj: list)

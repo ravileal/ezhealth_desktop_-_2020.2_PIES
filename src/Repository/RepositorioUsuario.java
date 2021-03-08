@@ -16,6 +16,7 @@ public class RepositorioUsuario implements CRUD<Usuario> {
 
 	@Override
 	public ArrayList<Usuario> buscar(String usuario) {
+		if(usuario == null) return RepositorioUsuario.list;
 		ArrayList<Usuario> listResult = new ArrayList<>();
 		
 		for(Usuario u: list)
