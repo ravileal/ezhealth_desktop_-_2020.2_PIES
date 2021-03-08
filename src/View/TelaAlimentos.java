@@ -12,6 +12,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import Controller.ControllerAlimento;
+import Model.Alimento;
+
 import java.awt.Component;
 import java.awt.Dimension;
 
@@ -35,6 +39,8 @@ public class TelaAlimentos {
 
 	private JFrame frame;
 	private JTextField txtPesquise;
+	private JPanel panel_alimentos = null;
+	private JScrollPane scrollPane = null;
 
 	/**
 	 * Launch the application.
@@ -214,24 +220,72 @@ public class TelaAlimentos {
 		lblUltimasPesquisas.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		frame.getContentPane().add(lblUltimasPesquisas);
 		
-		JPanel panel_alimentos = new JPanel();
+		criarPainelAlimentos();
+		
+	}
+	
+	public JButton botaoEditar(String nome) {
+		
+		JButton botaoEditar = new JButton(nome);
+		botaoEditar.addMouseListener(
+			new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					new TelaExercicios().main(null);
+				}
+			}
+				
+		);
+		
+		return botaoEditar;
+		
+	}
+	
+	public JButton botaoExcluir(String nome) {
+			
+		JButton botaoExcluir = new JButton(nome);
+		botaoExcluir.addMouseListener(
+			new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					new ControllerAlimento().remover(nome);
+					criarPainelAlimentos();
+				}
+			}
+				
+		);
+		
+		return botaoExcluir;
+			
+	}
+	
+	public void criarPainelAlimentos() {
+		
+		if(scrollPane != null) {
+			frame.getContentPane().remove(scrollPane);
+		}
+		
+		this.panel_alimentos = new JPanel();
 		panel_alimentos.setLayout(new BoxLayout(panel_alimentos, BoxLayout.Y_AXIS));
 		
-		for (int i = 0; i < 10; i++) {
+//		for (Alimento a : new ControllerAlimento().buscar("")) {
 			panel_alimentos.add(Box.createRigidArea(new Dimension(0, 10)));
 			JPanel panel_item = new JPanel();
 			panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-			panel_item.add(new JLabel("aaaa"));
-			panel_item.add(new JButton("Editar" + i));
+			panel_item.add(new JLabel("Laranja"));
+			panel_item.add(botaoEditar("Laranja"));
 			panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-			panel_item.add(new JButton("Excluir" + i));
+			panel_item.add(botaoExcluir("Laranja"));
 			panel_alimentos.add(panel_item);
-        }
+//        }
 		
-		JScrollPane scrollPane = new JScrollPane(panel_alimentos);
+		this.scrollPane = new JScrollPane(panel_alimentos);
 		scrollPane.setBounds(136, 222, 461, 260);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		frame.getContentPane().add(scrollPane);
+		frame.revalidate();
+		
 	}
+	
 }

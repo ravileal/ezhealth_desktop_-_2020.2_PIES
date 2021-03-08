@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import Controller.ControllerUsuario;
 import Model.Usuario;
 
 import javax.swing.JTextField;
@@ -143,7 +144,7 @@ public class TelaCadastro {
 		lblAltura.setVerticalAlignment(SwingConstants.TOP);
 		lblAltura.setHorizontalAlignment(SwingConstants.LEFT);
 		lblAltura.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAltura.setBounds(598, 167, 120, 30);
+		lblAltura.setBounds(598, 167, 56, 30);
 		frame.getContentPane().add(lblAltura);
 		
 		textFieldAltura = new JTextField();
@@ -234,7 +235,7 @@ public class TelaCadastro {
 		Email.setBounds(62, 509, 381, 30);
 		frame.getContentPane().add(Email);
 		
-		JLabel lblSenha = new JLabel("Senha");
+		JLabel lblSenha = new JLabel("senha");
 		lblSenha.setVerticalAlignment(SwingConstants.TOP);
 		lblSenha.setHorizontalAlignment(SwingConstants.LEFT);
 		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -252,7 +253,20 @@ public class TelaCadastro {
 		Cadastrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Usuario usuario = new Usuario();
+				usuario.setNome(textFieldNome.getText());
+				usuario.setSenha(Senha.getText());
+				usuario.setUsuario(Email.getText());
+				usuario.setSexo(comboBoxSexo.getName());
+				usuario.setPeso(lblPeso.getText());
+				usuario.setAltura(lblAltura.getText());
+				usuario.setIdade(lblDataDeNascimento.getText());
+				usuario.setCaloriasMeta(lblQualSuaMeta.getText());
+				usuario.setObjetivo(lblQualSuaMeta.getText());
+				
+				new ControllerUsuario().adicionar(usuario);
 				new TelaHome().main(null);
+				System.out.println("Nome: " + usuario.getNome());
 				
 			}
 		});
