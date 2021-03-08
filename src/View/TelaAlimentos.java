@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Component;
+import java.awt.Dimension;
+
 import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.JSeparator;
@@ -24,6 +26,10 @@ import javax.swing.JList;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JPanel;
 import java.awt.Scrollbar;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.BoxLayout;
 
 public class TelaAlimentos {
 
@@ -208,20 +214,24 @@ public class TelaAlimentos {
 		lblUltimasPesquisas.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		frame.getContentPane().add(lblUltimasPesquisas);
 		
+		JPanel panel_alimentos = new JPanel();
+		panel_alimentos.setLayout(new BoxLayout(panel_alimentos, BoxLayout.Y_AXIS));
 		
-		DefaultListModel listModel = new DefaultListModel<>();
+		for (int i = 0; i < 10; i++) {
+			panel_alimentos.add(Box.createRigidArea(new Dimension(0, 10)));
+			JPanel panel_item = new JPanel();
+			panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
+			panel_item.add(new JLabel("aaaa"));
+			panel_item.add(new JButton("Editar" + i));
+			panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
+			panel_item.add(new JButton("Excluir" + i));
+			panel_alimentos.add(panel_item);
+        }
 		
-		for(int i=0; i<25; i++) {
-			listModel.addElement("Lable: "+i);
-		}
-		
-		JList<DefaultListModel> list = new JList(listModel);
-		list.setBounds(136, 222, 426, 247);
-		frame.getContentPane().add(list);
-		
-		JScrollPane scrollPane = new JScrollPane(list);
-		scrollPane.setBounds(135, 222, 427, 247);
+		JScrollPane scrollPane = new JScrollPane(panel_alimentos);
+		scrollPane.setBounds(136, 222, 461, 260);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
 		frame.getContentPane().add(scrollPane);
-		
 	}
 }
