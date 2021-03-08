@@ -1,6 +1,11 @@
 /bin/
-/View/
+/.classpath
+/.gitignore
+/.project
 /Controller/
+/Images/
+/Model/
 /Repository/
-/Validation/
 /Util/
+/Validation/
+/View/
