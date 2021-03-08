@@ -2,19 +2,32 @@ package View;
 
 import java.awt.EventQueue;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.Panel;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import Controller.ControllerAlimento;
+import Validation.DadosVaziosException;
+import Validation.ImpossivelAdicionarRepositorioExeception;
+
 import java.awt.Button;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.JScrollPane;
 
 public class TelaCriarRefeicoesPersonalizadas {
@@ -22,6 +35,8 @@ public class TelaCriarRefeicoesPersonalizadas {
 	private JFrame frame;
 	private JTextField txtPesquisarAlimentos;
 	private JTextField txtEditarNomeRefeio;
+	private JPanel panel_refeicoes = null;
+	private JScrollPane scrollPane = null;
 
 	/**
 	 * Launch the application.
@@ -51,7 +66,7 @@ public class TelaCriarRefeicoesPersonalizadas {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1023, 578);
+		frame.setBounds(100, 100, 1023, 628);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -64,7 +79,7 @@ public class TelaCriarRefeicoesPersonalizadas {
 		Panel panel = new Panel();
 		panel.setLayout(null);
 		panel.setBackground(SystemColor.activeCaption);
-		panel.setBounds(0, 73, 119, 474);
+		panel.setBounds(0, 73, 119, 516);
 		frame.getContentPane().add(panel);
 		
 		JLabel labelHome = new JLabel("Home");
@@ -175,31 +190,11 @@ public class TelaCriarRefeicoesPersonalizadas {
 		txtPesquisarAlimentos.setColumns(10);
 		txtPesquisarAlimentos.setBounds(643, 231, 335, 35);
 		frame.getContentPane().add(txtPesquisarAlimentos);
-		
-		JLabel lblUltimasPesquisas = new JLabel("Ultimas pesquisas");
-		lblUltimasPesquisas.setVerticalAlignment(SwingConstants.TOP);
-		lblUltimasPesquisas.setHorizontalAlignment(SwingConstants.LEFT);
-		lblUltimasPesquisas.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblUltimasPesquisas.setBounds(643, 308, 354, 30);
-		frame.getContentPane().add(lblUltimasPesquisas);
-		
-		JScrollPane scrollPaneUltimasPesquisas = new JScrollPane();
-		scrollPaneUltimasPesquisas.setBounds(642, 336, 344, 188);
-		frame.getContentPane().add(scrollPaneUltimasPesquisas);
-		
-		JLabel labelAlimento_1_1 = new JLabel("Suco de uva    200ml - 300kcal");
-		labelAlimento_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		labelAlimento_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		scrollPaneUltimasPesquisas.setColumnHeaderView(labelAlimento_1_1);
-		
-		JLabel labelAlimento_2 = new JLabel("Suco de uva    200ml - 300kcal");
-		labelAlimento_2.setHorizontalAlignment(SwingConstants.LEFT);
-		labelAlimento_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		scrollPaneUltimasPesquisas.setColumnHeaderView(labelAlimento_2);
+	
 		
 		Button buttonSalvar = new Button("Salvar");
 		buttonSalvar.setBackground(SystemColor.menu);
-		buttonSalvar.setBounds(136, 503, 70, 22);
+		buttonSalvar.setBounds(136, 557, 70, 22);
 		frame.getContentPane().add(buttonSalvar);
 		
 		JLabel lblListaDeAlimentos = new JLabel("Lista de Alimentos");
@@ -209,19 +204,6 @@ public class TelaCriarRefeicoesPersonalizadas {
 		lblListaDeAlimentos.setBounds(136, 181, 141, 30);
 		frame.getContentPane().add(lblListaDeAlimentos);
 		
-		JScrollPane scrollPaneListaAlimentos = new JScrollPane();
-		scrollPaneListaAlimentos.setBounds(135, 222, 395, 242);
-		frame.getContentPane().add(scrollPaneListaAlimentos);
-		
-		JLabel labelAlimento_1 = new JLabel("Suco de uva    200ml - 300kcal");
-		labelAlimento_1.setHorizontalAlignment(SwingConstants.LEFT);
-		labelAlimento_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		scrollPaneListaAlimentos.setColumnHeaderView(labelAlimento_1);
-		
-		JLabel labelAlimento = new JLabel("Suco de uva    200ml - 300kcal");
-		labelAlimento.setHorizontalAlignment(SwingConstants.LEFT);
-		labelAlimento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		scrollPaneListaAlimentos.setColumnHeaderView(labelAlimento);
 		
 		txtEditarNomeRefeio = new JTextField();
 		txtEditarNomeRefeio.setToolTipText("Pesquisar");
@@ -230,5 +212,74 @@ public class TelaCriarRefeicoesPersonalizadas {
 		txtEditarNomeRefeio.setColumns(10);
 		txtEditarNomeRefeio.setBounds(136, 120, 241, 22);
 		frame.getContentPane().add(txtEditarNomeRefeio);
+		
+		criarPainelRefeicoes();
+		
+	}
+	
+	public void criarPainelRefeicoes() {
+		
+		if(scrollPane != null) {
+			frame.getContentPane().remove(scrollPane);
+		}
+		
+		this.panel_refeicoes = new JPanel();
+		panel_refeicoes.setLayout(new BoxLayout(panel_refeicoes, BoxLayout.Y_AXIS));
+		
+//		for (Alimento a : new ControllerAlimento().buscar("")) {
+		panel_refeicoes.add(Box.createRigidArea(new Dimension(0, 10)));
+		JPanel panel_item = new JPanel();
+		panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
+		panel_item.add(new JLabel("Laranja"));
+		panel_item.add(botaoEditar("Laranja"));
+		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
+		panel_item.add(botaoExcluir("Laranja"));
+		panel_refeicoes.add(panel_item);
+//        }
+		
+		this.scrollPane = new JScrollPane(panel_refeicoes);
+		scrollPane.setBounds(136, 274, 814, 260);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		frame.getContentPane().add(scrollPane);
+		frame.revalidate();
+		
+	}
+	
+	public JButton botaoEditar(String nome) {
+		
+		JButton botaoEditar = new JButton("Editar");
+		botaoEditar.addMouseListener(
+			new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					new TelaExercicios().main(null);
+				}
+			}
+		);
+		return botaoEditar;
+	}
+	
+	public JButton botaoExcluir(String nome) {
+		
+		JButton botaoExcluir = new JButton("Excluir");
+		botaoExcluir.addMouseListener(
+			new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					try {
+						new ControllerAlimento().remover(nome);
+					} catch (DadosVaziosException e1) {
+						JOptionPane.showMessageDialog(null, e1);
+						e1.printStackTrace();
+					} catch (ImpossivelAdicionarRepositorioExeception e1) {
+						JOptionPane.showMessageDialog(null, e1);
+						e1.printStackTrace();
+					}
+					criarPainelRefeicoes();
+				}
+			}
+		);
+		return botaoExcluir;
 	}
 }

@@ -13,6 +13,8 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import Controller.ControllerAlimento;
+import Validation.DadosVaziosException;
+import Validation.ImpossivelAdicionarRepositorioExeception;
 
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
