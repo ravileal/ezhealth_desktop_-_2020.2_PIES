@@ -250,7 +250,7 @@ public class TelaEditarRefeicaoPersonalizada {
 		botaoEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaExercicios().main(null);
+				new TelaEditarAlimentos().main(null);
 			}
 		});
 		return botaoEditar;
