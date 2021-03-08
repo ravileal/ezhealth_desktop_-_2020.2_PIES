@@ -12,6 +12,9 @@ import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import java.awt.Button;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JTextField;
 
 public class TelaEditarAlimentos {
@@ -76,6 +79,12 @@ public class TelaEditarAlimentos {
 		frame.getContentPane().add(separator);
 		
 		Button buttonVoltar = new Button("Voltar");
+		buttonVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaEditarRefeicaoPersonalizada().main(null);
+			}
+		});
 		buttonVoltar.setBackground(SystemColor.menu);
 		buttonVoltar.setBounds(910, 92, 70, 22);
 		frame.getContentPane().add(buttonVoltar);
@@ -120,5 +129,10 @@ public class TelaEditarAlimentos {
 		lblkcal.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblkcal.setBounds(137, 359, 141, 30);
 		frame.getContentPane().add(lblkcal);
+		
+		Button buttonSalvar = new Button("Salvar");
+		buttonSalvar.setBackground(SystemColor.menu);
+		buttonSalvar.setBounds(449, 459, 70, 22);
+		frame.getContentPane().add(buttonSalvar);
 	}
 }
