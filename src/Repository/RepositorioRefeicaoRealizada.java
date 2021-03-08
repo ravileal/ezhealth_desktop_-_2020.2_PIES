@@ -34,7 +34,9 @@ public class RepositorioRefeicaoRealizada implements CRUD<Refeicao> {
 
 	@Override
 	public boolean remover(String nome) {
-		return (list.remove(getIdForName(nome)) != null)? true: false;
+		int index = getIdForName(nome);
+		if(index == -1) return false;
+		return (list.remove(index) != null)? true: false;
 	}
 	
 	private int getIdForName(String nome) {

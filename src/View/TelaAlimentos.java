@@ -15,6 +15,8 @@ import javax.swing.SwingConstants;
 
 import Controller.ControllerAlimento;
 import Model.Alimento;
+import Validation.DadosVaziosException;
+import Validation.ImpossivelAdicionarRepositorioExeception;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -27,6 +29,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JPanel;
 import java.awt.Scrollbar;
@@ -224,41 +227,6 @@ public class TelaAlimentos {
 		
 	}
 	
-	public JButton botaoEditar(String nome) {
-		
-		JButton botaoEditar = new JButton(nome);
-		botaoEditar.addMouseListener(
-			new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					new TelaExercicios().main(null);
-				}
-			}
-				
-		);
-		
-		return botaoEditar;
-		
-	}
-	
-	public JButton botaoExcluir(String nome) {
-			
-		JButton botaoExcluir = new JButton(nome);
-		botaoExcluir.addMouseListener(
-			new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					new ControllerAlimento().remover(nome);
-					criarPainelAlimentos();
-				}
-			}
-				
-		);
-		
-		return botaoExcluir;
-			
-	}
-	
 	public void criarPainelAlimentos() {
 		
 		if(scrollPane != null) {
@@ -269,23 +237,61 @@ public class TelaAlimentos {
 		panel_alimentos.setLayout(new BoxLayout(panel_alimentos, BoxLayout.Y_AXIS));
 		
 //		for (Alimento a : new ControllerAlimento().buscar("")) {
-			panel_alimentos.add(Box.createRigidArea(new Dimension(0, 10)));
-			JPanel panel_item = new JPanel();
-			panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-			panel_item.add(new JLabel("Laranja"));
-			panel_item.add(botaoEditar("Laranja"));
-			panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-			panel_item.add(botaoExcluir("Laranja"));
-			panel_alimentos.add(panel_item);
+		panel_alimentos.add(Box.createRigidArea(new Dimension(0, 10)));
+		JPanel panel_item = new JPanel();
+		panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
+		panel_item.add(new JLabel("Laranja"));
+		panel_item.add(botaoEditar("Laranja"));
+		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
+		panel_item.add(botaoExcluir("Laranja"));
+		panel_alimentos.add(panel_item);
 //        }
 		
 		this.scrollPane = new JScrollPane(panel_alimentos);
 		scrollPane.setBounds(136, 222, 461, 260);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
+		
 		frame.getContentPane().add(scrollPane);
 		frame.revalidate();
 		
 	}
+	
+	public JButton botaoEditar(String nome) {
+		
+		JButton botaoEditar = new JButton("Editar");
+		botaoEditar.addMouseListener(
+			new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					new TelaExercicios().main(null);
+				}
+			}
+		);
+		return botaoEditar;
+	}
+	
+	public JButton botaoExcluir(String nome) {
+		
+		JButton botaoExcluir = new JButton("Excluir");
+		botaoExcluir.addMouseListener(
+			new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					try {
+						new ControllerAlimento().remover(nome);
+					} catch (DadosVaziosException e1) {
+						JOptionPane.showMessageDialog(null, e1);
+						e1.printStackTrace();
+					} catch (ImpossivelAdicionarRepositorioExeception e1) {
+						JOptionPane.showMessageDialog(null, e1);
+						e1.printStackTrace();
+					}
+					criarPainelAlimentos();
+				}
+			}
+		);
+		return botaoExcluir;
+	}
+	
 	
 }

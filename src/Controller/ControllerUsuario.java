@@ -79,6 +79,4 @@ public class ControllerUsuario implements CRUD<Usuario> {
 		throw new UnsupportedOperationException();
 	}
 
-
-
 }

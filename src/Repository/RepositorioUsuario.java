@@ -33,7 +33,9 @@ public class RepositorioUsuario implements CRUD<Usuario> {
 
 	@Override
 	public boolean remover(String usuario) {
-		return (list.remove(getIdForUsuario(usuario)) != null)? true: false;
+		int index = getIdForUsuario(usuario);
+		if(index == -1) return false;
+		return (list.remove(index) != null)? true: false;
 	}
 	
 	private int getIdForUsuario(String usuario) {
