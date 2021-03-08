@@ -3,7 +3,7 @@ package Util;
 import java.util.ArrayList;
 
 import Validation.DadosVaziosException;
-import Validation.ImpossivelAdicionarRepositorioExeception;
+import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
 public interface CRUD<T> {
 
@@ -11,9 +11,9 @@ public interface CRUD<T> {
 	 * 
 	 * @param obj
 	 * @throws DadosVaziosException 
-	 * @throws ImpossivelAdicionarRepositorioExeception 
+	 * @throws OperacaoNaoConcluidaRepositorioExeception 
 	 */
-	boolean adicionar(T obj) throws DadosVaziosException, ImpossivelAdicionarRepositorioExeception;
+	boolean adicionar(T obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception;
 
 	/**
 	 * 
@@ -25,16 +25,16 @@ public interface CRUD<T> {
 	 * 
 	 * @param obj
 	 * @throws DadosVaziosException 
-	 * @throws ImpossivelAdicionarRepositorioExeception 
+	 * @throws OperacaoNaoConcluidaRepositorioExeception 
 	 */
-	boolean editar(String nome, T obj) throws DadosVaziosException, ImpossivelAdicionarRepositorioExeception;
+	boolean editar(String nome, T obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception;
 
 	/**
 	 * 
 	 * @param id
 	 * @throws DadosVaziosException 
-	 * @throws ImpossivelAdicionarRepositorioExeception 
+	 * @throws OperacaoNaoConcluidaRepositorioExeception 
 	 */
-	boolean remover(String id) throws DadosVaziosException, ImpossivelAdicionarRepositorioExeception;
+	boolean remover(String id) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception;
 
 }

@@ -22,7 +22,7 @@ public class RepositorioUsuario implements CRUD<Usuario> {
 		for(Usuario u: list)
 			if( u.getUsuario().equals(usuario) )
 				listResult.add(u);
-				
+		
 		return listResult;
 	}
 

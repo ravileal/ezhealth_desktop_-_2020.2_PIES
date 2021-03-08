@@ -1,13 +1,15 @@
 package Controller;
 
 import Util.*;
+import Validation.CredenciaisInvalidasException;
+import Validation.DadosVaziosException;
+import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import java.util.ArrayList;
 
 import Model.Exercicio;
 import Model.Refeicao;
 import Model.Usuario;
-import Repository.RepositorioRefeicao;
 import Repository.RepositorioUsuario;
 
 public class ControllerUsuario implements CRUD<Usuario> {
@@ -23,9 +25,17 @@ public class ControllerUsuario implements CRUD<Usuario> {
 	 * 		Métodos do CRUD
 	 * -----------------------------*/
 	@Override
-	public boolean adicionar(Usuario obj) {
-		return (obj.getNome().equals("") || obj.getSenha().equals(""))?
-			 false : rep.adicionar(obj);
+	public boolean adicionar(Usuario obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+		if(obj == null)
+			throw new NullPointerException("Impossível adicionar! Objeto Usuario null");
+		else if(obj.getNome().equals(""))
+			throw new DadosVaziosException("Impossível adicionar! Nome vazio");
+		else if(obj.getSenha().equals(""))
+			throw new DadosVaziosException("Impossível adicionar! Senha vazia");
+		else if(!rep.adicionar(obj))
+			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível adicionar! Erro ao tentar adicionar o usuario '"+obj.getNome()+"' ao repositorio");
+		else 
+			return true;
 	}
 
 	@Override
@@ -34,13 +44,25 @@ public class ControllerUsuario implements CRUD<Usuario> {
 	}
 
 	@Override
-	public boolean editar(String nome, Usuario obj) {
-		return (nome.equals(""))? false: rep.editar(nome, obj);
+	public boolean editar(String nome, Usuario obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+		if(obj == null)
+			throw new NullPointerException("Impossível editar! Objeto Usuario null");
+		else if(obj.getNome().equals(""))
+			throw new DadosVaziosException("Impossível editar! Nome vazio");
+		else if(!rep.editar(nome, obj))
+			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível editar! Erro ao tentar editar o usuario '"+nome+"' no repositorio");
+		else 
+			return true;
 	}
 
 	@Override
-	public boolean remover(String nome) {
-		return (nome.equals(""))? false: rep.remover(nome);
+	public boolean remover(String nome) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+		if(nome.equals(""))
+			throw new DadosVaziosException("Impossível excluir! Nome vazio");
+		else if(!rep.remover(nome))
+			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível excluir! Erro ao tentar excluir o usuario '"+nome+"' no repositorio");
+		else 
+			return true;
 	}
 	
 	/* -----------------------------
@@ -51,20 +73,19 @@ public class ControllerUsuario implements CRUD<Usuario> {
 	 * 
 	 * @param nome
 	 * @param senha
+	 * @throws CredenciaisInvalidasException 
 	 */
-	public boolean validarLogin(String usuario, String senha) {
-		// TODO - implement ControllerUsuario.validarLogin
+	public boolean validarLogin(String usuario, String senha) throws CredenciaisInvalidasException {
 		
 		ArrayList<Usuario> list = rep.buscar(usuario);
 		if(list.size() == 0)
-			return false;
+			throw new NullPointerException("Nenhum usuario encontrado");
 		
 		Usuario u = rep.buscar(usuario).get(0);
-		
-		if( u == null 
-		|| !u.getSenha().equals(senha) 
-		|| !u.getUsuario().equals(usuario)
-		) return false;
+		if( u == null )
+			throw new NullPointerException("Usuario não encontrado");
+		else if( !u.getSenha().equals(senha) || !u.getUsuario().equals(usuario))
+			throw new CredenciaisInvalidasException("Login ou senha inválidos");
 		
 		return true;
 	}

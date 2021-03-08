@@ -1,6 +1,8 @@
 package Controller;
 
 import Util.*;
+import Validation.DadosVaziosException;
+import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,9 +28,15 @@ public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao
 	 * -----------------------------*/
 	
 	@Override
-	public boolean adicionar(Refeicao obj) {
-		return (obj.getNome().equals(""))? false : 
-		(refeicaoRealizada)? repRealizada.adicionar(obj) : rep.adicionar(obj);
+	public boolean adicionar(Refeicao obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+		if(obj == null)
+			throw new NullPointerException("Impossível adicionar! Objeto Refeicao null");
+		else if(obj.getNome().equals(""))
+			throw new DadosVaziosException("Impossível adicionar! Nome vazio");
+		else if(!(refeicaoRealizada)? repRealizada.adicionar(obj) : rep.adicionar(obj))
+			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível adicionar! Erro ao tentar adicionar o refeicao '"+obj.getNome()+"' ao repositorio");
+		else 
+			return true;
 	}
 
 	@Override
@@ -38,15 +46,25 @@ public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao
 	}
 
 	@Override
-	public boolean editar(String nome, Refeicao obj) {
-		return (nome.equals(""))? false: 
-		(refeicaoRealizada)? repRealizada.editar(nome, obj) : rep.editar(nome, obj);
+	public boolean editar(String nome, Refeicao obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+		if(obj == null)
+			throw new NullPointerException("Impossível editar! Objeto Refeicao null");
+		else if(obj.getNome().equals(""))
+			throw new DadosVaziosException("Impossível editar! Nome vazio");
+		else if(!(refeicaoRealizada)? repRealizada.editar(nome, obj) : rep.editar(nome, obj))
+			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível editar! Erro ao tentar editar o refeicao '"+nome+"' no repositorio");
+		else 
+			return true;
 	}
 
 	@Override
-	public boolean remover(String nome) {
-		return (nome.equals(""))? false: 
-		(refeicaoRealizada)? repRealizada.remover(nome) : rep.remover(nome);
+	public boolean remover(String nome) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+		if(nome.equals(""))
+			throw new DadosVaziosException("Impossível excluir! Nome vazio");
+		else if(!(refeicaoRealizada)? repRealizada.remover(nome) : rep.remover(nome))
+			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível excluir! Erro ao tentar excluir o refeicao '"+nome+"' no repositorio");
+		else 
+			return true;
 	}
 	
 	/* -----------------------------

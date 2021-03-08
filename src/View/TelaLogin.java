@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Controller.ControllerUsuario;
+import Validation.CredenciaisInvalidasException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -95,17 +96,14 @@ public class TelaLogin {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				boolean logado = new ControllerUsuario()
-						.validarLogin(campoLogin.getText(), campoSenha.getText());
-				if(logado == true) {
+				try {
+					new ControllerUsuario().validarLogin(campoLogin.getText(), campoSenha.getText());
 					new TelaHome().main(null);
-				} else {
-					JOptionPane.showMessageDialog(null, "Dados incorretos!");
+				} catch (CredenciaisInvalidasException e1) {
+					JOptionPane.showMessageDialog(null, "Usuario e/ou senha incorretos!");
+					e1.printStackTrace();
 				}
-				//JOptionPane.showMessageDialog(null, 
-					//		(logado)? 
-						//	"Logado com sucesso!" :
-							//"Erro ao tentar realizar login!");
+
 			}
 		});
 		btnLogin.setBounds(788, 492, 89, 36);

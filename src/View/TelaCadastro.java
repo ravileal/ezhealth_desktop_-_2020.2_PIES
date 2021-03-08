@@ -6,11 +6,15 @@ import javax.swing.JFrame;
 import java.awt.Panel;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import Controller.ControllerUsuario;
 import Model.Usuario;
+import Validation.DadosVaziosException;
+import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import javax.swing.JTextField;
 import javax.swing.JScrollBar;
@@ -264,9 +268,17 @@ public class TelaCadastro {
 				usuario.setCaloriasMeta(lblQualSuaMeta.getText());
 				usuario.setObjetivo(lblQualSuaMeta.getText());
 				
-				new ControllerUsuario().adicionar(usuario);
-				new TelaHome().main(null);
-				System.out.println("Nome: " + usuario.getNome());
+				try {
+					new ControllerUsuario().adicionar(usuario);
+					new TelaHome().main(null);
+					System.out.println("Nome: " + usuario.getNome());
+				} catch (DadosVaziosException e1) {
+					JOptionPane.showMessageDialog(null, "Algum campo vazio");
+					e1.printStackTrace();
+				} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
+					JOptionPane.showMessageDialog(null, "Erro ao salvar usuario");
+					e1.printStackTrace();
+				}
 				
 			}
 		});

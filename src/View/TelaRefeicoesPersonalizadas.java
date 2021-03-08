@@ -14,7 +14,7 @@ import javax.swing.SwingConstants;
 
 import Controller.ControllerAlimento;
 import Validation.DadosVaziosException;
-import Validation.ImpossivelAdicionarRepositorioExeception;
+import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
@@ -267,7 +267,7 @@ public class TelaRefeicoesPersonalizadas {
 					} catch (DadosVaziosException e1) {
 						JOptionPane.showMessageDialog(null, e1);
 						e1.printStackTrace();
-					} catch (ImpossivelAdicionarRepositorioExeception e1) {
+					} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
 						JOptionPane.showMessageDialog(null, e1);
 						e1.printStackTrace();
 					}
