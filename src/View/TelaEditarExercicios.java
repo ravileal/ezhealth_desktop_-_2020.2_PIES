@@ -16,7 +16,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
 
-public class EditarExercicios {
+public class TelaEditarExercicios {
 
 	private JFrame frame;
 	private JTextField textFieldMinutosExercicios;
@@ -28,7 +28,7 @@ public class EditarExercicios {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditarExercicios window = new EditarExercicios();
+					TelaEditarExercicios window = new TelaEditarExercicios();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +40,7 @@ public class EditarExercicios {
 	/**
 	 * Create the application.
 	 */
-	public EditarExercicios() {
+	public TelaEditarExercicios() {
 		initialize();
 	}
 
@@ -77,7 +77,7 @@ public class EditarExercicios {
 		buttonVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//new ().main(null);
+				new TelaExercicios().main(null);
 			}
 		});
 		buttonVoltar.setBackground(SystemColor.menu);
