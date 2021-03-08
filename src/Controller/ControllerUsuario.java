@@ -25,7 +25,7 @@ public class ControllerUsuario implements CRUD<Usuario> {
 	 * 		Métodos do CRUD
 	 * -----------------------------*/
 	@Override
-	public boolean adicionar(Usuario obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+	public boolean adicionar(Usuario obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
 		if(obj == null)
 			throw new NullPointerException("Impossível adicionar! Objeto Usuario null");
 		else if(obj.getNome().equals(""))
@@ -39,12 +39,21 @@ public class ControllerUsuario implements CRUD<Usuario> {
 	}
 
 	@Override
-	public ArrayList<Usuario> buscar(String nome) {
-		return (nome.equals(""))? null: rep.buscar(nome);
+	public ArrayList<Usuario> buscar(String nome) throws DadosVaziosException, NullPointerException {
+		if(nome.equals(""))
+			throw new DadosVaziosException("Impossível buscar! Nome vazio");
+		
+		ArrayList<Usuario> list = rep.buscar(nome);
+		
+		if(list == null)
+			throw new NullPointerException("Não foi possível encontrar usuarios a partir do nome");
+		else 
+			return list;
+			
 	}
 
 	@Override
-	public boolean editar(String nome, Usuario obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+	public boolean editar(String nome, Usuario obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
 		if(obj == null)
 			throw new NullPointerException("Impossível editar! Objeto Usuario null");
 		else if(obj.getNome().equals(""))

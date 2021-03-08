@@ -18,8 +18,9 @@ public interface CRUD<T> {
 	/**
 	 * 
 	 * @param id
+	 * @throws DadosVaziosException 
 	 */
-	ArrayList<T> buscar(String nome);
+	ArrayList<T> buscar(String nome) throws DadosVaziosException;
 
 	/**
 	 * 

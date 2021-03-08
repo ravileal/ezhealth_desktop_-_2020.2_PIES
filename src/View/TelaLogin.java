@@ -102,6 +102,9 @@ public class TelaLogin {
 				} catch (CredenciaisInvalidasException e1) {
 					JOptionPane.showMessageDialog(null, "Usuario e/ou senha incorretos!");
 					e1.printStackTrace();
+				} catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Usuario e/ou senha incorretos!");
+					e1.printStackTrace();
 				}
 
 			}

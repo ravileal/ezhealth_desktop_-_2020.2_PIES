@@ -270,10 +270,10 @@ public class TelaCriarRefeicoesPersonalizadas {
 					try {
 						new ControllerAlimento().remover(nome);
 					} catch (DadosVaziosException e1) {
-						JOptionPane.showMessageDialog(null, e1);
+						JOptionPane.showMessageDialog(null, "Algum campo está vazio");
 						e1.printStackTrace();
 					} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
-						JOptionPane.showMessageDialog(null, e1);
+						JOptionPane.showMessageDialog(null, "Erro ao excluir refeição");
 						e1.printStackTrace();
 					}
 					criarPainelRefeicoes();

@@ -3,6 +3,7 @@ package Controller;
 import java.util.ArrayList;
 
 import Model.Exercicio;
+import Model.Refeicao;
 import Repository.RepositorioExercicio;
 import Repository.RepositorioExercicioRealizado;
 import Util.*;
@@ -26,7 +27,7 @@ public class ControllerExercicios implements CRUD<Exercicio> {
 	 * -----------------------------*/
 	
 	@Override
-	public boolean adicionar(Exercicio obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+	public boolean adicionar(Exercicio obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
 		if(obj == null)
 			throw new NullPointerException("Impossível adicionar! Objeto Exercicio null");
 		else if(obj.getNome().equals(""))
@@ -38,13 +39,21 @@ public class ControllerExercicios implements CRUD<Exercicio> {
 	}
 
 	@Override
-	public ArrayList<Exercicio> buscar(String nome) {
-		return (nome.equals(""))? null: 
-		(exercicioRealizado)? repRealizada.buscar(nome) : rep.buscar(nome);
+	public ArrayList<Exercicio> buscar(String nome) throws DadosVaziosException, NullPointerException {
+		if(nome.equals(""))
+			throw new DadosVaziosException("Impossível buscar! Nome vazio");
+		
+		ArrayList<Exercicio> list = (exercicioRealizado)? repRealizada.buscar(nome) : rep.buscar(nome);
+		
+		if(list == null)
+			throw new NullPointerException("Não foi possível encontrar exercicio a partir do nome");
+		else 
+			return list;
+		
 	}
 
 	@Override
-	public boolean editar(String nome, Exercicio obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+	public boolean editar(String nome, Exercicio obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
 		if(obj == null)
 			throw new NullPointerException("Impossível editar! Objeto Exercicio null");
 		else if(obj.getNome().equals(""))

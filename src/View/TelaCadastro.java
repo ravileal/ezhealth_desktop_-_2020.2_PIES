@@ -273,7 +273,7 @@ public class TelaCadastro {
 					new TelaHome().main(null);
 					System.out.println("Nome: " + usuario.getNome());
 				} catch (DadosVaziosException e1) {
-					JOptionPane.showMessageDialog(null, "Algum campo vazio");
+					JOptionPane.showMessageDialog(null, "Algum campo está vazio");
 					e1.printStackTrace();
 				} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
 					JOptionPane.showMessageDialog(null, "Erro ao salvar usuario");

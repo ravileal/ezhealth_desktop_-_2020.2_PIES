@@ -20,7 +20,7 @@ import javax.swing.SwingConstants;
 
 import Controller.ControllerAlimento;
 import Validation.DadosVaziosException;
-import Validation.ImpossivelAdicionarRepositorioExeception;
+import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import java.awt.Button;
 import java.awt.SystemColor;
@@ -258,10 +258,10 @@ public class TelaExercicios {
 					try {
 						new ControllerAlimento().remover(nome);
 					} catch (DadosVaziosException e1) {
-						JOptionPane.showMessageDialog(null, e1);
+						JOptionPane.showMessageDialog(null, "Algum campo está vazio");
 						e1.printStackTrace();
-					} catch (ImpossivelAdicionarRepositorioExeception e1) {
-						JOptionPane.showMessageDialog(null, e1);
+					} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
+						JOptionPane.showMessageDialog(null, "Erro ao excluir exercicio");
 						e1.printStackTrace();
 					}
 					criarPainelExeercicios();

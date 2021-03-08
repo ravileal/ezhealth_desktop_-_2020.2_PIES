@@ -28,7 +28,7 @@ public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao
 	 * -----------------------------*/
 	
 	@Override
-	public boolean adicionar(Refeicao obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+	public boolean adicionar(Refeicao obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
 		if(obj == null)
 			throw new NullPointerException("Impossível adicionar! Objeto Refeicao null");
 		else if(obj.getNome().equals(""))
@@ -40,13 +40,20 @@ public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao
 	}
 
 	@Override
-	public ArrayList<Refeicao> buscar(String nome) {
-		return (nome.equals(""))? null: 
-		(refeicaoRealizada)? repRealizada.buscar(nome) : rep.buscar(nome);
+	public ArrayList<Refeicao> buscar(String nome) throws DadosVaziosException, NullPointerException {
+		if(nome.equals(""))
+			throw new DadosVaziosException("Impossível buscar! Nome vazio");
+		
+		ArrayList<Refeicao> list = (refeicaoRealizada)? repRealizada.buscar(nome) : rep.buscar(nome);
+		
+		if(list == null)
+			throw new NullPointerException("Não foi possível encontrar refeicao a partir do nome");
+		else 
+			return list;
 	}
 
 	@Override
-	public boolean editar(String nome, Refeicao obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+	public boolean editar(String nome, Refeicao obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
 		if(obj == null)
 			throw new NullPointerException("Impossível editar! Objeto Refeicao null");
 		else if(obj.getNome().equals(""))
