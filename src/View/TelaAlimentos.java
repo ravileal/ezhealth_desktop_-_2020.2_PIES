@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 import Controller.ControllerAlimento;
 import Model.Alimento;
 import Validation.DadosVaziosException;
-import Validation.ImpossivelAdicionarRepositorioExeception;
+import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -280,10 +280,10 @@ public class TelaAlimentos {
 					try {
 						new ControllerAlimento().remover(nome);
 					} catch (DadosVaziosException e1) {
-						JOptionPane.showMessageDialog(null, e1);
+						JOptionPane.showMessageDialog(null, "Algum campo vazio");
 						e1.printStackTrace();
-					} catch (ImpossivelAdicionarRepositorioExeception e1) {
-						JOptionPane.showMessageDialog(null, e1);
+					} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
+						JOptionPane.showMessageDialog(null, "Erro ao excluir alimento");
 						e1.printStackTrace();
 					}
 					criarPainelAlimentos();

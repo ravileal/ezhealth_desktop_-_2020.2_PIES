@@ -22,7 +22,7 @@ import javax.swing.SwingConstants;
 
 import Controller.ControllerAlimento;
 import Validation.DadosVaziosException;
-import Validation.ImpossivelAdicionarRepositorioExeception;
+import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import java.awt.Button;
 import javax.swing.JSeparator;
@@ -272,7 +272,7 @@ public class TelaCriarRefeicoesPersonalizadas {
 					} catch (DadosVaziosException e1) {
 						JOptionPane.showMessageDialog(null, e1);
 						e1.printStackTrace();
-					} catch (ImpossivelAdicionarRepositorioExeception e1) {
+					} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
 						JOptionPane.showMessageDialog(null, e1);
 						e1.printStackTrace();
 					}
