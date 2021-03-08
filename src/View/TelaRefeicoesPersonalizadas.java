@@ -2,11 +2,21 @@ package View;
 
 import java.awt.EventQueue;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import Controller.ControllerAlimento;
+
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,15 +24,19 @@ import java.awt.event.MouseEvent;
 import javax.swing.JScrollPane;
 import java.awt.Panel;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Button;
 import javax.swing.JSeparator;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import java.awt.Component;
 
 public class TelaRefeicoesPersonalizadas {
 
 	private JFrame frame;
 	private JTextField txtPesquisarAlimentosPara;
+	private JPanel panel_refeicoes = null;
+	private JScrollPane scrollPane = null;
 
 	/**
 	 * Launch the application.
@@ -192,14 +206,73 @@ public class TelaRefeicoesPersonalizadas {
 		lblBuscarAlimentos_2.setBounds(136, 551, 354, 30);
 		frame.getContentPane().add(lblBuscarAlimentos_2);
 		
-		JScrollPane scrollPaneRefeicoes = new JScrollPane();
-		scrollPaneRefeicoes.setBounds(140, 290, 810, 229);
-		frame.getContentPane().add(scrollPaneRefeicoes);
+		criarPainelRefeicoes();
 		
-		JLabel labelArrayRefeicoesProntas = new JLabel("Refei\u00E7\u00E3o 01     200g - 300kcal");
-		labelArrayRefeicoesProntas.setVerticalAlignment(SwingConstants.TOP);
-		labelArrayRefeicoesProntas.setHorizontalAlignment(SwingConstants.LEFT);
-		labelArrayRefeicoesProntas.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		scrollPaneRefeicoes.setColumnHeaderView(labelArrayRefeicoesProntas);
+	}
+	
+	public void criarPainelRefeicoes() {
+		
+		if(scrollPane != null) {
+			frame.getContentPane().remove(scrollPane);
+		}
+		
+		this.panel_refeicoes = new JPanel();
+		panel_refeicoes.setLayout(new BoxLayout(panel_refeicoes, BoxLayout.Y_AXIS));
+		
+//		for (Alimento a : new ControllerAlimento().buscar("")) {
+		panel_refeicoes.add(Box.createRigidArea(new Dimension(0, 10)));
+		JPanel panel_item = new JPanel();
+		panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
+		panel_item.add(new JLabel("Laranja"));
+		panel_item.add(botaoEditar("Laranja"));
+		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
+		panel_item.add(botaoExcluir("Laranja"));
+		panel_refeicoes.add(panel_item);
+//        }
+		
+		this.scrollPane = new JScrollPane(panel_refeicoes);
+		scrollPane.setBounds(136, 274, 814, 260);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		frame.getContentPane().add(scrollPane);
+		frame.revalidate();
+		
+	}
+	
+	public JButton botaoEditar(String nome) {
+		
+		JButton botaoEditar = new JButton("Editar");
+		botaoEditar.addMouseListener(
+			new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					new TelaExercicios().main(null);
+				}
+			}
+		);
+		return botaoEditar;
+	}
+	
+	public JButton botaoExcluir(String nome) {
+		
+		JButton botaoExcluir = new JButton("Excluir");
+		botaoExcluir.addMouseListener(
+			new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					try {
+						new ControllerAlimento().remover(nome);
+					} catch (DadosVaziosException e1) {
+						JOptionPane.showMessageDialog(null, e1);
+						e1.printStackTrace();
+					} catch (ImpossivelAdicionarRepositorioExeception e1) {
+						JOptionPane.showMessageDialog(null, e1);
+						e1.printStackTrace();
+					}
+					criarPainelRefeicoes();
+				}
+			}
+		);
+		return botaoExcluir;
 	}
 }
