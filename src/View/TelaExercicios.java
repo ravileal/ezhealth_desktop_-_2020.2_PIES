@@ -21,6 +21,7 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import Controller.ControllerAlimento;
 import Util.ViewUtils;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import java.awt.Window.Type;
 
 public class TelaExercicios {
 
@@ -48,6 +50,7 @@ public class TelaExercicios {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					TelaExercicios window = new TelaExercicios();
@@ -75,7 +78,7 @@ public class TelaExercicios {
 		frame.setBounds(100, 100, 1058, 603);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setUndecorated(true);
-		frame.setTitle("Home - EzHealth");
+		frame.setTitle("Exercicio - EzHealth");
 		
 		ArrayList<Image> icons = new ArrayList<Image>();
 		icons.add(new ImageIcon(this.getClass().getResource("/Images/hospital.png")).getImage());
@@ -93,7 +96,7 @@ public class TelaExercicios {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);	
 		
-		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF");
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF", false);
 		
 		JLabel lblImgHospital = new JLabel(""); 
 		lblImgHospital.setBounds(43, 24, 52, 51);
@@ -119,7 +122,7 @@ public class TelaExercicios {
 		
 		Panel panel_menu = new Panel();
 		panel_menu.setBackground(Color.decode("#A4B0BE"));
-		panel_menu.setBounds(0, 82, 136, 521);
+		panel_menu.setBounds(0, 87, 136, 516);
 		frame.getContentPane().add(panel_menu);
 		panel_menu.setLayout(null);
 		
@@ -147,7 +150,8 @@ public class TelaExercicios {
 		labelRefeicoes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaRefeicoesPersonalizadas().main(null);
+				new TelaRefeicoesPersonalizadas();
+				TelaRefeicoesPersonalizadas.main(null);
 			}
 		});
 		
@@ -170,7 +174,8 @@ public class TelaExercicios {
 		labelExercicios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaExercicios().main(null);
+				new TelaExercicios();
+				TelaExercicios.main(null);
 			}
 		});
 		
@@ -192,7 +197,8 @@ public class TelaExercicios {
 		labelMeusDados.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaMeusDados().main(null);
+				new TelaMeusDados();
+				TelaMeusDados.main(null);
 			}
 		});
 		labelMeusDados.setHorizontalAlignment(SwingConstants.LEFT);
@@ -305,7 +311,8 @@ public class TelaExercicios {
 			new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					new TelaEditarExercicios().main(null);
+					new TelaEditarExercicios();
+					TelaEditarExercicios.main(null);
 				}
 			}
 		);

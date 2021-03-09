@@ -3,12 +3,12 @@ package View;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.Panel;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import Util.ViewUtils;
 
@@ -30,6 +30,7 @@ public class TelaEditarAlimentos {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					TelaEditarAlimentos window = new TelaEditarAlimentos();
@@ -55,7 +56,7 @@ public class TelaEditarAlimentos {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 1053, 550);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		Panel panel = new Panel();
@@ -64,7 +65,7 @@ public class TelaEditarAlimentos {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);	
 		
-		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF");
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF", true);
 		
 		JLabel lblImgHospital = new JLabel(""); 
 		lblImgHospital.setBounds(43, 24, 52, 51);
@@ -110,7 +111,8 @@ public class TelaEditarAlimentos {
 		buttonVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaEditarRefeicaoPersonalizada().main(null);
+				new TelaEditarRefeicaoPersonalizada();
+				TelaEditarRefeicaoPersonalizada.main(null);
 			}
 		});
 		buttonVoltar.setBackground(SystemColor.menu);

@@ -3,7 +3,6 @@ package Controller;
 import java.util.ArrayList;
 
 import Model.Exercicio;
-import Model.Refeicao;
 import Repository.RepositorioExercicio;
 import Repository.RepositorioExercicioRealizado;
 import Util.*;

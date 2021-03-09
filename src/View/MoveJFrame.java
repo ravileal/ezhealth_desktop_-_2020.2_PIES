@@ -1,18 +1,11 @@
 package View;
 
-import java.awt.BorderLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 public class MoveJFrame extends JFrame{
 	public MoveJFrame() {
@@ -44,15 +37,18 @@ public class MoveJFrame extends JFrame{
             this.frame = frame;
         }
 
-        public void mouseReleased(MouseEvent e) {
+        @Override
+		public void mouseReleased(MouseEvent e) {
             mouseDownCompCoords = null;
         }
 
-        public void mousePressed(MouseEvent e) {
+        @Override
+		public void mousePressed(MouseEvent e) {
             mouseDownCompCoords = e.getPoint();
         }
 
-        public void mouseDragged(MouseEvent e) {
+        @Override
+		public void mouseDragged(MouseEvent e) {
             Point currCoords = e.getLocationOnScreen();
             frame.setLocation(currCoords.x - mouseDownCompCoords.x, currCoords.y - mouseDownCompCoords.y);
         }

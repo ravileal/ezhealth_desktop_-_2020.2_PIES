@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import Controller.ControllerUsuario;
 import Model.Usuario;
@@ -18,18 +19,15 @@ import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import javax.swing.JTextField;
-import javax.swing.JScrollBar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
-import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Window.Type;
 
 public class TelaCadastro {
 
@@ -47,6 +45,7 @@ public class TelaCadastro {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					TelaCadastro window = new TelaCadastro();
@@ -73,7 +72,7 @@ public class TelaCadastro {
 		frame.setAlwaysOnTop(true);
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 1054, 732);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		Panel panel = new Panel();
@@ -82,7 +81,7 @@ public class TelaCadastro {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);	
 		
-		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF");
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF", true);
 		
 		
 		JLabel lblCadastro = new JLabel("Cadastro");
@@ -279,7 +278,8 @@ public class TelaCadastro {
 				
 				try {
 					new ControllerUsuario().adicionar(usuario);
-					new TelaHome().main(null);
+					new TelaHome();
+					TelaHome.main(null);
 					System.out.println("Nome: " + usuario.getNome());
 				} catch (DadosVaziosException e1) {
 					JOptionPane.showMessageDialog(null, "Algum campo está vazio");

@@ -22,6 +22,7 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import Controller.ControllerAlimento;
 import Util.ViewUtils;
@@ -32,7 +33,6 @@ import javax.swing.JSeparator;
 import java.awt.Button;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
-import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.ScrollPaneConstants;
@@ -49,6 +49,7 @@ public class TelaEditarRefeicaoPersonalizada {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					TelaEditarRefeicaoPersonalizada window = new TelaEditarRefeicaoPersonalizada();
@@ -74,7 +75,7 @@ public class TelaEditarRefeicaoPersonalizada {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 1058, 603);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setUndecorated(true);
 		frame.setTitle("Home - EzHealth");
 		
@@ -94,7 +95,7 @@ public class TelaEditarRefeicaoPersonalizada {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);	
 		
-		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF");
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF", true);
 		
 		JLabel lblImgHospital = new JLabel(""); 
 		lblImgHospital.setBounds(43, 24, 52, 51);
@@ -148,7 +149,8 @@ public class TelaEditarRefeicaoPersonalizada {
 		labelRefeicoes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaRefeicoesPersonalizadas().main(null);
+				new TelaRefeicoesPersonalizadas();
+				TelaRefeicoesPersonalizadas.main(null);
 			}
 		});
 		
@@ -171,7 +173,8 @@ public class TelaEditarRefeicaoPersonalizada {
 		labelExercicios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaExercicios().main(null);
+				new TelaExercicios();
+				TelaExercicios.main(null);
 			}
 		});
 		
@@ -193,7 +196,8 @@ public class TelaEditarRefeicaoPersonalizada {
 		labelMeusDados.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaMeusDados().main(null);
+				new TelaMeusDados();
+				TelaMeusDados.main(null);
 			}
 		});
 		labelMeusDados.setHorizontalAlignment(SwingConstants.LEFT);
@@ -257,7 +261,8 @@ public class TelaEditarRefeicaoPersonalizada {
 		buttonVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaRefeicoesPersonalizadas().main(null);
+				new TelaRefeicoesPersonalizadas();
+				TelaRefeicoesPersonalizadas.main(null);
 			}
 		});
 		buttonVoltar.setBackground(SystemColor.menu);
@@ -317,7 +322,8 @@ public class TelaEditarRefeicaoPersonalizada {
 		botaoEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaEditarAlimentos().main(null);
+				new TelaEditarAlimentos();
+				TelaEditarAlimentos.main(null);
 			}
 		});
 		return botaoEditar;

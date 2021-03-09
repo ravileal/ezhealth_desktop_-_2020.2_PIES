@@ -7,6 +7,7 @@ import javax.swing.JSeparator;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import Util.ViewUtils;
 
@@ -21,6 +22,7 @@ import java.awt.Panel;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Window.Type;
 
 public class TelaEditarCadastro {
 
@@ -38,6 +40,7 @@ public class TelaEditarCadastro {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					TelaEditarCadastro window = new TelaEditarCadastro();
@@ -61,9 +64,10 @@ public class TelaEditarCadastro {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setType(Type.POPUP);
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 1056, 718);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JSeparator separator_1 = new JSeparator();
@@ -248,7 +252,7 @@ public class TelaEditarCadastro {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);	
 		
-		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF");
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF", true);
 		
 		JLabel lblEditarCadastro = new JLabel("Editar Cadastro");
 		lblEditarCadastro.setVerticalAlignment(SwingConstants.TOP);
@@ -270,7 +274,8 @@ public class TelaEditarCadastro {
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaMeusDados().main(null);
+				new TelaMeusDados();
+				TelaMeusDados.main(null);
 			}
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));

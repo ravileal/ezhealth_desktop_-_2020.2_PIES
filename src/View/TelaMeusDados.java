@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.Panel;
-import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -16,6 +15,7 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import Util.ViewUtils;
 
@@ -33,6 +33,7 @@ public class TelaMeusDados {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					TelaMeusDados window = new TelaMeusDados();
@@ -58,7 +59,7 @@ public class TelaMeusDados {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 1058, 603);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setUndecorated(true);
 		frame.setTitle("Home - EzHealth");
 		
@@ -78,7 +79,7 @@ public class TelaMeusDados {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);	
 		
-		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF");
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF", false);
 		
 		JLabel lblImgHospital = new JLabel(""); 
 		lblImgHospital.setBounds(43, 24, 52, 51);
@@ -132,7 +133,8 @@ public class TelaMeusDados {
 		labelRefeicoes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaRefeicoesPersonalizadas().main(null);
+				new TelaRefeicoesPersonalizadas();
+				TelaRefeicoesPersonalizadas.main(null);
 			}
 		});
 		
@@ -155,7 +157,8 @@ public class TelaMeusDados {
 		labelExercicios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaExercicios().main(null);
+				new TelaExercicios();
+				TelaExercicios.main(null);
 			}
 		});
 		
@@ -177,7 +180,8 @@ public class TelaMeusDados {
 		labelMeusDados.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaMeusDados().main(null);
+				new TelaMeusDados();
+				TelaMeusDados.main(null);
 			}
 		});
 		labelMeusDados.setHorizontalAlignment(SwingConstants.LEFT);
@@ -355,7 +359,8 @@ public class TelaMeusDados {
 		btnEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaEditarCadastro().main(null);
+				new TelaEditarCadastro();
+				TelaEditarCadastro.main(null);
 			}
 		});
 		btnEditar.setFont(new Font("Tahoma", Font.PLAIN, 14));

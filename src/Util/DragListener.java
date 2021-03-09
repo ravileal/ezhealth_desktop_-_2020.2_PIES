@@ -10,11 +10,13 @@ public class DragListener extends MouseInputAdapter{
     private Point location;
     private MouseEvent mouseEvent;
  
-    public void mousePressed(MouseEvent mouseEvent){
+    @Override
+	public void mousePressed(MouseEvent mouseEvent){
     	this.mouseEvent = mouseEvent;
     }
  
-    public void mouseDragged(MouseEvent mouseEvent){
+    @Override
+	public void mouseDragged(MouseEvent mouseEvent){
         Component component = mouseEvent.getComponent();
         location = component.getLocation(location);
         int x = this.location.x - this.mouseEvent.getX() + mouseEvent.getX();

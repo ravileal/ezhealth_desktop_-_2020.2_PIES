@@ -5,11 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
+import javax.swing.WindowConstants;
 
 import Controller.ControllerUsuario;
-import Util.DragListener;
 import Util.ViewUtils;
 import Validation.CredenciaisInvalidasException;
 
@@ -18,23 +16,18 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
-import java.awt.Window.Type;
 
 public class TelaLogin {
 
@@ -48,6 +41,7 @@ public class TelaLogin {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					TelaLogin window = new TelaLogin();
@@ -73,7 +67,7 @@ public class TelaLogin {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 1058, 603);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setTitle("Login - EzHealth");
 		
@@ -87,7 +81,7 @@ public class TelaLogin {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		new ViewUtils().configureTitleBarAlternative(frame, panel, "#DFE4EA", "#000000");
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#DFE4EA", "#000000", false);
 		
 		campoLogin = new JTextField();
 		campoLogin.setColumns(10);
@@ -111,6 +105,7 @@ public class TelaLogin {
 		
 		JButton btnLogin = new JButton("Entrar");
 		btnLogin.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -123,7 +118,8 @@ public class TelaLogin {
 				
 				try {
 					new ControllerUsuario().validarLogin(campoLogin.getText(), campoSenha.getText());
-					new TelaHome().main(null);
+					new TelaHome();
+					TelaHome.main(null);
 					frame.dispose();
 				} catch (CredenciaisInvalidasException e1) {
 					JOptionPane.showMessageDialog(null, "Usuario e/ou senha incorretos!");
@@ -155,6 +151,7 @@ public class TelaLogin {
 		
 		JButton btnCadastro = new JButton("N\u00E3o tem conta ainda? Cadastre-se");
 		btnCadastro.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -162,7 +159,8 @@ public class TelaLogin {
 		btnCadastro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaCadastro().main(null);
+				new TelaCadastro();
+				TelaCadastro.main(null);
 			}
 		});
 		btnCadastro.setBackground(Color.decode("#2F3542"));

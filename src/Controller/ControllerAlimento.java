@@ -3,7 +3,6 @@ package Controller;
 import java.util.ArrayList;
 
 import Model.Alimento;
-import Model.Exercicio;
 import Repository.RepositorioAlimento;
 import Util.*;
 import Validation.DadosVaziosException;

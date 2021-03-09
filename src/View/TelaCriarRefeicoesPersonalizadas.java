@@ -23,6 +23,7 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import Controller.ControllerAlimento;
 import Util.ViewUtils;
@@ -48,6 +49,7 @@ public class TelaCriarRefeicoesPersonalizadas {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					TelaCriarRefeicoesPersonalizadas window = new TelaCriarRefeicoesPersonalizadas();
@@ -73,7 +75,7 @@ public class TelaCriarRefeicoesPersonalizadas {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 1058, 603);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setUndecorated(true);
 		frame.setTitle("Home - EzHealth");
 		
@@ -93,7 +95,7 @@ public class TelaCriarRefeicoesPersonalizadas {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);	
 		
-		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF");
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF", false);
 		
 		JLabel lblImgHospital = new JLabel(""); 
 		lblImgHospital.setBounds(43, 24, 52, 51);
@@ -147,7 +149,8 @@ public class TelaCriarRefeicoesPersonalizadas {
 		labelRefeicoes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaRefeicoesPersonalizadas().main(null);
+				new TelaRefeicoesPersonalizadas();
+				TelaRefeicoesPersonalizadas.main(null);
 			}
 		});
 		
@@ -170,7 +173,8 @@ public class TelaCriarRefeicoesPersonalizadas {
 		labelExercicios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaExercicios().main(null);
+				new TelaExercicios();
+				TelaExercicios.main(null);
 			}
 		});
 		
@@ -192,7 +196,8 @@ public class TelaCriarRefeicoesPersonalizadas {
 		labelMeusDados.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaMeusDados().main(null);
+				new TelaMeusDados();
+				TelaMeusDados.main(null);
 			}
 		});
 		labelMeusDados.setHorizontalAlignment(SwingConstants.LEFT);
@@ -234,7 +239,8 @@ public class TelaCriarRefeicoesPersonalizadas {
 		buttonVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaRefeicoesPersonalizadas().main(null);
+				new TelaRefeicoesPersonalizadas();
+				TelaRefeicoesPersonalizadas.main(null);
 			}
 		});
 		
@@ -320,7 +326,8 @@ public class TelaCriarRefeicoesPersonalizadas {
 			new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					new TelaExercicios().main(null);
+					new TelaExercicios();
+					TelaExercicios.main(null);
 				}
 			}
 		);

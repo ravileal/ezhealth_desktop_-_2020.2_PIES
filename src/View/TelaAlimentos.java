@@ -15,32 +15,25 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import Controller.ControllerAlimento;
-import Model.Alimento;
 import Util.ViewUtils;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
-import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.Box;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
 import java.awt.Button;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JPanel;
-import java.awt.Scrollbar;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 
 public class TelaAlimentos {
@@ -55,6 +48,7 @@ public class TelaAlimentos {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					TelaAlimentos window = new TelaAlimentos();
@@ -80,7 +74,7 @@ public class TelaAlimentos {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 1058, 603);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setUndecorated(true);
 		frame.setTitle("Home - EzHealth");
 		
@@ -100,7 +94,7 @@ public class TelaAlimentos {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);	
 		
-		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF");
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF", false);
 		
 		JLabel lblImgHospital = new JLabel(""); 
 		lblImgHospital.setBounds(43, 24, 52, 51);
@@ -154,7 +148,8 @@ public class TelaAlimentos {
 		labelRefeicoes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaRefeicoesPersonalizadas().main(null);
+				new TelaRefeicoesPersonalizadas();
+				TelaRefeicoesPersonalizadas.main(null);
 			}
 		});
 		
@@ -177,7 +172,8 @@ public class TelaAlimentos {
 		labelExercicios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaExercicios().main(null);
+				new TelaExercicios();
+				TelaExercicios.main(null);
 			}
 		});
 		
@@ -199,7 +195,8 @@ public class TelaAlimentos {
 		labelMeusDados.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaMeusDados().main(null);
+				new TelaMeusDados();
+				TelaMeusDados.main(null);
 			}
 		});
 		labelMeusDados.setHorizontalAlignment(SwingConstants.LEFT);
@@ -252,7 +249,8 @@ public class TelaAlimentos {
 		buttonVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaHome().main(null);
+				new TelaHome();
+				TelaHome.main(null);
 			}
 		});
 		
@@ -323,7 +321,8 @@ public class TelaAlimentos {
 			new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					new TelaEditarAlimentos().main(null);
+					new TelaEditarAlimentos();
+					TelaEditarAlimentos.main(null);
 				}
 			}
 		);

@@ -2,7 +2,6 @@ package Repository;
 
 import java.util.ArrayList;
 
-import Model.Exercicio;
 import Model.Refeicao;
 import Util.*;
 
