@@ -150,7 +150,7 @@ public class TelaHome {
 		
 		JLabel lblImgHome = new JLabel(""); 
 		lblImgHome.setBounds(10, 70, 19, 18);
-		new ViewUtils().setImageInLabel("/Images/refeicao.png", lblImgHome, panel_menu);
+		new ViewUtils().setImageInLabel("/Images/restaurant.png", lblImgHome, panel_menu);
 		
 		
 		labelHome.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
@@ -171,7 +171,7 @@ public class TelaHome {
 		
 		JLabel lblImgRefeicao = new JLabel(""); 
 		lblImgRefeicao.setBounds(10, 115, 19, 18);
-		new ViewUtils().setImageInLabel("/Images/exercicio.png", lblImgRefeicao, panel_menu);
+		new ViewUtils().setImageInLabel("/Images/fitness.png", lblImgRefeicao, panel_menu);
 		
 		JLabel lblNewLabel_7 = new JLabel("Menu");
 		lblNewLabel_7.setVerticalAlignment(SwingConstants.TOP);
@@ -207,6 +207,12 @@ public class TelaHome {
 		
 		
 		JLabel labelMeusDados = new JLabel("Meus Dados");
+		labelMeusDados.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaMeusDados().main(null);
+			}
+		});
 		labelMeusDados.setHorizontalAlignment(SwingConstants.LEFT);
 		labelMeusDados.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
 		labelMeusDados.setBounds(36, 177, 87, 35);
@@ -214,7 +220,7 @@ public class TelaHome {
 		
 		JLabel lblImgMeusDados = new JLabel(""); 
 		lblImgMeusDados.setBounds(10, 184, 19, 18);
-		new ViewUtils().setImageInLabel("/Images/meusdados.png", lblImgMeusDados, panel_menu);
+		new ViewUtils().setImageInLabel("/Images/account.png", lblImgMeusDados, panel_menu);
 		
 		JLabel labelSair = new JLabel("Sair");
 		labelSair.setHorizontalAlignment(SwingConstants.LEFT);
@@ -230,7 +236,7 @@ public class TelaHome {
 		
 		JLabel lblImgSair = new JLabel(""); 
 		lblImgSair.setBounds(10, 218, 19, 18);
-		new ViewUtils().setImageInLabel("/Images/sair.png", lblImgSair, panel_menu);
+		new ViewUtils().setImageInLabel("/Images/exit.png", lblImgSair, panel_menu);
 		
 		
 		JPanel panel = new JPanel();
