@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.Panel;
@@ -14,11 +15,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.SwingConstants;
 
 import Controller.ControllerAlimento;
+import Util.ViewUtils;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
@@ -26,6 +31,7 @@ import java.awt.Button;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
@@ -66,109 +72,101 @@ public class TelaExercicios {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 1011, 573);
+		frame.setBounds(100, 100, 1058, 603);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setUndecorated(true);
+		frame.setTitle("Home - EzHealth");
+		
+		ArrayList<Image> icons = new ArrayList<Image>();
+		icons.add(new ImageIcon(this.getClass().getResource("/Images/hospital.png")).getImage());
+		frame.setIconImages(icons);
 		frame.getContentPane().setLayout(null);
 		
-		Panel panel_1 = new Panel();
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(0, 0, 10, 10);
+		frame.setContentPane(panel_1);
 		panel_1.setLayout(null);
-		panel_1.setBackground(new Color(0, 0, 51));
-		panel_1.setBounds(0, 0, 1014, 73);
-		frame.getContentPane().add(panel_1);
-		
-		JLabel lblExercicios = new JLabel("Exercicios");
-		lblExercicios.setVerticalAlignment(SwingConstants.TOP);
-		lblExercicios.setHorizontalAlignment(SwingConstants.LEFT);
-		lblExercicios.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblExercicios.setBounds(136, 91, 113, 30);
-		frame.getContentPane().add(lblExercicios);
-		
-		JLabel labelData = new JLabel("Quarta - 10/02");
-		labelData.setVerticalAlignment(SwingConstants.TOP);
-		labelData.setHorizontalAlignment(SwingConstants.LEFT);
-		labelData.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		labelData.setBounds(136, 112, 92, 30);
-		frame.getContentPane().add(labelData);
-		
-		JLabel lblAdicionarExerccios = new JLabel("Adicionar Exerc\u00EDcios");
-		lblAdicionarExerccios.setVerticalAlignment(SwingConstants.TOP);
-		lblAdicionarExerccios.setHorizontalAlignment(SwingConstants.LEFT);
-		lblAdicionarExerccios.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAdicionarExerccios.setBounds(643, 181, 158, 30);
-		frame.getContentPane().add(lblAdicionarExerccios);
-		
-		JLabel lblListaDeExerccios = new JLabel("Lista de Exerc\u00EDcios");
-		lblListaDeExerccios.setVerticalAlignment(SwingConstants.TOP);
-		lblListaDeExerccios.setHorizontalAlignment(SwingConstants.LEFT);
-		lblListaDeExerccios.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblListaDeExerccios.setBounds(136, 181, 141, 30);
-		frame.getContentPane().add(lblListaDeExerccios);
-		
-		Button buttonSalvar = new Button("Salvar");
-		buttonSalvar.setBackground(SystemColor.menu);
-		buttonSalvar.setBounds(135, 490, 70, 22);
-		frame.getContentPane().add(buttonSalvar);
 		
 		Panel panel = new Panel();
-		panel.setLayout(null);
-		panel.setBackground(SystemColor.activeCaption);
-		panel.setBounds(0, 73, 119, 474);
+		panel.setBackground(Color.decode("#2F3542"));
+		panel.setBounds(0, 0, 1058, 87);
 		frame.getContentPane().add(panel);
+		panel.setLayout(null);	
 		
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF");
 		
-		JLabel lblNewLabel_7 = new JLabel("Menu");
-		lblNewLabel_7.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_7.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_7.setBounds(10, 11, 63, 30);
-		panel.add(lblNewLabel_7);
+		JLabel lblImgHospital = new JLabel(""); 
+		lblImgHospital.setBounds(43, 24, 52, 51);
+		
+		new ViewUtils().setImageInLabel("/Images/hospital.png", lblImgHospital, panel);
+		
+		JLabel lblNewLabel_title = new JLabel("EZHEALTH");
+		lblNewLabel_title.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
+		lblNewLabel_title.setForeground(Color.decode("#A4B0BE"));
+		lblNewLabel_title.setBounds(112, 37, 96, 25);
+		panel.add(lblNewLabel_title);
+		
+		JLabel lblImgMinhaConta = new JLabel(""); 
+		lblImgMinhaConta.setBounds(930, 29, 39, 40);
+		
+		new ViewUtils().setImageInLabel("/Images/accountWhite.png", lblImgMinhaConta, panel);
+		
+		JLabel lblNewLabel_minhaConta = new JLabel("<html>Minha<br>Conta</html>");
+		lblNewLabel_minhaConta.setFont(new Font("Quicksand Medium", Font.PLAIN, 18));
+		lblNewLabel_minhaConta.setForeground(Color.decode("#A4B0BE"));
+		lblNewLabel_minhaConta.setBounds(978, 24, 70, 51);
+		panel.add(lblNewLabel_minhaConta);
+		
+		Panel panel_menu = new Panel();
+		panel_menu.setBackground(Color.decode("#A4B0BE"));
+		panel_menu.setBounds(0, 82, 136, 521);
+		frame.getContentPane().add(panel_menu);
+		panel_menu.setLayout(null);
 		
 		JLabel labelHome = new JLabel("Home");
-		labelHome.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		labelHome.setBounds(10, 33, 63, 27);
-		panel.add(labelHome);
 		labelHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaHome().main(null);
+				// código para atualizar a tela
 			}
 		});
 		
-		JLabel labelRefeicoes = new JLabel("Refei\u00E7\u00F5es ");
+		JLabel lblImgHome = new JLabel(""); 
+		lblImgHome.setBounds(10, 70, 19, 18);
+		new ViewUtils().setImageInLabel("/Images/restaurant.png", lblImgHome, panel_menu);
+		
+		labelHome.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
+		labelHome.setBounds(36, 33, 87, 27);
+		panel_menu.add(labelHome);
+		
+		JLabel labelRefeicoes = new JLabel("<html>Refei\u00E7\u00F5es <br> Personalizadas</html>");
 		labelRefeicoes.setHorizontalAlignment(SwingConstants.LEFT);
-		labelRefeicoes.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		labelRefeicoes.setBounds(10, 59, 144, 35);
-		panel.add(labelRefeicoes);
+		labelRefeicoes.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
+		labelRefeicoes.setBounds(36, 65, 98, 35);
+		panel_menu.add(labelRefeicoes);
 		labelRefeicoes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				new TelaCriarRefeicoesPersonalizadas().main(null);
-			}
-		});
-		
-		JLabel labelPersonalizadas = new JLabel("Personalizadas");
-		labelPersonalizadas.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		labelPersonalizadas.setBounds(10, 80, 86, 27);
-		panel.add(labelPersonalizadas);
-		labelPersonalizadas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new TelaRefeicoesPersonalizadas().main(null);
 			}
 		});
 		
-		JLabel lblNewLabel_8 = new JLabel("Menu");
+		JLabel lblImgRefeicao = new JLabel(""); 
+		lblImgRefeicao.setBounds(10, 115, 19, 18);
+		new ViewUtils().setImageInLabel("/Images/fitness.png", lblImgRefeicao, panel_menu);
+		
+		JLabel lblNewLabel_7 = new JLabel("Menu");
 		lblNewLabel_7.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_7.setFont(new Font("Quicksand Medium", Font.PLAIN, 14));
 		lblNewLabel_7.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_7.setBounds(10, 11, 63, 30);
-		panel.add(lblNewLabel_7);
+		panel_menu.add(lblNewLabel_7);
 		
 		JLabel labelExercicios = new JLabel("Exerc\u00EDcios");
 		labelExercicios.setHorizontalAlignment(SwingConstants.LEFT);
-		labelExercicios.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		labelExercicios.setBounds(10, 106, 144, 35);
-		panel.add(labelExercicios);
+		labelExercicios.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
+		labelExercicios.setBounds(36, 106, 87, 35);
+		panel_menu.add(labelExercicios);
 		labelExercicios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -176,31 +174,96 @@ public class TelaExercicios {
 			}
 		});
 		
+		
+		JLabel lblImgExercicio = new JLabel(""); 
+		lblImgExercicio.setBounds(10, 36, 19, 18);
+		new ViewUtils().setImageInLabel("/Images/home.png", lblImgExercicio, panel_menu);
+		
+		
+		JLabel lblNewLabel_7_1 = new JLabel("Mais op\u00E7\u00F5es");
+		lblNewLabel_7_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_7_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_7_1.setFont(new Font("Quicksand Medium", Font.PLAIN, 14));
+		lblNewLabel_7_1.setBounds(10, 151, 124, 30);
+		panel_menu.add(lblNewLabel_7_1);
+		
+		
 		JLabel labelMeusDados = new JLabel("Meus Dados");
+		labelMeusDados.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new TelaMeusDados().main(null);
+			}
+		});
 		labelMeusDados.setHorizontalAlignment(SwingConstants.LEFT);
-		labelMeusDados.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		labelMeusDados.setBounds(10, 136, 144, 35);
-		panel.add(labelMeusDados);
+		labelMeusDados.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
+		labelMeusDados.setBounds(36, 177, 87, 35);
+		panel_menu.add(labelMeusDados);
+		
+		JLabel lblImgMeusDados = new JLabel(""); 
+		lblImgMeusDados.setBounds(10, 184, 19, 18);
+		new ViewUtils().setImageInLabel("/Images/account.png", lblImgMeusDados, panel_menu);
 		
 		JLabel labelSair = new JLabel("Sair");
 		labelSair.setHorizontalAlignment(SwingConstants.LEFT);
-		labelSair.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		labelSair.setBounds(10, 170, 144, 35);
-		panel.add(labelSair);
+		labelSair.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
+		labelSair.setBounds(36, 211, 87, 35);
 		labelSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.exit(0);
 			}
 		});
+		panel_menu.add(labelSair);
+		
+		JLabel lblImgSair = new JLabel(""); 
+		lblImgSair.setBounds(10, 218, 19, 18);
+		new ViewUtils().setImageInLabel("/Images/exit.png", lblImgSair, panel_menu);
+		
+		JLabel labelNomeRefeicao = new JLabel("Exerc\u00EDcios");
+		labelNomeRefeicao.setBounds(164, 104, 113, 30);
+		labelNomeRefeicao.setVerticalAlignment(SwingConstants.TOP);
+		labelNomeRefeicao.setHorizontalAlignment(SwingConstants.LEFT);
+		labelNomeRefeicao.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		frame.getContentPane().add(labelNomeRefeicao);
+		
+		JLabel labelData = new JLabel("Quarta - 10/02");
+		labelData.setBounds(164, 125, 92, 30);
+		labelData.setVerticalAlignment(SwingConstants.TOP);
+		labelData.setHorizontalAlignment(SwingConstants.LEFT);
+		labelData.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		frame.getContentPane().add(labelData);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(162, 153, 871, 2);
+		frame.getContentPane().add(separator);
 		
 		txtPesquisarExercicios = new JTextField();
 		txtPesquisarExercicios.setToolTipText("Pesquisar");
 		txtPesquisarExercicios.setText("Pesquisar Exercicios");
 		txtPesquisarExercicios.setForeground(SystemColor.scrollbar);
 		txtPesquisarExercicios.setColumns(10);
-		txtPesquisarExercicios.setBounds(643, 222, 335, 35);
+		txtPesquisarExercicios.setBounds(687, 222, 335, 35);
 		frame.getContentPane().add(txtPesquisarExercicios);
+		
+		JLabel lblBuscarExerccios = new JLabel("Buscar Exerc\u00EDcios");
+		lblBuscarExerccios.setVerticalAlignment(SwingConstants.TOP);
+		lblBuscarExerccios.setHorizontalAlignment(SwingConstants.LEFT);
+		lblBuscarExerccios.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblBuscarExerccios.setBounds(685, 181, 157, 30);
+		panel_1.add(lblBuscarExerccios);
+		
+		JLabel lblListaDeExerccios = new JLabel("Lista de Exerc\u00EDcios");
+		lblListaDeExerccios.setVerticalAlignment(SwingConstants.TOP);
+		lblListaDeExerccios.setHorizontalAlignment(SwingConstants.LEFT);
+		lblListaDeExerccios.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblListaDeExerccios.setBounds(164, 181, 157, 30);
+		panel_1.add(lblListaDeExerccios);
+		
+		Button buttonSalvar = new Button("Salvar");
+		buttonSalvar.setBackground(SystemColor.menu);
+		buttonSalvar.setBounds(164, 540, 70, 22);
+		frame.getContentPane().add(buttonSalvar);
 		
 		criarPainelExeercicios();
 		
@@ -227,7 +290,7 @@ public class TelaExercicios {
 //        }
 		
 		this.scrollPane = new JScrollPane(panel_exercicios);
-		scrollPane.setBounds(136, 222, 461, 260);
+		scrollPane.setBounds(164, 222, 461, 260);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		frame.getContentPane().add(scrollPane);
@@ -271,6 +334,4 @@ public class TelaExercicios {
 		);
 		return botaoExcluir;
 	}
-	
-	
 }

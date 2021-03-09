@@ -8,6 +8,9 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import Util.ViewUtils;
+
 import java.awt.Button;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
@@ -50,28 +53,52 @@ public class TelaEditarExercicios {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 1011, 563);
+		frame.setBounds(100, 100, 1057, 563);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		Panel panel_1 = new Panel();
-		panel_1.setLayout(null);
-		panel_1.setBackground(new Color(0, 0, 51));
-		panel_1.setBounds(0, 0, 1014, 73);
-		frame.getContentPane().add(panel_1);
+		Panel panel = new Panel();
+		panel.setBackground(Color.decode("#2F3542"));
+		panel.setBounds(0, 0, 1058, 80);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);	
+		
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF");
+		
+		JLabel lblImgHospital = new JLabel(""); 
+		lblImgHospital.setBounds(43, 24, 52, 51);
+		
+		new ViewUtils().setImageInLabel("/Images/hospital.png", lblImgHospital, panel);
+		
+		JLabel lblNewLabel_title = new JLabel("EZHEALTH");
+		lblNewLabel_title.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
+		lblNewLabel_title.setForeground(Color.decode("#A4B0BE"));
+		lblNewLabel_title.setBounds(112, 37, 96, 25);
+		panel.add(lblNewLabel_title);
+		
+		JLabel lblImgMinhaConta = new JLabel(""); 
+		lblImgMinhaConta.setBounds(930, 29, 39, 40);
+		
+		new ViewUtils().setImageInLabel("/Images/accountWhite.png", lblImgMinhaConta, panel);
+		
+		JLabel lblNewLabel_minhaConta = new JLabel("<html>Minha<br>Conta</html>");
+		lblNewLabel_minhaConta.setFont(new Font("Quicksand Medium", Font.PLAIN, 18));
+		lblNewLabel_minhaConta.setForeground(Color.decode("#A4B0BE"));
+		lblNewLabel_minhaConta.setBounds(978, 24, 70, 51);
+		panel.add(lblNewLabel_minhaConta);
 		
 		JLabel lblExercicioX = new JLabel("Exercicio  x");
 		lblExercicioX.setVerticalAlignment(SwingConstants.TOP);
 		lblExercicioX.setHorizontalAlignment(SwingConstants.LEFT);
 		lblExercicioX.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblExercicioX.setBounds(31, 84, 177, 30);
+		lblExercicioX.setBounds(30, 97, 177, 30);
 		frame.getContentPane().add(lblExercicioX);
 		
 		JLabel labelData = new JLabel("Quarta - 10/02");
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
 		labelData.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		labelData.setBounds(31, 105, 92, 30);
+		labelData.setBounds(30, 118, 92, 30);
 		frame.getContentPane().add(labelData);
 		
 		Button buttonVoltar = new Button("Voltar");
@@ -82,7 +109,7 @@ public class TelaEditarExercicios {
 			}
 		});
 		buttonVoltar.setBackground(SystemColor.menu);
-		buttonVoltar.setBounds(910, 92, 70, 22);
+		buttonVoltar.setBounds(976, 105, 70, 22);
 		frame.getContentPane().add(buttonVoltar);
 		
 		JLabel lblMinutos = new JLabel("Minutos praticados");
@@ -124,7 +151,7 @@ public class TelaEditarExercicios {
 		frame.getContentPane().add(buttonSalvar);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(20, 146, 960, 2);
+		separator.setBounds(20, 146, 1026, 2);
 		frame.getContentPane().add(separator);
 	}
 
