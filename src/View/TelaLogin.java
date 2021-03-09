@@ -5,8 +5,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 
 import Controller.ControllerUsuario;
+import Util.DragListener;
+import Util.ViewUtils;
 import Validation.CredenciaisInvalidasException;
 
 import javax.swing.JLabel;
@@ -14,16 +18,23 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
+
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
+import java.awt.Window.Type;
 
 public class TelaLogin {
 
@@ -60,39 +71,52 @@ public class TelaLogin {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 1058, 603);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setTitle("Login - EzHealth");
+		
+		ArrayList<Image> icons = new ArrayList<Image>();
+		icons.add(new ImageIcon(this.getClass().getResource("/Images/hospital.png")).getImage());
+		frame.setIconImages(icons);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 1042, 564);
+		panel.setBounds(0, 0, 1058, 603);
+		panel.setBackground(Color.decode("#DFE4EA"));
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#DFE4EA", "#000000");
+		
 		campoLogin = new JTextField();
 		campoLogin.setColumns(10);
-		campoLogin.setBounds(687, 261, 277, 36);
+		campoLogin.setBounds(701, 295, 277, 36);
 		panel.add(campoLogin);
 		
 		JLabel lblNewLabel = new JLabel("Usuario");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel.setBounds(687, 236, 46, 23);
+		lblNewLabel.setFont(new Font("Quicksand Medium", Font.PLAIN, 15));
+		lblNewLabel.setBounds(701, 270, 70, 23);
 		panel.add(lblNewLabel);
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblSenha.setBounds(687, 320, 46, 23);
+		lblSenha.setFont(new Font("Quicksand Medium", Font.PLAIN, 15));
+		lblSenha.setBounds(701, 354, 46, 23);
 		panel.add(lblSenha);
 		
 		JLabel lblNewLabel_1 = new JLabel("Realizar Login");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1.setBounds(759, 159, 118, 23);
+		lblNewLabel_1.setFont(new Font("Quicksand Light", Font.BOLD, 20));
+		lblNewLabel_1.setBounds(777, 194, 140, 23);
 		panel.add(lblNewLabel_1);
 		
 		JButton btnLogin = new JButton("Entrar");
-		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnLogin.setFont(new Font("Quicksand", Font.PLAIN, 15));
 		btnLogin.setForeground(new Color(255, 255, 255));
-		btnLogin.setBackground(new Color(0, 0, 51));
+		btnLogin.setBackground(Color.decode("#2F3542"));
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -100,6 +124,7 @@ public class TelaLogin {
 				try {
 					new ControllerUsuario().validarLogin(campoLogin.getText(), campoSenha.getText());
 					new TelaHome().main(null);
+					frame.dispose();
 				} catch (CredenciaisInvalidasException e1) {
 					JOptionPane.showMessageDialog(null, "Usuario e/ou senha incorretos!");
 					e1.printStackTrace();
@@ -110,47 +135,51 @@ public class TelaLogin {
 
 			}
 		});
-		btnLogin.setBounds(788, 492, 89, 36);
+		btnLogin.setBounds(802, 526, 89, 36);
 		panel.add(btnLogin);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("EzHealth");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1_1.setBounds(791, 68, 118, 23);
+		JLabel lblNewLabel_1_1 = new JLabel("EZHEALTH");
+		lblNewLabel_1_1.setFont(new Font("Quicksand Light", Font.PLAIN, 20));
+		lblNewLabel_1_1.setBounds(856, 106, 122, 23);
 		panel.add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Ol\u00E1! :)");
-		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1_1_1.setBounds(203, 41, 118, 23);
+		lblNewLabel_1_1_1.setFont(new Font("Quicksand", Font.PLAIN, 18));
+		lblNewLabel_1_1_1.setBounds(274, 73, 51, 23);
 		panel.add(lblNewLabel_1_1_1);
 		
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("Bem vindo(a) de volta!");
-		lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1_1_1_1.setBounds(137, 75, 222, 23);
+		lblNewLabel_1_1_1_1.setFont(new Font("Quicksand", Font.PLAIN, 18));
+		lblNewLabel_1_1_1_1.setBounds(199, 107, 194, 23);
 		panel.add(lblNewLabel_1_1_1_1);
 		
 		JButton btnCadastro = new JButton("N\u00E3o tem conta ainda? Cadastre-se");
-		btnCadastro.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnCadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCadastro.setFont(new Font("Quicksand", Font.PLAIN, 13));
 		btnCadastro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new TelaCadastro().main(null);
 			}
 		});
-		btnCadastro.setBackground(new Color(0, 0, 51));
+		btnCadastro.setBackground(Color.decode("#2F3542"));
 		btnCadastro.setForeground(new Color(255, 255, 255));
-		btnCadastro.setBounds(102, 487, 277, 46);
+		btnCadastro.setBounds(116, 521, 277, 46);
 		panel.add(btnCadastro);
 		
 		JLabel jLabelImagemLogin1 = new JLabel("");
 		ImageIcon imgLogin1 = new ImageIcon(this.getClass().getResource("/Images/imagemlogin1.png"));
 		jLabelImagemLogin1.setIcon(imgLogin1);
-		jLabelImagemLogin1.setBounds(46, 109, 468, 355);
+		jLabelImagemLogin1.setBounds(60, 143, 468, 355);
 		panel.add(jLabelImagemLogin1);
 		
 		
 		// ---- Label da imagem hospital ---- Inicio
 		JLabel lblImgHospital = new JLabel(""); // Criação da label
-		lblImgHospital.setBounds(692, 26, 89, 83); // Dimensões e posicionamento da label
+		lblImgHospital.setBounds(776, 83, 70, 68); // Dimensões e posicionamento da label
 		
 		// criação do icone gerenando a iamgem a partir da path passado como argumento
 		ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/Images/hospital.png")); 
@@ -166,8 +195,12 @@ public class TelaLogin {
 		// ---- Label da imagem hospital ---- Fim
 		
 		campoSenha = new JPasswordField();
-		campoSenha.setBounds(687, 351, 277, 36);
+		campoSenha.setBounds(701, 385, 277, 36);
 		panel.add(campoSenha);
+
+		
+		
 	}
+	
 	
 }

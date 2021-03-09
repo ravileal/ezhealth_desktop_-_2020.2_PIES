@@ -28,6 +28,7 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Window.Type;
 
 public class TelaCadastro {
 
@@ -68,8 +69,10 @@ public class TelaCadastro {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setAlwaysOnTop(true);
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 1023, 732);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		Panel panel_1 = new Panel();

@@ -41,6 +41,7 @@ import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import javax.swing.JToggleButton;
 import java.awt.TextField;
@@ -82,21 +83,68 @@ public class TelaHome {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 998, 542);
+		frame.setResizable(false);
+		frame.setBounds(100, 100, 1058, 603);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.setUndecorated(true);
+		frame.setTitle("Home - EzHealth");
+		
+		ArrayList<Image> icons = new ArrayList<Image>();
+		icons.add(new ImageIcon(this.getClass().getResource("/Images/hospital.png")).getImage());
+		frame.setIconImages(icons);
+		
+		JPanel panel_content = new JPanel();
+		panel_content.setBounds(0, 0, 10, 10);
+		frame.setContentPane(panel_content);
+		panel_content.setLayout(null);
+		
+		Panel panel_header = new Panel();
+		panel_header.setBackground(Color.decode("#2F3542"));
+		panel_header.setBounds(0, 0, 1058, 107);
+		frame.getContentPane().add(panel_header);
+		panel_header.setLayout(null);		
+		
+		
+		new ViewUtils().configureTitleBarAlternative(frame, panel_header, "#2F3542", "#FFFFFF");
+		
+		
+		JLabel lblImgHospital = new JLabel(""); 
+		lblImgHospital.setBounds(43, 30, 52, 51);
+		
+		new ViewUtils().setImageInLabel("/Images/hospital.png", lblImgHospital, panel_header);
+		
+		JLabel lblNewLabel_title = new JLabel("EZHEALTH");
+		lblNewLabel_title.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
+		lblNewLabel_title.setForeground(Color.decode("#A4B0BE"));
+		lblNewLabel_title.setBounds(112, 41, 96, 25);
+		panel_header.add(lblNewLabel_title);
+
+		
+		JLabel lblImgMinhaConta = new JLabel(""); 
+		lblImgMinhaConta.setBounds(930, 43, 39, 40);
+		
+		new ViewUtils().setImageInLabel("/Images/accountWhite.png", lblImgMinhaConta, panel_header);
+		
+		JLabel lblNewLabel_minhaConta = new JLabel("<html>Minha<br>Conta</html>");
+		lblNewLabel_minhaConta.setFont(new Font("Quicksand Medium", Font.PLAIN, 18));
+		lblNewLabel_minhaConta.setForeground(Color.decode("#A4B0BE"));
+		lblNewLabel_minhaConta.setBounds(978, 39, 70, 51);
+		panel_header.add(lblNewLabel_minhaConta);
+		
+
 		
 		Panel panel_menu = new Panel();
 		panel_menu.setBackground(Color.decode("#A4B0BE"));
-		panel_menu.setBounds(0, 73, 145, 430);
+		panel_menu.setBounds(0, 106, 136, 497);
 		frame.getContentPane().add(panel_menu);
 		panel_menu.setLayout(null);
 		
+
 		JLabel labelHome = new JLabel("Home");
 		labelHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaHome().main(null);
+				// código para atualizar a tela
 			}
 		});
 		
@@ -144,6 +192,7 @@ public class TelaHome {
 			}
 		});
 		
+		
 		JLabel lblImgExercicio = new JLabel(""); 
 		lblImgExercicio.setBounds(10, 36, 19, 18);
 		new ViewUtils().setImageInLabel("/Images/home.png", lblImgExercicio, panel_menu);
@@ -183,45 +232,15 @@ public class TelaHome {
 		lblImgSair.setBounds(10, 218, 19, 18);
 		new ViewUtils().setImageInLabel("/Images/sair.png", lblImgSair, panel_menu);
 		
-		Panel panel_header = new Panel();
-		panel_header.setBackground(Color.decode("#2F3542"));
-		panel_header.setBounds(0, 0, 1014, 73);
-		frame.getContentPane().add(panel_header);
-		panel_header.setLayout(null);
-		
-		
-		JLabel lblImgHospital = new JLabel(""); 
-		lblImgHospital.setBounds(43, 11, 52, 51);
-		
-		new ViewUtils().setImageInLabel("/Images/hospital.png", lblImgHospital, panel_header);
-		
-		
-		JLabel lblNewLabel_title = new JLabel("EZHEALTH");
-		lblNewLabel_title.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
-		lblNewLabel_title.setForeground(Color.decode("#A4B0BE"));
-		lblNewLabel_title.setBounds(113, 22, 96, 25);
-		panel_header.add(lblNewLabel_title);
-		
-		
-		JLabel lblImgMinhaConta = new JLabel(""); 
-		lblImgMinhaConta.setBounds(855, 18, 39, 40);
-		
-		new ViewUtils().setImageInLabel("/Images/accountWhite.png", lblImgMinhaConta, panel_header);
-		
-		JLabel lblNewLabel_minhaConta = new JLabel("<html>Minha<br>Conta</html>");
-		lblNewLabel_minhaConta.setFont(new Font("Quicksand Medium", Font.PLAIN, 18));
-		lblNewLabel_minhaConta.setForeground(Color.decode("#A4B0BE"));
-		lblNewLabel_minhaConta.setBounds(904, 11, 70, 51);
-		panel_header.add(lblNewLabel_minhaConta);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(144, 73, 838, 430);
+		panel.setBounds(136, 106, 922, 497);
 		panel.setBackground(Color.decode("#DFE4EA"));
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JPanel panel_almoco = new JPanel();
-		panel_almoco.setBounds(558, 273, 258, 53);
+		panel_almoco.setBounds(634, 342, 258, 53);
 		panel.add(panel_almoco);
 		panel_almoco.setLayout(null);
 		panel_almoco.setBackground(Color.decode("#CED6E0"));
@@ -242,7 +261,7 @@ public class TelaHome {
 		panel_almoco.add(labelAdicionarAlmoco);
 		
 		JPanel panel_lancheNoite = new JPanel();
-		panel_lancheNoite.setBounds(558, 353, 258, 53);
+		panel_lancheNoite.setBounds(634, 422, 258, 53);
 		panel.add(panel_lancheNoite);
 		panel_lancheNoite.setLayout(null);
 		panel_lancheNoite.setBackground(Color.decode("#CED6E0"));
@@ -263,7 +282,7 @@ public class TelaHome {
 		panel_lancheNoite.add(labelAdicionarLancheNoite);
 		
 		JPanel panel_janta = new JPanel();
-		panel_janta.setBounds(288, 353, 258, 53);
+		panel_janta.setBounds(332, 422, 258, 53);
 		panel.add(panel_janta);
 		panel_janta.setLayout(null);
 		panel_janta.setBackground(Color.decode("#CED6E0"));
@@ -284,7 +303,7 @@ public class TelaHome {
 		panel_janta.add(labelAdicionarJanta);
 		
 		JPanel panel_lancheManha = new JPanel();
-		panel_lancheManha.setBounds(288, 273, 258, 53);
+		panel_lancheManha.setBounds(332, 342, 258, 53);
 		panel.add(panel_lancheManha);
 		panel_lancheManha.setLayout(null);
 		panel_lancheManha.setBackground(Color.decode("#CED6E0"));
@@ -305,7 +324,7 @@ public class TelaHome {
 		panel_lancheManha.add(labelAdicionarLancheManha);
 		
 		JPanel panel_cafeManha = new JPanel();
-		panel_cafeManha.setBounds(20, 273, 258, 53);
+		panel_cafeManha.setBounds(32, 342, 258, 53);
 		panel.add(panel_cafeManha);
 		panel_cafeManha.setBackground(Color.decode("#CED6E0"));
 		panel_cafeManha.setLayout(null);
@@ -327,7 +346,7 @@ public class TelaHome {
 		panel_cafeManha.add(labelAdicionarCafe);
 		
 		JPanel panel_lancheTarde = new JPanel();
-		panel_lancheTarde.setBounds(20, 353, 258, 53);
+		panel_lancheTarde.setBounds(32, 422, 258, 53);
 		panel.add(panel_lancheTarde);
 		panel_lancheTarde.setLayout(null);
 		panel_lancheTarde.setBackground(Color.decode("#CED6E0"));
@@ -354,7 +373,7 @@ public class TelaHome {
 		panel_lancheTarde.add(labelAdicionarLancheTarde);
 		
 		Panel panel_2 = new Panel();
-		panel_2.setBounds(241, 69, 334, 139);
+		panel_2.setBounds(296, 90, 334, 139);
 		panel.add(panel_2);
 		panel_2.setBackground(UIManager.getColor("InternalFrame.inactiveTitleGradient"));
 		panel_2.setBackground(Color.decode("#CED6E0"));
@@ -408,10 +427,11 @@ public class TelaHome {
 		labelData.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
 		
 		JLabel lblNewLabel_4_1 = new JLabel("Refei\u00E7\u00F5es");
-		lblNewLabel_4_1.setBounds(20, 236, 125, 33);
+		lblNewLabel_4_1.setBounds(32, 291, 125, 33);
 		panel.add(lblNewLabel_4_1);
 		lblNewLabel_4_1.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
-				
+		
+						
 		labelAdicionarCafe.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -445,6 +465,4 @@ public class TelaHome {
 		
 		
 	}
-	
-
 }
