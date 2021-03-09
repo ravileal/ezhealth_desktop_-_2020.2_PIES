@@ -19,7 +19,7 @@ import Util.ViewUtils;
 
 public class LayoutMain {
 	
-	private JFrame frame;
+	protected JFrame frame;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -198,9 +198,5 @@ public class LayoutMain {
 		new ViewUtils().setImageInLabel("/Images/exit.png", lblImgSair, panel);
 		
 		frame.getContentPane().add(panel);
-	}
-	
-	public JFrame getFrame() {
-		return this.frame;
 	}
 }

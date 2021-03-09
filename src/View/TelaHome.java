@@ -13,7 +13,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.UIManager;
 import javax.swing.JPanel;
 
-public class TelaHome extends LayoutMain{
+public class TelaHome extends LayoutMain {
 
 	/**
 	 * Launch the application.
@@ -24,7 +24,7 @@ public class TelaHome extends LayoutMain{
 			public void run() {
 				try {
 					TelaHome window = new TelaHome();
-					window.getFrame().setVisible(true);
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,8 +44,8 @@ public class TelaHome extends LayoutMain{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		getFrame().setTitle("Home - EzHealth");
-		getFrame().getContentPane().add(configurePanelContent());
+		frame.setTitle("Home - EzHealth");
+		frame.getContentPane().add(configurePanelContent());
 	}
 	
 	private JPanel configurePanelContent() {
@@ -151,7 +151,7 @@ public class TelaHome extends LayoutMain{
 		labelAdicionarCafe.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getFrame().dispose();
+				frame.dispose();
 				TelaAlimentos.main(null);
 			}
 		});
@@ -180,7 +180,7 @@ public class TelaHome extends LayoutMain{
 		labelAdicionarLancheManha.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getFrame().dispose();
+				frame.dispose();
 				TelaAlimentos.main(null);
 			}
 		});
@@ -209,7 +209,7 @@ public class TelaHome extends LayoutMain{
 		labelAdicionarAlmoco.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getFrame().dispose();
+				frame.dispose();
 				TelaAlimentos.main(null);
 			}
 		});
@@ -235,7 +235,7 @@ public class TelaHome extends LayoutMain{
 		labelAdicionarLancheTarde.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getFrame().dispose();
+				frame.dispose();
 				TelaAlimentos.main(null);
 			}
 		});
@@ -268,7 +268,7 @@ public class TelaHome extends LayoutMain{
 		labelAdicionarJanta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getFrame().dispose();
+				frame.dispose();
 				TelaAlimentos.main(null);
 			}
 		});
@@ -297,7 +297,7 @@ public class TelaHome extends LayoutMain{
 		labelAdicionarLancheNoite.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getFrame().dispose();
+				frame.dispose();
 				TelaAlimentos.main(null);
 			}
 		});
