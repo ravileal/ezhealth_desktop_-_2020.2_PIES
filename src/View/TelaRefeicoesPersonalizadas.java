@@ -164,7 +164,7 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 			}
 			
 		} catch (NullPointerException e) {
-			JOptionPane.showMessageDialog(null, "Refeição encontrada");
+			JOptionPane.showMessageDialog(null, "Refeição não encontrada");
 			e.printStackTrace();
 		} catch (DadosVaziosException e) {
 			JOptionPane.showMessageDialog(null, "Refeição com nome vazio");

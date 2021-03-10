@@ -1,10 +1,12 @@
 package View;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Panel;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+
 
 import Util.ViewUtils;
 
@@ -56,6 +59,11 @@ public class LayoutMain {
 		ArrayList<Image> icons = new ArrayList<Image>();
 		icons.add(new ImageIcon(this.getClass().getResource("/Images/hospital.png")).getImage());
 		frame.setIconImages(icons);
+		
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setLocation(x, y);
 	}
 	
 	private void configurePanelHeader() {
