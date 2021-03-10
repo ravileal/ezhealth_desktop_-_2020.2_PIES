@@ -69,6 +69,7 @@ public class PopupEditarCadastro {
 		frame.setBounds(100, 100, 1056, 718);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setBackground(Color.decode("#DFE4EA"));
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(26, 427, 1004, 18);

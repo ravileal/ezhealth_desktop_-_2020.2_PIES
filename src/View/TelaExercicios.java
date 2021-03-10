@@ -44,6 +44,8 @@ import java.util.ArrayList;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import java.awt.Window.Type;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class TelaExercicios extends LayoutMain {
 
@@ -104,6 +106,25 @@ public class TelaExercicios extends LayoutMain {
 		panel.add(separator);
 		
 		JTextField txtPesquisarExercicios = new JTextField();
+		txtPesquisarExercicios.setText("Pesquise exerc\u00EDcios");
+		txtPesquisarExercicios.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtPesquisarExercicios.getText().equals("Pesquise exercícios")) {
+					txtPesquisarExercicios.setText("");
+					txtPesquisarExercicios.setForeground(new Color (153, 153, 153));
+				}
+			}
+		});
+		txtPesquisarExercicios.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtPesquisarExercicios.getText().equals("Pesquise exercícios")) {
+					txtPesquisarExercicios.setText("");
+					txtPesquisarExercicios.setForeground(new Color (153, 153, 153));
+				}
+			}
+		});
 		txtPesquisarExercicios.setToolTipText("Pesquisar");
 		txtPesquisarExercicios.setForeground(SystemColor.scrollbar);
 		txtPesquisarExercicios.setColumns(10);

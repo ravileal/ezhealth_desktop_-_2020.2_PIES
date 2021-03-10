@@ -40,6 +40,8 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class TelaAlimentos extends LayoutMain{
 
@@ -101,6 +103,25 @@ public class TelaAlimentos extends LayoutMain{
 		panel.add(separator);
 		
 		JTextField txtPesquisarAlimentos = new JTextField();
+		txtPesquisarAlimentos.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtPesquisarAlimentos.getText().equals("Pesquise alimentos")) {
+					txtPesquisarAlimentos.setText("");
+					txtPesquisarAlimentos.setForeground(new Color (153, 153, 153));
+				}
+			}
+		});
+		txtPesquisarAlimentos.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtPesquisarAlimentos.getText().equals("Pesquise alimentos")) {
+					txtPesquisarAlimentos.setText("");
+					txtPesquisarAlimentos.setForeground(new Color (153, 153, 153));
+				}
+			}
+		});
+		txtPesquisarAlimentos.setText("Pesquise alimentos");
 		txtPesquisarAlimentos.setToolTipText("Pesquisar");
 		txtPesquisarAlimentos.setForeground(SystemColor.scrollbar);
 		txtPesquisarAlimentos.setColumns(10);
@@ -247,4 +268,5 @@ public class TelaAlimentos extends LayoutMain{
 		});
 		return botaoExcluir;
 	}
+	
 }

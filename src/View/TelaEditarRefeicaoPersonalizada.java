@@ -10,6 +10,8 @@ import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.SystemColor;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
@@ -33,7 +35,7 @@ import java.awt.Dimension;
 import javax.swing.ScrollPaneConstants;
 
 public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
-	private JTextField textField_1;
+	private JTextField txtNomeRefeicao;
 
 	/**
 	 * Launch the application.
@@ -123,12 +125,31 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		buttonSalvar.setBounds(20, 449, 70, 22);
 		panel.add(buttonSalvar);
 
-		JTextField textField = new JTextField();
-		textField.setToolTipText("Pesquisar");
-		textField.setForeground(SystemColor.scrollbar);
-		textField.setColumns(10);
-		textField.setBounds(541, 114, 335, 35);
-		panel.add(textField);
+		JTextField txtPesquisarAlimentos = new JTextField();
+		txtPesquisarAlimentos.setText("Pesquisar alimentos");
+		txtPesquisarAlimentos.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtPesquisarAlimentos.getText().equals("Pesquisar alimentos")) {
+					txtPesquisarAlimentos.setText("");
+					txtPesquisarAlimentos.setForeground(new Color (153, 153, 153));
+				}
+			}
+		});
+		txtPesquisarAlimentos.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtPesquisarAlimentos.getText().equals("Pesquisar alimentos")) {
+					txtPesquisarAlimentos.setText("");
+					txtPesquisarAlimentos.setForeground(new Color (153, 153, 153));
+				}
+			}
+		});
+		txtPesquisarAlimentos.setToolTipText("Pesquisar");
+		txtPesquisarAlimentos.setForeground(SystemColor.scrollbar);
+		txtPesquisarAlimentos.setColumns(10);
+		txtPesquisarAlimentos.setBounds(541, 114, 335, 35);
+		panel.add(txtPesquisarAlimentos);
 
 		JLabel lblListaDeAlimentos = new JLabel("Lista de Alimentos");
 		lblListaDeAlimentos.setVerticalAlignment(SwingConstants.TOP);
@@ -141,10 +162,31 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		
 		frame.getContentPane().add(panel);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(208, 73, 265, 28);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		txtNomeRefeicao = new JTextField();
+		txtNomeRefeicao.setForeground(Color.LIGHT_GRAY);
+		txtNomeRefeicao.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtNomeRefeicao.getText().equals("Minha Refeição 1")) {
+					txtNomeRefeicao.setText("");
+					txtNomeRefeicao.setForeground(new Color (153, 153, 153));
+				}
+			}
+		});
+		txtNomeRefeicao.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtNomeRefeicao.getText().equals("Minha Refeição 1")) {
+					txtNomeRefeicao.setText("");
+					txtNomeRefeicao.setForeground(new Color (153, 153, 153));
+				}
+			}
+		});
+		txtNomeRefeicao.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtNomeRefeicao.setText("Minha Refei\u00E7\u00E3o 1");
+		txtNomeRefeicao.setBounds(208, 73, 265, 28);
+		panel.add(txtNomeRefeicao);
+		txtNomeRefeicao.setColumns(10);
 		
 		JLabel lblAlterarNome = new JLabel("Alterar nome da refei\u00E7\u00E3o:");
 		lblAlterarNome.setVerticalAlignment(SwingConstants.TOP);

@@ -39,12 +39,14 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.ActionEvent;
 
 public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 
 	private JScrollPane scrollPane = null;
-	private JTextField textField;
+	private JTextField txtNomeRefeicao;
 
 	/**
 	 * Launch the application.
@@ -93,8 +95,27 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		panel.add(separator);
 		
 		JTextField txtPesquisarAlimentos = new JTextField();
+		txtPesquisarAlimentos.setText("Adicione alimentos na refei\u00E7\u00E3o");
+		txtPesquisarAlimentos.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtPesquisarAlimentos.getText().equals("Adicione alimentos na refeição")) {
+					txtPesquisarAlimentos.setText("");
+					txtPesquisarAlimentos.setForeground(new Color (153, 153, 153));
+				}
+			}
+		});
+		txtPesquisarAlimentos.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtPesquisarAlimentos.getText().equals("Adicione alimentos na refeição")) {
+					txtPesquisarAlimentos.setText("");
+					txtPesquisarAlimentos.setForeground(new Color (153, 153, 153));
+				}
+			}
+		});
 		txtPesquisarAlimentos.setToolTipText("Pesquisar");
-		txtPesquisarAlimentos.setForeground(Color.BLACK);
+		txtPesquisarAlimentos.setForeground(Color.LIGHT_GRAY);
 		txtPesquisarAlimentos.setColumns(10);
 		txtPesquisarAlimentos.setBounds(534, 117, 335, 35);
 		panel.add(txtPesquisarAlimentos);
@@ -122,17 +143,31 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		configureList(panel);
 		frame.getContentPane().add(panel);
 		
-		textField = new JTextField();
-		textField.setBounds(235, 89, 238, 20);
-		panel.add(textField);
-		textField.setColumns(10);
 		
-		JLabel lblDigiteONome = new JLabel("Digite o nome da refei\u00E7\u00E3o:");
-		lblDigiteONome.setVerticalAlignment(SwingConstants.TOP);
-		lblDigiteONome.setHorizontalAlignment(SwingConstants.LEFT);
-		lblDigiteONome.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblDigiteONome.setBounds(20, 87, 205, 30);
-		panel.add(lblDigiteONome);
+		txtNomeRefeicao = new JTextField();
+		txtNomeRefeicao.setForeground(Color.LIGHT_GRAY);
+		txtNomeRefeicao.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(txtNomeRefeicao.getText().equals("Digite o nome da refeição")) {
+					txtNomeRefeicao.setText("");
+					txtNomeRefeicao.setForeground(new Color (153, 153, 153));
+				}
+			}
+		});
+		txtNomeRefeicao.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(txtNomeRefeicao.getText().equals("Digite o nome da refeição")) {
+					txtNomeRefeicao.setText("");
+					txtNomeRefeicao.setForeground(new Color (153, 153, 153));
+				}
+			}
+		});
+		txtNomeRefeicao.setText("Digite o nome da refei\u00E7\u00E3o");
+		txtNomeRefeicao.setBounds(20, 89, 304, 28);
+		panel.add(txtNomeRefeicao);
+		txtNomeRefeicao.setColumns(10);
 		
 		JLabel labelData = new JLabel("Quarta - 10/02");
 		labelData.setVerticalAlignment(SwingConstants.TOP);
