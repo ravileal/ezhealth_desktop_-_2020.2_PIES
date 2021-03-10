@@ -72,7 +72,7 @@ public class TelaAlimentos extends LayoutMain{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame.setTitle("Exercicios - EzHealth");
+		frame.setTitle("Tela Alimentos - EzHealth");
 		configureContent();
 	}
 		
@@ -102,7 +102,6 @@ public class TelaAlimentos extends LayoutMain{
 		
 		JTextField txtPesquisarAlimentos = new JTextField();
 		txtPesquisarAlimentos.setToolTipText("Pesquisar");
-		txtPesquisarAlimentos.setText("Pesquisar Alimentos");
 		txtPesquisarAlimentos.setForeground(SystemColor.scrollbar);
 		txtPesquisarAlimentos.setColumns(10);
 		txtPesquisarAlimentos.setBounds(534, 117, 335, 35);
@@ -123,7 +122,13 @@ public class TelaAlimentos extends LayoutMain{
 		panel.add(lblListaDeAlimentos);
 		
 		Button buttonSalvar = new Button("Salvar");
-		buttonSalvar.setBackground(SystemColor.menu);
+		buttonSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		buttonSalvar.setBackground(Color.decode("#2F3542"));
+		buttonSalvar.setForeground(new Color(255, 255, 255));
 		buttonSalvar.setBounds(20, 448, 70, 22);
 		panel.add(buttonSalvar);
 		

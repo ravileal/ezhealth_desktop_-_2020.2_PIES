@@ -74,20 +74,56 @@ public class LayoutMain {
 		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF", false);
 		
 		JLabel lblImgHospital = new JLabel(""); 
+		lblImgHospital.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				frame.dispose();
+				TelaHome.main(null);
+				
+			}
+		});
 		lblImgHospital.setBounds(43, 30, 52, 51);
 		new ViewUtils().setImageInLabel("/Images/hospital.png", lblImgHospital, panel);
 		
 		JLabel lblNewLabel_title = new JLabel("EZHEALTH");
+		lblNewLabel_title.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				frame.dispose();
+				TelaHome.main(null);
+				
+			}
+		});
 		lblNewLabel_title.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
 		lblNewLabel_title.setForeground(Color.decode("#A4B0BE"));
 		lblNewLabel_title.setBounds(112, 41, 96, 25);
 		panel.add(lblNewLabel_title);
 		
 		JLabel lblImgMinhaConta = new JLabel(""); 
+		lblImgMinhaConta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				frame.dispose();
+				TelaMeusDados.main(null);
+				
+			}
+		});
 		lblImgMinhaConta.setBounds(930, 43, 39, 40);
 		new ViewUtils().setImageInLabel("/Images/accountWhite.png", lblImgMinhaConta, panel);
 		
 		JLabel lblNewLabel_minhaConta = new JLabel("<html>Minha<br>Conta</html>");
+		lblNewLabel_minhaConta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				frame.dispose();
+				TelaMeusDados.main(null);
+				
+			}
+		});
 		lblNewLabel_minhaConta.setFont(new Font("Quicksand Medium", Font.PLAIN, 18));
 		lblNewLabel_minhaConta.setForeground(Color.decode("#A4B0BE"));
 		lblNewLabel_minhaConta.setBounds(978, 39, 70, 51);

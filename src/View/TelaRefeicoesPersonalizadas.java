@@ -83,14 +83,14 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 		labeRefeicao.setVerticalAlignment(SwingConstants.TOP);
 		labeRefeicao.setHorizontalAlignment(SwingConstants.LEFT);
 		labeRefeicao.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labeRefeicao.setBounds(10, 11, 193, 30);
+		labeRefeicao.setBounds(28, 11, 193, 30);
 		panel.add(labeRefeicao);
 		
 		JLabel labelData = new JLabel("Quarta - 10/02");
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
 		labelData.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		labelData.setBounds(10, 32, 92, 30);
+		labelData.setBounds(28, 32, 92, 30);
 		panel.add(labelData);
 		
 		JSeparator separator = new JSeparator();
@@ -101,7 +101,7 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 		labelCriarRefeicao.setVerticalAlignment(SwingConstants.TOP);
 		labelCriarRefeicao.setHorizontalAlignment(SwingConstants.LEFT);
 		labelCriarRefeicao.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelCriarRefeicao.setBounds(389, 108, 240, 30);
+		labelCriarRefeicao.setBounds(87, 437, 240, 30);
 		panel.add(labelCriarRefeicao);
 		labelCriarRefeicao.addMouseListener(new MouseAdapter() {
 			@Override
@@ -115,7 +115,7 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 		lblBuscarAlimentos_2.setVerticalAlignment(SwingConstants.TOP);
 		lblBuscarAlimentos_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblBuscarAlimentos_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblBuscarAlimentos_2.setBounds(358, 104, 21, 30);
+		lblBuscarAlimentos_2.setBounds(56, 433, 21, 30);
 		panel.add(lblBuscarAlimentos_2);
 		
 		configureList(panel);
@@ -135,7 +135,7 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 		JScrollPane scrollPane = new JScrollPane(panel_refeicoes);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(4);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.setBounds(266, 171, 453, 260);
+		scrollPane.setBounds(28, 124, 666, 260);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		JPanel panel_item = null;

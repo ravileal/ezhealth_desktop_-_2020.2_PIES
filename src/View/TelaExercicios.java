@@ -105,7 +105,6 @@ public class TelaExercicios extends LayoutMain {
 		
 		JTextField txtPesquisarExercicios = new JTextField();
 		txtPesquisarExercicios.setToolTipText("Pesquisar");
-		txtPesquisarExercicios.setText("Pesquisar Exercicios");
 		txtPesquisarExercicios.setForeground(SystemColor.scrollbar);
 		txtPesquisarExercicios.setColumns(10);
 		txtPesquisarExercicios.setBounds(534, 117, 335, 35);
@@ -126,7 +125,13 @@ public class TelaExercicios extends LayoutMain {
 		panel.add(lblListaDeExerccios);
 		
 		Button buttonSalvar = new Button("Salvar");
-		buttonSalvar.setBackground(SystemColor.menu);
+		buttonSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		buttonSalvar.setBackground(Color.decode("#2F3542"));
+		buttonSalvar.setForeground(new Color(255, 255, 255));
 		buttonSalvar.setBounds(20, 448, 70, 22);
 		panel.add(buttonSalvar);
 		
