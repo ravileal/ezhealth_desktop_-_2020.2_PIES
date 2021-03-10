@@ -34,9 +34,9 @@ public class TelaHome extends LayoutMain {
 
 	/**
 	 * Create the application.
+	 * @wbp.parser.entryPoint
 	 */
 	public TelaHome() {
-		super();
 		initialize();
 	}
 
@@ -45,20 +45,20 @@ public class TelaHome extends LayoutMain {
 	 */
 	private void initialize() {
 		frame.setTitle("Home - EzHealth");
-		frame.getContentPane().add(configurePanelContent());
+		configureContent();
 	}
 	
-	private JPanel configurePanelContent() {
+	private void configureContent() {
 		JPanel panel = new JPanel();
 		panel.setBounds(136, 106, 922, 497);
 		panel.setBackground(Color.decode("#DFE4EA"));
 		panel.setLayout(null);
-				
+		
 		this.configureData(panel);
 		this.configurePanelCalorias(panel);
 		this.configureButtonsRefeicoes(panel);
 		
-		return panel;
+		frame.getContentPane().add(panel);
 	}
 	
 	private void configureData(JPanel panel_content) {

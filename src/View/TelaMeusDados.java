@@ -1,3 +1,4 @@
+
 package View;
 
 import java.awt.EventQueue;
@@ -56,22 +57,16 @@ public class TelaMeusDados extends LayoutMain {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame.setTitle("Home - EzHealth");
-		frame.getContentPane().add(configurePanelContent());
+		frame.setTitle("Meus Dados - EzHealth");
+		configureContent();
 	}
-	
-	private JPanel configurePanelContent() {
+
+	private void configureContent() {
 		JPanel panel = new JPanel();
 		panel.setBounds(136, 106, 922, 497);
 		panel.setBackground(Color.decode("#DFE4EA"));
 		panel.setLayout(null);
-				
-		configureInputs(panel);
 		
-		return panel;
-	}
-
-	private void configureInputs(JPanel panel) {
 		JLabel lblMeusDadosPessoais = new JLabel("Meus dados Pessoais");
 		lblMeusDadosPessoais.setVerticalAlignment(SwingConstants.TOP);
 		lblMeusDadosPessoais.setHorizontalAlignment(SwingConstants.LEFT);
@@ -230,5 +225,6 @@ public class TelaMeusDados extends LayoutMain {
 		btnEditar.setBounds(427, 353, 89, 30);
 		panel.add(btnEditar);
 		
+		frame.getContentPane().add(panel);
 	}
 }

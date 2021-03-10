@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
@@ -198,5 +199,16 @@ public class LayoutMain {
 		new ViewUtils().setImageInLabel("/Images/exit.png", lblImgSair, panel);
 		
 		frame.getContentPane().add(panel);
+	}
+	
+	protected JPanel configurePanelContent() {
+		JPanel panel = new JPanel();
+		panel.setBounds(136, 106, 922, 497);
+		panel.setBackground(Color.decode("#DFE4EA"));
+		panel.setLayout(null);
+		
+		frame.getContentPane().add(panel);
+		
+		return panel;
 	}
 }
