@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
 import Util.ViewUtils;
+
 import javax.swing.SwingConstants;
 
 public class LayoutPopup {
@@ -68,7 +69,6 @@ public class LayoutPopup {
 		panel.setBounds(0, 0, frame.getWidth(), 70);
 		panel.setLayout(null);
 		new ViewUtils().configureTitleBarAlternative(frame, panel, "#A4B0BE", "#FFFFFF", true);
-		
 		
 		
 		frame.getContentPane().add(panel);
