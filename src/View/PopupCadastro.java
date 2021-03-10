@@ -7,7 +7,6 @@ import java.awt.Panel;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -30,9 +29,16 @@ import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class PopupCadastro extends LayoutPopup {
-	private JTextField textField;
+public class PopupCadastro {
 
+	private JFrame frame;
+	private JTextField textFieldNome;
+	private JTextField textFieldNascimento;
+	private JTextField textFieldPeso;
+	private JTextField textFieldAltura;
+	private JTextField Email;
+	private JPasswordField ConfirmarSenha;
+	private JPasswordField Senha;
 
 	/**
 	 * Launch the application.
@@ -55,7 +61,6 @@ public class PopupCadastro extends LayoutPopup {
 	 * Create the application.
 	 */
 	public PopupCadastro() {
-		super("Cadastro - EzHealth");
 		initialize();
 	}
 
@@ -63,230 +68,207 @@ public class PopupCadastro extends LayoutPopup {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		configureContent();
-	}
+		frame = new JFrame();
+		frame.setAlwaysOnTop(true);
+		frame.setResizable(false);
+		frame.setBounds(100, 100, 1054, 732);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
-	public void configureContent() {
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 71, 700, 590);
-		panel.setBackground(Color.decode("#E8EDF3"));
-		panel.setLayout(null);
+		Panel panel = new Panel();
+		panel.setBackground(Color.decode("#2F3542"));
+		panel.setBounds(0, 0, 1058, 78);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);	
+		
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF", true);
+		
+		
+		JLabel lblCadastro = new JLabel("Cadastro");
+		lblCadastro.setForeground(Color.WHITE);
+		lblCadastro.setBackground(Color.WHITE);
+		lblCadastro.setVerticalAlignment(SwingConstants.TOP);
+		lblCadastro.setHorizontalAlignment(SwingConstants.LEFT);
+		lblCadastro.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblCadastro.setBounds(458, 21, 109, 30);
+		panel.add(lblCadastro);
 		
 		JLabel lblNomeCompleto = new JLabel("Nome Completo");
 		lblNomeCompleto.setVerticalAlignment(SwingConstants.TOP);
-		lblNomeCompleto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNomeCompleto.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblNomeCompleto.setBounds(10, 30, 680, 30);
-		panel.add(lblNomeCompleto);
+		lblNomeCompleto.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNomeCompleto.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNomeCompleto.setBounds(24, 102, 253, 30);
+		frame.getContentPane().add(lblNomeCompleto);
 		
-		JTextField textFieldNome = new JTextField();
-		textFieldNome.setBounds(114, 52, 463, 30);
-		panel.add(textFieldNome);
+		textFieldNome = new JTextField();
+		textFieldNome.setBounds(147, 94, 381, 30);
+		frame.getContentPane().add(textFieldNome);
 		textFieldNome.setColumns(10);
 		
 		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento");
 		lblDataDeNascimento.setVerticalAlignment(SwingConstants.TOP);
-		lblDataDeNascimento.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDataDeNascimento.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblDataDeNascimento.setBounds(114, 93, 218, 30);
-		panel.add(lblDataDeNascimento);
+		lblDataDeNascimento.setHorizontalAlignment(SwingConstants.LEFT);
+		lblDataDeNascimento.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblDataDeNascimento.setBounds(584, 102, 253, 30);
+		frame.getContentPane().add(lblDataDeNascimento);
 		
-		JTextField textFieldNascimento = new JTextField();
+		textFieldNascimento = new JTextField();
 		textFieldNascimento.setColumns(10);
-		textFieldNascimento.setBounds(114, 116, 218, 30);
-		panel.add(textFieldNascimento);
+		textFieldNascimento.setBounds(733, 94, 166, 30);
+		frame.getContentPane().add(textFieldNascimento);
 		
 		JLabel lblSexo = new JLabel("Sexo");
 		lblSexo.setVerticalAlignment(SwingConstants.TOP);
-		lblSexo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSexo.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblSexo.setBounds(114, 156, 218, 30);
-		panel.add(lblSexo);
+		lblSexo.setHorizontalAlignment(SwingConstants.LEFT);
+		lblSexo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblSexo.setBounds(182, 165, 62, 30);
+		frame.getContentPane().add(lblSexo);
 		
 		JComboBox comboBoxSexo = new JComboBox();
 		comboBoxSexo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] {"Feminino", "Maculino"}));
 		comboBoxSexo.setMaximumRowCount(2);
-		comboBoxSexo.setBounds(114, 175, 218, 30);
-		panel.add(comboBoxSexo);
+		comboBoxSexo.setBounds(235, 162, 110, 30);
+		frame.getContentPane().add(comboBoxSexo);
 		
 		JLabel lblPeso = new JLabel("Peso");
 		lblPeso.setVerticalAlignment(SwingConstants.TOP);
 		lblPeso.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPeso.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblPeso.setBounds(431, 93, 38, 18);
-		panel.add(lblPeso);
+		lblPeso.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPeso.setBounds(372, 165, 120, 30);
+		frame.getContentPane().add(lblPeso);
 		
-		JTextField textFieldPeso = new JTextField();
+		textFieldPeso = new JTextField();
 		textFieldPeso.setColumns(10);
-		textFieldPeso.setBounds(359, 116, 218, 30);
-		panel.add(textFieldPeso);
+		textFieldPeso.setBounds(419, 162, 97, 30);
+		frame.getContentPane().add(textFieldPeso);
 		
-		JLabel lblKg = new JLabel("(Kg)");
+		JLabel lblKg = new JLabel("KG");
 		lblKg.setVerticalAlignment(SwingConstants.TOP);
 		lblKg.setHorizontalAlignment(SwingConstants.LEFT);
-		lblKg.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
-		lblKg.setBounds(477, 97, 31, 15);
-		panel.add(lblKg);
+		lblKg.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblKg.setBounds(520, 165, 56, 30);
+		frame.getContentPane().add(lblKg);
 		
 		JLabel lblAltura = new JLabel("Altura");
 		lblAltura.setVerticalAlignment(SwingConstants.TOP);
 		lblAltura.setHorizontalAlignment(SwingConstants.LEFT);
-		lblAltura.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblAltura.setBounds(431, 156, 49, 18);
-		panel.add(lblAltura);
+		lblAltura.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblAltura.setBounds(612, 165, 56, 30);
+		frame.getContentPane().add(lblAltura);
 		
-		JTextField textFieldAltura = new JTextField();
+		textFieldAltura = new JTextField();
 		textFieldAltura.setColumns(10);
-		textFieldAltura.setBounds(359, 177, 218, 30);
-		panel.add(textFieldAltura);
+		textFieldAltura.setBounds(659, 162, 97, 30);
+		frame.getContentPane().add(textFieldAltura);
 		
 		JLabel lblKg_1 = new JLabel("KG");
 		lblKg_1.setVerticalAlignment(SwingConstants.TOP);
 		lblKg_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblKg_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblKg_1.setBounds(760, 165, 56, 30);
-		panel.add(lblKg_1);
+		frame.getContentPane().add(lblKg_1);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(40, 220, 615, 18);
-		panel.add(separator);
+		separator.setBounds(24, 239, 987, 18);
+		frame.getContentPane().add(separator);
 		
 		JLabel lblQualSuaMeta = new JLabel("Qual sua meta?");
 		lblQualSuaMeta.setVerticalAlignment(SwingConstants.TOP);
-		lblQualSuaMeta.setHorizontalAlignment(SwingConstants.CENTER);
-		lblQualSuaMeta.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblQualSuaMeta.setBounds(20, 258, 166, 30);
-		panel.add(lblQualSuaMeta);
+		lblQualSuaMeta.setHorizontalAlignment(SwingConstants.LEFT);
+		lblQualSuaMeta.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblQualSuaMeta.setBounds(136, 294, 253, 30);
+		frame.getContentPane().add(lblQualSuaMeta);
 		
-		JRadioButton radio_perderPeso = new JRadioButton("Perder Peso");
-		radio_perderPeso.setBackground(Color.decode("#E8EDF3"));
-		radio_perderPeso.setBounds(40, 282, 109, 23);
-		panel.add(radio_perderPeso);
+		JRadioButton GanharPeso = new JRadioButton("Ganhar Peso");
+		GanharPeso.setBounds(24, 345, 109, 23);
+		frame.getContentPane().add(GanharPeso);
 		
-		JRadioButton radio_manterPeso = new JRadioButton("Manter Peso");
-		radio_manterPeso.setBackground(Color.decode("#E8EDF3"));
-		radio_manterPeso.setBounds(40, 308, 109, 23);
-		panel.add(radio_manterPeso);
+		JRadioButton PerderPeso = new JRadioButton("Perder Peso");
+		PerderPeso.setBounds(147, 345, 109, 23);
+		frame.getContentPane().add(PerderPeso);
 		
-		JRadioButton radio_ganharPeso = new JRadioButton("Ganhar Peso");
-		radio_ganharPeso.setBackground(Color.decode("#E8EDF3"));
-		radio_ganharPeso.setBounds(40, 334, 109, 23);
-		panel.add(radio_ganharPeso);
+		JRadioButton ManterPeso = new JRadioButton("Manter Peso");
+		ManterPeso.setBounds(276, 345, 109, 23);
+		frame.getContentPane().add(ManterPeso);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(40, 376, 615, 18);
-		panel.add(separator_1);
+		separator_1.setBounds(24, 441, 987, 18);
+		frame.getContentPane().add(separator_1);
 		
 		JLabel lblPossuiAlgumaDoena = new JLabel("Possui alguma doen\u00E7a?");
 		lblPossuiAlgumaDoena.setVerticalAlignment(SwingConstants.TOP);
 		lblPossuiAlgumaDoena.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPossuiAlgumaDoena.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblPossuiAlgumaDoena.setBounds(248, 258, 253, 30);
-		panel.add(lblPossuiAlgumaDoena);
+		lblPossuiAlgumaDoena.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPossuiAlgumaDoena.setBounds(479, 294, 253, 30);
+		frame.getContentPane().add(lblPossuiAlgumaDoena);
 		
-		JCheckBox checkbox_diabetes = new JCheckBox("Diabetes");
-		checkbox_diabetes.setBackground(Color.decode("#E8EDF3"));
-		checkbox_diabetes.setBounds(290, 297, 109, 23);
-		panel.add(checkbox_diabetes);
-
-		JCheckBox checkbox_colesterolAlto = new JCheckBox("Colesterol Alto");
-		checkbox_colesterolAlto.setBackground(Color.decode("#E8EDF3"));
-		checkbox_colesterolAlto.setBounds(290, 323, 109, 23);
-		panel.add(checkbox_colesterolAlto);
+		JCheckBox Diabetes = new JCheckBox("Diabetes");
+		Diabetes.setBounds(479, 345, 97, 23);
+		frame.getContentPane().add(Diabetes);
 		
 		JLabel lblPossuiAlgumaIntolerncia = new JLabel("Possui alguma Intoler\u00E2ncia?");
 		lblPossuiAlgumaIntolerncia.setVerticalAlignment(SwingConstants.TOP);
 		lblPossuiAlgumaIntolerncia.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPossuiAlgumaIntolerncia.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblPossuiAlgumaIntolerncia.setBounds(451, 258, 204, 30);
-		panel.add(lblPossuiAlgumaIntolerncia);
+		lblPossuiAlgumaIntolerncia.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPossuiAlgumaIntolerncia.setBounds(775, 294, 253, 30);
+		frame.getContentPane().add(lblPossuiAlgumaIntolerncia);
 		
+		JCheckBox Colesterol = new JCheckBox("Colesterol");
+		Colesterol.setBounds(584, 345, 97, 23);
+		frame.getContentPane().add(Colesterol);
 		
-		JCheckBox checkbox_lactose = new JCheckBox("Lactose");
-		checkbox_lactose.setBackground(Color.decode("#E8EDF3"));
-		checkbox_lactose.setBounds(506, 295, 100, 23);
-		panel.add(checkbox_lactose);
+		JCheckBox Lactose = new JCheckBox("A lactose");
+		Lactose.setBounds(802, 345, 83, 23);
+		frame.getContentPane().add(Lactose);
 		
-		JCheckBox checkbox_gluten = new JCheckBox("Gluten");
-		checkbox_gluten.setBackground(Color.decode("#E8EDF3"));
-		checkbox_gluten.setBounds(506, 323, 100, 23);
-		panel.add(checkbox_gluten);
+		JCheckBox Gluten = new JCheckBox("A gluten");
+		Gluten.setBounds(888, 345, 97, 23);
+		frame.getContentPane().add(Gluten);
 		
-		JLabel lblPreenchaSInformaes = new JLabel("Dados de acesso");
+		JLabel lblPreenchaSInformaes = new JLabel("Preencha as informa\u00E7\u00F5es de acesso abaixo");
 		lblPreenchaSInformaes.setVerticalAlignment(SwingConstants.TOP);
 		lblPreenchaSInformaes.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPreenchaSInformaes.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
-		lblPreenchaSInformaes.setBounds(40, 387, 343, 30);
-		panel.add(lblPreenchaSInformaes);
+		lblPreenchaSInformaes.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPreenchaSInformaes.setBounds(24, 461, 343, 30);
+		frame.getContentPane().add(lblPreenchaSInformaes);
 		
-		JLabel lblSenha = new JLabel("Senha");
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setVerticalAlignment(SwingConstants.TOP);
+		lblEmail.setHorizontalAlignment(SwingConstants.LEFT);
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblEmail.setBounds(24, 510, 253, 30);
+		frame.getContentPane().add(lblEmail);
+		
+		Email = new JTextField();
+		Email.setColumns(10);
+		Email.setBounds(76, 507, 381, 30);
+		frame.getContentPane().add(Email);
+		
+		JLabel lblSenha = new JLabel("senha");
 		lblSenha.setVerticalAlignment(SwingConstants.TOP);
-		lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSenha.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblSenha.setBounds(114, 469, 218, 30);
-		panel.add(lblSenha);
+		lblSenha.setHorizontalAlignment(SwingConstants.LEFT);
+		lblSenha.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblSenha.setBounds(577, 510, 48, 30);
+		frame.getContentPane().add(lblSenha);
 		
 		JLabel lblConfirmarSenha = new JLabel("Confirmar senha");
 		lblConfirmarSenha.setVerticalAlignment(SwingConstants.TOP);
-		lblConfirmarSenha.setHorizontalAlignment(SwingConstants.CENTER);
-		lblConfirmarSenha.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblConfirmarSenha.setBounds(348, 471, 229, 30);
-		panel.add(lblConfirmarSenha);
+		lblConfirmarSenha.setHorizontalAlignment(SwingConstants.LEFT);
+		lblConfirmarSenha.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblConfirmarSenha.setBounds(511, 566, 126, 30);
+		frame.getContentPane().add(lblConfirmarSenha);
 		
-		JPasswordField confirmarSenha = new JPasswordField();
-		confirmarSenha.setBounds(359, 494, 218, 30);
-		panel.add(confirmarSenha);
-		
-		JPasswordField senha = new JPasswordField();
-		senha.setBounds(114, 494, 218, 30);
-		panel.add(senha);
-		
-
-		
-		JLabel lblKg_2 = new JLabel("(cm)");
-		lblKg_2.setVerticalAlignment(SwingConstants.TOP);
-		lblKg_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblKg_2.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
-		lblKg_2.setBounds(477, 160, 38, 15);
-		panel.add(lblKg_2);
-		
-		JLabel lbl_usuario = new JLabel("Usuario");
-		lbl_usuario.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_usuario.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lbl_usuario.setBounds(214, 405, 253, 23);
-		panel.add(lbl_usuario);
-		
-		textField = new JTextField();
-		textField.setBounds(114, 428, 463, 30);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblInformaesNutricionasE = new JLabel("Informa\u00E7\u00F5es nutricionas e m\u00E9dicas");
-		lblInformaesNutricionasE.setVerticalAlignment(SwingConstants.TOP);
-		lblInformaesNutricionasE.setHorizontalAlignment(SwingConstants.LEFT);
-		lblInformaesNutricionasE.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
-		lblInformaesNutricionasE.setBounds(40, 232, 343, 30);
-		panel.add(lblInformaesNutricionasE);
-		
-		JLabel lblDadosPessoais = new JLabel("Dados pessoais");
-		lblDadosPessoais.setVerticalAlignment(SwingConstants.TOP);
-		lblDadosPessoais.setHorizontalAlignment(SwingConstants.LEFT);
-		lblDadosPessoais.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
-		lblDadosPessoais.setBounds(40, 11, 343, 30);
-		panel.add(lblDadosPessoais);
-		
-		JButton cadastrar = new JButton("Cadastrar");
-		cadastrar.setBackground(new Color(47, 53, 66));
-		cadastrar.setForeground(new Color(255, 255, 255));
-		cadastrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		cadastrar.setBounds(425, 540, 100, 30);
-		cadastrar.addMouseListener(new MouseAdapter() {
+		JButton Cadastrar = new JButton("Finalizar");
+		Cadastrar.setBackground(new Color(47, 53, 66));
+		Cadastrar.setForeground(new Color(255, 255, 255));
+		Cadastrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Usuario usuario = new Usuario();
 				usuario.setNome(textFieldNome.getText());
-				usuario.setSenha(senha.getText());
+				usuario.setSenha(Senha.getText());
+				usuario.setUsuario(Email.getText());
 				usuario.setSexo(comboBoxSexo.getName());
 				usuario.setPeso(lblPeso.getText());
 				usuario.setAltura(lblAltura.getText());
@@ -296,7 +278,9 @@ public class PopupCadastro extends LayoutPopup {
 				
 				try {
 					new ControllerUsuario().adicionar(usuario);
+					new TelaHome();
 					TelaHome.main(null);
+					System.out.println("Nome: " + usuario.getNome());
 				} catch (DadosVaziosException e1) {
 					JOptionPane.showMessageDialog(null, "Algum campo está vazio");
 					e1.printStackTrace();
@@ -304,24 +288,19 @@ public class PopupCadastro extends LayoutPopup {
 					JOptionPane.showMessageDialog(null, "Erro ao salvar usuario");
 					e1.printStackTrace();
 				}
+				
 			}
 		});
-		panel.add(cadastrar);
+		Cadastrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		Cadastrar.setBounds(460, 650, 89, 30);
+		frame.getContentPane().add(Cadastrar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBackground(Color.decode("#616774"));
-		btnCancelar.setForeground(new Color(255, 255, 255));
-		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnCancelar.setBounds(176, 540, 100, 30);
-		btnCancelar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				frame.dispose();
-			}
-		});
-		panel.add(btnCancelar);
+		ConfirmarSenha = new JPasswordField();
+		ConfirmarSenha.setBounds(647, 563, 360, 30);
+		frame.getContentPane().add(ConfirmarSenha);
 		
-		
-		frame.getContentPane().add(panel);
+		Senha = new JPasswordField();
+		Senha.setBounds(647, 507, 360, 30);
+		frame.getContentPane().add(Senha);
 	}
 }
