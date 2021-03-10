@@ -18,6 +18,7 @@ public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao
 	private boolean refeicaoRealizada;
 	
 	public ControllerRefeicao(boolean refeicaoRealizada) {
+		Popular.getInstance();
 		this.rep = new RepositorioRefeicao();
 		this.repRealizada = new RepositorioRefeicaoRealizada();
 		this.refeicaoRealizada = refeicaoRealizada;
@@ -41,7 +42,7 @@ public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao
 
 	@Override
 	public ArrayList<Refeicao> buscar(String nome) throws DadosVaziosException, NullPointerException {
-		if(nome.equals(""))
+		if(nome != null && nome.equals(""))
 			throw new DadosVaziosException("Impossível buscar! Nome vazio");
 		
 		ArrayList<Refeicao> list = (refeicaoRealizada)? repRealizada.buscar(nome) : rep.buscar(nome);
@@ -68,7 +69,7 @@ public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao
 	public boolean remover(String nome) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
 		if(nome.equals(""))
 			throw new DadosVaziosException("Impossível excluir! Nome vazio");
-		else if(!(refeicaoRealizada)? repRealizada.remover(nome) : rep.remover(nome))
+		else if(!((refeicaoRealizada)? repRealizada.remover(nome) : rep.remover(nome)))
 			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível excluir! Erro ao tentar excluir o refeicao '"+nome+"' no repositorio");
 		else 
 			return true;

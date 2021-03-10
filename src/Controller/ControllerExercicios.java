@@ -16,6 +16,7 @@ public class ControllerExercicios implements CRUD<Exercicio> {
 	private boolean exercicioRealizado;
 	
 	public ControllerExercicios(boolean exercicioRealizado) {
+		Popular.getInstance();
 		this.rep = new RepositorioExercicio();
 		this.repRealizada = new RepositorioExercicioRealizado();
 		this.exercicioRealizado = exercicioRealizado;
@@ -39,7 +40,7 @@ public class ControllerExercicios implements CRUD<Exercicio> {
 
 	@Override
 	public ArrayList<Exercicio> buscar(String nome) throws DadosVaziosException, NullPointerException {
-		if(nome.equals(""))
+		if(nome != null && nome.equals(""))
 			throw new DadosVaziosException("Impossível buscar! Nome vazio");
 		
 		ArrayList<Exercicio> list = (exercicioRealizado)? repRealizada.buscar(nome) : rep.buscar(nome);
@@ -67,7 +68,7 @@ public class ControllerExercicios implements CRUD<Exercicio> {
 	public boolean remover(String nome) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
 		if(nome.equals(""))
 			throw new DadosVaziosException("Impossível excluir! Nome vazio");
-		else if(!(exercicioRealizado)? repRealizada.remover(nome) : rep.remover(nome))
+		else if(!((exercicioRealizado)? repRealizada.remover(nome) : rep.remover(nome)))
 			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível excluir! Erro ao tentar excluir o alimento '"+nome+"' no repositorio");
 		else 
 			return true;

@@ -197,7 +197,6 @@ public class TelaLogin {
 		panel.add(campoSenha);
 
 		
-		
 	}
 	
 	

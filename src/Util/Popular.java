@@ -45,10 +45,17 @@ public class Popular {
 	}
 	
 	private void popuparAlimentos() {
-		Alimento alimento = new Alimento();
-		alimento.setNome("Laranja");
+		Alimento alimento;
 		
+		alimento = new Alimento();
+		alimento.setNome("Laranja");
 		repositorioAlimento.adicionar(alimento);
+		
+		for (int i=0; i<10;i++) {
+			alimento = new Alimento();
+			alimento.setNome("Manga");
+			repositorioAlimento.adicionar(alimento);
+		}
 	}
 	
 	private void popuparExercicio() {

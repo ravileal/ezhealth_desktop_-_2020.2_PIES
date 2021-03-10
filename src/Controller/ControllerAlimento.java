@@ -13,6 +13,7 @@ public class ControllerAlimento implements IAlimentacao<Alimento>, CRUD<Alimento
 	private RepositorioAlimento rep;
 
 	public ControllerAlimento() {
+		Popular.getInstance();
 		rep = new RepositorioAlimento();
 	}
 
@@ -33,7 +34,7 @@ public class ControllerAlimento implements IAlimentacao<Alimento>, CRUD<Alimento
 
 	@Override
 	public ArrayList<Alimento> buscar(String nome) throws DadosVaziosException, NullPointerException {
-		if(nome.equals(""))
+		if(nome != null && nome.equals(""))
 			throw new DadosVaziosException("Impossível buscar! Nome vazio");
 		
 		ArrayList<Alimento> list = rep.buscar(nome);

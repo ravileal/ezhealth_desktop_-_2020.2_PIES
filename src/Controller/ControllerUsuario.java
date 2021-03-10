@@ -40,7 +40,7 @@ public class ControllerUsuario implements CRUD<Usuario> {
 
 	@Override
 	public ArrayList<Usuario> buscar(String nome) throws DadosVaziosException, NullPointerException {
-		if(nome.equals(""))
+		if(nome != null && nome.equals(""))
 			throw new DadosVaziosException("Impossível buscar! Nome vazio");
 		
 		ArrayList<Usuario> list = rep.buscar(nome);
