@@ -2,8 +2,6 @@ package View;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import java.awt.Panel;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -11,11 +9,8 @@ import javax.swing.JPanel;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
-
 import Controller.ControllerUsuario;
 import Model.Usuario;
-import Util.ViewUtils;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
