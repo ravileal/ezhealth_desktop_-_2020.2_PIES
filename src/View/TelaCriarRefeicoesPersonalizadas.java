@@ -37,6 +37,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
 
 public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 
@@ -108,17 +109,16 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		separator.setBounds(10, 67, 872, 2);
 		panel.add(separator);
 		
-		JLabel lblAdicionarAlimentosNa = new JLabel("Adicionar Alimentos na Refei\u00E7\u00E3o Personalizada");
+		JLabel lblAdicionarAlimentosNa = new JLabel("Pesquisar e Adicionar Alimentos na Refei\u00E7\u00E3o Personalizada");
 		lblAdicionarAlimentosNa.setVerticalAlignment(SwingConstants.TOP);
 		lblAdicionarAlimentosNa.setHorizontalAlignment(SwingConstants.LEFT);
 		lblAdicionarAlimentosNa.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAdicionarAlimentosNa.setBounds(528, 101, 354, 30);
+		lblAdicionarAlimentosNa.setBounds(497, 102, 415, 30);
 		panel.add(lblAdicionarAlimentosNa);
 		
 		JTextField txtPesquisarAlimentos = new JTextField();
 		txtPesquisarAlimentos.setToolTipText("Pesquisar");
-		txtPesquisarAlimentos.setText("Pesquisar Alimentos");
-		txtPesquisarAlimentos.setForeground(SystemColor.scrollbar);
+		txtPesquisarAlimentos.setForeground(Color.BLACK);
 		txtPesquisarAlimentos.setColumns(10);
 		txtPesquisarAlimentos.setBounds(528, 143, 335, 35);
 		panel.add(txtPesquisarAlimentos);
@@ -176,8 +176,31 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		frame.revalidate();
 	}
 	
-	public JButton botaoEditar(String nome) {
-		JButton botaoEditar = new JButton("Editar");
+	public Panel configureItemList(String nome, JPanel panel) {
+		Panel panel_item = new Panel();
+		panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
+		panel_item.setPreferredSize(new Dimension(0, 50));
+		panel_item.setBackground(Color.decode("#DFE4EA"));
+		
+	
+		// configurações da label
+		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
+		panel_item.add(new JLabel(nome));
+		panel_item.add(Box.createVerticalStrut(10)); 
+		
+		// configurações dos botões
+		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
+		new ViewUtils().setImageInLabel("/Images/edit.png", botaoEditar(nome), panel_item);
+		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
+		new ViewUtils().setImageInLabel("/Images/remove.png", botaoExcluir(nome), panel_item);
+		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
+		
+		return panel_item;
+	}
+
+	
+	public JLabel botaoEditar(String nome) {
+		JLabel botaoEditar = new JLabel("Editar");
 		botaoEditar.addMouseListener(
 			new MouseAdapter() {
 				@Override
@@ -189,7 +212,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		return botaoEditar;
 	}
 	
-	public JButton botaoExcluir(String nome) {
+	public JLabel botaoExcluir(String nome) {
 		JButton botaoExcluir = new JButton("Excluir");
 		botaoExcluir.addMouseListener(
 			new MouseAdapter() {
