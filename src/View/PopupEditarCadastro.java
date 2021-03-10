@@ -24,7 +24,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Window.Type;
 
-public class TelaEditarCadastro {
+public class PopupEditarCadastro {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -43,7 +43,7 @@ public class TelaEditarCadastro {
 			@Override
 			public void run() {
 				try {
-					TelaEditarCadastro window = new TelaEditarCadastro();
+					PopupEditarCadastro window = new PopupEditarCadastro();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +55,7 @@ public class TelaEditarCadastro {
 	/**
 	 * Create the application.
 	 */
-	public TelaEditarCadastro() {
+	public PopupEditarCadastro() {
 		initialize();
 	}
 

@@ -321,8 +321,8 @@ public class TelaAlimentos {
 			new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					new TelaEditarAlimentos();
-					TelaEditarAlimentos.main(null);
+					new PopupEditarAlimentos();
+					PopupEditarAlimentos.main(null);
 				}
 			}
 		);

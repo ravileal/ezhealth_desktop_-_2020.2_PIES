@@ -12,18 +12,18 @@ import javax.swing.WindowConstants;
 
 import Util.ViewUtils;
 
+import javax.swing.JSeparator;
 import java.awt.Button;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JTextField;
-import javax.swing.JSeparator;
 
-public class TelaEditarExercicios {
+public class PopupEditarAlimentos {
 
 	private JFrame frame;
-	private JTextField textFieldMinutosExercicios;
+	private JTextField textFieldQuantidadedoAlimento;
 
 	/**
 	 * Launch the application.
@@ -33,7 +33,7 @@ public class TelaEditarExercicios {
 			@Override
 			public void run() {
 				try {
-					TelaEditarExercicios window = new TelaEditarExercicios();
+					PopupEditarAlimentos window = new PopupEditarAlimentos();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class TelaEditarExercicios {
 	/**
 	 * Create the application.
 	 */
-	public TelaEditarExercicios() {
+	public PopupEditarAlimentos() {
 		initialize();
 	}
 
@@ -55,7 +55,7 @@ public class TelaEditarExercicios {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 1057, 563);
+		frame.setBounds(100, 100, 1053, 550);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -89,12 +89,12 @@ public class TelaEditarExercicios {
 		lblNewLabel_minhaConta.setBounds(978, 24, 70, 51);
 		panel.add(lblNewLabel_minhaConta);
 		
-		JLabel lblExercicioX = new JLabel("Exercicio  x");
-		lblExercicioX.setVerticalAlignment(SwingConstants.TOP);
-		lblExercicioX.setHorizontalAlignment(SwingConstants.LEFT);
-		lblExercicioX.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblExercicioX.setBounds(30, 97, 177, 30);
-		frame.getContentPane().add(lblExercicioX);
+		JLabel lblData = new JLabel("Alimento x");
+		lblData.setVerticalAlignment(SwingConstants.TOP);
+		lblData.setHorizontalAlignment(SwingConstants.LEFT);
+		lblData.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblData.setBounds(30, 97, 177, 30);
+		frame.getContentPane().add(lblData);
 		
 		JLabel labelData = new JLabel("Quarta - 10/02");
 		labelData.setVerticalAlignment(SwingConstants.TOP);
@@ -103,59 +103,66 @@ public class TelaEditarExercicios {
 		labelData.setBounds(30, 118, 92, 30);
 		frame.getContentPane().add(labelData);
 		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(20, 146, 1017, 2);
+		frame.getContentPane().add(separator);
+		
 		Button buttonVoltar = new Button("Voltar");
 		buttonVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaExercicios();
-				TelaExercicios.main(null);
+				new TelaEditarRefeicaoPersonalizada();
+				TelaEditarRefeicaoPersonalizada.main(null);
 			}
 		});
 		buttonVoltar.setBackground(SystemColor.menu);
-		buttonVoltar.setBounds(976, 105, 70, 22);
+		buttonVoltar.setBounds(948, 105, 70, 22);
 		frame.getContentPane().add(buttonVoltar);
 		
-		JLabel lblMinutos = new JLabel("Minutos praticados");
-		lblMinutos.setVerticalAlignment(SwingConstants.TOP);
-		lblMinutos.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMinutos.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblMinutos.setBounds(20, 183, 141, 30);
-		frame.getContentPane().add(lblMinutos);
+		JLabel lblAlimentoX = new JLabel("Quantidade");
+		lblAlimentoX.setVerticalAlignment(SwingConstants.TOP);
+		lblAlimentoX.setHorizontalAlignment(SwingConstants.LEFT);
+		lblAlimentoX.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblAlimentoX.setBounds(20, 183, 141, 30);
+		frame.getContentPane().add(lblAlimentoX);
 		
-		textFieldMinutosExercicios = new JTextField();
-		textFieldMinutosExercicios.setColumns(10);
-		textFieldMinutosExercicios.setBounds(164, 185, 86, 20);
-		frame.getContentPane().add(textFieldMinutosExercicios);
+		textFieldQuantidadedoAlimento = new JTextField();
+		textFieldQuantidadedoAlimento.setBounds(119, 185, 86, 20);
+		frame.getContentPane().add(textFieldQuantidadedoAlimento);
+		textFieldQuantidadedoAlimento.setColumns(10);
 		
-		JLabel lblMin = new JLabel("min");
-		lblMin.setVerticalAlignment(SwingConstants.TOP);
-		lblMin.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblMin.setBounds(255, 183, 92, 30);
-		frame.getContentPane().add(lblMin);
+		JLabel lblG = new JLabel("g");
+		lblG.setVerticalAlignment(SwingConstants.TOP);
+		lblG.setHorizontalAlignment(SwingConstants.LEFT);
+		lblG.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblG.setBounds(210, 183, 92, 30);
+		frame.getContentPane().add(lblG);
 		
-		JLabel lblCaloriasTotaisGastas = new JLabel("Calorias totais gastas:");
-		lblCaloriasTotaisGastas.setVerticalAlignment(SwingConstants.TOP);
-		lblCaloriasTotaisGastas.setHorizontalAlignment(SwingConstants.LEFT);
-		lblCaloriasTotaisGastas.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCaloriasTotaisGastas.setBounds(20, 359, 155, 30);
-		frame.getContentPane().add(lblCaloriasTotaisGastas);
+		JLabel lblseTiverLactose = new JLabel("*se tiver lactose, aparece aqui");
+		lblseTiverLactose.setForeground(Color.RED);
+		lblseTiverLactose.setVerticalAlignment(SwingConstants.TOP);
+		lblseTiverLactose.setHorizontalAlignment(SwingConstants.LEFT);
+		lblseTiverLactose.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblseTiverLactose.setBounds(20, 224, 248, 30);
+		frame.getContentPane().add(lblseTiverLactose);
+		
+		JLabel lblCaloriasTotais = new JLabel("Calorias totais:");
+		lblCaloriasTotais.setVerticalAlignment(SwingConstants.TOP);
+		lblCaloriasTotais.setHorizontalAlignment(SwingConstants.LEFT);
+		lblCaloriasTotais.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblCaloriasTotais.setBounds(20, 359, 141, 30);
+		frame.getContentPane().add(lblCaloriasTotais);
 		
 		JLabel lblkcal = new JLabel("500kcal");
 		lblkcal.setVerticalAlignment(SwingConstants.TOP);
 		lblkcal.setHorizontalAlignment(SwingConstants.LEFT);
 		lblkcal.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblkcal.setBounds(185, 359, 141, 30);
+		lblkcal.setBounds(137, 359, 141, 30);
 		frame.getContentPane().add(lblkcal);
 		
 		Button buttonSalvar = new Button("Salvar");
 		buttonSalvar.setBackground(SystemColor.menu);
 		buttonSalvar.setBounds(449, 459, 70, 22);
 		frame.getContentPane().add(buttonSalvar);
-		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(20, 146, 1026, 2);
-		frame.getContentPane().add(separator);
 	}
-
 }

@@ -216,7 +216,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		botaoEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaEditarAlimentos.main(null);
+				PopupEditarAlimentos.main(null);
 			}
 		});
 		return botaoEditar;

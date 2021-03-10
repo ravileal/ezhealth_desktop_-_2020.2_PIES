@@ -29,7 +29,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 
-public class TelaLogin {
+public class Login {
 
 	private JFrame frame;
 	private JTextField campoLogin;
@@ -44,7 +44,7 @@ public class TelaLogin {
 			@Override
 			public void run() {
 				try {
-					TelaLogin window = new TelaLogin();
+					Login window = new Login();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,7 +56,7 @@ public class TelaLogin {
 	/**
 	 * Create the application.
 	 */
-	public TelaLogin() {
+	public Login() {
 		initialize();
 	}
 
@@ -159,8 +159,8 @@ public class TelaLogin {
 		btnCadastro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaCadastro();
-				TelaCadastro.main(null);
+				new PopupCadastro();
+				PopupCadastro.main(null);
 			}
 		});
 		btnCadastro.setBackground(Color.decode("#2F3542"));

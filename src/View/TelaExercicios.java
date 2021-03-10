@@ -216,7 +216,7 @@ public class TelaExercicios extends LayoutMain {
 		botaoEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				TelaEditarExercicios.main(null);
+				PopupEditarExercicios.main(null);
 			}
 		});
 		return botaoEditar;

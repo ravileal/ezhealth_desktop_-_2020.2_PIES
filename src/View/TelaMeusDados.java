@@ -217,8 +217,8 @@ public class TelaMeusDados extends LayoutMain {
 		btnEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaEditarCadastro();
-				TelaEditarCadastro.main(null);
+				new PopupEditarCadastro();
+				PopupEditarCadastro.main(null);
 			}
 		});
 		btnEditar.setFont(new Font("Tahoma", Font.PLAIN, 14));

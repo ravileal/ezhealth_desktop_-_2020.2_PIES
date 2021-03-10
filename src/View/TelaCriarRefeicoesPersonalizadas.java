@@ -182,7 +182,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 			new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					TelaEditarAlimentos.main(null);
+					PopupEditarAlimentos.main(null);
 				}
 			}
 		);

@@ -29,7 +29,7 @@ import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class TelaCadastro {
+public class PopupCadastro {
 
 	private JFrame frame;
 	private JTextField textFieldNome;
@@ -48,7 +48,7 @@ public class TelaCadastro {
 			@Override
 			public void run() {
 				try {
-					TelaCadastro window = new TelaCadastro();
+					PopupCadastro window = new PopupCadastro();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,7 +60,7 @@ public class TelaCadastro {
 	/**
 	 * Create the application.
 	 */
-	public TelaCadastro() {
+	public PopupCadastro() {
 		initialize();
 	}
 
