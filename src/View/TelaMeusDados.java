@@ -19,7 +19,6 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 import Util.ViewUtils;
-
 import java.awt.Color;
 import javax.swing.JSeparator;
 import javax.swing.ImageIcon;

@@ -115,7 +115,8 @@ public class PopupEditarAlimentos {
 				TelaEditarRefeicaoPersonalizada.main(null);
 			}
 		});
-		buttonVoltar.setBackground(SystemColor.menu);
+		buttonVoltar.setBackground(Color.decode("#2F3542"));
+		buttonVoltar.setForeground(new Color(255, 255, 255));
 		buttonVoltar.setBounds(948, 105, 70, 22);
 		frame.getContentPane().add(buttonVoltar);
 		
@@ -161,7 +162,13 @@ public class PopupEditarAlimentos {
 		frame.getContentPane().add(lblkcal);
 		
 		Button buttonSalvar = new Button("Salvar");
-		buttonSalvar.setBackground(SystemColor.menu);
+		buttonSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		buttonSalvar.setBackground(Color.decode("#2F3542"));
+		buttonSalvar.setForeground(new Color(255, 255, 255));
 		buttonSalvar.setBounds(449, 459, 70, 22);
 		frame.getContentPane().add(buttonSalvar);
 	}
