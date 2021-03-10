@@ -20,8 +20,11 @@ public class ViewUtils {
 	private JFrame frame;
 	private String baseColor;
 	private String baseColorText;
+	private int positionXButtonMinimize;
+	private int positionXButtonClose;
 	
-	public void setImageInLabel(String path, JLabel jlabel, Panel panel) {		
+	// Essa função irá adicionar uma imagem em label e em seguida adiciona-lo ao painel 
+	public void setImageInLabel(String path, JLabel jlabel, Panel panel) {
 		ImageIcon imageIcon = new ImageIcon(this.getClass().getResource(path)); 
 		Image imagem = imageIcon.getImage(); 
 		imagem = imagem.getScaledInstance(jlabel.getWidth(), jlabel.getHeight(), Image.SCALE_DEFAULT);
@@ -42,6 +45,7 @@ public class ViewUtils {
 		frame.addMouseMotionListener(drag);
 					
 		if(isPopup) {
+			positionXButtonClose = 649;
 			JButton close = buttonClose(false); 
 		
 			if(choicePanel instanceof JPanel) ((JPanel)choicePanel).add(close);
@@ -49,6 +53,9 @@ public class ViewUtils {
 			if(choicePanel instanceof Panel) ((Panel)choicePanel).add(close);
 			
 		} else {
+			positionXButtonMinimize = 958;
+			positionXButtonClose = 1007;
+			
 			JButton close = buttonClose(true);
 			JButton minimize = buttonMinimize();
 			
@@ -65,6 +72,7 @@ public class ViewUtils {
 	
 	private JButton buttonMinimize() {
 		JButton btnNewButton_minimize = new JButton("_");
+		btnNewButton_minimize.setBounds(positionXButtonMinimize, 0, 51, 23);
 		btnNewButton_minimize.setFont(new Font("Quicksand", Font.PLAIN, 14));
 		btnNewButton_minimize.addMouseListener(new MouseAdapter() {
 			@Override
@@ -87,7 +95,6 @@ public class ViewUtils {
 		btnNewButton_minimize.setMargin(new Insets(-12, 0, 0, 0));
 		btnNewButton_minimize.setBorderPainted(false);
 		btnNewButton_minimize.setFocusPainted(false);
-		btnNewButton_minimize.setBounds(958, 0, 51, 23);
 		btnNewButton_minimize.setForeground(Color.decode(baseColorText));
 		btnNewButton_minimize.setBackground(Color.decode(baseColor));
 		
@@ -96,6 +103,7 @@ public class ViewUtils {
 	
 	private JButton buttonClose(boolean close) {
 		JButton btnNewButton_close = new JButton("X");
+		btnNewButton_close.setBounds(positionXButtonClose, 0, 51, 23);
 		btnNewButton_close.setFont(new Font("Arial Black", Font.BOLD, 12));
 		btnNewButton_close.addMouseListener(new MouseAdapter() {
 			@Override
@@ -118,7 +126,6 @@ public class ViewUtils {
 		});
 		btnNewButton_close.setBorderPainted(false);
 		btnNewButton_close.setFocusPainted(false);
-		btnNewButton_close.setBounds(1007, 0, 51, 23);
 		btnNewButton_close.setBackground(Color.decode(baseColor));
 		btnNewButton_close.setForeground(Color.decode(baseColorText));
 		

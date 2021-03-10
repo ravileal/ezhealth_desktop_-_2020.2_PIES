@@ -112,7 +112,7 @@ public class LayoutMain {
 		});
 		
 		JLabel lblImgHome = new JLabel(""); 
-		lblImgHome.setBounds(10, 70, 19, 18);
+		lblImgHome.setBounds(10, frame.getWidth(), 19, 18);
 		new ViewUtils().setImageInLabel("/Images/restaurant.png", lblImgHome, panel);
 		
 		
