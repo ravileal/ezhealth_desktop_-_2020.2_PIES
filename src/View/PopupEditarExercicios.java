@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import java.awt.Panel;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
@@ -19,11 +21,10 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
+import javax.swing.JButton;
 
-public class PopupEditarExercicios {
-
-	private JFrame frame;
-	private JTextField textFieldMinutosExercicios;
+public class PopupEditarExercicios extends LayoutPopup {
+	private JTextField textField_caloriasTotais;
 
 	/**
 	 * Launch the application.
@@ -46,123 +47,92 @@ public class PopupEditarExercicios {
 	 * Create the application.
 	 */
 	public PopupEditarExercicios() {
-		initialize();
+		super("Editar Exercicio - EzHealth");
+		configureContent();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 1057, 563);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
+	private void configureContent() {
 		Panel panel = new Panel();
-		panel.setBackground(Color.decode("#2F3542"));
-		panel.setBounds(0, 0, 1058, 80);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);	
-		
-		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF", true);
-		
-		JLabel lblImgHospital = new JLabel(""); 
-		lblImgHospital.setBounds(43, 24, 52, 51);
-		
-		new ViewUtils().setImageInLabel("/Images/hospital.png", lblImgHospital, panel);
-		
-		JLabel lblNewLabel_title = new JLabel("EZHEALTH");
-		lblNewLabel_title.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
-		lblNewLabel_title.setForeground(Color.decode("#A4B0BE"));
-		lblNewLabel_title.setBounds(112, 37, 96, 25);
-		panel.add(lblNewLabel_title);
-		
-		JLabel lblImgMinhaConta = new JLabel(""); 
-		lblImgMinhaConta.setBounds(930, 29, 39, 40);
-		
-		new ViewUtils().setImageInLabel("/Images/accountWhite.png", lblImgMinhaConta, panel);
-		
-		JLabel lblNewLabel_minhaConta = new JLabel("<html>Minha<br>Conta</html>");
-		lblNewLabel_minhaConta.setFont(new Font("Quicksand Medium", Font.PLAIN, 18));
-		lblNewLabel_minhaConta.setForeground(Color.decode("#A4B0BE"));
-		lblNewLabel_minhaConta.setBounds(978, 24, 70, 51);
-		panel.add(lblNewLabel_minhaConta);
-		
+		panel.setBounds(0, 71, 700, 590);
+		panel.setBackground(Color.decode("#E8EDF3"));
+		panel.setLayout(null);
+				
 		JLabel lblExercicioX = new JLabel("Exercicio  x");
 		lblExercicioX.setVerticalAlignment(SwingConstants.TOP);
 		lblExercicioX.setHorizontalAlignment(SwingConstants.LEFT);
-		lblExercicioX.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblExercicioX.setBounds(30, 97, 177, 30);
-		frame.getContentPane().add(lblExercicioX);
+		lblExercicioX.setFont(new Font("Quicksand", Font.PLAIN, 16));
+		lblExercicioX.setBounds(10, 11, 177, 30);
+		panel.add(lblExercicioX);
 		
 		JLabel labelData = new JLabel("Quarta - 10/02");
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
-		labelData.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		labelData.setBounds(30, 118, 92, 30);
-		frame.getContentPane().add(labelData);
-		
-		Button buttonVoltar = new Button("Voltar");
-		buttonVoltar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				new TelaExercicios();
-				TelaExercicios.main(null);
-			}
-		});
-		buttonVoltar.setBackground(Color.decode("#2F3542"));
-		buttonVoltar.setForeground(new Color(255, 255, 255));
-		buttonVoltar.setBounds(976, 105, 70, 22);
-		frame.getContentPane().add(buttonVoltar);
+		labelData.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
+		labelData.setBounds(590, 13, 100, 30);
+		panel.add(labelData);
 		
 		JLabel lblMinutos = new JLabel("Minutos praticados");
 		lblMinutos.setVerticalAlignment(SwingConstants.TOP);
 		lblMinutos.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMinutos.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblMinutos.setBounds(20, 183, 141, 30);
-		frame.getContentPane().add(lblMinutos);
+		lblMinutos.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
+		lblMinutos.setBounds(86, 69, 141, 30);
+		panel.add(lblMinutos);
 		
-		textFieldMinutosExercicios = new JTextField();
+		JTextField textFieldMinutosExercicios = new JTextField();
+		textFieldMinutosExercicios.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
 		textFieldMinutosExercicios.setColumns(10);
-		textFieldMinutosExercicios.setBounds(164, 185, 86, 20);
-		frame.getContentPane().add(textFieldMinutosExercicios);
+		textFieldMinutosExercicios.setBounds(86, 94, 169, 30);
+		panel.add(textFieldMinutosExercicios);
 		
 		JLabel lblMin = new JLabel("min");
 		lblMin.setVerticalAlignment(SwingConstants.TOP);
 		lblMin.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblMin.setBounds(255, 183, 92, 30);
-		frame.getContentPane().add(lblMin);
+		lblMin.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
+		lblMin.setBounds(259, 101, 30, 14);
+		panel.add(lblMin);
 		
 		JLabel lblCaloriasTotaisGastas = new JLabel("Calorias totais gastas:");
 		lblCaloriasTotaisGastas.setVerticalAlignment(SwingConstants.TOP);
 		lblCaloriasTotaisGastas.setHorizontalAlignment(SwingConstants.LEFT);
-		lblCaloriasTotaisGastas.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCaloriasTotaisGastas.setBounds(20, 359, 155, 30);
-		frame.getContentPane().add(lblCaloriasTotaisGastas);
+		lblCaloriasTotaisGastas.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
+		lblCaloriasTotaisGastas.setBounds(397, 69, 169, 30);
+		panel.add(lblCaloriasTotaisGastas);
 		
-		JLabel lblkcal = new JLabel("500kcal");
+		JLabel lblkcal = new JLabel("kcal");
 		lblkcal.setVerticalAlignment(SwingConstants.TOP);
 		lblkcal.setHorizontalAlignment(SwingConstants.LEFT);
-		lblkcal.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblkcal.setBounds(185, 359, 141, 30);
-		frame.getContentPane().add(lblkcal);
-		
-		Button buttonSalvar = new Button("Salvar");
-		buttonSalvar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		buttonSalvar.setBackground(Color.decode("#2F3542"));
-		buttonSalvar.setForeground(new Color(255, 255, 255));
-		buttonSalvar.setBounds(449, 459, 70, 22);
-		frame.getContentPane().add(buttonSalvar);
+		lblkcal.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
+		lblkcal.setBounds(576, 101, 61, 22);
+		panel.add(lblkcal);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(20, 146, 1026, 2);
-		frame.getContentPane().add(separator);
+		separator.setBounds(10, 37, 680, 2);
+		panel.add(separator);
+		
+		frame.getContentPane().add(panel);
+		
+		textField_caloriasTotais = new JTextField();
+		textField_caloriasTotais.setEnabled(false);
+		textField_caloriasTotais.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
+		textField_caloriasTotais.setColumns(10);
+		textField_caloriasTotais.setBounds(396, 94, 170, 30);
+		panel.add(textField_caloriasTotais);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setForeground(Color.WHITE);
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCancelar.setBackground(new Color(97, 103, 116));
+		btnCancelar.setBounds(204, 167, 100, 30);
+		panel.add(btnCancelar);
+		
+		JButton salvar = new JButton("Salvar");
+		salvar.setForeground(Color.WHITE);
+		salvar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		salvar.setBackground(new Color(47, 53, 66));
+		salvar.setBounds(343, 167, 100, 30);
+		panel.add(salvar);
 	}
-
 }
