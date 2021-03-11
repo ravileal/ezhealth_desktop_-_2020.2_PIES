@@ -167,15 +167,16 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		panel.add(labelData);
 		
 		Button buttonVoltar = new Button("Voltar");
-		buttonVoltar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				TelaRefeicoesPersonalizadas.main(null);
-			}
-		});
 		buttonVoltar.setBackground(Color.decode("#2F3542"));
 		buttonVoltar.setForeground(new Color(255, 255, 255));
 		buttonVoltar.setBounds(827, 19, 70, 22);
+		buttonVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.dispose();
+				TelaRefeicoesPersonalizadas.main(null);
+			}
+		});
 		panel.add(buttonVoltar);
 		
 		JLabel lblBuscarRefeio = new JLabel("Buscar refei\u00E7\u00E3o");

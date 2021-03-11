@@ -15,7 +15,6 @@ import javax.swing.JSeparator;
 import javax.swing.JButton;
 
 public class PopupEditarExercicios extends LayoutPopup {
-	private JTextField textField_caloriasTotais;
 
 	/**
 	 * Launch the application.
@@ -103,9 +102,8 @@ public class PopupEditarExercicios extends LayoutPopup {
 		separator.setBounds(10, 37, 680, 2);
 		panel.add(separator);
 		
-		dialog.getContentPane().add(panel);
 		
-		textField_caloriasTotais = new JTextField();
+		JTextField textField_caloriasTotais = new JTextField();
 		textField_caloriasTotais.setEnabled(false);
 		textField_caloriasTotais.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
 		textField_caloriasTotais.setColumns(10);
@@ -131,5 +129,7 @@ public class PopupEditarExercicios extends LayoutPopup {
 		salvar.setBackground(new Color(47, 53, 66));
 		salvar.setBounds(343, 167, 100, 30);
 		panel.add(salvar);
+		
+		dialog.getContentPane().add(panel);
 	}
 }

@@ -94,7 +94,7 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 		labelCriarRefeicao.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaCriarRefeicoesPersonalizadas();
+				frame.dispose();
 				TelaCriarRefeicoesPersonalizadas.main(null);
 			}
 		});
