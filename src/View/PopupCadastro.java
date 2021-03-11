@@ -257,7 +257,7 @@ public class PopupCadastro extends LayoutPopup {
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblInformaesNutricionasE = new JLabel("Informa\u00E7\u00F5es nutricionas e m\u00E9dicas");
+		JLabel lblInformaesNutricionasE = new JLabel("Informa\u00E7\u00F5es nutricionais e m\u00E9dicas");
 		lblInformaesNutricionasE.setVerticalAlignment(SwingConstants.TOP);
 		lblInformaesNutricionasE.setHorizontalAlignment(SwingConstants.LEFT);
 		lblInformaesNutricionasE.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));

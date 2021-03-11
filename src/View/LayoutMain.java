@@ -138,7 +138,19 @@ public class LayoutMain {
 		panel.setBounds(0, 106, 136, 497);
 		panel.setLayout(null);
 		
+		// label menu
+		JLabel lblNewLabel_7 = new JLabel("Menu");
+		lblNewLabel_7.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_7.setFont(new Font("Quicksand Medium", Font.PLAIN, 14));
+		lblNewLabel_7.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel_7.setBounds(10, 11, 63, 30);
+		panel.add(lblNewLabel_7);
+
+		// botão home
 		JLabel labelHome = new JLabel("Home");
+		labelHome.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
+		labelHome.setBounds(36, 33, 98, 35);
+		panel.add(labelHome);
 		labelHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -146,21 +158,16 @@ public class LayoutMain {
 				TelaHome.main(null);
 			}
 		});
+		JLabel lblImgHome = new JLabel("");
+		lblImgHome.setBounds(10, 40, 19, 18);
+		new ViewUtils().setImageInLabel("/Images/home.png", lblImgHome, panel);
 		
-		JLabel lblImgHome = new JLabel(""); 
-		lblImgHome.setBounds(10, frame.getWidth(), 19, 18);
-		new ViewUtils().setImageInLabel("/Images/restaurant.png", lblImgHome, panel);
 		
-		
-		labelHome.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
-		labelHome.setBounds(36, 33, 87, 27);
-		panel.add(labelHome);
-		
+		// botão refeições
 		JLabel labelRefeicoes = new JLabel("<html>Refei\u00E7\u00F5es <br> Personalizadas</html>");
 		labelRefeicoes.setHorizontalAlignment(SwingConstants.LEFT);
 		labelRefeicoes.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
-		labelRefeicoes.setBounds(36, 65, 98, 35);
-		panel.add(labelRefeicoes);
+		labelRefeicoes.setBounds(36, 70, 98, 35);
 		labelRefeicoes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -168,23 +175,16 @@ public class LayoutMain {
 				TelaRefeicoesPersonalizadas.main(null);
 			}
 		});
-		
+		panel.add(labelRefeicoes);
 		JLabel lblImgRefeicao = new JLabel(""); 
-		lblImgRefeicao.setBounds(10, 115, 19, 18);
-		new ViewUtils().setImageInLabel("/Images/fitness.png", lblImgRefeicao, panel);
+		lblImgRefeicao.setBounds(10, 75, 19, 18);
+		new ViewUtils().setImageInLabel("/Images/restaurant.png", lblImgRefeicao, panel);
 		
-		JLabel lblNewLabel_7 = new JLabel("Menu");
-		lblNewLabel_7.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_7.setFont(new Font("Quicksand Medium", Font.PLAIN, 14));
-		lblNewLabel_7.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_7.setBounds(10, 11, 63, 30);
-		panel.add(lblNewLabel_7);
-		
+		// botão exercicio
 		JLabel labelExercicios = new JLabel("Exerc\u00EDcios");
 		labelExercicios.setHorizontalAlignment(SwingConstants.LEFT);
 		labelExercicios.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
-		labelExercicios.setBounds(36, 106, 87, 35);
-		panel.add(labelExercicios);
+		labelExercicios.setBounds(36, 106, 98, 35);
 		labelExercicios.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -193,22 +193,25 @@ public class LayoutMain {
 				TelaExercicios.main(null);
 			}
 		});
-		
-		
+		panel.add(labelExercicios);
 		JLabel lblImgExercicio = new JLabel(""); 
-		lblImgExercicio.setBounds(10, 36, 19, 18);
-		new ViewUtils().setImageInLabel("/Images/home.png", lblImgExercicio, panel);
+		lblImgExercicio.setBounds(10, 112, 19, 18);
+		new ViewUtils().setImageInLabel("/Images/fitness.png", lblImgExercicio, panel);
 		
 		
-		JLabel lblNewLabel_7_1 = new JLabel("Mais op\u00E7\u00F5es");
-		lblNewLabel_7_1.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_7_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_7_1.setFont(new Font("Quicksand Medium", Font.PLAIN, 14));
-		lblNewLabel_7_1.setBounds(10, 151, 124, 30);
-		panel.add(lblNewLabel_7_1);
+		// label mais opções
+		JLabel lblMaisOpcoes = new JLabel("Mais op\u00E7\u00F5es");
+		lblMaisOpcoes.setVerticalAlignment(SwingConstants.TOP);
+		lblMaisOpcoes.setHorizontalAlignment(SwingConstants.LEFT);
+		lblMaisOpcoes.setFont(new Font("Quicksand Medium", Font.PLAIN, 14));
+		lblMaisOpcoes.setBounds(10, 151, 124, 30);
+		panel.add(lblMaisOpcoes);
 		
-		
+		// botão meus dados
 		JLabel labelMeusDados = new JLabel("Meus Dados");
+		labelMeusDados.setHorizontalAlignment(SwingConstants.LEFT);
+		labelMeusDados.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
+		labelMeusDados.setBounds(36, 177, 98, 35);
 		labelMeusDados.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -217,19 +220,16 @@ public class LayoutMain {
 				TelaMeusDados.main(null);
 			}
 		});
-		labelMeusDados.setHorizontalAlignment(SwingConstants.LEFT);
-		labelMeusDados.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
-		labelMeusDados.setBounds(36, 177, 87, 35);
 		panel.add(labelMeusDados);
-		
 		JLabel lblImgMeusDados = new JLabel(""); 
 		lblImgMeusDados.setBounds(10, 184, 19, 18);
 		new ViewUtils().setImageInLabel("/Images/account.png", lblImgMeusDados, panel);
 		
+		// botão sair
 		JLabel labelSair = new JLabel("Sair");
 		labelSair.setHorizontalAlignment(SwingConstants.LEFT);
 		labelSair.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
-		labelSair.setBounds(36, 211, 87, 35);
+		labelSair.setBounds(36, 211, 98, 35);
 		labelSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -237,7 +237,6 @@ public class LayoutMain {
 			}
 		});
 		panel.add(labelSair);
-		
 		JLabel lblImgSair = new JLabel(""); 
 		lblImgSair.setBounds(10, 218, 19, 18);
 		new ViewUtils().setImageInLabel("/Images/exit.png", lblImgSair, panel);

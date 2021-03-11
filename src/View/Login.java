@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
@@ -58,6 +60,11 @@ public class Login {
 	 */
 	public Login() {
 		initialize();
+		// centraliza tela de login
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setLocation(x, y);
 	}
 
 	/**
