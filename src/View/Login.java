@@ -88,7 +88,7 @@ public class Login {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		new ViewUtils().configureTitleBarAlternative(frame, panel, "#DFE4EA", "#000000", false);
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#DFE4EA", "#000000");
 		
 		campoLogin = new JTextField();
 		campoLogin.setColumns(10);

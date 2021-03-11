@@ -6,18 +6,20 @@ import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Panel;
+import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ViewUtils {
 	
-	private JFrame frame;
+	private Window window;
 	private String baseColor;
 	private String baseColorText;
 	private int positionXButtonMinimize;
@@ -33,41 +35,48 @@ public class ViewUtils {
 		panel.add(jlabel); 
 	}
 	
-	public void configureTitleBarAlternative(JFrame frame, Object choicePanel, String baseColor, String baseColorText, boolean isPopup) {
-		this.frame = frame;
+	public void configureTitleBarAlternative(JDialog dialog, Object choicePanel, String baseColor, String baseColorText) {
+		this.window = dialog;
+		positionXButtonClose = 649;
+		
 		this.baseColor = baseColor;
 		this.baseColorText = baseColorText;
+		JButton close = buttonClose(false); 
+	
+		if(choicePanel instanceof JPanel) 
+			((JPanel)choicePanel).add(close);
+		else if(choicePanel instanceof Panel) 
+			((Panel)choicePanel).add(close);
 		
+		configureTitleBarAlternative(choicePanel, baseColor, baseColorText);
+	}
+	
+	public void configureTitleBarAlternative(JFrame frame, Object choicePanel, String baseColor, String baseColorText) {
 		frame.setUndecorated(true);
+		this.window = frame;
+		positionXButtonMinimize = 958;
+		positionXButtonClose = 1007;
 		
-		DragListener drag = new DragListener();
-		frame.addMouseListener(drag);
-		frame.addMouseMotionListener(drag);
-					
-		if(isPopup) {
-			positionXButtonClose = 649;
-			JButton close = buttonClose(false); 
+		this.baseColor = baseColor;
+		this.baseColorText = baseColorText;
+		JButton close = buttonClose(true);
+		JButton minimize = buttonMinimize();
 		
-			if(choicePanel instanceof JPanel) ((JPanel)choicePanel).add(close);
-			else 
-			if(choicePanel instanceof Panel) ((Panel)choicePanel).add(close);
-			
-		} else {
-			positionXButtonMinimize = 958;
-			positionXButtonClose = 1007;
-			
-			JButton close = buttonClose(true);
-			JButton minimize = buttonMinimize();
-			
-			if(choicePanel instanceof JPanel) {
-				((JPanel)choicePanel).add(minimize);
-				((JPanel)choicePanel).add(close);
-			} else if(choicePanel instanceof Panel) {
-				((Panel)choicePanel).add(minimize);
-				((Panel)choicePanel).add(close);
-			}
+		if(choicePanel instanceof JPanel) {
+			((JPanel)choicePanel).add(minimize);
+			((JPanel)choicePanel).add(close);
+		} else if(choicePanel instanceof Panel) {
+			((Panel)choicePanel).add(minimize);
+			((Panel)choicePanel).add(close);
 		}
-		
+		configureTitleBarAlternative(choicePanel, baseColor, baseColorText);
+	}
+	
+	private void configureTitleBarAlternative(Object choicePanel, String baseColor, String baseColorText) {
+
+		DragListener drag = new DragListener();
+		window.addMouseListener(drag);
+		window.addMouseMotionListener(drag);
 	}
 	
 	private JButton buttonMinimize() {
@@ -77,7 +86,7 @@ public class ViewUtils {
 		btnNewButton_minimize.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				frame.setState(Frame.ICONIFIED);
+				((Frame)window).setState(Frame.ICONIFIED);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -111,7 +120,7 @@ public class ViewUtils {
 				if(close)
 					System.exit(0);
 				else
-					frame.dispose();
+					window.dispose();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {

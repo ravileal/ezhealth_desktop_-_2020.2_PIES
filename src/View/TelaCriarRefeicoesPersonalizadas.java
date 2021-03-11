@@ -5,28 +5,18 @@ import java.awt.EventQueue;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Font;
-import java.awt.Image;
-
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
-
 import Controller.ControllerAlimento;
 import Model.Alimento;
 import Util.ViewUtils;
@@ -38,10 +28,8 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JScrollPane;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.ActionEvent;
 
 public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 
@@ -87,14 +75,15 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		labelRefeicoesPersonalizadas.setBounds(20, 11, 272, 30);
 		labelRefeicoesPersonalizadas.setVerticalAlignment(SwingConstants.TOP);
 		labelRefeicoesPersonalizadas.setHorizontalAlignment(SwingConstants.LEFT);
-		labelRefeicoesPersonalizadas.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelRefeicoesPersonalizadas.setFont(new Font("Quicksand", Font.PLAIN, 16));
 		panel.add(labelRefeicoesPersonalizadas);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 63, 902, 2);
+		separator.setBounds(10, 52, 902, 2);
 		panel.add(separator);
 		
 		JTextField txtPesquisarAlimentos = new JTextField();
+		txtPesquisarAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
 		txtPesquisarAlimentos.setText("Adicione alimentos na refei\u00E7\u00E3o");
 		txtPesquisarAlimentos.addFocusListener(new FocusAdapter() {
 			@Override
@@ -117,20 +106,20 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		txtPesquisarAlimentos.setToolTipText("Pesquisar");
 		txtPesquisarAlimentos.setForeground(Color.LIGHT_GRAY);
 		txtPesquisarAlimentos.setColumns(10);
-		txtPesquisarAlimentos.setBounds(534, 117, 335, 35);
+		txtPesquisarAlimentos.setBounds(534, 86, 335, 30);
 		panel.add(txtPesquisarAlimentos);
 		
 		JLabel lblBuscarAlimentos = new JLabel("Buscar Alimentos");
 		lblBuscarAlimentos.setVerticalAlignment(SwingConstants.TOP);
 		lblBuscarAlimentos.setHorizontalAlignment(SwingConstants.LEFT);
-		lblBuscarAlimentos.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblBuscarAlimentos.setBounds(534, 87, 157, 30);
+		lblBuscarAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
+		lblBuscarAlimentos.setBounds(534, 63, 157, 30);
 		panel.add(lblBuscarAlimentos);
 		
 		JLabel lblListaDeAlimentos = new JLabel("Lista de Alimentos");
 		lblListaDeAlimentos.setVerticalAlignment(SwingConstants.TOP);
 		lblListaDeAlimentos.setHorizontalAlignment(SwingConstants.LEFT);
-		lblListaDeAlimentos.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblListaDeAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
 		lblListaDeAlimentos.setBounds(20, 133, 157, 30);
 		panel.add(lblListaDeAlimentos);
 		
@@ -145,6 +134,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		
 		
 		txtNomeRefeicao = new JTextField();
+		txtNomeRefeicao.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
 		txtNomeRefeicao.setForeground(Color.LIGHT_GRAY);
 		txtNomeRefeicao.addFocusListener(new FocusAdapter() {
 			@Override
@@ -165,15 +155,15 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 			}
 		});
 		txtNomeRefeicao.setText("Digite o nome da refei\u00E7\u00E3o");
-		txtNomeRefeicao.setBounds(20, 89, 304, 28);
+		txtNomeRefeicao.setBounds(20, 89, 453, 30);
 		panel.add(txtNomeRefeicao);
 		txtNomeRefeicao.setColumns(10);
 		
 		JLabel labelData = new JLabel("Quarta - 10/02");
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
-		labelData.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		labelData.setBounds(20, 33, 92, 30);
+		labelData.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
+		labelData.setBounds(20, 33, 107, 30);
 		panel.add(labelData);
 		
 		Button buttonVoltar = new Button("Voltar");
@@ -187,6 +177,13 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		buttonVoltar.setForeground(new Color(255, 255, 255));
 		buttonVoltar.setBounds(827, 19, 70, 22);
 		panel.add(buttonVoltar);
+		
+		JLabel lblBuscarRefeio = new JLabel("Buscar refei\u00E7\u00E3o");
+		lblBuscarRefeio.setVerticalAlignment(SwingConstants.TOP);
+		lblBuscarRefeio.setHorizontalAlignment(SwingConstants.LEFT);
+		lblBuscarRefeio.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
+		lblBuscarRefeio.setBounds(20, 68, 157, 30);
+		panel.add(lblBuscarRefeio);
 	}
 	
 	public void configureList(JPanel panel) {

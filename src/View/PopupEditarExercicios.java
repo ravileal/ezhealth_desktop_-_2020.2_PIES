@@ -2,20 +2,11 @@ package View;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import java.awt.Panel;
 import java.awt.Color;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
-
-import Util.ViewUtils;
-
-import java.awt.Button;
-import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -35,7 +26,7 @@ public class PopupEditarExercicios extends LayoutPopup {
 			public void run() {
 				try {
 					PopupEditarExercicios window = new PopupEditarExercicios();
-					window.frame.setVisible(true);
+					window.dialog.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,7 +43,7 @@ public class PopupEditarExercicios extends LayoutPopup {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialize the contents of the dialog.
 	 */
 	private void configureContent() {
 		Panel panel = new Panel();
@@ -112,7 +103,7 @@ public class PopupEditarExercicios extends LayoutPopup {
 		separator.setBounds(10, 37, 680, 2);
 		panel.add(separator);
 		
-		frame.getContentPane().add(panel);
+		dialog.getContentPane().add(panel);
 		
 		textField_caloriasTotais = new JTextField();
 		textField_caloriasTotais.setEnabled(false);
@@ -122,6 +113,12 @@ public class PopupEditarExercicios extends LayoutPopup {
 		panel.add(textField_caloriasTotais);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dialog.dispose();
+			}
+		});
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCancelar.setBackground(new Color(97, 103, 116));

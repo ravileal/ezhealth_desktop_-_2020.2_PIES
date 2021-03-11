@@ -2,26 +2,17 @@ package View;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Image;
-
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
-
 import Controller.ControllerAlimento;
-import Controller.ControllerExercicios;
 import Model.Alimento;
-import Model.Exercicio;
 import Util.ViewUtils;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
@@ -30,20 +21,17 @@ import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.ImageIcon;
 import javax.swing.JSeparator;
-import java.awt.Button;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-public class TelaAlimentos extends LayoutMain{
+public class TelaAlimentos extends LayoutMain {
 
 
 	/**
@@ -85,17 +73,17 @@ public class TelaAlimentos extends LayoutMain{
 		panel.setLayout(null);
 		
 		JLabel labelNomeAlimento = new JLabel("Caf\u00E9 da Manh\u00E3");
-		labelNomeAlimento.setBounds(20, 11, 113, 30);
+		labelNomeAlimento.setBounds(20, 11, 130, 30);
 		labelNomeAlimento.setVerticalAlignment(SwingConstants.TOP);
 		labelNomeAlimento.setHorizontalAlignment(SwingConstants.LEFT);
-		labelNomeAlimento.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		labelNomeAlimento.setFont(new Font("Quicksand", Font.PLAIN, 16));
 		panel.add(labelNomeAlimento);
 		
 		JLabel labelData = new JLabel("Quarta - 10/02");
 		labelData.setBounds(20, 32, 92, 30);
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
-		labelData.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelData.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
 		panel.add(labelData);
 		
 		JSeparator separator = new JSeparator();
@@ -131,27 +119,16 @@ public class TelaAlimentos extends LayoutMain{
 		JLabel lblBuscarAlimentos = new JLabel("Buscar Alimentos");
 		lblBuscarAlimentos.setVerticalAlignment(SwingConstants.TOP);
 		lblBuscarAlimentos.setHorizontalAlignment(SwingConstants.LEFT);
-		lblBuscarAlimentos.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblBuscarAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
 		lblBuscarAlimentos.setBounds(534, 87, 157, 30);
 		panel.add(lblBuscarAlimentos);
 		
 		JLabel lblListaDeAlimentos = new JLabel("Lista de Alimentos");
 		lblListaDeAlimentos.setVerticalAlignment(SwingConstants.TOP);
 		lblListaDeAlimentos.setHorizontalAlignment(SwingConstants.LEFT);
-		lblListaDeAlimentos.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblListaDeAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
 		lblListaDeAlimentos.setBounds(20, 87, 157, 30);
 		panel.add(lblListaDeAlimentos);
-		
-		Button buttonSalvar = new Button("Salvar");
-		buttonSalvar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		buttonSalvar.setBackground(Color.decode("#2F3542"));
-		buttonSalvar.setForeground(new Color(255, 255, 255));
-		buttonSalvar.setBounds(20, 448, 70, 22);
-		panel.add(buttonSalvar);
 		
 		configureList(panel);
 		frame.getContentPane().add(panel);
@@ -170,7 +147,7 @@ public class TelaAlimentos extends LayoutMain{
 		JScrollPane scrollPane = new JScrollPane(panel_alimentos);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(4);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.setBounds(20, 117, 453, 260);
+		scrollPane.setBounds(20, 117, 453, 355);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		JPanel panel_item = null;

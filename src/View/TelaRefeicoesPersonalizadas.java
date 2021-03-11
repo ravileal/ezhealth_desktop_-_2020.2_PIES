@@ -5,33 +5,21 @@ import java.awt.EventQueue;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Image;
-
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
-
-import Controller.ControllerAlimento;
 import Controller.ControllerRefeicao;
-import Model.Alimento;
 import Model.Refeicao;
 import Util.ViewUtils;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
-import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
 import javax.swing.JScrollPane;
 import java.awt.Panel;
 import java.awt.Color;
@@ -82,15 +70,15 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 		JLabel labeRefeicao = new JLabel("Refei\u00E7\u00F5es Personalizadas");
 		labeRefeicao.setVerticalAlignment(SwingConstants.TOP);
 		labeRefeicao.setHorizontalAlignment(SwingConstants.LEFT);
-		labeRefeicao.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labeRefeicao.setBounds(28, 11, 193, 30);
+		labeRefeicao.setFont(new Font("Quicksand", Font.PLAIN, 16));
+		labeRefeicao.setBounds(28, 11, 232, 30);
 		panel.add(labeRefeicao);
 		
 		JLabel labelData = new JLabel("Quarta - 10/02");
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
-		labelData.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		labelData.setBounds(28, 32, 92, 30);
+		labelData.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
+		labelData.setBounds(28, 32, 107, 30);
 		panel.add(labelData);
 		
 		JSeparator separator = new JSeparator();
@@ -100,8 +88,8 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 		JLabel labelCriarRefeicao = new JLabel("Criar nova Refei\u00E7\u00E3o Personalizada");
 		labelCriarRefeicao.setVerticalAlignment(SwingConstants.TOP);
 		labelCriarRefeicao.setHorizontalAlignment(SwingConstants.LEFT);
-		labelCriarRefeicao.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelCriarRefeicao.setBounds(87, 437, 240, 30);
+		labelCriarRefeicao.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
+		labelCriarRefeicao.setBounds(87, 437, 274, 30);
 		panel.add(labelCriarRefeicao);
 		labelCriarRefeicao.addMouseListener(new MouseAdapter() {
 			@Override

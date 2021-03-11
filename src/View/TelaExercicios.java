@@ -5,9 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Component;
@@ -20,30 +17,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 
 import java.awt.Font;
-import java.awt.Image;
-
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
-
-import Controller.ControllerAlimento;
 import Controller.ControllerExercicios;
-import Controller.ControllerRefeicao;
-import Model.Alimento;
 import Model.Exercicio;
-import Model.Refeicao;
 import Util.ViewUtils;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
-import java.awt.Button;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-import java.awt.Window.Type;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -145,17 +130,6 @@ public class TelaExercicios extends LayoutMain {
 		lblListaDeExerccios.setBounds(20, 87, 157, 30);
 		panel.add(lblListaDeExerccios);
 		
-		Button buttonSalvar = new Button("Salvar");
-		buttonSalvar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		buttonSalvar.setBackground(Color.decode("#2F3542"));
-		buttonSalvar.setForeground(new Color(255, 255, 255));
-		buttonSalvar.setBounds(20, 448, 70, 22);
-		panel.add(buttonSalvar);
-		
 		configureList(panel);
 		frame.getContentPane().add(panel);
 	}
@@ -173,7 +147,7 @@ public class TelaExercicios extends LayoutMain {
 		JScrollPane scrollPane = new JScrollPane(panel_refeicoes);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(4);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.setBounds(20, 117, 453, 260);
+		scrollPane.setBounds(20, 117, 453, 358);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		JPanel panel_item = null;

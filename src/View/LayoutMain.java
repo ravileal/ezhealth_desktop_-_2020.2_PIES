@@ -71,7 +71,7 @@ public class LayoutMain {
 		panel.setBackground(Color.decode("#2F3542"));
 		panel.setBounds(0, 0, 1058, 107);
 		panel.setLayout(null);		
-		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF", false);
+		new ViewUtils().configureTitleBarAlternative(frame, panel, "#2F3542", "#FFFFFF");
 		
 		JLabel lblImgHospital = new JLabel(""); 
 		lblImgHospital.addMouseListener(new MouseAdapter() {

@@ -25,7 +25,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class PopupEditarCadastro extends LayoutPopup{
+public class PopupEditarCadastro extends LayoutPopup {
 
 	/**
 	 * Launch the application.
@@ -36,7 +36,7 @@ public class PopupEditarCadastro extends LayoutPopup{
 			public void run() {
 				try {
 					PopupEditarCadastro window = new PopupEditarCadastro();
-					window.frame.setVisible(true);
+					window.dialog.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -48,7 +48,7 @@ public class PopupEditarCadastro extends LayoutPopup{
 	 * Create the application.
 	 */
 	public PopupEditarCadastro() {
-		super("Editar Cadastro - EzHealth");
+		super("Editar Dados - EzHealth");
 		configureContent();
 	}
 
@@ -247,6 +247,7 @@ public class PopupEditarCadastro extends LayoutPopup{
 		panel.add(lbl_usuario);
 		
 		JTextField textField = new JTextField();
+		textField.setEditable(false);
 		textField.setBounds(114, 428, 463, 30);
 		panel.add(textField);
 		textField.setColumns(10);
@@ -305,12 +306,12 @@ public class PopupEditarCadastro extends LayoutPopup{
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				frame.dispose();
+				dialog.dispose();
 			}
 		});
 		panel.add(btnCancelar);
 		
 		
-		frame.getContentPane().add(panel);
+		dialog.getContentPane().add(panel);
 	}
 }

@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Component;
@@ -78,14 +77,14 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		JLabel lblMinhaRefeio = new JLabel("Minha Refei\u00E7\u00E3o 1");
 		lblMinhaRefeio.setVerticalAlignment(SwingConstants.TOP);
 		lblMinhaRefeio.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMinhaRefeio.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblMinhaRefeio.setFont(new Font("Quicksand", Font.PLAIN, 16));
 		lblMinhaRefeio.setBounds(20, 11, 177, 30);
 		panel.add(lblMinhaRefeio);
 
 		JLabel labelData = new JLabel("Quarta - 10/02");
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
-		labelData.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelData.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
 		labelData.setBounds(21, 32, 92, 30);
 		panel.add(labelData);
 
@@ -97,7 +96,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		JLabel lblAdicionarAlimentosNa = new JLabel("Adicionar Alimentos na Refei\u00E7\u00E3o Personalizada");
 		lblAdicionarAlimentosNa.setVerticalAlignment(SwingConstants.TOP);
 		lblAdicionarAlimentosNa.setHorizontalAlignment(SwingConstants.LEFT);
-		lblAdicionarAlimentosNa.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblAdicionarAlimentosNa.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
 		lblAdicionarAlimentosNa.setBounds(541, 73, 412, 30);
 		panel.add(lblAdicionarAlimentosNa);
 
@@ -113,19 +112,9 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		buttonVoltar.setForeground(new Color(255, 255, 255));
 		buttonVoltar.setBounds(829, 19, 70, 22);
 		panel.add(buttonVoltar);
-		
-		Button buttonSalvar = new Button("Salvar");
-		buttonSalvar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		buttonSalvar.setBackground(Color.decode("#2F3542"));
-		buttonSalvar.setForeground(new Color(255, 255, 255));
-		buttonSalvar.setBounds(20, 449, 70, 22);
-		panel.add(buttonSalvar);
 
 		JTextField txtPesquisarAlimentos = new JTextField();
+		txtPesquisarAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
 		txtPesquisarAlimentos.setText("Pesquisar alimentos");
 		txtPesquisarAlimentos.addFocusListener(new FocusAdapter() {
 			@Override
@@ -148,14 +137,14 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		txtPesquisarAlimentos.setToolTipText("Pesquisar");
 		txtPesquisarAlimentos.setForeground(SystemColor.scrollbar);
 		txtPesquisarAlimentos.setColumns(10);
-		txtPesquisarAlimentos.setBounds(541, 114, 335, 35);
+		txtPesquisarAlimentos.setBounds(541, 100, 344, 30);
 		panel.add(txtPesquisarAlimentos);
 
 		JLabel lblListaDeAlimentos = new JLabel("Lista de Alimentos");
 		lblListaDeAlimentos.setVerticalAlignment(SwingConstants.TOP);
 		lblListaDeAlimentos.setHorizontalAlignment(SwingConstants.LEFT);
-		lblListaDeAlimentos.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblListaDeAlimentos.setBounds(21, 127, 141, 30);
+		lblListaDeAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
+		lblListaDeAlimentos.setBounds(20, 137, 141, 30);
 		panel.add(lblListaDeAlimentos);
 		
 		configureListAlimentos(panel);
@@ -182,17 +171,17 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 				}
 			}
 		});
-		txtNomeRefeicao.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtNomeRefeicao.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
 		txtNomeRefeicao.setText("Minha Refei\u00E7\u00E3o 1");
-		txtNomeRefeicao.setBounds(208, 73, 265, 28);
+		txtNomeRefeicao.setBounds(20, 100, 453, 30);
 		panel.add(txtNomeRefeicao);
 		txtNomeRefeicao.setColumns(10);
 		
 		JLabel lblAlterarNome = new JLabel("Alterar nome da refei\u00E7\u00E3o:");
 		lblAlterarNome.setVerticalAlignment(SwingConstants.TOP);
 		lblAlterarNome.setHorizontalAlignment(SwingConstants.LEFT);
-		lblAlterarNome.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAlterarNome.setBounds(20, 78, 197, 30);
+		lblAlterarNome.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
+		lblAlterarNome.setBounds(20, 73, 197, 30);
 		panel.add(lblAlterarNome);
 	}
 
@@ -209,7 +198,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		JScrollPane scrollPane = new JScrollPane(panel_refeicoes);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(4);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.setBounds(20, 168, 453, 260);
+		scrollPane.setBounds(20, 168, 453, 307);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		JPanel panel_item = null;

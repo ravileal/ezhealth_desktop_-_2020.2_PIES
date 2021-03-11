@@ -37,7 +37,7 @@ public class PopupCadastro extends LayoutPopup {
 			public void run() {
 				try {
 					PopupCadastro window = new PopupCadastro();
-					window.frame.setVisible(true);
+					window.dialog.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -303,12 +303,12 @@ public class PopupCadastro extends LayoutPopup {
 		btnCancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				frame.dispose();
+				dialog.dispose();
 			}
 		});
 		panel.add(btnCancelar);
 		
 		
-		frame.getContentPane().add(panel);
+		dialog.getContentPane().add(panel);
 	}
 }

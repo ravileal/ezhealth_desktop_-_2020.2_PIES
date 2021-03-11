@@ -2,21 +2,14 @@ package View;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import java.awt.Panel;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
-
-import Util.ViewUtils;
-
 import javax.swing.JSeparator;
 import java.awt.Button;
-import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -35,7 +28,7 @@ public class PopupEditarAlimentos extends LayoutPopup {
 			public void run() {
 				try {
 					PopupEditarAlimentos window = new PopupEditarAlimentos();
-					window.frame.setVisible(true);
+					window.dialog.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,7 +45,7 @@ public class PopupEditarAlimentos extends LayoutPopup {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialize the contents of the dialog.
 	 */
 	private void configureContent() {
 		JPanel panel = new JPanel();
@@ -82,8 +75,7 @@ public class PopupEditarAlimentos extends LayoutPopup {
 		buttonVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaEditarRefeicaoPersonalizada();
-				TelaEditarRefeicaoPersonalizada.main(null);
+				dialog.dispose();
 			}
 		});
 		buttonVoltar.setBackground(Color.decode("#2F3542"));
@@ -133,7 +125,7 @@ public class PopupEditarAlimentos extends LayoutPopup {
 		lblkcal.setBounds(560, 111, 54, 30);
 		panel.add(lblkcal);
 		
-		frame.getContentPane().add(panel);
+		dialog.getContentPane().add(panel);
 		
 		txt_kcal = new JTextField();
 		txt_kcal.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
@@ -151,6 +143,12 @@ public class PopupEditarAlimentos extends LayoutPopup {
 		panel.add(salvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dialog.dispose();
+			}
+		});
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCancelar.setBackground(new Color(97, 103, 116));
