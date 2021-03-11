@@ -26,7 +26,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class PopupCadastro extends LayoutPopup {
-	private JTextField textField;
 
 
 	/**
@@ -51,13 +50,6 @@ public class PopupCadastro extends LayoutPopup {
 	 */
 	public PopupCadastro() {
 		super("Cadastro - EzHealth");
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
 		configureContent();
 	}
 		
@@ -252,7 +244,7 @@ public class PopupCadastro extends LayoutPopup {
 		lbl_usuario.setBounds(214, 405, 253, 23);
 		panel.add(lbl_usuario);
 		
-		textField = new JTextField();
+		JTextField textField = new JTextField();
 		textField.setBounds(114, 428, 463, 30);
 		panel.add(textField);
 		textField.setColumns(10);
