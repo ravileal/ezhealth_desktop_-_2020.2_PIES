@@ -60,6 +60,15 @@ public class PopupCadastro extends LayoutPopup {
 		panel.setBackground(Color.decode("#E8EDF3"));
 		panel.setLayout(null);
 		
+		
+		// Dados pessoais
+		JLabel lblDadosPessoais = new JLabel("Dados pessoais");
+		lblDadosPessoais.setVerticalAlignment(SwingConstants.TOP);
+		lblDadosPessoais.setHorizontalAlignment(SwingConstants.LEFT);
+		lblDadosPessoais.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
+		lblDadosPessoais.setBounds(40, 11, 343, 30);
+		panel.add(lblDadosPessoais);
+		
 		JLabel lblNomeCompleto = new JLabel("Nome Completo");
 		lblNomeCompleto.setVerticalAlignment(SwingConstants.TOP);
 		lblNomeCompleto.setHorizontalAlignment(SwingConstants.CENTER);
@@ -105,17 +114,17 @@ public class PopupCadastro extends LayoutPopup {
 		lblPeso.setBounds(431, 93, 38, 18);
 		panel.add(lblPeso);
 		
-		JTextField textFieldPeso = new JTextField();
-		textFieldPeso.setColumns(10);
-		textFieldPeso.setBounds(359, 116, 218, 30);
-		panel.add(textFieldPeso);
-		
 		JLabel lblKg = new JLabel("(Kg)");
 		lblKg.setVerticalAlignment(SwingConstants.TOP);
 		lblKg.setHorizontalAlignment(SwingConstants.LEFT);
 		lblKg.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
 		lblKg.setBounds(477, 97, 31, 15);
 		panel.add(lblKg);
+		
+		JTextField textFieldPeso = new JTextField();
+		textFieldPeso.setColumns(10);
+		textFieldPeso.setBounds(359, 116, 218, 30);
+		panel.add(textFieldPeso);
 		
 		JLabel lblAltura = new JLabel("Altura");
 		lblAltura.setVerticalAlignment(SwingConstants.TOP);
@@ -124,22 +133,33 @@ public class PopupCadastro extends LayoutPopup {
 		lblAltura.setBounds(431, 156, 49, 18);
 		panel.add(lblAltura);
 		
+		JLabel lblKg_2 = new JLabel("(cm)");
+		lblKg_2.setVerticalAlignment(SwingConstants.TOP);
+		lblKg_2.setHorizontalAlignment(SwingConstants.LEFT);
+		lblKg_2.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
+		lblKg_2.setBounds(477, 160, 38, 15);
+		panel.add(lblKg_2);
+
 		JTextField textFieldAltura = new JTextField();
 		textFieldAltura.setColumns(10);
 		textFieldAltura.setBounds(359, 177, 218, 30);
 		panel.add(textFieldAltura);
 		
-		JLabel lblKg_1 = new JLabel("KG");
-		lblKg_1.setVerticalAlignment(SwingConstants.TOP);
-		lblKg_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblKg_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblKg_1.setBounds(760, 165, 56, 30);
-		panel.add(lblKg_1);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(40, 220, 615, 18);
 		panel.add(separator);
 		
+		
+		// Informações médicas e nutricionais
+		JLabel lblInformaesNutricionasE = new JLabel("Informa\u00E7\u00F5es nutricionais e m\u00E9dicas");
+		lblInformaesNutricionasE.setVerticalAlignment(SwingConstants.TOP);
+		lblInformaesNutricionasE.setHorizontalAlignment(SwingConstants.LEFT);
+		lblInformaesNutricionasE.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
+		lblInformaesNutricionasE.setBounds(40, 232, 343, 30);
+		panel.add(lblInformaesNutricionasE);
+		
+		// Definição de meta 
 		JLabel lblQualSuaMeta = new JLabel("Qual sua meta?");
 		lblQualSuaMeta.setVerticalAlignment(SwingConstants.TOP);
 		lblQualSuaMeta.setHorizontalAlignment(SwingConstants.CENTER);
@@ -150,27 +170,29 @@ public class PopupCadastro extends LayoutPopup {
 		JRadioButton radio_perderPeso = new JRadioButton("Perder Peso");
 		radio_perderPeso.setBackground(Color.decode("#E8EDF3"));
 		radio_perderPeso.setBounds(40, 282, 109, 23);
+		radio_perderPeso.setActionCommand("Perder Peso");
 		panel.add(radio_perderPeso);
 		
 		JRadioButton radio_manterPeso = new JRadioButton("Manter Peso");
 		radio_manterPeso.setBackground(Color.decode("#E8EDF3"));
 		radio_manterPeso.setBounds(40, 308, 109, 23);
+		radio_manterPeso.setActionCommand("Manter Peso");
 		panel.add(radio_manterPeso);
 		
 		JRadioButton radio_ganharPeso = new JRadioButton("Ganhar Peso");
 		radio_ganharPeso.setBackground(Color.decode("#E8EDF3"));
+		radio_ganharPeso.setActionCommand("Ganhar Peso");
 		radio_ganharPeso.setBounds(40, 334, 109, 23);
 		panel.add(radio_ganharPeso);
 		
-		ButtonGroup buttongroup = new ButtonGroup();
-		buttongroup.add(radio_perderPeso);
-		buttongroup.add(radio_manterPeso);
-		buttongroup.add(radio_ganharPeso);
+		ButtonGroup buttonGroupMeta = new ButtonGroup();
+		buttonGroupMeta.add(radio_perderPeso);
+		buttonGroupMeta.add(radio_manterPeso);
+		buttonGroupMeta.add(radio_ganharPeso);
+
 		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(40, 376, 615, 18);
-		panel.add(separator_1);
 		
+		// Definição de doença
 		JLabel lblPossuiAlgumaDoena = new JLabel("Possui alguma doen\u00E7a?");
 		lblPossuiAlgumaDoena.setVerticalAlignment(SwingConstants.TOP);
 		lblPossuiAlgumaDoena.setHorizontalAlignment(SwingConstants.LEFT);
@@ -188,6 +210,7 @@ public class PopupCadastro extends LayoutPopup {
 		checkbox_colesterolAlto.setBounds(290, 323, 109, 23);
 		panel.add(checkbox_colesterolAlto);
 		
+		// Definição de intolerancia
 		JLabel lblPossuiAlgumaIntolerncia = new JLabel("Possui alguma Intoler\u00E2ncia?");
 		lblPossuiAlgumaIntolerncia.setVerticalAlignment(SwingConstants.TOP);
 		lblPossuiAlgumaIntolerncia.setHorizontalAlignment(SwingConstants.LEFT);
@@ -206,6 +229,11 @@ public class PopupCadastro extends LayoutPopup {
 		checkbox_gluten.setBounds(506, 323, 100, 23);
 		panel.add(checkbox_gluten);
 		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(40, 376, 615, 18);
+		panel.add(separator_1);
+		
+		// Dados de acesso
 		JLabel lblPreenchaSInformaes = new JLabel("Dados de acesso");
 		lblPreenchaSInformaes.setVerticalAlignment(SwingConstants.TOP);
 		lblPreenchaSInformaes.setHorizontalAlignment(SwingConstants.LEFT);
@@ -220,6 +248,10 @@ public class PopupCadastro extends LayoutPopup {
 		lblSenha.setBounds(114, 469, 218, 30);
 		panel.add(lblSenha);
 		
+		JPasswordField textFieldSenha = new JPasswordField();
+		textFieldSenha.setBounds(114, 494, 218, 30);
+		panel.add(textFieldSenha);
+		
 		JLabel lblConfirmarSenha = new JLabel("Confirmar senha");
 		lblConfirmarSenha.setVerticalAlignment(SwingConstants.TOP);
 		lblConfirmarSenha.setHorizontalAlignment(SwingConstants.CENTER);
@@ -230,19 +262,6 @@ public class PopupCadastro extends LayoutPopup {
 		JPasswordField textFieldConfirmaSenha = new JPasswordField();
 		textFieldConfirmaSenha.setBounds(359, 494, 218, 30);
 		panel.add(textFieldConfirmaSenha);
-		
-		JPasswordField textFieldSenha = new JPasswordField();
-		textFieldSenha.setBounds(114, 494, 218, 30);
-		panel.add(textFieldSenha);
-		
-
-		
-		JLabel lblKg_2 = new JLabel("(cm)");
-		lblKg_2.setVerticalAlignment(SwingConstants.TOP);
-		lblKg_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblKg_2.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
-		lblKg_2.setBounds(477, 160, 38, 15);
-		panel.add(lblKg_2);
 		
 		JLabel lbl_usuario = new JLabel("Usuario");
 		lbl_usuario.setHorizontalAlignment(SwingConstants.CENTER);
@@ -255,19 +274,9 @@ public class PopupCadastro extends LayoutPopup {
 		panel.add(textFieldUsuario);
 		textFieldUsuario.setColumns(10);
 		
-		JLabel lblInformaesNutricionasE = new JLabel("Informa\u00E7\u00F5es nutricionais e m\u00E9dicas");
-		lblInformaesNutricionasE.setVerticalAlignment(SwingConstants.TOP);
-		lblInformaesNutricionasE.setHorizontalAlignment(SwingConstants.LEFT);
-		lblInformaesNutricionasE.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
-		lblInformaesNutricionasE.setBounds(40, 232, 343, 30);
-		panel.add(lblInformaesNutricionasE);
+
 		
-		JLabel lblDadosPessoais = new JLabel("Dados pessoais");
-		lblDadosPessoais.setVerticalAlignment(SwingConstants.TOP);
-		lblDadosPessoais.setHorizontalAlignment(SwingConstants.LEFT);
-		lblDadosPessoais.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
-		lblDadosPessoais.setBounds(40, 11, 343, 30);
-		panel.add(lblDadosPessoais);
+
 		
 		JButton cadastrar = new JButton("Cadastrar");
 		cadastrar.setBackground(new Color(47, 53, 66));
@@ -284,23 +293,25 @@ public class PopupCadastro extends LayoutPopup {
 				usuario.setAltura(lblAltura.getText());
 				usuario.setIdade(lblDataDeNascimento.getText());
 				usuario.setCaloriasMeta(lblQualSuaMeta.getText());
-				usuario.setObjetivo(lblQualSuaMeta.getText());
 				usuario.setUsuario(textFieldUsuario.getText());
 				usuario.setSenha(textFieldSenha.getText());
 				usuario.setConfirmaSenha(textFieldConfirmaSenha.getText());
 				
-					try {
-						new ControllerUsuario().adicionar(usuario);
-					} catch (NullPointerException e1) {
-						JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuario");
-						e1.printStackTrace();
-					} catch (DadosVaziosException e1) {
-						JOptionPane.showMessageDialog(null, "Algum campo está vazio");
-						e1.printStackTrace();
-					} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
-						JOptionPane.showMessageDialog(null, "Erro ao salvar usuario");
-						e1.printStackTrace();
-					}
+				usuario.setObjetivo(buttonGroupMeta.getSelection().getActionCommand());
+				
+				
+				try {
+					new ControllerUsuario().adicionar(usuario);
+				} catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuario");
+					e1.printStackTrace();
+				} catch (DadosVaziosException e1) {
+					JOptionPane.showMessageDialog(null, "Algum campo está vazio");
+					e1.printStackTrace();
+				} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
+					JOptionPane.showMessageDialog(null, "Erro ao salvar usuario");
+					e1.printStackTrace();
+				}
 				
 			}
 		});

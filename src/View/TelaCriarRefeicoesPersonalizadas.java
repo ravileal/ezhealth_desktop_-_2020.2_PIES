@@ -88,6 +88,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		panel.add(separator);
 		
 		JTextField txtPesquisarAlimentos = new JTextField();
+		txtPesquisarAlimentos.setEnabled(false);
 		txtPesquisarAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
 		txtPesquisarAlimentos.setText("Adicione alimentos na refei\u00E7\u00E3o");
 		txtPesquisarAlimentos.addFocusListener(new FocusAdapter() {
@@ -121,11 +122,11 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		lblBuscarAlimentos.setBounds(534, 63, 157, 30);
 		panel.add(lblBuscarAlimentos);
 		
-		JLabel lblListaDeAlimentos = new JLabel("Lista de Alimentos");
+		JLabel lblListaDeAlimentos = new JLabel("Lista de Alimentos da Refei\u00E7\u00E3o");
 		lblListaDeAlimentos.setVerticalAlignment(SwingConstants.TOP);
 		lblListaDeAlimentos.setHorizontalAlignment(SwingConstants.LEFT);
 		lblListaDeAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblListaDeAlimentos.setBounds(20, 133, 157, 30);
+		lblListaDeAlimentos.setBounds(20, 133, 222, 30);
 		panel.add(lblListaDeAlimentos);
 		
 		Button buttonSalvar = new Button("Salvar");
@@ -184,11 +185,11 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		});
 		panel.add(buttonVoltar);
 		
-		JLabel lblBuscarRefeio = new JLabel("Buscar refei\u00E7\u00E3o");
+		JLabel lblBuscarRefeio = new JLabel("Digite o nome da refei\u00E7\u00E3o");
 		lblBuscarRefeio.setVerticalAlignment(SwingConstants.TOP);
 		lblBuscarRefeio.setHorizontalAlignment(SwingConstants.LEFT);
 		lblBuscarRefeio.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblBuscarRefeio.setBounds(20, 68, 157, 30);
+		lblBuscarRefeio.setBounds(20, 68, 204, 30);
 		panel.add(lblBuscarRefeio);
 	}
 	

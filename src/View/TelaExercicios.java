@@ -96,6 +96,7 @@ public class TelaExercicios extends LayoutMain {
 		panel.add(separator);
 		
 		JTextField txtPesquisarExercicios = new JTextField();
+		txtPesquisarExercicios.setEnabled(false);
 		txtPesquisarExercicios.setText("Pesquise exerc\u00EDcios");
 		txtPesquisarExercicios.addFocusListener(new FocusAdapter() {
 			@Override
@@ -121,18 +122,18 @@ public class TelaExercicios extends LayoutMain {
 		txtPesquisarExercicios.setBounds(534, 117, 335, 35);
 		panel.add(txtPesquisarExercicios);
 		
-		JLabel lblBuscarExerccios = new JLabel("Buscar Exerc\u00EDcios");
+		JLabel lblBuscarExerccios = new JLabel("Lista de Exerc\u00EDcios");
 		lblBuscarExerccios.setVerticalAlignment(SwingConstants.TOP);
 		lblBuscarExerccios.setHorizontalAlignment(SwingConstants.LEFT);
 		lblBuscarExerccios.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblBuscarExerccios.setBounds(534, 87, 157, 30);
 		panel.add(lblBuscarExerccios);
 		
-		JLabel lblListaDeExerccios = new JLabel("Lista de Exerc\u00EDcios");
+		JLabel lblListaDeExerccios = new JLabel("Lista de Exerc\u00EDcios Realizados");
 		lblListaDeExerccios.setVerticalAlignment(SwingConstants.TOP);
 		lblListaDeExerccios.setHorizontalAlignment(SwingConstants.LEFT);
 		lblListaDeExerccios.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblListaDeExerccios.setBounds(20, 87, 157, 30);
+		lblListaDeExerccios.setBounds(20, 87, 212, 30);
 		panel.add(lblListaDeExerccios);
 		
 		configureList(panel);
