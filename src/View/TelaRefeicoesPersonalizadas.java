@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import Controller.ControllerRefeicao;
 import Model.Refeicao;
+import Util.DatasFormatadas;
 import Util.ViewUtils;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
@@ -20,6 +21,8 @@ import javax.swing.ScrollPaneConstants;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
+
 import javax.swing.JScrollPane;
 import java.awt.Panel;
 import java.awt.Color;
@@ -62,6 +65,8 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 		configureContent();
 	}
 	private void configureContent() {
+		DatasFormatadas dataFormatada = new DatasFormatadas(new Date());
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(136, 106, 922, 497);
 		panel.setBackground(Color.decode("#DFE4EA"));
@@ -74,7 +79,7 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 		labeRefeicao.setBounds(28, 11, 232, 30);
 		panel.add(labeRefeicao);
 		
-		JLabel labelData = new JLabel("Quarta - 10/02");
+		JLabel labelData = new JLabel(dataFormatada.getDiaSemana() + " - " + dataFormatada.getDiaMes());
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
 		labelData.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
