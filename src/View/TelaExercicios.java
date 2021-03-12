@@ -20,6 +20,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import Controller.ControllerExercicios;
 import Model.Exercicio;
+import Util.DatasFormatadas;
 import Util.ViewUtils;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
@@ -27,6 +28,8 @@ import Validation.OperacaoNaoConcluidaRepositorioExeception;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
+
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import java.awt.event.FocusAdapter;
@@ -67,6 +70,8 @@ public class TelaExercicios extends LayoutMain {
 	}
 		
 	private void configureContent() {	
+		DatasFormatadas dataFormatada = new DatasFormatadas(new Date()); 
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(136, 106, 922, 497);
 		panel.setBackground(Color.decode("#DFE4EA"));
@@ -79,7 +84,7 @@ public class TelaExercicios extends LayoutMain {
 		labelNomeRefeicao.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel.add(labelNomeRefeicao);
 		
-		JLabel labelData = new JLabel("Quarta - 10/02");
+		JLabel labelData = new JLabel( dataFormatada.getDiaSemana() + " - " + dataFormatada.getDiaMes());
 		labelData.setBounds(20, 32, 92, 30);
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
