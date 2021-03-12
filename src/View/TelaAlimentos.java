@@ -8,11 +8,14 @@ import java.awt.Component;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import Controller.ControllerAlimento;
 import Model.Alimento;
+import Util.DatasFormatadas;
 import Util.ViewUtils;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
@@ -67,6 +70,8 @@ public class TelaAlimentos extends LayoutMain {
 	}
 		
 	private void configureContent() {	
+		DatasFormatadas dataFormatada = new DatasFormatadas(new Date());
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(136, 106, 922, 497);
 		panel.setBackground(Color.decode("#DFE4EA"));
@@ -79,7 +84,7 @@ public class TelaAlimentos extends LayoutMain {
 		labelNomeAlimento.setFont(new Font("Quicksand", Font.PLAIN, 16));
 		panel.add(labelNomeAlimento);
 		
-		JLabel labelData = new JLabel("Quarta - 10/02");
+		JLabel labelData = new JLabel(dataFormatada.getDiaSemana() + " - " + dataFormatada.getDiaMes());
 		labelData.setBounds(20, 32, 92, 30);
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);

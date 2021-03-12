@@ -8,10 +8,14 @@ import javax.swing.JPanel;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import Util.DatasFormatadas;
+
 import javax.swing.JSeparator;
 import java.awt.Button;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -48,6 +52,8 @@ public class PopupEditarAlimentos extends LayoutPopup {
 	 * Initialize the contents of the dialog.
 	 */
 	private void configureContent() {
+		DatasFormatadas dataFormatada = new DatasFormatadas(new Date());
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 71, 700, 590);
 		panel.setBackground(Color.decode("#E8EDF3"));
@@ -60,7 +66,7 @@ public class PopupEditarAlimentos extends LayoutPopup {
 		lblData.setBounds(10, 11, 92, 30);
 		panel.add(lblData);
 		
-		JLabel labelData = new JLabel("Quarta - 10/02");
+		JLabel labelData = new JLabel( dataFormatada.getDiaSemana() + " - " + dataFormatada.getDiaMes());
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
 		labelData.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
