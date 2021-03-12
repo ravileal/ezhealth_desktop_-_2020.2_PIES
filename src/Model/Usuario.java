@@ -9,6 +9,7 @@ public class Usuario {
 	private String sexo;
 	private String usuario;
 	private String senha;
+	private String confirmaSenha;
 	private String objetivo;
 	private String caloriasMeta;
 
@@ -123,6 +124,14 @@ public class Usuario {
 	public float calculoIMC() {
 		// TODO - implement Usuario.calculoIMC
 		throw new UnsupportedOperationException();
+	}
+
+	public String getConfirmaSenha() {
+		return confirmaSenha;
+	}
+
+	public void setConfirmaSenha(String confirmaSenha) {
+		this.confirmaSenha = confirmaSenha;
 	}
 
 }
