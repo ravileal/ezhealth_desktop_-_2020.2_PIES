@@ -22,7 +22,6 @@ import javax.swing.SwingConstants;
 public class LayoutPopup {
 	
 	protected JDialog dialog;
-	private JFrame old_window = null;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -42,13 +41,7 @@ public class LayoutPopup {
 	 * @wbp.parser.entryPoint
 	 */
 	public LayoutPopup(String title) {
-		this.dialog = new JDialog() {
-			@Override
-			public void dispose() {
-				super.dispose();
-				if(old_window!=null) old_window.setVisible(true);
-			}
-		};
+		this.dialog = new JDialog();
 		dialog.setModal(true);
 		this.dialog.setTitle(title);
 		this.configureDialog();

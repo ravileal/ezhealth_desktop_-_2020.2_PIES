@@ -27,13 +27,15 @@ public class ControllerUsuario implements CRUD<Usuario> {
 	@Override
 	public boolean adicionar(Usuario obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
 		if(obj == null)
-			throw new NullPointerException("Impossível adicionar! Objeto Usuario null");
+			throw new NullPointerException("Impossível concluir cadastro! Objeto Usuario null");
 		else if(obj.getNome().equals(""))
-			throw new DadosVaziosException("Impossível adicionar! Nome vazio");
+			throw new DadosVaziosException("Impossível concluir cadastro! Nome vazio");
 		else if(obj.getSenha().equals(""))
-			throw new DadosVaziosException("Impossível adicionar! Senha vazia");
+			throw new DadosVaziosException("Impossível concluir cadastro! Senha vazia");
+		else if(!obj.getSenha().equals(obj.getConfirmaSenha()))
+			throw new DadosVaziosException("Impossível concluir cadastro! As senhas não coincidem");
 		else if(!rep.adicionar(obj))
-			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível adicionar! Erro ao tentar adicionar o usuario '"+obj.getNome()+"' ao repositorio");
+			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível concluir cadastro! Erro ao tentar adicionar o usuario '"+obj.getNome()+"' ao repositorio");
 		else 
 			return true;
 	}

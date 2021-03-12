@@ -13,7 +13,7 @@ public interface CRUD<T> {
 	 * @throws DadosVaziosException 
 	 * @throws OperacaoNaoConcluidaRepositorioExeception 
 	 */
-	boolean adicionar(T obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception;
+	boolean adicionar(T obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException;
 
 	/**
 	 * 

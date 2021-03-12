@@ -16,6 +16,7 @@ import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
 import javax.swing.JRadioButton;
@@ -161,6 +162,11 @@ public class PopupCadastro extends LayoutPopup {
 		radio_ganharPeso.setBounds(40, 334, 109, 23);
 		panel.add(radio_ganharPeso);
 		
+		ButtonGroup buttongroup = new ButtonGroup();
+		buttongroup.add(radio_perderPeso);
+		buttongroup.add(radio_manterPeso);
+		buttongroup.add(radio_ganharPeso);
+		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(40, 376, 615, 18);
 		panel.add(separator_1);
@@ -221,13 +227,13 @@ public class PopupCadastro extends LayoutPopup {
 		lblConfirmarSenha.setBounds(348, 471, 229, 30);
 		panel.add(lblConfirmarSenha);
 		
-		JPasswordField confirmarSenha = new JPasswordField();
-		confirmarSenha.setBounds(359, 494, 218, 30);
-		panel.add(confirmarSenha);
+		JPasswordField textFieldConfirmaSenha = new JPasswordField();
+		textFieldConfirmaSenha.setBounds(359, 494, 218, 30);
+		panel.add(textFieldConfirmaSenha);
 		
-		JPasswordField senha = new JPasswordField();
-		senha.setBounds(114, 494, 218, 30);
-		panel.add(senha);
+		JPasswordField textFieldSenha = new JPasswordField();
+		textFieldSenha.setBounds(114, 494, 218, 30);
+		panel.add(textFieldSenha);
 		
 
 		
@@ -244,10 +250,10 @@ public class PopupCadastro extends LayoutPopup {
 		lbl_usuario.setBounds(214, 405, 253, 23);
 		panel.add(lbl_usuario);
 		
-		JTextField textField = new JTextField();
-		textField.setBounds(114, 428, 463, 30);
-		panel.add(textField);
-		textField.setColumns(10);
+		JTextField textFieldUsuario = new JTextField();
+		textFieldUsuario.setBounds(114, 428, 463, 30);
+		panel.add(textFieldUsuario);
+		textFieldUsuario.setColumns(10);
 		
 		JLabel lblInformaesNutricionasE = new JLabel("Informa\u00E7\u00F5es nutricionais e m\u00E9dicas");
 		lblInformaesNutricionasE.setVerticalAlignment(SwingConstants.TOP);
@@ -273,24 +279,29 @@ public class PopupCadastro extends LayoutPopup {
 			public void mouseClicked(MouseEvent e) {
 				Usuario usuario = new Usuario();
 				usuario.setNome(textFieldNome.getText());
-				usuario.setSenha(senha.getText());
 				usuario.setSexo(comboBoxSexo.getName());
 				usuario.setPeso(lblPeso.getText());
 				usuario.setAltura(lblAltura.getText());
 				usuario.setIdade(lblDataDeNascimento.getText());
 				usuario.setCaloriasMeta(lblQualSuaMeta.getText());
 				usuario.setObjetivo(lblQualSuaMeta.getText());
+				usuario.setUsuario(textFieldUsuario.getText());
+				usuario.setSenha(textFieldSenha.getText());
+				usuario.setConfirmaSenha(textFieldConfirmaSenha.getText());
 				
-				try {
-					new ControllerUsuario().adicionar(usuario);
-					TelaHome.main(null);
-				} catch (DadosVaziosException e1) {
-					JOptionPane.showMessageDialog(null, "Algum campo está vazio");
-					e1.printStackTrace();
-				} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
-					JOptionPane.showMessageDialog(null, "Erro ao salvar usuario");
-					e1.printStackTrace();
-				}
+					try {
+						new ControllerUsuario().adicionar(usuario);
+					} catch (NullPointerException e1) {
+						JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuario");
+						e1.printStackTrace();
+					} catch (DadosVaziosException e1) {
+						JOptionPane.showMessageDialog(null, "Algum campo está vazio");
+						e1.printStackTrace();
+					} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
+						JOptionPane.showMessageDialog(null, "Erro ao salvar usuario");
+						e1.printStackTrace();
+					}
+				
 			}
 		});
 		panel.add(cadastrar);
@@ -310,5 +321,9 @@ public class PopupCadastro extends LayoutPopup {
 		
 		
 		dialog.getContentPane().add(panel);
+	}
+	
+	public void cadastrar() {
+		
 	}
 }

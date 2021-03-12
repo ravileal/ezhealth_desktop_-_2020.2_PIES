@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
-
 import Util.ViewUtils;
 
 public class LayoutMain {
@@ -146,7 +145,7 @@ public class LayoutMain {
 		lblNewLabel_7.setBounds(10, 11, 63, 30);
 		panel.add(lblNewLabel_7);
 
-		// botão home
+		// botï¿½o home
 		JLabel labelHome = new JLabel("Home");
 		labelHome.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
 		labelHome.setBounds(36, 33, 98, 35);
@@ -163,7 +162,7 @@ public class LayoutMain {
 		new ViewUtils().setImageInLabel("/Images/home.png", lblImgHome, panel);
 		
 		
-		// botão refeições
+		// botï¿½o refeiï¿½ï¿½es
 		JLabel labelRefeicoes = new JLabel("<html>Refei\u00E7\u00F5es <br> Personalizadas</html>");
 		labelRefeicoes.setHorizontalAlignment(SwingConstants.LEFT);
 		labelRefeicoes.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
@@ -180,7 +179,7 @@ public class LayoutMain {
 		lblImgRefeicao.setBounds(10, 75, 19, 18);
 		new ViewUtils().setImageInLabel("/Images/restaurant.png", lblImgRefeicao, panel);
 		
-		// botão exercicio
+		// botï¿½o exercicio
 		JLabel labelExercicios = new JLabel("Exerc\u00EDcios");
 		labelExercicios.setHorizontalAlignment(SwingConstants.LEFT);
 		labelExercicios.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
@@ -199,7 +198,7 @@ public class LayoutMain {
 		new ViewUtils().setImageInLabel("/Images/fitness.png", lblImgExercicio, panel);
 		
 		
-		// label mais opções
+		// label mais opï¿½ï¿½es
 		JLabel lblMaisOpcoes = new JLabel("Mais op\u00E7\u00F5es");
 		lblMaisOpcoes.setVerticalAlignment(SwingConstants.TOP);
 		lblMaisOpcoes.setHorizontalAlignment(SwingConstants.LEFT);
@@ -207,7 +206,7 @@ public class LayoutMain {
 		lblMaisOpcoes.setBounds(10, 151, 124, 30);
 		panel.add(lblMaisOpcoes);
 		
-		// botão meus dados
+		// botï¿½o meus dados
 		JLabel labelMeusDados = new JLabel("Meus Dados");
 		labelMeusDados.setHorizontalAlignment(SwingConstants.LEFT);
 		labelMeusDados.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
@@ -225,7 +224,7 @@ public class LayoutMain {
 		lblImgMeusDados.setBounds(10, 184, 19, 18);
 		new ViewUtils().setImageInLabel("/Images/account.png", lblImgMeusDados, panel);
 		
-		// botão sair
+		// botï¿½o sair
 		JLabel labelSair = new JLabel("Sair");
 		labelSair.setHorizontalAlignment(SwingConstants.LEFT);
 		labelSair.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
