@@ -16,14 +16,11 @@ import Repository.RepositorioUsuario;
 
 public class ControllerUsuario implements CRUD<Usuario> {
 
-	private static RepositorioUsuario rep;
+	private static RepositorioUsuario rep = new RepositorioUsuario();
 	
 	private static Usuario usuarioLogado;
 	
 	public ControllerUsuario() {
-		Popular.getInstance();
-		rep = new RepositorioUsuario();
-		
 //		try { // usuario de teste
 //			usuarioLogado = this.buscar("Admin").get(0);
 //		} catch (NullPointerException | DadosVaziosException e) {e.printStackTrace();}

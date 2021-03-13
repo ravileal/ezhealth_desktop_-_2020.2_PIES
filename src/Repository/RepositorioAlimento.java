@@ -8,7 +8,7 @@ import Util.*;
 public class RepositorioAlimento implements CRUD<Alimento> {
 
 	private static ArrayList<Alimento> list = new ArrayList<>();
-
+	
 	@Override
 	public boolean adicionar(Alimento obj) {
 		return list.add(obj);

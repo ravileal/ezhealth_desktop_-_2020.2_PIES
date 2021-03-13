@@ -7,8 +7,9 @@ import Util.*;
 
 public class RepositorioUsuario implements CRUD<Usuario> {
 
-	private static ArrayList<Usuario> list = new ArrayList<>();;
+	private static ArrayList<Usuario> list = new ArrayList<>();
 
+	
 	@Override
 	public boolean adicionar(Usuario obj) {
 		return list.add(obj);

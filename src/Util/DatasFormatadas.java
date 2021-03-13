@@ -68,7 +68,7 @@ public class DatasFormatadas {
 			diaSemana = "Quinta";
 		}else if(diaSemana.intern() == "sex.") {
 			diaSemana = "Sexta";
-		}else if(diaSemana.intern() == "sab.") {
+		}else if(diaSemana.intern() == "sáb.") {
 			diaSemana = "Sábado";
 		}else if(diaSemana.intern() == "dom.") {
 			diaSemana = "Domingo";

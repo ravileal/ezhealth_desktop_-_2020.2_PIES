@@ -8,7 +8,7 @@ import Util.*;
 public class RepositorioExercicioRealizado implements CRUD<Exercicio> {
 
 	private static ArrayList<Exercicio> list = new ArrayList<>();
-
+	
 	@Override
 	public boolean adicionar(Exercicio obj) {
 		return list.add(obj);

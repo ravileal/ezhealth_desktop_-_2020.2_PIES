@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import Controller.ControllerUsuario;
+import Util.Popular;
 import Util.ViewUtils;
 import Validation.CredenciaisInvalidasException;
 
@@ -46,6 +47,7 @@ public class Login {
 				try {
 					Login window = new Login();
 					window.frame.setVisible(true);
+					Popular.getInstance();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
