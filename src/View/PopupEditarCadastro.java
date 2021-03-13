@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
+
 import Controller.ControllerUsuario;
 import Model.Usuario;
 import Validation.DadosVaziosException;
@@ -18,6 +20,7 @@ import Validation.UsuarioDuplicadoException;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.JPasswordField;
@@ -29,6 +32,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.lang.ModuleLayer.Controller;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -87,6 +91,7 @@ public class PopupEditarCadastro extends LayoutPopup {
 		JTextField textFieldNome = new JTextField(ControllerUsuario.getUsuarioLogado().getNome());
 		textFieldNome.setBounds(114, 52, 463, 30);
 		textFieldNome.setColumns(10);
+		textFieldNome.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(textFieldNome);
 		
 		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento");
@@ -99,6 +104,7 @@ public class PopupEditarCadastro extends LayoutPopup {
 		JTextField textFieldNascimento = new JTextField(ControllerUsuario.getUsuarioLogado().getDataNascimento().toString());
 		textFieldNascimento.setColumns(10);
 		textFieldNascimento.setBounds(114, 116, 218, 30);
+		textFieldNascimento.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(textFieldNascimento);
 		
 		JLabel lblSexo = new JLabel("Sexo");
@@ -130,10 +136,20 @@ public class PopupEditarCadastro extends LayoutPopup {
 		lblKg.setBounds(477, 97, 31, 15);
 		panel.add(lblKg);
 		
-		JTextField textFieldPeso = new JTextField(ControllerUsuario.getUsuarioLogado().getPeso());
+		JFormattedTextField textFieldPeso = new JFormattedTextField(ControllerUsuario.getUsuarioLogado().getPeso());
 		textFieldPeso.setColumns(10);
 		textFieldPeso.setBounds(359, 116, 218, 30);
+		textFieldPeso.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(textFieldPeso);
+		
+		try {
+			MaskFormatter formatter = new MaskFormatter("##.##");
+			formatter.setPlaceholder("00.00");
+			formatter.install(textFieldPeso);
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
 		JLabel lblAltura = new JLabel("Altura");
 		lblAltura.setVerticalAlignment(SwingConstants.TOP);
@@ -149,11 +165,22 @@ public class PopupEditarCadastro extends LayoutPopup {
 		lblCm.setBounds(477, 160, 38, 15);
 		panel.add(lblCm);
 
-		JTextField textFieldAltura = new JTextField(ControllerUsuario.getUsuarioLogado().getAltura());
+		String teste = ControllerUsuario.getUsuarioLogado().getAltura();
+		System.out.println(teste);
+		JFormattedTextField textFieldAltura = new JFormattedTextField(teste);
 		textFieldAltura.setColumns(10);
 		textFieldAltura.setBounds(359, 177, 218, 30);
+		textFieldAltura.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(textFieldAltura);
 		
+		try {
+			MaskFormatter formatter = new MaskFormatter("#.##");
+			formatter.setPlaceholder("0.00");
+			formatter.install(textFieldAltura);
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(40, 220, 615, 18);
@@ -266,6 +293,7 @@ public class PopupEditarCadastro extends LayoutPopup {
 		
 		JPasswordField textFieldSenha = new JPasswordField();
 		textFieldSenha.setBounds(114, 494, 218, 30);
+		textFieldSenha.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(textFieldSenha);
 		
 		JLabel lblConfirmarSenha = new JLabel("Confirmar senha");
@@ -277,6 +305,8 @@ public class PopupEditarCadastro extends LayoutPopup {
 		
 		JPasswordField textFieldConfirmaSenha = new JPasswordField();
 		textFieldConfirmaSenha.setBounds(359, 494, 218, 30);
+		textFieldConfirmaSenha.setHorizontalAlignment(SwingConstants.CENTER);
+		textFieldConfirmaSenha.setColumns(10);
 		panel.add(textFieldConfirmaSenha);
 		
 		JLabel lbl_usuario = new JLabel("Usuario");
@@ -286,9 +316,9 @@ public class PopupEditarCadastro extends LayoutPopup {
 		panel.add(lbl_usuario);
 		
 		JTextField textFieldUsuario = new JTextField(ControllerUsuario.getUsuarioLogado().getUsuario());
+		textFieldUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldUsuario.setBounds(114, 428, 463, 30);
 		panel.add(textFieldUsuario);
-		textFieldUsuario.setColumns(10);
 		
 		JButton salvar = new JButton("Salvar");
 		salvar.setBackground(new Color(47, 53, 66));
@@ -319,7 +349,8 @@ public class PopupEditarCadastro extends LayoutPopup {
 				
 				try {
 					new ControllerUsuario().editar(ControllerUsuario.getUsuarioLogado().getUsuario(), usuario);
-					TelaHome.main(null);
+					JOptionPane.showMessageDialog(null, "Dados atualizados");
+					dialog.dispose();
 				} catch (DadosVaziosException e1) {
 					JOptionPane.showMessageDialog(null, "Algum campo está vazio");
 					e1.printStackTrace();

@@ -194,7 +194,7 @@ public class TelaMeusDados extends LayoutMain {
 		lblSexo.setBounds(85, 223, 52, 30);
 		panel.add(lblSexo);
 		
-		JLabel lblFeminino = new JLabel("Feminino");
+		JLabel lblFeminino = new JLabel(ControllerUsuario.getUsuarioLogado().getSexo());
 		lblFeminino.setVerticalAlignment(SwingConstants.TOP);
 		lblFeminino.setHorizontalAlignment(SwingConstants.LEFT);
 		lblFeminino.setFont(new Font("Quicksand Light", Font.PLAIN, 16));

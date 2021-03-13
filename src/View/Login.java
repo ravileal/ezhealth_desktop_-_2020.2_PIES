@@ -113,23 +113,18 @@ public class Login {
 		panel.add(campoSenha);
 		
 		JButton btnLogin = new JButton("Entrar");
-		btnLogin.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnLogin.setFont(new Font("Quicksand", Font.PLAIN, 15));
 		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.setBackground(Color.decode("#2F3542"));
+		btnLogin.setBounds(802, 526, 89, 36);
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 				try {
-					new ControllerUsuario().validarLogin(campoLogin.getText(), campoSenha.getText());
-					new TelaHome();
-					TelaHome.main(null);
+					ControllerUsuario.validarLogin(campoLogin.getText(), campoSenha.getText());
 					frame.dispose();
+					TelaHome.main(null);
 				} catch (CredenciaisInvalidasException e1) {
 					JOptionPane.showMessageDialog(null, "Usuario e/ou senha incorretos!");
 					e1.printStackTrace();
@@ -140,7 +135,6 @@ public class Login {
 
 			}
 		});
-		btnLogin.setBounds(802, 526, 89, 36);
 		panel.add(btnLogin);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("EZHEALTH");
@@ -200,9 +194,6 @@ public class Login {
 		 
 		panel.add(lblImgHospital); // adiciona a label ao painel
 		// ---- Label da imagem hospital ---- Fim
-		
-
-
 		
 	}
 	

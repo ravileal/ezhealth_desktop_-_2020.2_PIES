@@ -16,7 +16,7 @@ import Repository.RepositorioUsuario;
 
 public class ControllerUsuario implements CRUD<Usuario> {
 
-	private RepositorioUsuario rep;
+	private static RepositorioUsuario rep;
 	
 	private static Usuario usuarioLogado;
 	
@@ -24,9 +24,9 @@ public class ControllerUsuario implements CRUD<Usuario> {
 		Popular.getInstance();
 		rep = new RepositorioUsuario();
 		
-		try { // usuario de teste
-			usuarioLogado = this.buscar("Admin").get(0);
-		} catch (NullPointerException | DadosVaziosException e) {e.printStackTrace();}
+//		try { // usuario de teste
+//			usuarioLogado = this.buscar("Admin").get(0);
+//		} catch (NullPointerException | DadosVaziosException e) {e.printStackTrace();}
 	}
 	
 	/* -----------------------------
@@ -103,7 +103,7 @@ public class ControllerUsuario implements CRUD<Usuario> {
 	 * @param senha
 	 * @throws CredenciaisInvalidasException 
 	 */
-	public boolean validarLogin(String usuario, String senha) throws CredenciaisInvalidasException {
+	public static boolean validarLogin(String usuario, String senha) throws CredenciaisInvalidasException {
 		
 		ArrayList<Usuario> list = rep.buscar(usuario);
 		if(list == null)
