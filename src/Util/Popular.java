@@ -1,5 +1,8 @@
 package Util;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import Model.Alimento;
 import Model.Exercicio;
 import Model.Refeicao;
@@ -90,6 +93,13 @@ public class Popular {
 		Usuario u = new Usuario();
 		u.setUsuario("Admin");
 		u.setSenha("Admin");
+		u.setColesterolAlto(true);
+		u.setNome("Administrador");
+		u.setSexo("Masculino");
+		u.setDataNascimento(LocalDate.of(2021, Month.MARCH, 13));
+		u.setObjetivo("Manter Peso");
+		u.setPeso("2");
+		u.setAltura("50");
 		
 		repositorioUsuario.adicionar(u);
 	}

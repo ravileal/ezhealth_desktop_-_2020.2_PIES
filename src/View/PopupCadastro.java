@@ -13,6 +13,8 @@ import Controller.ControllerUsuario;
 import Model.Usuario;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
+import Validation.SenhaInvalidaException;
+import Validation.UsuarioDuplicadoException;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -25,6 +27,9 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.Date;
 
 public class PopupCadastro extends LayoutPopup {
 
@@ -78,8 +83,8 @@ public class PopupCadastro extends LayoutPopup {
 		
 		JTextField textFieldNome = new JTextField();
 		textFieldNome.setBounds(114, 52, 463, 30);
-		panel.add(textFieldNome);
 		textFieldNome.setColumns(10);
+		panel.add(textFieldNome);
 		
 		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento");
 		lblDataDeNascimento.setVerticalAlignment(SwingConstants.TOP);
@@ -177,6 +182,7 @@ public class PopupCadastro extends LayoutPopup {
 		radio_manterPeso.setBackground(Color.decode("#E8EDF3"));
 		radio_manterPeso.setBounds(40, 308, 109, 23);
 		radio_manterPeso.setActionCommand("Manter Peso");
+		radio_manterPeso.setSelected(true);
 		panel.add(radio_manterPeso);
 		
 		JRadioButton radio_ganharPeso = new JRadioButton("Ganhar Peso");
@@ -273,9 +279,6 @@ public class PopupCadastro extends LayoutPopup {
 		textFieldUsuario.setBounds(114, 428, 463, 30);
 		panel.add(textFieldUsuario);
 		textFieldUsuario.setColumns(10);
-		
-
-		
 
 		
 		JButton cadastrar = new JButton("Cadastrar");
@@ -289,19 +292,27 @@ public class PopupCadastro extends LayoutPopup {
 				Usuario usuario = new Usuario();
 				usuario.setNome(textFieldNome.getText());
 				usuario.setSexo(comboBoxSexo.getName());
-				usuario.setPeso(lblPeso.getText());
-				usuario.setAltura(lblAltura.getText());
-				usuario.setIdade(lblDataDeNascimento.getText());
-				usuario.setCaloriasMeta(lblQualSuaMeta.getText());
+				usuario.setPeso(textFieldPeso.getText());
+				usuario.setAltura(textFieldAltura.getText());
+				usuario.setDataNascimento(LocalDate.of(2021, Month.MARCH, 13));
+				
 				usuario.setUsuario(textFieldUsuario.getText());
-				usuario.setSenha(textFieldSenha.getText());
-				usuario.setConfirmaSenha(textFieldConfirmaSenha.getText());
+				usuario.setSenha(String.valueOf(textFieldSenha.getPassword()));
+				usuario.setConfirmaSenha(String.valueOf(textFieldConfirmaSenha.getPassword()));
 				
 				usuario.setObjetivo(buttonGroupMeta.getSelection().getActionCommand());
 				
+				usuario.setLactose(checkbox_lactose.isSelected());
+				usuario.setGluten(checkbox_gluten.isSelected());
+				
+				usuario.setColesterolAlto(checkbox_colesterolAlto.isSelected());
+				usuario.setDiabetes(checkbox_diabetes.isSelected());
 				
 				try {
 					new ControllerUsuario().adicionar(usuario);
+					JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
+					Login.main(null);
+					dialog.dispose();
 				} catch (NullPointerException e1) {
 					JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuario");
 					e1.printStackTrace();
@@ -310,6 +321,12 @@ public class PopupCadastro extends LayoutPopup {
 					e1.printStackTrace();
 				} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
 					JOptionPane.showMessageDialog(null, "Erro ao salvar usuario");
+					e1.printStackTrace();
+				} catch (SenhaInvalidaException e1) {
+					JOptionPane.showMessageDialog(null, "As senhas estão diferentes!");
+					e1.printStackTrace();
+				} catch (UsuarioDuplicadoException e1) {
+					JOptionPane.showMessageDialog(null, "Impossível concluir cadastro! Usuário digitado já esta cadastrado");
 					e1.printStackTrace();
 				}
 				

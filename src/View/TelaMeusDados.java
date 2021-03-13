@@ -10,9 +10,14 @@ import javax.swing.JPanel;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import Controller.ControllerUsuario;
+import Model.Usuario;
+
 import java.awt.Color;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 
 public class TelaMeusDados extends LayoutMain {
 
@@ -51,6 +56,7 @@ public class TelaMeusDados extends LayoutMain {
 	}
 
 	private void configureContent() {
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(136, 106, 922, 497);
 		panel.setBackground(Color.decode("#DFE4EA"));
@@ -75,6 +81,7 @@ public class TelaMeusDados extends LayoutMain {
 		panel.add(lblNome);
 		
 		JLabel lblNomeCompletoDa = new JLabel("Nome completo da pessoa");
+		lblNomeCompletoDa.setText(ControllerUsuario.getUsuarioLogado().getNome());
 		lblNomeCompletoDa.setVerticalAlignment(SwingConstants.TOP);
 		lblNomeCompletoDa.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNomeCompletoDa.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
@@ -88,7 +95,7 @@ public class TelaMeusDados extends LayoutMain {
 		lblDataDeNascimento.setBounds(85, 134, 160, 30);
 		panel.add(lblDataDeNascimento);
 		
-		JLabel lblNascimento = new JLabel("dd/mm/aaaa");
+		JLabel lblNascimento = new JLabel(ControllerUsuario.getUsuarioLogado().getDataNascimento().toString());
 		lblNascimento.setVerticalAlignment(SwingConstants.TOP);
 		lblNascimento.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNascimento.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
@@ -102,7 +109,7 @@ public class TelaMeusDados extends LayoutMain {
 		lblPe.setBounds(85, 164, 52, 30);
 		panel.add(lblPe);
 		
-		JLabel lblPesoKg = new JLabel("45 kg");
+		JLabel lblPesoKg = new JLabel(ControllerUsuario.getUsuarioLogado().getPeso() + " Kg");
 		lblPesoKg.setVerticalAlignment(SwingConstants.TOP);
 		lblPesoKg.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPesoKg.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
@@ -116,7 +123,7 @@ public class TelaMeusDados extends LayoutMain {
 		lblAltu.setBounds(85, 195, 52, 30);
 		panel.add(lblAltu);
 		
-		JLabel lblAltura = new JLabel("1,65 cm");
+		JLabel lblAltura = new JLabel(ControllerUsuario.getUsuarioLogado().getAltura() + " cm");
 		lblAltura.setVerticalAlignment(SwingConstants.TOP);
 		lblAltura.setHorizontalAlignment(SwingConstants.LEFT);
 		lblAltura.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
@@ -130,7 +137,7 @@ public class TelaMeusDados extends LayoutMain {
 		lblMe.setBounds(575, 104, 52, 30);
 		panel.add(lblMe);
 		
-		JLabel lblMeta = new JLabel("Ganhar Peso");
+		JLabel lblMeta = new JLabel(ControllerUsuario.getUsuarioLogado().getObjetivo());
 		lblMeta.setVerticalAlignment(SwingConstants.TOP);
 		lblMeta.setHorizontalAlignment(SwingConstants.LEFT);
 		lblMeta.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
@@ -144,26 +151,41 @@ public class TelaMeusDados extends LayoutMain {
 		lblDoenas.setBounds(575, 134, 72, 30);
 		panel.add(lblDoenas);
 		
-		JLabel lblMeta_1 = new JLabel("-");
-		lblMeta_1.setVerticalAlignment(SwingConstants.TOP);
-		lblMeta_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMeta_1.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblMeta_1.setBounds(646, 134, 200, 30);
-		panel.add(lblMeta_1);
+		JCheckBox chckbx_diabetes = new JCheckBox("Diabetes");
+		chckbx_diabetes.setBackground(Color.decode("#DFE4EA"));
+		chckbx_diabetes.setEnabled(false);
+		chckbx_diabetes.setBounds(653, 135, 105, 23);
+		chckbx_diabetes.setSelected(ControllerUsuario.getUsuarioLogado().isDiabetes());
+		panel.add(chckbx_diabetes);
+		
+		JCheckBox chckbx_colesterol = new JCheckBox("Colesterol Alto");
+		chckbx_colesterol.setBackground(Color.decode("#DFE4EA"));
+		chckbx_colesterol.setEnabled(false);
+		chckbx_colesterol.setBounds(653, 165, 130, 23);
+		chckbx_colesterol.setSelected(ControllerUsuario.getUsuarioLogado().isColesterolAlto());
+		panel.add(chckbx_colesterol);
+		
 		
 		JLabel lblIntolerncias = new JLabel("Intoler\u00E2ncias:");
 		lblIntolerncias.setVerticalAlignment(SwingConstants.TOP);
 		lblIntolerncias.setHorizontalAlignment(SwingConstants.LEFT);
 		lblIntolerncias.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblIntolerncias.setBounds(575, 164, 105, 30);
+		lblIntolerncias.setBounds(575, 206, 105, 30);
 		panel.add(lblIntolerncias);
 		
-		JLabel lblLactose = new JLabel("Lactose");
-		lblLactose.setVerticalAlignment(SwingConstants.TOP);
-		lblLactose.setHorizontalAlignment(SwingConstants.LEFT);
-		lblLactose.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblLactose.setBounds(683, 164, 174, 30);
-		panel.add(lblLactose);
+		JCheckBox chckbx_lactose = new JCheckBox("Lactose");
+		chckbx_lactose.setBackground(Color.decode("#DFE4EA"));
+		chckbx_lactose.setEnabled(false);
+		chckbx_lactose.setBounds(686, 207, 97, 23);
+		chckbx_lactose.setSelected(ControllerUsuario.getUsuarioLogado().isLactose());
+		panel.add(chckbx_lactose);
+		
+		JCheckBox chckbx_gluten = new JCheckBox("Gl\u00FAten");
+		chckbx_gluten.setBackground(Color.decode("#DFE4EA"));
+		chckbx_gluten.setEnabled(false);
+		chckbx_gluten.setBounds(686, 230, 97, 23);
+		chckbx_gluten.setSelected(ControllerUsuario.getUsuarioLogado().isGluten());
+		panel.add(chckbx_gluten);
 		
 		JLabel lblSexo = new JLabel("Sexo:");
 		lblSexo.setVerticalAlignment(SwingConstants.TOP);
@@ -200,5 +222,7 @@ public class TelaMeusDados extends LayoutMain {
 		panel.add(btnEditar);
 		
 		frame.getContentPane().add(panel);
+		
+
 	}
 }

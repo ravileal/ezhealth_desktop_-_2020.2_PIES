@@ -17,13 +17,13 @@ public class RepositorioUsuario implements CRUD<Usuario> {
 	@Override
 	public ArrayList<Usuario> buscar(String usuario) {
 		if(usuario == null) return RepositorioUsuario.list;
-		ArrayList<Usuario> listResult = new ArrayList<>();
+		ArrayList<Usuario> listResult = new ArrayList<Usuario>();
 		
 		for(Usuario u: list)
 			if( u.getUsuario().equals(usuario) )
 				listResult.add(u);
 		
-		return listResult;
+		return (listResult.size() == 0)? null: listResult;
 	}
 
 	@Override

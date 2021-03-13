@@ -1,9 +1,12 @@
 package Model;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class Usuario {
 
 	private String nome;
-	private String idade;
+	private LocalDate dataNascimento;
 	private String altura;
 	private String peso;
 	private String sexo;
@@ -12,6 +15,10 @@ public class Usuario {
 	private String confirmaSenha;
 	private String objetivo;
 	private String caloriasMeta;
+	private boolean lactose;
+	private boolean gluten;
+	private boolean diabetes;
+	private boolean colesterolAlto;
 
 	public String getNome() {
 		return this.nome;
@@ -25,17 +32,6 @@ public class Usuario {
 		this.nome = nome;
 	}
 
-	public String getIdade() {
-		return this.idade;
-	}
-
-	/**
-	 * 
-	 * @param idade
-	 */
-	public void setIdade(String idade) {
-		this.idade = idade;
-	}
 
 	public String getAltura() {
 		return this.altura;
@@ -132,6 +128,46 @@ public class Usuario {
 
 	public void setConfirmaSenha(String confirmaSenha) {
 		this.confirmaSenha = confirmaSenha;
+	}
+
+	public boolean isLactose() {
+		return lactose;
+	}
+
+	public void setLactose(boolean lactose) {
+		this.lactose = lactose;
+	}
+
+	public boolean isGluten() {
+		return gluten;
+	}
+
+	public void setGluten(boolean glute) {
+		this.gluten = glute;
+	}
+
+	public boolean isDiabetes() {
+		return diabetes;
+	}
+
+	public void setDiabetes(boolean diabetes) {
+		this.diabetes = diabetes;
+	}
+
+	public boolean isColesterolAlto() {
+		return colesterolAlto;
+	}
+
+	public void setColesterolAlto(boolean colesterolAlto) {
+		this.colesterolAlto = colesterolAlto;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 }

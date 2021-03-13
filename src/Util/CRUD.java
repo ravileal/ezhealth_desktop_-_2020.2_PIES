@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
+import Validation.SenhaInvalidaException;
+import Validation.UsuarioDuplicadoException;
 
 public interface CRUD<T> {
 
@@ -12,8 +14,10 @@ public interface CRUD<T> {
 	 * @param obj
 	 * @throws DadosVaziosException 
 	 * @throws OperacaoNaoConcluidaRepositorioExeception 
+	 * @throws SenhaInvalidaException 
+	 * @throws UsuarioDuplicadoException 
 	 */
-	boolean adicionar(T obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException;
+	boolean adicionar(T obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException, SenhaInvalidaException, UsuarioDuplicadoException;
 
 	/**
 	 * 
