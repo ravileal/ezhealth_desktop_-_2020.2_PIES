@@ -10,9 +10,12 @@ Além dessas doenças citadas, também há suporte à hipertensão, que afeta bo
 
 O EzHealth possui telas simples e intuitivas onde o usuário poderá aproveitar tudo que o sistema oferece, veja a seguir algumas telas do sistema. 
 
-https://i.imgur.com/bQ4ioZB.png
+![](https://i.imgur.com/25DpH2V.png)
+
+![](https://i.imgur.com/nMjITU8.png)
 
 Porém, sabemos que nem todo usuário está acostumado com certos tipos de sistema, logo, criamos essa área para lhe ensinar como utilizá-lo.
+
 Abaixo você tem acesso ao link para acessar o Wiki do sistema, onde ensinamos, utilizando prints das próprias telas da nossa aplicação, como realizar as principais atividades contidas no sistema.
 
 [Wiki EzHealth](https://github.com/ravileal/ezhealth_desktop_-_2020.2_PIES/wiki)
