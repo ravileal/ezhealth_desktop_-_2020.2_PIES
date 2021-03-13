@@ -242,15 +242,4 @@ public class LayoutMain {
 		
 		frame.getContentPane().add(panel);
 	}
-	
-	protected JPanel configurePanelContent() {
-		JPanel panel = new JPanel();
-		panel.setBounds(136, 106, 922, 497);
-		panel.setBackground(Color.decode("#DFE4EA"));
-		panel.setLayout(null);
-		
-		frame.getContentPane().add(panel);
-		
-		return panel;
-	}
 }

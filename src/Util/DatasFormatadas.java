@@ -5,8 +5,8 @@ import java.util.Date;
 
 public class DatasFormatadas {
 
-	String mes, ano, diaSemana, diaMes;
-	Date data;
+	private String mes, ano, diaSemana, diaMes;
+	private Date data;
 	
 	public DatasFormatadas (Date data) {
 		this.data = data;

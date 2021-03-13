@@ -34,8 +34,6 @@ import javax.swing.JPasswordField;
 public class Login {
 
 	private JFrame frame;
-	private JTextField campoLogin;
-	private JPasswordField campoSenha;
 	
 
 	/**
@@ -90,7 +88,7 @@ public class Login {
 		
 		new ViewUtils().configureTitleBarAlternative(frame, panel, "#DFE4EA", "#000000");
 		
-		campoLogin = new JTextField();
+		JTextField campoLogin = new JTextField();
 		campoLogin.setColumns(10);
 		campoLogin.setBounds(701, 295, 277, 36);
 		panel.add(campoLogin);
@@ -109,6 +107,10 @@ public class Login {
 		lblNewLabel_1.setFont(new Font("Quicksand Light", Font.BOLD, 20));
 		lblNewLabel_1.setBounds(777, 194, 140, 23);
 		panel.add(lblNewLabel_1);
+		
+		JPasswordField campoSenha = new JPasswordField();
+		campoSenha.setBounds(701, 385, 277, 36);
+		panel.add(campoSenha);
 		
 		JButton btnLogin = new JButton("Entrar");
 		btnLogin.addActionListener(new ActionListener() {
@@ -199,9 +201,7 @@ public class Login {
 		panel.add(lblImgHospital); // adiciona a label ao painel
 		// ---- Label da imagem hospital ---- Fim
 		
-		campoSenha = new JPasswordField();
-		campoSenha.setBounds(701, 385, 277, 36);
-		panel.add(campoSenha);
+
 
 		
 	}
