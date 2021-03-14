@@ -9,11 +9,8 @@ import javax.swing.JPanel;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
-import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.components.DatePickerSettings;
 
 import Controller.ControllerUsuario;
 import Model.Usuario;
@@ -37,7 +34,6 @@ import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Date;
 
 public class PopupCadastro extends LayoutPopup {
 
@@ -106,7 +102,7 @@ public class PopupCadastro extends LayoutPopup {
 		JFormattedTextField textFieldNascimento = new JFormattedTextField();
 		textFieldNascimento.setColumns(10);
 		textFieldNascimento.setBounds(114, 116, 218, 30);
-		textFieldNascimento.setHorizontalAlignment(JTextField.CENTER);
+		textFieldNascimento.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(textFieldNascimento);
 		
 		try {
@@ -125,7 +121,7 @@ public class PopupCadastro extends LayoutPopup {
 		lblSexo.setBounds(114, 156, 218, 30);
 		panel.add(lblSexo);
 		
-		JComboBox comboBoxSexo = new JComboBox();
+		JComboBox<DefaultComboBoxModel<String>> comboBoxSexo = new JComboBox<DefaultComboBoxModel<String>>();
 		comboBoxSexo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] {"Feminino", "Maculino"}));
 		comboBoxSexo.setMaximumRowCount(2);
@@ -148,7 +144,7 @@ public class PopupCadastro extends LayoutPopup {
 		
 		JFormattedTextField textFieldPeso = new JFormattedTextField();
 		textFieldPeso.setBounds(359, 116, 218, 30);
-		textFieldPeso.setHorizontalAlignment(JTextField.CENTER);
+		textFieldPeso.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(textFieldPeso);
 		
 		try {
@@ -176,7 +172,7 @@ public class PopupCadastro extends LayoutPopup {
 
 		JFormattedTextField textFieldAltura = new JFormattedTextField();
 		textFieldAltura.setColumns(10);
-		textFieldAltura.setHorizontalAlignment(JTextField.CENTER);
+		textFieldAltura.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldAltura.setBounds(359, 177, 218, 30);
 		panel.add(textFieldAltura);
 		

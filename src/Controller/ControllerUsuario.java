@@ -69,11 +69,17 @@ public class ControllerUsuario implements CRUD<Usuario> {
 	}
 
 	@Override
-	public boolean editar(String nome, Usuario obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
+	public boolean editar(String nome, Usuario obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException, SenhaInvalidaException {
 		if(obj == null)
 			throw new NullPointerException("Impossível editar! Objeto Usuario null");
 		else if(obj.getNome().equals(""))
 			throw new DadosVaziosException("Impossível editar! Nome vazio");
+		else if(obj.getUsuario().equals(""))
+			throw new DadosVaziosException("Impossível concluir cadastro! Campo usuário vazio");
+		else if(obj.getSenha().equals(""))
+			throw new DadosVaziosException("Impossível concluir cadastro! Senha vazia");
+		else if(!obj.getSenha().equals(obj.getConfirmaSenha()))
+			throw new SenhaInvalidaException("Impossível concluir cadastro! As senhas não coincidem");
 		else if(!rep.editar(nome, obj))
 			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível editar! Erro ao tentar editar o usuario '"+nome+"' no repositorio");
 		else 

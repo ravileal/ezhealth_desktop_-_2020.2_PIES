@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
+import Controller.ControllerUsuario;
 import Util.ViewUtils;
 
 public class LayoutMain {
@@ -232,7 +232,9 @@ public class LayoutMain {
 		labelSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.exit(0);
+				ControllerUsuario.setUsuarioLogado(null);
+				frame.dispose();
+				Login.main(null);
 			}
 		});
 		panel.add(labelSair);

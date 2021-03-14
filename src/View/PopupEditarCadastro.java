@@ -16,28 +16,32 @@ import Model.Usuario;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 import Validation.SenhaInvalidaException;
-import Validation.UsuarioDuplicadoException;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+
+import java.awt.Button;
 import java.awt.Color;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.lang.ModuleLayer.Controller;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 
 public class PopupEditarCadastro extends LayoutPopup {
-
+	
+	private TelaMeusDados frameOld;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -47,8 +51,7 @@ public class PopupEditarCadastro extends LayoutPopup {
 			public void run() {
 				try {
 					new ControllerUsuario();
-					PopupEditarCadastro window = new PopupEditarCadastro();
-					window.dialog.setVisible(true);
+					new PopupEditarCadastro(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -59,9 +62,11 @@ public class PopupEditarCadastro extends LayoutPopup {
 	/**
 	 * Create the application.
 	 */
-	public PopupEditarCadastro() {
+	public PopupEditarCadastro(TelaMeusDados frameOld) {
 		super("Editar Dados - EzHealth");
+		this.frameOld = frameOld;
 		configureContent();
+		dialog.setVisible(true);
 	}
 
 	/**
@@ -101,11 +106,22 @@ public class PopupEditarCadastro extends LayoutPopup {
 		lblDataDeNascimento.setBounds(114, 93, 218, 30);
 		panel.add(lblDataDeNascimento);
 		
-		JTextField textFieldNascimento = new JTextField(ControllerUsuario.getUsuarioLogado().getDataNascimento().toString());
+		LocalDate date = ControllerUsuario.getUsuarioLogado().getDataNascimento();
+		String dateFormated = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		JFormattedTextField textFieldNascimento = new JFormattedTextField(dateFormated);
 		textFieldNascimento.setColumns(10);
 		textFieldNascimento.setBounds(114, 116, 218, 30);
 		textFieldNascimento.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(textFieldNascimento);
+		
+		try {
+			MaskFormatter formatter = new MaskFormatter("##/##/####");
+			formatter.setPlaceholderCharacter('_');
+			formatter.install(textFieldNascimento);
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
 		JLabel lblSexo = new JLabel("Sexo");
 		lblSexo.setVerticalAlignment(SwingConstants.TOP);
@@ -165,9 +181,7 @@ public class PopupEditarCadastro extends LayoutPopup {
 		lblCm.setBounds(477, 160, 38, 15);
 		panel.add(lblCm);
 
-		String teste = ControllerUsuario.getUsuarioLogado().getAltura();
-		System.out.println(teste);
-		JFormattedTextField textFieldAltura = new JFormattedTextField(teste);
+		JFormattedTextField textFieldAltura = new JFormattedTextField(ControllerUsuario.getUsuarioLogado().getAltura());
 		textFieldAltura.setColumns(10);
 		textFieldAltura.setBounds(359, 177, 218, 30);
 		textFieldAltura.setHorizontalAlignment(SwingConstants.CENTER);
@@ -330,10 +344,13 @@ public class PopupEditarCadastro extends LayoutPopup {
 			public void mouseClicked(MouseEvent e) {
 				Usuario usuario = new Usuario();
 				usuario.setNome(textFieldNome.getText());
-				usuario.setSexo(comboBoxSexo.getName());
-				usuario.setPeso(lblPeso.getText());
-				usuario.setAltura(lblAltura.getText());
-				usuario.setDataNascimento(LocalDate.of(2021, Month.MARCH, 13));
+				usuario.setSexo(comboBoxSexo.getSelectedItem().toString());
+				usuario.setPeso(textFieldPeso.getText());
+				usuario.setAltura(textFieldAltura.getText());
+				
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				LocalDate dt = LocalDate.parse(textFieldNascimento.getText(), formatter);
+				usuario.setDataNascimento(dt);
 				
 				usuario.setUsuario(textFieldUsuario.getText());
 				usuario.setSenha(String.valueOf(textFieldSenha.getPassword()));
@@ -350,12 +367,22 @@ public class PopupEditarCadastro extends LayoutPopup {
 				try {
 					new ControllerUsuario().editar(ControllerUsuario.getUsuarioLogado().getUsuario(), usuario);
 					JOptionPane.showMessageDialog(null, "Dados atualizados");
+					ControllerUsuario.setUsuarioLogado(usuario);
+					usuario = null;
+					usuario = ControllerUsuario.getUsuarioLogado();
+					frameOld.atualizarTela();
 					dialog.dispose();
 				} catch (DadosVaziosException e1) {
 					JOptionPane.showMessageDialog(null, "Algum campo está vazio");
 					e1.printStackTrace();
 				} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
 					JOptionPane.showMessageDialog(null, "Erro ao salvar usuario");
+					e1.printStackTrace();
+				} catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Erro ao editar usuario");
+					e1.printStackTrace();
+				} catch (SenhaInvalidaException e1) {
+					JOptionPane.showMessageDialog(null, "As senhas estão diferentes!");
 					e1.printStackTrace();
 				}
 				

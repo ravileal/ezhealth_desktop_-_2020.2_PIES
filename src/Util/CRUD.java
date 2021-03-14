@@ -31,8 +31,10 @@ public interface CRUD<T> {
 	 * @param obj
 	 * @throws DadosVaziosException 
 	 * @throws OperacaoNaoConcluidaRepositorioExeception 
+	 * @throws SenhaInvalidaException 
+	 * @throws NullPointerException 
 	 */
-	boolean editar(String nome, T obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception;
+	boolean editar(String nome, T obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException, SenhaInvalidaException;
 
 	/**
 	 * 

@@ -85,7 +85,7 @@ public class TelaExercicios extends LayoutMain {
 		panel.add(labelNomeRefeicao);
 		
 		JLabel labelData = new JLabel( dataFormatada.getDiaSemana() + " - " + dataFormatada.getDiaMes());
-		labelData.setBounds(20, 32, 92, 30);
+		labelData.setBounds(20, 32, 163, 30);
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
 		labelData.setFont(new Font("Tahoma", Font.PLAIN, 14));

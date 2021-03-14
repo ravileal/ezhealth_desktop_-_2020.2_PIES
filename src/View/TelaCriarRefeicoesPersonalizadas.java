@@ -36,7 +36,6 @@ import java.awt.event.FocusEvent;
 
 public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 
-	private JScrollPane scrollPane = null;
 	private JTextField txtNomeRefeicao;
 
 	/**

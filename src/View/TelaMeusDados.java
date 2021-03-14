@@ -5,14 +5,22 @@ import java.awt.EventQueue;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.List;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Font;
+import java.awt.Window;
+
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+
 
 import Controller.ControllerUsuario;
-import Model.Usuario;
 
 import java.awt.Color;
 import javax.swing.JSeparator;
@@ -21,6 +29,7 @@ import javax.swing.JCheckBox;
 
 public class TelaMeusDados extends LayoutMain {
 
+	JPanel panel;
 
 	/**
 	 * Launch the application.
@@ -57,7 +66,7 @@ public class TelaMeusDados extends LayoutMain {
 
 	private void configureContent() {
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBounds(136, 106, 922, 497);
 		panel.setBackground(Color.decode("#DFE4EA"));
 		panel.setLayout(null);
@@ -208,13 +217,14 @@ public class TelaMeusDados extends LayoutMain {
 		lblGosatariaDeMudar.setBounds(367, 312, 231, 30);
 		panel.add(lblGosatariaDeMudar);
 		
+		TelaMeusDados instance = this;
 		JButton btnEditar = new JButton("Editar");
 		btnEditar.setBackground(Color.decode("#2F3542"));
 		btnEditar.setForeground(new Color(255, 255, 255));
 		btnEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PopupEditarCadastro.main(null);
+				new PopupEditarCadastro(instance);
 			}
 		});
 		btnEditar.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -222,7 +232,12 @@ public class TelaMeusDados extends LayoutMain {
 		panel.add(btnEditar);
 		
 		frame.getContentPane().add(panel);
-		
-
+	}
+	
+	public void atualizarTela() {
+		frame.remove(panel);
+		configureContent();
+		frame.revalidate();
+		frame.repaint();
 	}
 }

@@ -9,7 +9,6 @@ import java.awt.Panel;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.UIManager;
@@ -70,12 +69,12 @@ public class TelaHome extends LayoutMain {
 		DatasFormatadas dataFormatada = new DatasFormatadas(new Date());
 				
 		JLabel labelMes = new JLabel(dataFormatada.getMes() + " de " + dataFormatada.getAno() );
-		labelMes.setBounds(20, 11, 125, 45);
+		labelMes.setBounds(20, 11, 178, 45);
 		panel_content.add(labelMes);
 		labelMes.setFont(new Font("Quicksand Medium", Font.PLAIN, 16));
 		
 		JLabel labelData = new JLabel(dataFormatada.getDiaSemana() + " - " + dataFormatada.getDiaMes());
-		labelData.setBounds(20, 43, 125, 22);
+		labelData.setBounds(20, 43, 178, 22);
 		panel_content.add(labelData);
 		labelData.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
 	}

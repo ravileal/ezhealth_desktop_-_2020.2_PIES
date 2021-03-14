@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
@@ -28,8 +27,7 @@ public class LayoutPopup {
 			@Override
 			public void run() {
 				try {
-					LayoutPopup window = new LayoutPopup("Teste");
-					window.dialog.setVisible(true);
+					new LayoutPopup("Teste").dialog.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,7 +40,7 @@ public class LayoutPopup {
 	 */
 	public LayoutPopup(String title) {
 		this.dialog = new JDialog();
-		dialog.setModal(true);
+		this.dialog.setModal(true);
 		this.dialog.setTitle(title);
 		this.configureDialog();
 		this.configurePanelHeader();
@@ -83,4 +81,5 @@ public class LayoutPopup {
 		lbl_title.setBounds(29, 11, 161, 48);
 		panel.add(lbl_title);
 	}
+	
 }

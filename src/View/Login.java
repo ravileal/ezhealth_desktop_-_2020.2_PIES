@@ -124,7 +124,7 @@ public class Login {
 			public void mouseClicked(MouseEvent e) {
 				
 				try {
-					ControllerUsuario.validarLogin(campoLogin.getText(), campoSenha.getText());
+					ControllerUsuario.validarLogin(campoLogin.getText(), String.valueOf(campoSenha.getPassword()));
 					frame.dispose();
 					TelaHome.main(null);
 				} catch (CredenciaisInvalidasException e1) {

@@ -1,6 +1,6 @@
 package Validation;
 
-public class CredenciaisInvalidasException extends Exception{
+public class CredenciaisInvalidasException extends Exception {
 	/**
 	 * 
 	 */
