@@ -20,13 +20,11 @@ import Validation.SenhaInvalidaException;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
-import java.awt.Button;
 import java.awt.Color;
 
 import javax.swing.ButtonGroup;
@@ -35,7 +33,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 
 public class PopupEditarCadastro extends LayoutPopup {

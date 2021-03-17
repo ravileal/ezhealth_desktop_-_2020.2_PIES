@@ -31,6 +31,7 @@ import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
+import javax.swing.SwingConstants;
 
 public class Login {
 
@@ -106,8 +107,9 @@ public class Login {
 		panel.add(lblSenha);
 		
 		JLabel lblNewLabel_1 = new JLabel("Realizar Login");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Quicksand Light", Font.BOLD, 20));
-		lblNewLabel_1.setBounds(777, 194, 140, 23);
+		lblNewLabel_1.setBounds(701, 194, 277, 23);
 		panel.add(lblNewLabel_1);
 		
 		JPasswordField campoSenha = new JPasswordField();

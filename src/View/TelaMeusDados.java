@@ -5,21 +5,11 @@ import java.awt.EventQueue;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.util.List;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Font;
-import java.awt.Window;
-
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-
-
 import Controller.ControllerUsuario;
 
 import java.awt.Color;
