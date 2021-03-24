@@ -1,9 +1,8 @@
 package Model;
 
-public abstract class AbstractAlimentacao {
+public abstract class AbstractAlimentacao extends Model{
 
-	private String nome;
-	private int calorias;
+	private int calorias; 
 	private int proteina;
 	private int carboidrato;
 	private int gordura;
@@ -12,6 +11,7 @@ public abstract class AbstractAlimentacao {
 	private boolean lactose;
 	private boolean favorito;
 
+	@Override
 	public String getNome() {
 		return this.nome;
 	}
@@ -20,6 +20,7 @@ public abstract class AbstractAlimentacao {
 	 * 
 	 * @param nome
 	 */
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

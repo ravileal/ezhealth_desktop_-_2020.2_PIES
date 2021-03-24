@@ -2,9 +2,8 @@ package Model;
 
 import java.time.LocalDate;
 
-public class Usuario {
+public class Usuario extends Model{
 
-	private String nome;
 	private LocalDate dataNascimento;
 	private String altura;
 	private String peso;
@@ -19,6 +18,7 @@ public class Usuario {
 	private boolean diabetes;
 	private boolean colesterolAlto;
 
+	@Override
 	public String getNome() {
 		return this.nome;
 	}
@@ -27,6 +27,7 @@ public class Usuario {
 	 * 
 	 * @param nome
 	 */
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

@@ -70,7 +70,7 @@ public class Popular {
 	
 	private void popuparExercicioRealizado() {
 		Exercicio exercicio = new Exercicio();
-		exercicio.setNome("Correr");
+		exercicio.setNome("Musculação");
 		
 		repositorioExercicioRealizado.adicionar(exercicio);
 	}

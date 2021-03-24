@@ -32,7 +32,7 @@ public class ControllerExercicios implements CRUD<Exercicio> {
 			throw new NullPointerException("Impossível adicionar! Objeto Exercicio null");
 		else if(obj.getNome().equals(""))
 			throw new DadosVaziosException("Impossível adicionar! Nome vazio");
-		else if(!(exercicioRealizado)? repRealizada.adicionar(obj) : rep.adicionar(obj))
+		else if(!((exercicioRealizado)? repRealizada.adicionar(obj) : rep.adicionar(obj)))
 			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível adicionar! Erro ao tentar adicionar o exercicio '"+obj.getNome()+"' ao repositorio");
 		else 
 			return true;

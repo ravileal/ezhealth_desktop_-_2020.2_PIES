@@ -2,9 +2,8 @@ package Model;
 
 import java.util.Date;
 
-public class Exercicio {
+public class Exercicio extends Model{
 
-	private String nome;
 	private float calorias;
 	private String duracao;
 	private Date data;
@@ -33,6 +32,7 @@ public class Exercicio {
 		this.duracao = duracao;
 	}
 
+	@Override
 	public String getNome() {
 		return this.nome;
 	}
@@ -41,6 +41,7 @@ public class Exercicio {
 	 * 
 	 * @param nome
 	 */
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

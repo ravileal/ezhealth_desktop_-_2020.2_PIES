@@ -3,13 +3,8 @@ package View;
 import java.awt.EventQueue;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,7 +16,9 @@ import javax.swing.SwingConstants;
 import Controller.ControllerExercicios;
 import Model.Exercicio;
 import Util.DatasFormatadas;
-import Util.ViewUtils;
+import Util.ScrollList;
+import Util.ScrollList.MouseAdapterAdicionar;
+import Util.ScrollList.MouseAdapterExcluir;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
@@ -29,7 +26,6 @@ import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
-
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import java.awt.event.FocusAdapter;
@@ -101,7 +97,7 @@ public class TelaExercicios extends LayoutMain {
 		txtPesquisarExercicios.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				if(txtPesquisarExercicios.getText().equals("Pesquise exercÌcios")) {
+				if(txtPesquisarExercicios.getText().equals("Pesquise exerc√≠cios")) {
 					txtPesquisarExercicios.setText("");
 					txtPesquisarExercicios.setForeground(new Color (153, 153, 153));
 				}
@@ -110,7 +106,7 @@ public class TelaExercicios extends LayoutMain {
 		txtPesquisarExercicios.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if(txtPesquisarExercicios.getText().equals("Pesquise exercÌcios")) {
+				if(txtPesquisarExercicios.getText().equals("Pesquise exerc√≠cios")) {
 					txtPesquisarExercicios.setText("");
 					txtPesquisarExercicios.setForeground(new Color (153, 153, 153));
 				}
@@ -136,119 +132,114 @@ public class TelaExercicios extends LayoutMain {
 		lblListaDeExerccios.setBounds(20, 87, 212, 30);
 		panel.add(lblListaDeExerccios);
 		
-		configureList(panel);
+
+		configureListExercicios(panel);
+		configureListExerciciosRealizados(panel);
+		
 		frame.getContentPane().add(panel);
 	}
 	
-	public void configureList(JPanel panel) {
-		for (Component compo : panel.getComponents()) {
-			if(compo instanceof JScrollPane)
-				panel.remove(compo);
-		}
-		
-		JPanel panel_refeicoes = new JPanel();
-		panel_refeicoes.setLayout(new BoxLayout(panel_refeicoes, BoxLayout.Y_AXIS));
-		panel_refeicoes.setBackground(Color.decode("#DFE4EA"));
-		
-		JScrollPane scrollPane = new JScrollPane(panel_refeicoes);
-		scrollPane.getVerticalScrollBar().setUnitIncrement(4);
-		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.setBounds(20, 117, 453, 358);
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		
-		JPanel panel_item = null;
-		
-		try {
-			for (Exercicio a : new ControllerExercicios(false).buscar(null)) {
-				panel_item = new JPanel();
-				panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-				panel_item.setMaximumSize(new Dimension(scrollPane.getWidth(), 10));
-				panel_item.setBackground(Color.decode("#DFE4EA"));
-				panel_refeicoes.add(panel_item);
-				
-				panel_refeicoes.add(configureItemList(a.getNome(), panel));
-				
-				panel_item = new JPanel();
-				panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-				panel_item.setMaximumSize(new Dimension(scrollPane.getWidth(), 10));
-				panel_item.setBackground(Color.decode("#DFE4EA"));
-				panel_refeicoes.add(panel_item);
-				
-				panel_item = new JPanel();
-				panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-				panel_item.setMaximumSize(new Dimension(scrollPane.getWidth(), 1));
-				panel_item.setBackground(Color.decode("#A4B0BE"));
-				panel_refeicoes.add(panel_item);
-			}
-			
-		} catch (NullPointerException e) {
-			JOptionPane.showMessageDialog(null, "Exercicio n„o encontrado");
-			e.printStackTrace();
-		} catch (DadosVaziosException e) {
-			JOptionPane.showMessageDialog(null, "Exercicio com nome vazio");
-			e.printStackTrace();
-		}
-
-		panel.add(scrollPane);
-	}
-	
-	public Panel configureItemList(String nome, JPanel panel) {
-		Panel panel_item = new Panel();
-		panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-		panel_item.setPreferredSize(new Dimension(0, 50));
-		panel_item.setBackground(Color.decode("#DFE4EA"));
-		
-	
-		// configuraÁıes da label
-		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-		panel_item.add(new JLabel(nome));
-		panel_item.add(Box.createVerticalStrut(10)); 
-		
-		// configuraÁıes dos botıes
-		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-		new ViewUtils().setImageInLabel("/Images/edit.png", botaoEditar(nome), panel_item);
-		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-		new ViewUtils().setImageInLabel("/Images/remove.png", botaoExcluir(nome, panel), panel_item);
-		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-		
-		return panel_item;
-	}
-
-	
-	public JLabel botaoEditar(String nome) {
-
-		JLabel botaoEditar = new JLabel();
-		botaoEditar.setSize(20, 20);
-		botaoEditar.addMouseListener(new MouseAdapter() {
+	private void configureListExerciciosRealizados(JPanel panel){
+		MouseAdapter btnEditar = new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				super.mouseClicked(e);
 				PopupEditarExercicios.main(null);
 			}
-		});
-		return botaoEditar;
-	}
-
-	public JLabel botaoExcluir(String nome, JPanel panel) {
-
-		JLabel botaoExcluir = new JLabel();
-		botaoExcluir.setSize(20, 20);
-		botaoExcluir.addMouseListener(new MouseAdapter() {
+		};
+		
+		MouseAdapterExcluir btnExcluir = new MouseAdapterExcluir() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void MouseAdapter(String nome) {
 				try {
-					new ControllerExercicios(false).remover(nome);
-					configureList(panel);
-					frame.revalidate();
-					frame.repaint();
+					new ControllerExercicios(true).remover(nome);
 				} catch (DadosVaziosException e1) {
-					JOptionPane.showMessageDialog(null, "Algum campo est· vazio");
+					JOptionPane.showMessageDialog(null, "Exercicio com nome vazio");
 					e1.printStackTrace();
 				} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
-					JOptionPane.showMessageDialog(null, "Erro ao excluir exercicio");
+					JOptionPane.showMessageDialog(null, "Erro ao tentar remover");
 					e1.printStackTrace();
 				}
+				
+				for (Component compo : panel.getComponents()) 
+					if(compo instanceof JScrollPane)
+						panel.remove(compo);
+				
+				configureListExercicios(panel);
+				configureListExerciciosRealizados(panel);
+				
+				frame.revalidate();
+				frame.repaint();
 			}
-		});
-		return botaoExcluir;
+		};
+		
+		
+		ScrollList<Exercicio> listExerciciosRealizados = new ScrollList<Exercicio>();
+		listExerciciosRealizados.setAdapterEditar(btnEditar);
+		listExerciciosRealizados.setAdapterExcluir(btnExcluir);
+		listExerciciosRealizados.getVerticalScrollBar().setUnitIncrement(4);
+		listExerciciosRealizados.setBorder(BorderFactory.createEmptyBorder());
+		listExerciciosRealizados.setBounds(20, 117, 466, 358);
+		listExerciciosRealizados.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		try {
+			listExerciciosRealizados.configureList(panel, new ControllerExercicios(true).buscar(null));
+		} catch (NullPointerException e1) {
+			JOptionPane.showMessageDialog(null, "Exercicio n√£o encontrado");
+			e1.printStackTrace();
+		} catch (DadosVaziosException e1) {
+			JOptionPane.showMessageDialog(null, "Exercicio com nome inv√°lido");
+			e1.printStackTrace();
+		}
+		panel.add(listExerciciosRealizados);
+	}
+	
+	private void configureListExercicios(JPanel panel){
+		MouseAdapterAdicionar btnAdicionar = new MouseAdapterAdicionar() {
+			@Override
+			public void MouseAdapter(String nome) {
+				try {
+					Exercicio obj = new ControllerExercicios(false).buscar(nome).get(0);
+					
+					new ControllerExercicios(true).adicionar(obj);
+					
+					for (Component compo : panel.getComponents()) {
+						if(compo instanceof JScrollPane)
+							panel.remove(compo);
+					}
+					configureListExercicios(panel);
+					configureListExerciciosRealizados(panel);
+					
+					frame.revalidate();
+					frame.repaint();
+				} catch (NullPointerException e) {
+					JOptionPane.showMessageDialog(null, "Exercicio n√£o encontrado");
+					e.printStackTrace();
+				} catch (DadosVaziosException e) {
+					JOptionPane.showMessageDialog(null, "Exercicio com nome inv√°lido");
+					e.printStackTrace();
+				} catch (OperacaoNaoConcluidaRepositorioExeception e) {
+					JOptionPane.showMessageDialog(null, "N√£o foi poss√≠vel adicionar exercicio a lista de realizados");
+					e.printStackTrace();
+				}
+			}
+		};
+		
+		
+		ScrollList<Exercicio> listExercicios = new ScrollList<Exercicio>();
+		listExercicios.setAdapterAdicionar(btnAdicionar);
+		listExercicios.getVerticalScrollBar().setUnitIncrement(4);
+		listExercicios.setBorder(BorderFactory.createEmptyBorder());
+		listExercicios.setBounds(534, 168, 336, 307);
+		listExercicios.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		try {
+			listExercicios.configureList(panel, new ControllerExercicios(false).buscar(null));
+		} catch (NullPointerException e1) {
+			JOptionPane.showMessageDialog(null, "Exercicio n√£o encontrado");
+			e1.printStackTrace();
+		} catch (DadosVaziosException e1) {
+			JOptionPane.showMessageDialog(null, "Exercicio com nome inv√°lido");
+			e1.printStackTrace();
+		}
+		panel.add(listExercicios);
 	}
 }
