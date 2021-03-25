@@ -35,6 +35,7 @@ import Util.ScrollList;
 import Util.ViewUtils;
 import Util.ScrollList.MouseAdapterNome;
 import Validation.DadosVaziosException;
+import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import javax.swing.JSeparator;
 import java.awt.Button;
@@ -42,6 +43,8 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 
 import javax.swing.ScrollPaneConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 
@@ -143,8 +146,8 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		buttonVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new TelaRefeicoesPersonalizadas();
 				TelaRefeicoesPersonalizadas.main(null);
+				frame.dispose();
 			}
 		});
 		buttonVoltar.setBackground(Color.decode("#2F3542"));
@@ -229,6 +232,35 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		
 		configureListAlimentos(panel);
 		configureListAlimentosRefeicao(panel);
+		
+		Button buttonSalvar = new Button("Salvar");
+		buttonSalvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					Refeicao obj = refeicao;
+					obj.setNome(txtNomeRefeicao.getText());
+					new ControllerRefeicao(true).editar(refeicao.getNome(), obj);
+					JOptionPane.showMessageDialog(null, "Refeição atualizada");
+					frame.dispose();
+					TelaRefeicoesPersonalizadas.main(null);
+				} catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Refeicao não encontrada");
+					e1.printStackTrace();
+				} catch (DadosVaziosException e1) {
+					JOptionPane.showMessageDialog(null, "Refeicao com nome vazio");
+					e1.printStackTrace();
+				} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
+					JOptionPane.showMessageDialog(null, "Não foi possivel salvar a refeição");
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		buttonSalvar.setForeground(Color.WHITE);
+		buttonSalvar.setBackground(new Color(47, 53, 66));
+		buttonSalvar.setBounds(20, 453, 70, 22);
+		panel.add(buttonSalvar);
 	}
 
 	private void configureListAlimentos(JPanel panel){
@@ -285,6 +317,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 			@Override
 			public void mouseAdapter(String nome) {
 				PopupEditarAlimentos.main(null);
+				frame.dispose();
 			}
 		};
 		

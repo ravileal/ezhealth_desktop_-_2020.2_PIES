@@ -61,7 +61,7 @@ public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao
 			throw new NullPointerException("Impossível editar! Objeto Refeicao null");
 		else if(obj.getNome().equals(""))
 			throw new DadosVaziosException("Impossível editar! Nome vazio");
-		else if(!(refeicaoRealizada)? repRealizada.editar(nome, obj) : rep.editar(nome, obj))
+		else if(!((refeicaoRealizada)? repRealizada.editar(nome, obj) : rep.editar(nome, obj)))
 			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível editar! Erro ao tentar editar o refeicao '"+nome+"' no repositorio");
 		else 
 			return true;
