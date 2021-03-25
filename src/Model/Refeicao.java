@@ -6,8 +6,12 @@ public class Refeicao extends AbstractAlimentacao {
 
 	private Date data;
 	private String tipo;
-	private Collection<Alimento> listAlimento;
+	private ArrayList<Alimento> listAlimento;
 
+	public Refeicao(){
+		listAlimento = new ArrayList<Alimento>();
+	}
+	
 	public Date getData() {
 		return this.data;
 	}
@@ -33,8 +37,7 @@ public class Refeicao extends AbstractAlimentacao {
 	}
 
 	public ArrayList<Alimento> getListAlimento() {
-		// TODO - implement Refeicao.getListAlimento
-		throw new UnsupportedOperationException();
+		return this.listAlimento;
 	}
 
 	/**
@@ -42,8 +45,7 @@ public class Refeicao extends AbstractAlimentacao {
 	 * @param listAlimento
 	 */
 	public void setListAlimento(ArrayList<Alimento> listAlimento) {
-		// TODO - implement Refeicao.setListAlimento
-		throw new UnsupportedOperationException();
+		this.listAlimento = listAlimento;
 	}
 
 	/**
@@ -51,8 +53,7 @@ public class Refeicao extends AbstractAlimentacao {
 	 * @param alimento
 	 */
 	public void delAlimento(Alimento alimento) {
-		// TODO - implement Refeicao.delAlimento
-		throw new UnsupportedOperationException();
+		this.listAlimento.remove(alimento);
 	}
 
 	/**
@@ -60,8 +61,7 @@ public class Refeicao extends AbstractAlimentacao {
 	 * @param alimento
 	 */
 	public void addAlimento(Alimento alimento) {
-		// TODO - implement Refeicao.addAlimento
-		throw new UnsupportedOperationException();
+		this.listAlimento.add(alimento);
 	}
 
 	/**
@@ -69,8 +69,13 @@ public class Refeicao extends AbstractAlimentacao {
 	 * @param alimento
 	 */
 	public void setAlimento(Alimento alimento) {
-		// TODO - implement Refeicao.setAlimento
-		throw new UnsupportedOperationException();
+		int i = 0;
+		for(; i<listAlimento.size(); i++){
+			if(listAlimento.get(i).getNome().equals(alimento.getNome()))
+				break;
+		}
+		
+		this.listAlimento.set(i, alimento);
 	}
 
 }

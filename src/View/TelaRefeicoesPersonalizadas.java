@@ -134,7 +134,7 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 		JPanel panel_item = null;
 		
 		try {
-			for (Refeicao a : new ControllerRefeicao(false).buscar(null)) {
+			for (Refeicao a : new ControllerRefeicao(true).buscar(null)) {
 				panel_item = new JPanel();
 				panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
 				panel_item.setMaximumSize(new Dimension(scrollPane.getWidth(), 10));

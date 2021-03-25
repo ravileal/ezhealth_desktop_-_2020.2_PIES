@@ -32,10 +32,12 @@ public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao
 	public boolean adicionar(Refeicao obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
 		if(obj == null)
 			throw new NullPointerException("Impossível adicionar! Objeto Refeicao null");
+		else if(obj.getNome() == null)
+			throw new DadosVaziosException("Impossível adicionar! Nome vazio");
 		else if(obj.getNome().equals(""))
 			throw new DadosVaziosException("Impossível adicionar! Nome vazio");
-		else if(!(refeicaoRealizada)? repRealizada.adicionar(obj) : rep.adicionar(obj))
-			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível adicionar! Erro ao tentar adicionar o refeicao '"+obj.getNome()+"' ao repositorio");
+		else if(!((refeicaoRealizada)? repRealizada.adicionar(obj) : rep.adicionar(obj)))
+			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível adicionar! Erro ao tentar adicionar a refeicao '"+obj.getNome()+"' ao repositorio");
 		else 
 			return true;
 	}
