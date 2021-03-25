@@ -2,7 +2,7 @@ package Model;
 
 import java.util.Date;
 
-public class Exercicio extends Model{
+public class Exercicio extends Model {
 
 	private float calorias;
 	private String duracao;

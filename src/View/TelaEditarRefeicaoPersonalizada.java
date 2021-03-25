@@ -97,7 +97,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		} catch (DadosVaziosException e) {
 			JOptionPane.showMessageDialog(null, "Nome da refeição está vazio");
 			e.printStackTrace();
-		}
+		} 
 		initialize();
 	}
 	/**
@@ -114,6 +114,8 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		panel.setBounds(136, 106, 922, 497);
 		panel.setBackground(Color.decode("#DFE4EA"));
 		panel.setLayout(null);
+		
+		frame.getContentPane().add(panel);
 		
 		JLabel lblMinhaRefeio = new JLabel("Minha Refei\u00E7\u00E3o 1");
 		lblMinhaRefeio.setVerticalAlignment(SwingConstants.TOP);
@@ -192,7 +194,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		lblListaDeAlimentos.setBounds(20, 137, 141, 30);
 		panel.add(lblListaDeAlimentos);
 		
-		frame.getContentPane().add(panel);
+		
 		
 		JTextField txtNomeRefeicao = new JTextField() {
 			@Override
@@ -219,7 +221,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		txtNomeRefeicao.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
 		txtNomeRefeicao.setBorder(BorderFactory.createLineBorder(null, 0));
 		txtNomeRefeicao.setForeground(Color.black);
-		txtNomeRefeicao.setBounds(20, 96, 466, 30);
+		txtNomeRefeicao.setBounds(20, 96, 412, 30);
 		txtNomeRefeicao.setColumns(10);	
 		panel.add(txtNomeRefeicao);
 		
@@ -259,7 +261,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		
 		buttonSalvar.setForeground(Color.WHITE);
 		buttonSalvar.setBackground(new Color(47, 53, 66));
-		buttonSalvar.setBounds(20, 453, 70, 22);
+		buttonSalvar.setBounds(441, 96, 45, 30);
 		panel.add(buttonSalvar);
 	}
 
@@ -316,8 +318,9 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		MouseAdapterNome btnEditar = new MouseAdapterNome() {
 			@Override
 			public void mouseAdapter(String nome) {
-				PopupEditarAlimentos.main(null);
-				frame.dispose();
+				for(Alimento obj: refeicao.getListAlimento())
+					if(obj.getNome().equals(nome))
+						PopupEditarAlimentos.main(obj);
 			}
 		};
 		
@@ -348,7 +351,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		list_2.setAdapterExcluir(btnExcluir);
 		list_2.getVerticalScrollBar().setUnitIncrement(4);
 		list_2.setBorder(BorderFactory.createEmptyBorder());
-		list_2.setBounds(20, 168, 466, 272);
+		list_2.setBounds(20, 168, 466, 307);
 		list_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		try {
 			list_2.configureList(panel, refeicao.getListAlimento());

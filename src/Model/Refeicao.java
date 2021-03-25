@@ -2,6 +2,8 @@ package Model;
 
 import java.util.*;
 
+import Validation.DadosVaziosException;
+
 public class Refeicao extends AbstractAlimentacao {
 
 	private Date data;
@@ -68,14 +70,23 @@ public class Refeicao extends AbstractAlimentacao {
 	 * 
 	 * @param alimento
 	 */
-	public void setAlimento(Alimento alimento) {
-		int i = 0;
-		for(; i<listAlimento.size(); i++){
-			if(listAlimento.get(i).getNome().equals(alimento.getNome()))
-				break;
-		}
+	public void setAlimento(Alimento alimento) throws DadosVaziosException, NullPointerException {
+		if(alimento == null)
+			throw new NullPointerException("Alimento nulo");
+		else if(alimento.getNome().equals(""))
+			throw new DadosVaziosException("Alimento com nome vazio");
 		
-		this.listAlimento.set(i, alimento);
+		int i = 0;
+		boolean find = false;
+		for(; i<listAlimento.size(); i++){
+			if(listAlimento.get(i).getNome().equals(alimento.getNome())) {
+				find = true;
+				this.listAlimento.set(i, alimento);
+				break;
+			}
+		}
+		if(!find) 
+			throw new NullPointerException();
 	}
 
 }

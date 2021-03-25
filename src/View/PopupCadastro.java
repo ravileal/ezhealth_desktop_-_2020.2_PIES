@@ -14,6 +14,7 @@ import javax.swing.text.MaskFormatter;
 
 import Controller.ControllerUsuario;
 import Model.Usuario;
+import Util.DatasFormatadas;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 import Validation.SenhaInvalidaException;
@@ -34,6 +35,7 @@ import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Date;
 
 public class PopupCadastro extends LayoutPopup {
 
@@ -331,8 +333,13 @@ public class PopupCadastro extends LayoutPopup {
 				usuario.setSexo(comboBoxSexo.getSelectedItem().toString());
 				usuario.setPeso(textFieldPeso.getText());
 				usuario.setAltura(textFieldAltura.getText());
-				usuario.setDataNascimento(LocalDate.of(2021, Month.MARCH, 13));
-				
+
+				String[] data = textFieldNascimento.getText().split("/");
+				usuario.setDataNascimento(
+						LocalDate.of(
+							Integer.parseInt(data[2]), 
+							Integer.parseInt(data[1]), 
+							Integer.parseInt(data[0])));
 				usuario.setUsuario(textFieldUsuario.getText());
 				usuario.setSenha(String.valueOf(textFieldSenha.getPassword()));
 				usuario.setConfirmaSenha(String.valueOf(textFieldConfirmaSenha.getPassword()));

@@ -15,7 +15,10 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.function.Consumer;
@@ -189,6 +192,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
+					refeicao.setData(new Date());	
 					refeicao.setNome(txtNomeRefeicao.getText());
 					new ControllerRefeicao(true).adicionar(refeicao);
 					JOptionPane.showMessageDialog(null, "Refeição cadastrada");
@@ -248,7 +252,12 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 			public void mouseAdapter(String nome) {
 				try {
 					Alimento obj = new ControllerAlimento().buscar(nome).get(0);
-					refeicao.addAlimento(obj);
+					Alimento x = new Alimento();
+					x.setNome(obj.getNome());
+					x.setCalorias(obj.getCalorias());
+					x.setQuantidade(obj.getQuantidade());
+					refeicao.addAlimento(x);
+					refeicao.setData(null);
 					
 					for (Component compo : panel.getComponents()) {
 						if(compo instanceof JScrollPane)
@@ -293,7 +302,9 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		MouseAdapterNome btnEditar = new MouseAdapterNome() {
 			@Override
 			public void mouseAdapter(String nome) {
-				PopupEditarAlimentos.main(null);
+				for(Alimento obj: refeicao.getListAlimento())
+					if(obj.getNome().equals(nome))
+						PopupEditarAlimentos.main(obj);
 			}
 		};
 		
@@ -324,7 +335,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		list_2.setAdapterExcluir(btnExcluir);
 		list_2.getVerticalScrollBar().setUnitIncrement(4);
 		list_2.setBorder(BorderFactory.createEmptyBorder());
-		list_2.setBounds(20, 168, 466, 272);
+		list_2.setBounds(20, 168, 466, 274);
 		list_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		try {
 			list_2.configureList(panel, refeicao.getListAlimento());

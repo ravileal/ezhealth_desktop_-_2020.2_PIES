@@ -10,8 +10,8 @@ public abstract class Model {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
+	}    
+	
 	
 }
 

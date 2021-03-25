@@ -4,12 +4,19 @@ import java.awt.EventQueue;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import Controller.ControllerAlimento;
+import Controller.ControllerRefeicao;
+import Model.Alimento;
+import Model.Refeicao;
 import Util.DatasFormatadas;
+import Validation.DadosVaziosException;
+import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import javax.swing.JSeparator;
 import java.awt.Button;
@@ -21,8 +28,9 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class PopupEditarAlimentos extends LayoutPopup {
-	private JTextField txt_kcal;
-
+	
+	private Alimento alimento;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -39,12 +47,35 @@ public class PopupEditarAlimentos extends LayoutPopup {
 			}
 		});
 	}
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(Alimento alimento) {
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					PopupEditarAlimentos window = new PopupEditarAlimentos(alimento);
+					window.dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the application.
 	 */
 	public PopupEditarAlimentos() {
 		super("Editar Alimento - EzHealth");
+		configureContent();
+	}
+	
+	private PopupEditarAlimentos(Alimento alimento) {
+		super("Editar Alimento - EzHealth");
+		this.alimento = alimento;
 		configureContent();
 	}
 
@@ -59,11 +90,11 @@ public class PopupEditarAlimentos extends LayoutPopup {
 		panel.setBackground(Color.decode("#E8EDF3"));
 		panel.setLayout(null);
 		
-		JLabel lblData = new JLabel("Alimento x");
+		JLabel lblData = new JLabel("Alimento " + alimento.getNome());
 		lblData.setVerticalAlignment(SwingConstants.TOP);
 		lblData.setHorizontalAlignment(SwingConstants.LEFT);
 		lblData.setFont(new Font("Quicksand", Font.PLAIN, 16));
-		lblData.setBounds(10, 11, 92, 30);
+		lblData.setBounds(10, 11, 344, 30);
 		panel.add(lblData);
 		
 		JLabel labelData = new JLabel( dataFormatada.getDiaSemana() + " - " + dataFormatada.getDiaMes());
@@ -99,8 +130,9 @@ public class PopupEditarAlimentos extends LayoutPopup {
 		JTextField textFieldQuantidadedoAlimento = new JTextField();
 		textFieldQuantidadedoAlimento.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
 		textFieldQuantidadedoAlimento.setBounds(136, 108, 126, 30);
-		panel.add(textFieldQuantidadedoAlimento);
 		textFieldQuantidadedoAlimento.setColumns(10);
+		textFieldQuantidadedoAlimento.setText(String.valueOf(alimento.getQuantidade()));
+		panel.add(textFieldQuantidadedoAlimento);
 		
 		JLabel lblG = new JLabel("g");
 		lblG.setVerticalAlignment(SwingConstants.TOP);
@@ -115,6 +147,7 @@ public class PopupEditarAlimentos extends LayoutPopup {
 		lblseTiverLactose.setHorizontalAlignment(SwingConstants.LEFT);
 		lblseTiverLactose.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
 		lblseTiverLactose.setBounds(10, 52, 248, 30);
+		lblseTiverLactose.setVisible(alimento.getLactose());
 		panel.add(lblseTiverLactose);
 		
 		JLabel lblCaloriasTotais = new JLabel("Calorias totais");
@@ -133,15 +166,27 @@ public class PopupEditarAlimentos extends LayoutPopup {
 		
 		dialog.getContentPane().add(panel);
 		
-		txt_kcal = new JTextField();
+		JTextField txt_kcal = new JTextField();
 		txt_kcal.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
 		txt_kcal.setText("500");
 		txt_kcal.setEditable(false);
 		txt_kcal.setColumns(10);
 		txt_kcal.setBounds(431, 108, 126, 30);
+		txt_kcal.setText(String.valueOf(alimento.getCalorias()));
 		panel.add(txt_kcal);
 		
 		JButton salvar = new JButton("Salvar");
+		salvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String kcal = txt_kcal.getText();
+				alimento.setCalorias(Integer.parseInt(kcal));
+				String qtd = textFieldQuantidadedoAlimento.getText();
+				alimento.setQuantidade(Integer.parseInt(qtd));
+				JOptionPane.showMessageDialog(null, "Alimento atualizado");
+				dialog.dispose();
+			}
+		});
 		salvar.setForeground(Color.WHITE);
 		salvar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		salvar.setBackground(new Color(47, 53, 66));

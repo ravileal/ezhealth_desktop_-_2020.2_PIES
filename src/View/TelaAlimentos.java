@@ -221,7 +221,17 @@ public class TelaAlimentos extends LayoutMain {
 		botaoEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PopupEditarAlimentos.main(null);
+				try {
+					for(Alimento obj: new ControllerAlimento().buscar(nome))
+						if(obj.getNome().equals(nome))
+							PopupEditarAlimentos.main(obj);
+				} catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Alimento não encontrado");
+					e1.printStackTrace();
+				} catch (DadosVaziosException e1) {
+					JOptionPane.showMessageDialog(null, "Algum campo está vazio");
+					e1.printStackTrace();
+				}
 			}
 		});
 		return botaoEditar;
