@@ -17,38 +17,35 @@ import Model.Model;
 
 public class ScrollList<Object extends Model> extends JScrollPane {
 	
-	public interface MouseAdapterExcluir{
-		void MouseAdapter(String nome);
-	}
-	public interface MouseAdapterAdicionar{
-		void MouseAdapter(String nome);
+	public interface MouseAdapterNome{
+		void mouseAdapter(String nome);
 	}
 	
-	private MouseAdapter adapterEditar;
-	private MouseAdapterExcluir adapterExcluir;
-	private MouseAdapterAdicionar adapterAdicionar;
+	private MouseAdapterNome adapterEditar;
+	private MouseAdapterNome adapterExcluir;
+	private MouseAdapterNome adapterAdicionar;
 	
-	public MouseAdapter getAdapterEditar() {
+	public MouseAdapterNome getAdapterEditar() {
 		return adapterEditar;
 	}
 
-	public void setAdapterEditar(MouseAdapter adapterEditar) {
+	public void setAdapterEditar(MouseAdapterNome adapterEditar) {
 		this.adapterEditar = adapterEditar;
 	}
 
-	public MouseAdapterExcluir getAdapterExcluir() {
+	public MouseAdapterNome getAdapterExcluir() {
 		return adapterExcluir;
 	}
 
-	public void setAdapterExcluir(MouseAdapterExcluir adapterExcluir) {
+	public void setAdapterExcluir(MouseAdapterNome adapterExcluir) {
 		this.adapterExcluir = adapterExcluir;
 	}
 
-	public MouseAdapterAdicionar getAdapterAdicionar() {
+	public MouseAdapterNome getAdapterAdicionar() {
 		return adapterAdicionar;
 	}
 
-	public void setAdapterAdicionar(MouseAdapterAdicionar adapterAdicionar) {
+	public void setAdapterAdicionar(MouseAdapterNome adapterAdicionar) {
 		this.adapterAdicionar = adapterAdicionar;
 	}
 
@@ -116,7 +113,13 @@ public class ScrollList<Object extends Model> extends JScrollPane {
 	private JLabel botaoEditar(String nome) {
 		JLabel botaoEditar = new JLabel();
 		botaoEditar.setSize(20, 20);
-		botaoEditar.addMouseListener(adapterEditar);
+		botaoEditar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				adapterEditar.mouseAdapter(nome);
+				super.mouseClicked(e);
+			}
+		});
 		return botaoEditar;
 	}
 
@@ -126,7 +129,7 @@ public class ScrollList<Object extends Model> extends JScrollPane {
 		botaoExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				adapterExcluir.MouseAdapter(nome);
+				adapterExcluir.mouseAdapter(nome);
 			}
 		});
 		return botaoExcluir;
@@ -138,7 +141,7 @@ public class ScrollList<Object extends Model> extends JScrollPane {
 		botaoExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				adapterAdicionar.MouseAdapter(nome);
+				adapterAdicionar.mouseAdapter(nome);
 			}
 		});
 		return botaoExcluir;

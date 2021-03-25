@@ -41,8 +41,7 @@ import Util.CRUD;
 import Util.DatasFormatadas;
 import Util.ScrollList;
 import Util.ViewUtils;
-import Util.ScrollList.MouseAdapterAdicionar;
-import Util.ScrollList.MouseAdapterExcluir;
+import Util.ScrollList.MouseAdapterNome;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 import Validation.SenhaInvalidaException;
@@ -244,9 +243,9 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 	}
 	
 	private void configureListAlimentos(JPanel panel){
-		MouseAdapterAdicionar btnAdicionar = new MouseAdapterAdicionar() {
+		MouseAdapterNome btnAdicionar = new MouseAdapterNome() {
 			@Override
-			public void MouseAdapter(String nome) {
+			public void mouseAdapter(String nome) {
 				try {
 					Alimento obj = new ControllerAlimento().buscar(nome).get(0);
 					refeicao.addAlimento(obj);
@@ -291,17 +290,16 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 	}
 	
 	private void configureListAlimentosRefeicao(JPanel panel){
-		MouseAdapter btnEditar = new MouseAdapter() {
+		MouseAdapterNome btnEditar = new MouseAdapterNome() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				super.mouseClicked(e);
+			public void mouseAdapter(String nome) {
 				PopupEditarAlimentos.main(null);
 			}
 		};
 		
-		MouseAdapterExcluir btnExcluir = new MouseAdapterExcluir() {
+		MouseAdapterNome btnExcluir = new MouseAdapterNome() {
 			@Override
-			public void MouseAdapter(String nome) {
+			public void mouseAdapter(String nome) {
 				for(Alimento obj: refeicao.getListAlimento())
 					if(obj.getNome().equals(nome)) {
 						refeicao.delAlimento(obj);

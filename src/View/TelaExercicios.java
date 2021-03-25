@@ -17,8 +17,7 @@ import Controller.ControllerExercicios;
 import Model.Exercicio;
 import Util.DatasFormatadas;
 import Util.ScrollList;
-import Util.ScrollList.MouseAdapterAdicionar;
-import Util.ScrollList.MouseAdapterExcluir;
+import Util.ScrollList.MouseAdapterNome;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
@@ -140,17 +139,16 @@ public class TelaExercicios extends LayoutMain {
 	}
 	
 	private void configureListExerciciosRealizados(JPanel panel){
-		MouseAdapter btnEditar = new MouseAdapter() {
+		MouseAdapterNome btnEditar = new MouseAdapterNome() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				super.mouseClicked(e);
+			public void mouseAdapter(String nome) {
 				PopupEditarExercicios.main(null);
 			}
 		};
 		
-		MouseAdapterExcluir btnExcluir = new MouseAdapterExcluir() {
+		MouseAdapterNome btnExcluir = new MouseAdapterNome() {
 			@Override
-			public void MouseAdapter(String nome) {
+			public void mouseAdapter(String nome) {
 				try {
 					new ControllerExercicios(true).remover(nome);
 				} catch (DadosVaziosException e1) {
@@ -194,9 +192,9 @@ public class TelaExercicios extends LayoutMain {
 	}
 	
 	private void configureListExercicios(JPanel panel){
-		MouseAdapterAdicionar btnAdicionar = new MouseAdapterAdicionar() {
+		MouseAdapterNome btnAdicionar = new MouseAdapterNome() {
 			@Override
-			public void MouseAdapter(String nome) {
+			public void mouseAdapter(String nome) {
 				try {
 					Exercicio obj = new ControllerExercicios(false).buscar(nome).get(0);
 					

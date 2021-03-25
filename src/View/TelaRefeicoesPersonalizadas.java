@@ -17,9 +17,8 @@ import Model.Alimento;
 import Model.Refeicao;
 import Util.DatasFormatadas;
 import Util.ScrollList;
+import Util.ScrollList.MouseAdapterNome;
 import Util.ViewUtils;
-import Util.ScrollList.MouseAdapterAdicionar;
-import Util.ScrollList.MouseAdapterExcluir;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
@@ -122,17 +121,17 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 	}
 	
 	private void configureListRefeicoes(JPanel panel){
-		MouseAdapter btnEditar = new MouseAdapter() {
+		MouseAdapterNome btnEditar = new MouseAdapterNome() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				super.mouseClicked(e);
-				PopupEditarAlimentos.main(null);
+			public void mouseAdapter(String nome) {
+				frame.dispose();
+				TelaEditarRefeicaoPersonalizada.main(nome);
 			}
 		};
 		
-		MouseAdapterExcluir btnExcluir = new MouseAdapterExcluir() {
+		MouseAdapterNome btnExcluir = new MouseAdapterNome() {
 			@Override
-			public void MouseAdapter(String nome) {
+			public void mouseAdapter(String nome) {
 				try {
 					new ControllerRefeicao(true).remover(nome);
 				} catch (DadosVaziosException e) {
