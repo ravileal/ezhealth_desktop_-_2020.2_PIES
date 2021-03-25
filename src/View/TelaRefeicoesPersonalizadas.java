@@ -10,10 +10,16 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import Controller.ControllerAlimento;
 import Controller.ControllerRefeicao;
+import Model.Alimento;
 import Model.Refeicao;
 import Util.DatasFormatadas;
+import Util.ScrollList;
 import Util.ViewUtils;
+import Util.ScrollList.MouseAdapterAdicionar;
+import Util.ScrollList.MouseAdapterExcluir;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
@@ -111,120 +117,61 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 		lblBuscarAlimentos_2.setBounds(56, 433, 21, 30);
 		panel.add(lblBuscarAlimentos_2);
 		
-		configureList(panel);
+		configureListRefeicoes(panel);
 		frame.getContentPane().add(panel);
 	}
 	
-	public void configureList(JPanel panel) {
-		for (Component compo : panel.getComponents()) {
-			if(compo instanceof JScrollPane)
-				panel.remove(compo);
-		}
-		
-		JPanel panel_refeicoes = new JPanel();
-		panel_refeicoes.setLayout(new BoxLayout(panel_refeicoes, BoxLayout.Y_AXIS));
-		panel_refeicoes.setBackground(Color.decode("#DFE4EA"));
-		
-		JScrollPane scrollPane = new JScrollPane(panel_refeicoes);
-		scrollPane.getVerticalScrollBar().setUnitIncrement(4);
-		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.setBounds(28, 124, 666, 260);
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		
-		JPanel panel_item = null;
-		
-		try {
-			for (Refeicao a : new ControllerRefeicao(true).buscar(null)) {
-				panel_item = new JPanel();
-				panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-				panel_item.setMaximumSize(new Dimension(scrollPane.getWidth(), 10));
-				panel_item.setBackground(Color.decode("#DFE4EA"));
-				panel_refeicoes.add(panel_item);
-				
-				panel_refeicoes.add(configureItemList(a.getNome(), panel));
-				
-				panel_item = new JPanel();
-				panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-				panel_item.setMaximumSize(new Dimension(scrollPane.getWidth(), 10));
-				panel_item.setBackground(Color.decode("#DFE4EA"));
-				panel_refeicoes.add(panel_item);
-				
-				panel_item = new JPanel();
-				panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-				panel_item.setMaximumSize(new Dimension(scrollPane.getWidth(), 1));
-				panel_item.setBackground(Color.decode("#A4B0BE"));
-				panel_refeicoes.add(panel_item);
-			}
-			
-		} catch (NullPointerException e) {
-			JOptionPane.showMessageDialog(null, "Refeição não encontrada");
-			e.printStackTrace();
-		} catch (DadosVaziosException e) {
-			JOptionPane.showMessageDialog(null, "Refeição com nome vazio");
-			e.printStackTrace();
-		}
-
-		panel.add(scrollPane);
-	}
-	
-	public Panel configureItemList(String nome, JPanel panel) {
-		Panel panel_item = new Panel();
-		panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-		panel_item.setPreferredSize(new Dimension(0, 50));
-		panel_item.setBackground(Color.decode("#DFE4EA"));
-		
-	
-		// configurações da label
-		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-		panel_item.add(new JLabel(nome));
-		panel_item.add(Box.createVerticalStrut(10)); 
-		
-		// configurações dos botões
-		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-		new ViewUtils().setImageInLabel("/Images/edit.png", botaoEditar(nome), panel_item);
-		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-		new ViewUtils().setImageInLabel("/Images/remove.png", botaoExcluir(nome, panel), panel_item);
-		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-		
-		return panel_item;
-	}
-
-	
-	public JLabel botaoEditar(String nome) {
-
-		JLabel botaoEditar = new JLabel();
-		botaoEditar.setSize(20, 20);
-		botaoEditar.addMouseListener(new MouseAdapter() {
+	private void configureListRefeicoes(JPanel panel){
+		MouseAdapter btnEditar = new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				frame.dispose();
-				TelaEditarRefeicaoPersonalizada.main(null);
+				super.mouseClicked(e);
+				PopupEditarAlimentos.main(null);
 			}
-		});
-		return botaoEditar;
-	}
-
-	public JLabel botaoExcluir(String nome, JPanel panel) {
-
-		JLabel botaoExcluir = new JLabel();
-		botaoExcluir.setSize(20, 20);
-		botaoExcluir.addMouseListener(new MouseAdapter() {
+		};
+		
+		MouseAdapterExcluir btnExcluir = new MouseAdapterExcluir() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void MouseAdapter(String nome) {
 				try {
-					new ControllerRefeicao(false).remover(nome);
-					configureList(panel);
-					frame.revalidate();
-					frame.repaint();
-				} catch (DadosVaziosException e1) {
-					JOptionPane.showMessageDialog(null, "Algum campo está vazio");
-					e1.printStackTrace();
-				} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
-					JOptionPane.showMessageDialog(null, "Erro ao excluir refeição");
-					e1.printStackTrace();
+					new ControllerRefeicao(true).remover(nome);
+				} catch (DadosVaziosException e) {
+					JOptionPane.showMessageDialog(null, "Refeição com nova vazio");
+					e.printStackTrace();
+				} catch (OperacaoNaoConcluidaRepositorioExeception e) {
+					JOptionPane.showMessageDialog(null, "Erro ao tentar remover");
+					e.printStackTrace();
 				}
+				
+				for (Component compo : panel.getComponents()) 
+					if(compo instanceof JScrollPane)
+						panel.remove(compo);
+				
+				configureListRefeicoes(panel);
+				
+				frame.revalidate();
+				frame.repaint();
 			}
-		});
-		return botaoExcluir;
+		};
+		
+		
+		ScrollList<Refeicao> list_2 = new ScrollList<Refeicao>();
+		list_2.setAdapterEditar(btnEditar);
+		list_2.setAdapterExcluir(btnExcluir);
+		list_2.getVerticalScrollBar().setUnitIncrement(4);
+		list_2.setBorder(BorderFactory.createEmptyBorder());
+		list_2.setBounds(28, 92, 820, 337);
+		list_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		try {
+			list_2.configureList(panel,  new ControllerRefeicao(true).buscar(null) );
+		} catch (NullPointerException e1) {
+			JOptionPane.showMessageDialog(null, "Refeição não encontrada");
+			e1.printStackTrace();
+		} catch (DadosVaziosException e1) {
+			JOptionPane.showMessageDialog(null, "Refeição com nova vazio");
+			e1.printStackTrace();
+		} 
+		panel.add(list_2);
 	}
+	
 }
