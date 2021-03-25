@@ -2,6 +2,7 @@ package Util;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Date;
 
 import Model.Alimento;
 import Model.Exercicio;
@@ -63,6 +64,7 @@ public class Popular {
 	
 	private void popuparExercicio() {
 		Exercicio exercicio = new Exercicio();
+		exercicio.setData(new Date());
 		exercicio.setNome("Correr");
 		
 		repositorioExercicio.adicionar(exercicio);
@@ -70,6 +72,7 @@ public class Popular {
 	
 	private void popuparExercicioRealizado() {
 		Exercicio exercicio = new Exercicio();
+		exercicio.setData(new Date());
 		exercicio.setNome("Musculação");
 		
 		repositorioExercicioRealizado.adicionar(exercicio);

@@ -13,7 +13,10 @@ import javax.swing.JSeparator;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import Controller.ControllerAlimento;
 import Controller.ControllerExercicios;
+import Model.Alimento;
 import Model.Exercicio;
 import Util.DatasFormatadas;
 import Util.ScrollList;
@@ -32,6 +35,7 @@ import java.awt.event.FocusEvent;
 
 public class TelaExercicios extends LayoutMain {
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -142,7 +146,17 @@ public class TelaExercicios extends LayoutMain {
 		MouseAdapterNome btnEditar = new MouseAdapterNome() {
 			@Override
 			public void mouseAdapter(String nome) {
-				PopupEditarExercicios.main(null);
+				try {
+					for(Exercicio obj: new ControllerExercicios(true).buscar(null))
+						if(obj.getNome().equals(nome))
+							PopupEditarExercicios.main(obj);
+				} catch (NullPointerException e) {
+					JOptionPane.showMessageDialog(null, "Não foi possível encontrar o exercicio");
+					e.printStackTrace();
+				} catch (DadosVaziosException e) {
+					JOptionPane.showMessageDialog(null, "Exercicio com nome vazio");
+					e.printStackTrace();
+				}
 			}
 		};
 		
@@ -197,7 +211,7 @@ public class TelaExercicios extends LayoutMain {
 			public void mouseAdapter(String nome) {
 				try {
 					Exercicio obj = new ControllerExercicios(false).buscar(nome).get(0);
-					
+					obj.setData(new Date());
 					new ControllerExercicios(true).adicionar(obj);
 					
 					for (Component compo : panel.getComponents()) {

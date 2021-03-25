@@ -6,6 +6,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.FocusManager;
+import javax.swing.JButton;
 
 import java.awt.Panel;
 import java.awt.Color;
@@ -144,7 +145,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		lblAdicionarAlimentosNa.setBounds(541, 73, 412, 30);
 		panel.add(lblAdicionarAlimentosNa);
 
-		Button buttonVoltar = new Button("Voltar");
+		JButton buttonVoltar = new JButton("Voltar");
 		buttonVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -155,6 +156,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		buttonVoltar.setBackground(Color.decode("#2F3542"));
 		buttonVoltar.setForeground(new Color(255, 255, 255));
 		buttonVoltar.setBounds(829, 19, 70, 22);
+		buttonVoltar.setBorder(BorderFactory.createEmptyBorder());
 		panel.add(buttonVoltar);
 
 		JTextField txtPesquisarAlimentos = new JTextField() {
@@ -178,8 +180,8 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 				frame.revalidate();
 				frame.repaint();
 			}
-		});        
-        txtPesquisarAlimentos.setBorder(BorderFactory.createLineBorder(null, 0));
+		});    
+        txtPesquisarAlimentos.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtPesquisarAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
 		txtPesquisarAlimentos.setToolTipText("Pesquisar");
 		txtPesquisarAlimentos.setForeground(Color.black);
@@ -219,7 +221,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		});
 		txtNomeRefeicao.setText(refeicao.getNome());
 		txtNomeRefeicao.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
-		txtNomeRefeicao.setBorder(BorderFactory.createLineBorder(null, 0));
+		txtNomeRefeicao.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtNomeRefeicao.setForeground(Color.black);
 		txtNomeRefeicao.setBounds(20, 96, 412, 30);
 		txtNomeRefeicao.setColumns(10);	
@@ -235,7 +237,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		configureListAlimentos(panel);
 		configureListAlimentosRefeicao(panel);
 		
-		Button buttonSalvar = new Button("Salvar");
+		JButton buttonSalvar = new JButton("Salvar");
 		buttonSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -258,10 +260,10 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 				}
 			}
 		});
-		
 		buttonSalvar.setForeground(Color.WHITE);
 		buttonSalvar.setBackground(new Color(47, 53, 66));
 		buttonSalvar.setBounds(441, 96, 45, 30);
+		buttonSalvar.setBorder(BorderFactory.createEmptyBorder());
 		panel.add(buttonSalvar);
 	}
 
@@ -279,7 +281,6 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 					}
 					configureListAlimentos(panel);
 					configureListAlimentosRefeicao(panel); 
-				
 					
 					frame.revalidate();
 					frame.repaint();

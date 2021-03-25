@@ -5,9 +5,13 @@ import java.awt.EventQueue;
 import java.awt.Panel;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import Model.Alimento;
+import Model.Exercicio;
 import Util.DatasFormatadas;
 
 import java.awt.event.MouseAdapter;
@@ -19,6 +23,8 @@ import javax.swing.JSeparator;
 import javax.swing.JButton;
 
 public class PopupEditarExercicios extends LayoutPopup {
+	
+	private Exercicio exercicio;
 
 	/**
 	 * Launch the application.
@@ -36,6 +42,22 @@ public class PopupEditarExercicios extends LayoutPopup {
 			}
 		});
 	}
+	/**
+	 * Launch the application.
+	 */
+	public static void main(Exercicio exercicio) {
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				try { 
+					PopupEditarExercicios window = new PopupEditarExercicios(exercicio);
+					window.dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the application.
@@ -44,25 +66,33 @@ public class PopupEditarExercicios extends LayoutPopup {
 		super("Editar Exercicio - EzHealth");
 		configureContent();
 	}
+	/**
+	 * Create the application.
+	 */
+	public PopupEditarExercicios(Exercicio exercicio) {
+		super("Editar Exercicio - EzHealth");
+		this.exercicio = exercicio;
+		configureContent();
+	}
 
 	/**
 	 * Initialize the contents of the dialog.
 	 */
 	private void configureContent() {
-		DatasFormatadas dataFormatada = new DatasFormatadas(new Date());
 		
 		Panel panel = new Panel();
 		panel.setBounds(0, 71, 700, 590);
 		panel.setBackground(Color.decode("#E8EDF3"));
 		panel.setLayout(null);
 				
-		JLabel lblExercicioX = new JLabel("Exercicio  x");
+		JLabel lblExercicioX = new JLabel("Exercicio "+exercicio.getNome());
 		lblExercicioX.setVerticalAlignment(SwingConstants.TOP);
 		lblExercicioX.setHorizontalAlignment(SwingConstants.LEFT);
 		lblExercicioX.setFont(new Font("Quicksand", Font.PLAIN, 16));
 		lblExercicioX.setBounds(10, 11, 177, 30);
 		panel.add(lblExercicioX);
 		
+		DatasFormatadas dataFormatada = new DatasFormatadas(exercicio.getData());
 		JLabel labelData = new JLabel(dataFormatada.getDiaSemana() +  " - " + dataFormatada.getDiaMes());
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
@@ -78,6 +108,7 @@ public class PopupEditarExercicios extends LayoutPopup {
 		panel.add(lblMinutos);
 		
 		JTextField textFieldMinutosExercicios = new JTextField();
+		textFieldMinutosExercicios.setText(exercicio.getDuracao());
 		textFieldMinutosExercicios.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
 		textFieldMinutosExercicios.setColumns(10);
 		textFieldMinutosExercicios.setBounds(86, 94, 169, 30);
@@ -110,6 +141,7 @@ public class PopupEditarExercicios extends LayoutPopup {
 		
 		
 		JTextField textField_caloriasTotais = new JTextField();
+		textField_caloriasTotais.setText(String.valueOf(exercicio.getCalorias()));
 		textField_caloriasTotais.setEnabled(false);
 		textField_caloriasTotais.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
 		textField_caloriasTotais.setColumns(10);
@@ -130,6 +162,17 @@ public class PopupEditarExercicios extends LayoutPopup {
 		panel.add(btnCancelar);
 		
 		JButton salvar = new JButton("Salvar");
+		salvar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String kcal = textField_caloriasTotais.getText();
+				exercicio.setCalorias(Float.parseFloat(kcal));
+				String qtd = textFieldMinutosExercicios.getText();
+				exercicio.setDuracao(qtd);
+				JOptionPane.showMessageDialog(null, "Exercicio atualizado");
+				dialog.dispose();
+			}
+		});
 		salvar.setForeground(Color.WHITE);
 		salvar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		salvar.setBackground(new Color(47, 53, 66));

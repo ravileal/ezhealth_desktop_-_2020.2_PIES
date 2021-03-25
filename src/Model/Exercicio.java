@@ -46,4 +46,14 @@ public class Exercicio extends Model {
 		this.nome = nome;
 	}
 
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+	
+	
+
 }

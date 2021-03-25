@@ -6,6 +6,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.FocusManager;
+import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 
 import java.awt.Panel;
@@ -133,7 +134,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 				frame.repaint();
 			}
 		});        
-        txtPesquisarAlimentos.setBorder(BorderFactory.createLineBorder(null, 0));
+        txtPesquisarAlimentos.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtPesquisarAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
 		txtPesquisarAlimentos.setToolTipText("Pesquisar");
 		txtPesquisarAlimentos.setForeground(Color.black);
@@ -180,14 +181,14 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 			}
 		});
 		txtNomeRefeicao.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
-		txtNomeRefeicao.setBorder(BorderFactory.createLineBorder(null, 0));
+		txtNomeRefeicao.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		txtNomeRefeicao.setForeground(Color.black);
 		txtNomeRefeicao.setBounds(20, 89, 466, 30);
 		txtNomeRefeicao.setColumns(10);		
 		
 		panel.add(txtNomeRefeicao);
 		
-		Button buttonSalvar = new Button("Salvar");
+		JButton buttonSalvar = new JButton("Salvar");
 		buttonSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -210,6 +211,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 				}
 			}
 		});
+		buttonSalvar.setBorder(BorderFactory.createEmptyBorder());
 		buttonSalvar.setBackground(Color.decode("#2F3542"));
 		buttonSalvar.setForeground(new Color(255, 255, 255));
 		buttonSalvar.setBounds(20, 453, 70, 22);
@@ -222,10 +224,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		labelData.setBounds(20, 33, 107, 30);
 		panel.add(labelData);
 		
-		Button buttonVoltar = new Button("Voltar");
-		buttonVoltar.setBackground(Color.decode("#2F3542"));
-		buttonVoltar.setForeground(new Color(255, 255, 255));
-		buttonVoltar.setBounds(827, 19, 70, 22);
+		JButton buttonVoltar = new JButton("Voltar");
 		buttonVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -233,6 +232,10 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 				TelaRefeicoesPersonalizadas.main(null);
 			}
 		});
+		buttonVoltar.setBorder(BorderFactory.createEmptyBorder());
+		buttonVoltar.setBackground(Color.decode("#2F3542"));
+		buttonVoltar.setForeground(new Color(255, 255, 255));
+		buttonVoltar.setBounds(827, 19, 70, 22);
 		panel.add(buttonVoltar);
 		
 		JLabel lblBuscarRefeio = new JLabel("Digite o nome da refei\u00E7\u00E3o");
