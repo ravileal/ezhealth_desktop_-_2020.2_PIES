@@ -23,7 +23,7 @@ public class RepositorioRefeicaoRealizada implements CRUD<Refeicao> {
 			if( obj.getNome().equals(nome) )
 				listResult.add(obj);
 				
-		return listResult;
+		return  (listResult.size() == 0)? null: listResult;
 	}
 
 	@Override

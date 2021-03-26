@@ -28,6 +28,7 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
@@ -93,6 +94,7 @@ public class Login {
 		JTextField campoLogin = new JTextField();
 		campoLogin.setColumns(10);
 		campoLogin.setBounds(701, 295, 277, 36);
+		campoLogin.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		panel.add(campoLogin);
 		
 		JLabel lblNewLabel = new JLabel("Usuario");
@@ -113,6 +115,7 @@ public class Login {
 		
 		JPasswordField campoSenha = new JPasswordField();
 		campoSenha.setBounds(701, 385, 277, 36);
+		campoSenha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		panel.add(campoSenha);
 		
 		JButton btnLogin = new JButton("Entrar");
@@ -120,6 +123,7 @@ public class Login {
 		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.setBackground(Color.decode("#2F3542"));
 		btnLogin.setBounds(802, 526, 89, 36);
+		btnLogin.setBorder(BorderFactory.createEmptyBorder());
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -161,6 +165,7 @@ public class Login {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		btnCadastro.setBorder(BorderFactory.createEmptyBorder());
 		btnCadastro.setFont(new Font("Quicksand", Font.PLAIN, 13));
 		btnCadastro.addMouseListener(new MouseAdapter() {
 			@Override

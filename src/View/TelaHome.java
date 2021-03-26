@@ -13,7 +13,10 @@ import java.util.Date;
 
 import javax.swing.UIManager;
 
+import Controller.ControllerRefeicao;
+import Model.Refeicao;
 import Util.DatasFormatadas;
+import Validation.DadosVaziosException;
 
 import javax.swing.JPanel;
 
@@ -107,6 +110,7 @@ public class TelaHome extends LayoutMain {
 		lbl_caloriasConsumidas_title.setBounds(23, 42, 88, 45);
 		panel.add(lbl_caloriasConsumidas_title);
 		
+		
 		JLabel lbl_caloriasConsumidas = new JLabel("0 kcal");
 		lbl_caloriasConsumidas.setFont(new Font("Quicksand Medium", Font.PLAIN, 12));
 		lbl_caloriasConsumidas.setBounds(44, 87, 46, 14);
@@ -139,7 +143,8 @@ public class TelaHome extends LayoutMain {
 		panel_cafeManha.setBackground(Color.decode("#CED6E0"));
 		panel_cafeManha.setLayout(null);
 		
-		JLabel labelCaloriasManha = new JLabel("0 kcal");
+
+		JLabel labelCaloriasManha = new JLabel(getCaloriasRefeicao("Café da manhã")+" kcal");
 		labelCaloriasManha.setFont(new Font("Quicksand Light", Font.PLAIN, 11));
 		labelCaloriasManha.setBounds(103, 30, 46, 14);
 		panel_cafeManha.add(labelCaloriasManha);
@@ -158,18 +163,18 @@ public class TelaHome extends LayoutMain {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
-				TelaAlimentos.main(null);
+				TelaAlimentos.main("Café da manhã");
 			}
 		});
 		
 		// Lanche da manhã
 		JPanel panel_lancheManha = new JPanel();
 		panel_lancheManha.setBounds(332, 342, 258, 53);
-		panel_content.add(panel_lancheManha);
 		panel_lancheManha.setLayout(null);
 		panel_lancheManha.setBackground(Color.decode("#CED6E0"));
+		panel_content.add(panel_lancheManha);
 		
-		JLabel labelCaloriasLancheManha = new JLabel("0 kcal");
+		JLabel labelCaloriasLancheManha = new JLabel(getCaloriasRefeicao("Lanche da manhã")+" kcal");
 		labelCaloriasLancheManha.setFont(new Font("Quicksand Light", Font.PLAIN, 11));
 		labelCaloriasLancheManha.setBounds(103, 30, 46, 14);
 		panel_lancheManha.add(labelCaloriasLancheManha);
@@ -187,7 +192,7 @@ public class TelaHome extends LayoutMain {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
-				TelaAlimentos.main(null);
+				TelaAlimentos.main("Lanche da manhã");
 			}
 		});
 		
@@ -198,7 +203,7 @@ public class TelaHome extends LayoutMain {
 		panel_almoco.setLayout(null);
 		panel_almoco.setBackground(Color.decode("#CED6E0"));
 		
-		JLabel labelCaloriasAlmoco = new JLabel("0 kcal");
+		JLabel labelCaloriasAlmoco = new JLabel(getCaloriasRefeicao("Almoço")+" kcal");
 		labelCaloriasAlmoco.setFont(new Font("Quicksand Light", Font.PLAIN, 11));
 		labelCaloriasAlmoco.setBounds(103, 30, 46, 14);
 		panel_almoco.add(labelCaloriasAlmoco);
@@ -216,7 +221,7 @@ public class TelaHome extends LayoutMain {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
-				TelaAlimentos.main(null);
+				TelaAlimentos.main("Almoço");
 			}
 		});
 		
@@ -227,7 +232,7 @@ public class TelaHome extends LayoutMain {
 		panel_lancheTarde.setLayout(null);
 		panel_content.add(panel_lancheTarde);
 		
-		JLabel labelCaloriasLancheTarde = new JLabel("0 kcal");
+		JLabel labelCaloriasLancheTarde = new JLabel(getCaloriasRefeicao("Lanche da tarde")+" kcal");
 		labelCaloriasLancheTarde.setFont(new Font("Quicksand Light", Font.PLAIN, 11));
 		labelCaloriasLancheTarde.setBounds(103, 30, 46, 14);
 		panel_lancheTarde.add(labelCaloriasLancheTarde);
@@ -242,7 +247,7 @@ public class TelaHome extends LayoutMain {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
-				TelaAlimentos.main(null);
+				TelaAlimentos.main("Lanche da tarde");
 			}
 		});
 		labelAdicionarLancheTarde.setFont(new Font("Quicksand Light", Font.PLAIN, 20));
@@ -257,7 +262,7 @@ public class TelaHome extends LayoutMain {
 		panel_janta.setLayout(null);
 		panel_janta.setBackground(Color.decode("#CED6E0"));
 		
-		JLabel labelCaloriasJanta = new JLabel("0 kcal");
+		JLabel labelCaloriasJanta = new JLabel(getCaloriasRefeicao("Janta")+" kcal");
 		labelCaloriasJanta.setFont(new Font("Quicksand Light", Font.PLAIN, 11));
 		labelCaloriasJanta.setBounds(103, 30, 46, 14);
 		panel_janta.add(labelCaloriasJanta);
@@ -275,7 +280,7 @@ public class TelaHome extends LayoutMain {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
-				TelaAlimentos.main(null);
+				TelaAlimentos.main("Janta");
 			}
 		});
 		
@@ -286,7 +291,7 @@ public class TelaHome extends LayoutMain {
 		panel_lancheNoite.setLayout(null);
 		panel_lancheNoite.setBackground(Color.decode("#CED6E0"));
 		
-		JLabel labelCaloriasLancheNoite = new JLabel("0 kcal");
+		JLabel labelCaloriasLancheNoite = new JLabel(getCaloriasRefeicao("Lanche da noite")+" kcal");
 		labelCaloriasLancheNoite.setFont(new Font("Quicksand Light", Font.PLAIN, 11));
 		labelCaloriasLancheNoite.setBounds(103, 30, 46, 14);
 		panel_lancheNoite.add(labelCaloriasLancheNoite);
@@ -304,10 +309,22 @@ public class TelaHome extends LayoutMain {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
-				TelaAlimentos.main(null);
+				TelaAlimentos.main("Lanche da noite");
 			}
 		});
 
+	}
+	
+	private String getCaloriasRefeicao(String nomeRefeicao) {
+		Refeicao ref;
+		String calorias="0";
+		try {
+			ref = new ControllerRefeicao(true).buscar(nomeRefeicao).get(0);
+			calorias = String.valueOf(ref.getCalorias());
+		} catch (NullPointerException e1) {
+		} catch (DadosVaziosException e1) {
+		}
+		return calorias;
 	}
 
 }
