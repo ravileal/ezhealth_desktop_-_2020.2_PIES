@@ -31,7 +31,7 @@ public class Popular {
 			instance = new Popular();
 		return instance;
 	}
-	
+	 
 	private Popular() {
 		this.repositorioAlimento = new RepositorioAlimento();
 		this.repositorioExercicio = new RepositorioExercicio();
@@ -53,11 +53,13 @@ public class Popular {
 		
 		alimento = new Alimento();
 		alimento.setNome("Laranja");
+		alimento.setCalorias(100);
 		repositorioAlimento.adicionar(alimento);
 		
 		for (int i=0; i<10;i++) {
 			alimento = new Alimento();
 			alimento.setNome("Manga");
+			alimento.setCalorias(50);
 			repositorioAlimento.adicionar(alimento);
 		}
 	}
@@ -80,6 +82,7 @@ public class Popular {
 	
 	private void popuparRefeicao() {
 		Refeicao refeicao = new Refeicao();
+		refeicao.setData(new Date());
 		refeicao.setNome("Cafe da manha");
 		
 		repositorioRefeicao.adicionar(refeicao);
@@ -87,6 +90,7 @@ public class Popular {
 	
 	private void popuparRefeicaoRealizada() {
 		Refeicao refeicao = new Refeicao();
+		refeicao.setData(new Date());
 		refeicao.setNome("Cafe da manha");
 		
 		repositorioRefeicaoRealizada.adicionar(refeicao);

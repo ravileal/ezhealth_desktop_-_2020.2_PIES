@@ -334,12 +334,16 @@ public class PopupCadastro extends LayoutPopup {
 				usuario.setPeso(textFieldPeso.getText());
 				usuario.setAltura(textFieldAltura.getText());
 
-				String[] data = textFieldNascimento.getText().split("/");
-				usuario.setDataNascimento(
-						LocalDate.of(
-							Integer.parseInt(data[2]), 
-							Integer.parseInt(data[1]), 
-							Integer.parseInt(data[0])));
+				if(textFieldNascimento.getText().equals("__/__/____")) {
+					usuario.setDataNascimento(LocalDate.of(2000, 01, 01));
+				} else {
+					String[] data = textFieldNascimento.getText().split("/");
+					usuario.setDataNascimento(
+							LocalDate.of(
+									Integer.parseInt(data[2]), 
+									Integer.parseInt(data[1]), 
+									Integer.parseInt(data[0])));
+				}
 				usuario.setUsuario(textFieldUsuario.getText());
 				usuario.setSenha(String.valueOf(textFieldSenha.getPassword()));
 				usuario.setConfirmaSenha(String.valueOf(textFieldConfirmaSenha.getPassword()));

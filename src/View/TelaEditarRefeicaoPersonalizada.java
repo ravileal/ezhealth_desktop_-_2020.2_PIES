@@ -125,7 +125,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		lblMinhaRefeio.setBounds(20, 11, 177, 30);
 		panel.add(lblMinhaRefeio);
 
-		DatasFormatadas dataFormatada = new DatasFormatadas(new Date());
+		DatasFormatadas dataFormatada = new DatasFormatadas(refeicao.getData());
 		JLabel labelData = new JLabel( dataFormatada.getDiaSemana() + " - " + dataFormatada.getDiaMes());
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);

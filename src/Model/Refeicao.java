@@ -63,7 +63,9 @@ public class Refeicao extends AbstractAlimentacao {
 	 * @param alimento
 	 */
 	public void addAlimento(Alimento alimento) {
+		if(this.listAlimento==null) this.listAlimento = new ArrayList<Alimento>();
 		this.listAlimento.add(alimento);
+		setCalorias(getCalorias()+alimento.getCalorias());
 	}
 
 	/**

@@ -260,7 +260,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 					x.setCalorias(obj.getCalorias());
 					x.setQuantidade(obj.getQuantidade());
 					refeicao.addAlimento(x);
-					refeicao.setData(null);
+					refeicao.setData(new Date());
 					
 					for (Component compo : panel.getComponents()) {
 						if(compo instanceof JScrollPane)

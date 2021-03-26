@@ -8,15 +8,23 @@ import java.awt.Component;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import javax.swing.SwingConstants;
 import Controller.ControllerAlimento;
+import Controller.ControllerRefeicao;
 import Model.Alimento;
+import Model.Refeicao;
 import Util.DatasFormatadas;
+import Util.ScrollList;
 import Util.ViewUtils;
+import Util.ScrollList.MouseAdapterNome;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
@@ -31,11 +39,15 @@ import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
+import javax.swing.FocusManager;
+import javax.swing.JButton;
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 public class TelaAlimentos extends LayoutMain {
-
+	
+	private Refeicao refeicao;
 
 	/**
 	 * Launch the application.
@@ -53,6 +65,20 @@ public class TelaAlimentos extends LayoutMain {
 			}
 		});
 	}
+	
+	public static void main(String nome) {
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					TelaAlimentos window = new TelaAlimentos(nome);
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the application.
@@ -61,6 +87,39 @@ public class TelaAlimentos extends LayoutMain {
 		initialize();
 	}
 
+	private TelaAlimentos(String nome) {
+		try {
+			for(Refeicao ref : new ControllerRefeicao(true).buscar(nome)) {
+					refeicao = ref;				
+			}
+//			new ControllerRefeicao(true)
+//			.buscar(nome)
+//			.forEach((ref) -> {
+//				if(ref.getData().equals(new Date()))
+//					refeicao = ref;
+//			});
+		} catch (NullPointerException e) {
+			refeicao = new Refeicao();
+			refeicao.setNome(nome);
+			refeicao.setData(new Date());
+			try {
+				new ControllerRefeicao(true).adicionar(refeicao);
+			} catch (NullPointerException e1) {
+				JOptionPane.showMessageDialog(null, "Refeição nula");
+				e1.printStackTrace();
+			} catch (DadosVaziosException e1) {
+				JOptionPane.showMessageDialog(null, "Refeição com nome inválido");
+				e1.printStackTrace();
+			} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
+				JOptionPane.showMessageDialog(null, "Não foi possivel salvar refeição");
+				e1.printStackTrace();
+			}
+		} catch (DadosVaziosException e) {
+			JOptionPane.showMessageDialog(null, "Refeição com nome inválido");
+		}
+		initialize();
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -69,196 +128,217 @@ public class TelaAlimentos extends LayoutMain {
 		configureContent();
 	}
 		
-	private void configureContent() {	
-		DatasFormatadas dataFormatada = new DatasFormatadas(new Date());
+	private void configureContent() {
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(136, 106, 922, 497);
 		panel.setBackground(Color.decode("#DFE4EA"));
 		panel.setLayout(null);
 		
-		JLabel labelNomeAlimento = new JLabel("Caf\u00E9 da Manh\u00E3");
-		labelNomeAlimento.setBounds(20, 11, 130, 30);
-		labelNomeAlimento.setVerticalAlignment(SwingConstants.TOP);
-		labelNomeAlimento.setHorizontalAlignment(SwingConstants.LEFT);
-		labelNomeAlimento.setFont(new Font("Quicksand", Font.PLAIN, 16));
-		panel.add(labelNomeAlimento);
+		frame.getContentPane().add(panel);
 		
-		JLabel labelData = new JLabel(dataFormatada.getDiaSemana() + " - " + dataFormatada.getDiaMes());
-		labelData.setBounds(20, 32, 92, 30);
+		JLabel lblMinhaRefeio = new JLabel(refeicao.getNome());
+		lblMinhaRefeio.setVerticalAlignment(SwingConstants.TOP);
+		lblMinhaRefeio.setHorizontalAlignment(SwingConstants.LEFT);
+		lblMinhaRefeio.setFont(new Font("Quicksand", Font.PLAIN, 16));
+		lblMinhaRefeio.setBounds(20, 11, 341, 30);
+		panel.add(lblMinhaRefeio);
+
+		DatasFormatadas dataFormatada = new DatasFormatadas(refeicao.getData());
+		JLabel labelData = new JLabel( dataFormatada.getDiaSemana() + " - " + dataFormatada.getDiaMes());
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
 		labelData.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
+		labelData.setBounds(21, 32, 253, 30);
 		panel.add(labelData);
-		
+
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 60, 902, 2);
+		separator.setBounds(10, 52, 902, 10);
 		panel.add(separator);
-		
-		JTextField txtPesquisarAlimentos = new JTextField();
+
+
+		JLabel lblAdicionarAlimentosNa = new JLabel("Adicionar Alimentos na Refei\u00E7\u00E3o Personalizada");
+		lblAdicionarAlimentosNa.setVerticalAlignment(SwingConstants.TOP);
+		lblAdicionarAlimentosNa.setHorizontalAlignment(SwingConstants.LEFT);
+		lblAdicionarAlimentosNa.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
+		lblAdicionarAlimentosNa.setBounds(535, 73, 412, 30);
+		panel.add(lblAdicionarAlimentosNa);
+
+		JButton buttonVoltar = new JButton("Voltar");
+		buttonVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaHome.main(null);
+				frame.dispose();
+			}
+		});
+		buttonVoltar.setBackground(Color.decode("#2F3542"));
+		buttonVoltar.setForeground(new Color(255, 255, 255));
+		buttonVoltar.setBounds(829, 19, 70, 22);
+		buttonVoltar.setBorder(BorderFactory.createEmptyBorder());
+		panel.add(buttonVoltar);
+
+		JTextField txtPesquisarAlimentos = new JTextField() {
+			@Override
+			protected void paintComponent(Graphics graphics) {
+				super.paintComponent(graphics);
+				if(!(getText().isEmpty() && 
+				   !(FocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this)))
+					return;
+					
+				Graphics2D graphics2D = (Graphics2D)graphics.create();
+				graphics2D.setFont(getFont().deriveFont(Font.LAYOUT_LEFT_TO_RIGHT));
+		        graphics2D.setColor(Color.GRAY);
+		        graphics2D.drawString("Digite o nome do alimento", 5, 20);
+		        graphics2D.dispose();
+			}
+		};
 		txtPesquisarAlimentos.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				if(txtPesquisarAlimentos.getText().equals("Pesquise alimentos")) {
-					txtPesquisarAlimentos.setText("");
-					txtPesquisarAlimentos.setForeground(new Color (153, 153, 153));
-				}
+				frame.revalidate();
+				frame.repaint();
 			}
-		});
-		txtPesquisarAlimentos.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				if(txtPesquisarAlimentos.getText().equals("Pesquise alimentos")) {
-					txtPesquisarAlimentos.setText("");
-					txtPesquisarAlimentos.setForeground(new Color (153, 153, 153));
-				}
-			}
-		});
-		txtPesquisarAlimentos.setText("Pesquise alimentos");
+		});    
+        txtPesquisarAlimentos.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		txtPesquisarAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 14));
 		txtPesquisarAlimentos.setToolTipText("Pesquisar");
-		txtPesquisarAlimentos.setForeground(SystemColor.scrollbar);
+		txtPesquisarAlimentos.setForeground(Color.black);
 		txtPesquisarAlimentos.setColumns(10);
-		txtPesquisarAlimentos.setBounds(534, 117, 335, 35);
+		txtPesquisarAlimentos.setBounds(535, 96, 335, 30);
 		panel.add(txtPesquisarAlimentos);
-		
-		JLabel lblBuscarAlimentos = new JLabel("Buscar Alimentos");
-		lblBuscarAlimentos.setVerticalAlignment(SwingConstants.TOP);
-		lblBuscarAlimentos.setHorizontalAlignment(SwingConstants.LEFT);
-		lblBuscarAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblBuscarAlimentos.setBounds(534, 87, 157, 30);
-		panel.add(lblBuscarAlimentos);
-		
+
 		JLabel lblListaDeAlimentos = new JLabel("Lista de Alimentos");
 		lblListaDeAlimentos.setVerticalAlignment(SwingConstants.TOP);
 		lblListaDeAlimentos.setHorizontalAlignment(SwingConstants.LEFT);
 		lblListaDeAlimentos.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblListaDeAlimentos.setBounds(20, 87, 157, 30);
+		lblListaDeAlimentos.setBounds(20, 73, 141, 30);
 		panel.add(lblListaDeAlimentos);
 		
-		configureList(panel);
-		frame.getContentPane().add(panel);
-	}
-	
-	public void configureList(JPanel panel) {
-		for (Component compo : panel.getComponents()) {
-			if(compo instanceof JScrollPane)
-				panel.remove(compo);
-		}
-		
-		JPanel panel_alimentos = new JPanel();
-		panel_alimentos.setLayout(new BoxLayout(panel_alimentos, BoxLayout.Y_AXIS));
-		panel_alimentos.setBackground(Color.decode("#DFE4EA"));
-		
-		JScrollPane scrollPane = new JScrollPane(panel_alimentos);
-		scrollPane.getVerticalScrollBar().setUnitIncrement(4);
-		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.setBounds(20, 117, 453, 355);
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		
-		JPanel panel_item = null;
-		
-		try {
-			for (Alimento a : new ControllerAlimento().buscar(null)) {
-				panel_item = new JPanel();
-				panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-				panel_item.setMaximumSize(new Dimension(scrollPane.getWidth(), 10));
-				panel_item.setBackground(Color.decode("#DFE4EA"));
-				panel_alimentos.add(panel_item);
-				
-				panel_alimentos.add(configureItemList(a.getNome(), panel));
-				
-				panel_item = new JPanel();
-				panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-				panel_item.setMaximumSize(new Dimension(scrollPane.getWidth(), 10));
-				panel_item.setBackground(Color.decode("#DFE4EA"));
-				panel_alimentos.add(panel_item);
-				
-				panel_item = new JPanel();
-				panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-				panel_item.setMaximumSize(new Dimension(scrollPane.getWidth(), 1));
-				panel_item.setBackground(Color.decode("#A4B0BE"));
-				panel_alimentos.add(panel_item);
-			}
-			
-		} catch (NullPointerException e) {
-			JOptionPane.showMessageDialog(null, "Alimento não encontrado");
-			e.printStackTrace();
-		} catch (DadosVaziosException e) {
-			JOptionPane.showMessageDialog(null, "Alimento com nome vazio");
-			e.printStackTrace();
-		}
-
-		panel.add(scrollPane);
-	}
-	
-	public Panel configureItemList(String nome, JPanel panel) {
-		Panel panel_item = new Panel();
-		panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
-		panel_item.setPreferredSize(new Dimension(0, 50));
-		panel_item.setBackground(Color.decode("#DFE4EA"));
-		
-	
-		// configurações da label
-		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-		panel_item.add(new JLabel(nome));
-		panel_item.add(Box.createVerticalStrut(10)); 
-		
-		// configurações dos botões
-		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-		new ViewUtils().setImageInLabel("/Images/edit.png", botaoEditar(nome), panel_item);
-		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-		new ViewUtils().setImageInLabel("/Images/remove.png", botaoExcluir(nome, panel), panel_item);
-		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-		
-		return panel_item;
+		configureListAlimentos(panel);
+		configureListAlimentosRefeicao(panel);
 	}
 
-	
-	public JLabel botaoEditar(String nome) {
-
-		JLabel botaoEditar = new JLabel();
-		botaoEditar.setSize(20, 20);
-		botaoEditar.addMouseListener(new MouseAdapter() {
+	private void configureListAlimentos(JPanel panel){
+		MouseAdapterNome btnAdicionar = new MouseAdapterNome() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseAdapter(String nome) {
 				try {
-					for(Alimento obj: new ControllerAlimento().buscar(nome))
-						if(obj.getNome().equals(nome))
-							PopupEditarAlimentos.main(obj);
-				} catch (NullPointerException e1) {
-					JOptionPane.showMessageDialog(null, "Alimento não encontrado");
-					e1.printStackTrace();
-				} catch (DadosVaziosException e1) {
-					JOptionPane.showMessageDialog(null, "Algum campo está vazio");
-					e1.printStackTrace();
-				}
-			}
-		});
-		return botaoEditar;
-	}
-
-	public JLabel botaoExcluir(String nome, JPanel panel) {
-
-		JLabel botaoExcluir = new JLabel();
-		botaoExcluir.setSize(20, 20);
-		botaoExcluir.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				try {
-					new ControllerAlimento().remover(nome);
-					configureList(panel);
+					Alimento obj = new ControllerAlimento().buscar(nome).get(0);
+					
+					Alimento x = new Alimento();
+					x.setNome(obj.getNome());
+					x.setCalorias(obj.getCalorias());
+					x.setQuantidade(obj.getQuantidade());
+					refeicao.addAlimento(x);
+					
+					atualizarRefeicao();
+					
+					for (Component compo : panel.getComponents()) {
+						if(compo instanceof JScrollPane)
+							panel.remove(compo);
+					}
+					configureListAlimentos(panel);
+					configureListAlimentosRefeicao(panel); 
+					
 					frame.revalidate();
 					frame.repaint();
-				} catch (DadosVaziosException e1) {
-					JOptionPane.showMessageDialog(null, "Algum campo está vazio");
-					e1.printStackTrace();
-				} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
-					JOptionPane.showMessageDialog(null, "Erro ao excluir alimento");
-					e1.printStackTrace();
+				} catch (NullPointerException e) {
+					JOptionPane.showMessageDialog(null, "Alimento não encontrado");
+					e.printStackTrace();
+				} catch (DadosVaziosException e) {
+					JOptionPane.showMessageDialog(null, "Alimento com nome inválido");
+					e.printStackTrace();
 				}
 			}
-		});
-		return botaoExcluir;
+		};
+		
+		
+		ScrollList<Alimento> list = new ScrollList<Alimento>();
+		list.setAdapterAdicionar(btnAdicionar);
+		list.getVerticalScrollBar().setUnitIncrement(4);
+		list.setBorder(BorderFactory.createEmptyBorder());
+		list.setBounds(534, 151, 336, 324);
+		list.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		try {
+			list.configureList(panel, new ControllerAlimento().buscar(null));
+		} catch (NullPointerException e1) {
+			JOptionPane.showMessageDialog(null, "Alimento não encontrado");
+			e1.printStackTrace();
+		} catch (DadosVaziosException e1) {
+			JOptionPane.showMessageDialog(null, "Alimento com nome inválido");
+			e1.printStackTrace();
+		}
+		panel.add(list);
+	
+	}
+	
+	
+	private void configureListAlimentosRefeicao(JPanel panel){
+		MouseAdapterNome btnEditar = new MouseAdapterNome() {
+			@Override
+			public void mouseAdapter(String nome) {
+				for(Alimento obj: refeicao.getListAlimento())
+					if(obj.getNome().equals(nome))
+						PopupEditarAlimentos.main(obj);
+				
+				atualizarRefeicao();
+			}
+		};
+		
+		MouseAdapterNome btnExcluir = new MouseAdapterNome() {
+			@Override
+			public void mouseAdapter(String nome) {
+				for(Alimento obj: refeicao.getListAlimento())
+					if(obj.getNome().equals(nome)) {
+						refeicao.delAlimento(obj);
+						break;
+					}
+				atualizarRefeicao();
+				
+				for (Component compo : panel.getComponents()) 
+					if(compo instanceof JScrollPane)
+						panel.remove(compo);
+				
+				configureListAlimentos(panel);
+				configureListAlimentosRefeicao(panel);
+				
+				frame.revalidate();
+				frame.repaint();
+			}
+		};
+		
+		
+		ScrollList<Alimento> list_2 = new ScrollList<Alimento>();
+		list_2.setAdapterEditar(btnEditar);
+		list_2.setAdapterExcluir(btnExcluir);
+		list_2.getVerticalScrollBar().setUnitIncrement(4);
+		list_2.setBorder(BorderFactory.createEmptyBorder());
+		list_2.setBounds(20, 100, 466, 375);
+		list_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		try {
+			list_2.configureList(panel, refeicao.getListAlimento());
+		} catch (NullPointerException e1) {
+			JOptionPane.showMessageDialog(null, "Alimento não encontrado");
+			e1.printStackTrace();
+		} 
+		panel.add(list_2);
+	}
+	
+	
+	private void atualizarRefeicao() {
+		try {
+			new ControllerRefeicao(true).editar(refeicao.getNome(), refeicao);
+		} catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "Refeição nula");
+			e.printStackTrace();
+		} catch (DadosVaziosException e) {
+			JOptionPane.showMessageDialog(null, "Refeição com nome inválido");
+			e.printStackTrace();
+		} catch (OperacaoNaoConcluidaRepositorioExeception e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível atualizar refeição");
+			e.printStackTrace();
+		}
 	}
 	
 }
