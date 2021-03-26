@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 
 import Controller.ControllerAlimento;
 import Controller.ControllerExercicios;
+import Controller.ControllerUsuario;
 import Model.Alimento;
 import Model.Exercicio;
 import Util.DatasFormatadas;
@@ -164,7 +165,10 @@ public class TelaExercicios extends LayoutMain {
 			@Override
 			public void mouseAdapter(String nome) {
 				try {
+					Exercicio obj = new ControllerExercicios(true).buscar(nome).get(0);
+					int calorias = obj.getCalorias();
 					new ControllerExercicios(true).remover(nome);
+					new ControllerUsuario().removerCaloriasGastas(calorias);
 				} catch (DadosVaziosException e1) {
 					JOptionPane.showMessageDialog(null, "Exercicio com nome vazio");
 					e1.printStackTrace();
@@ -213,6 +217,7 @@ public class TelaExercicios extends LayoutMain {
 					Exercicio obj = new ControllerExercicios(false).buscar(nome).get(0);
 					obj.setData(new Date());
 					new ControllerExercicios(true).adicionar(obj);
+					new ControllerUsuario().adicionarCaloriasGastas(obj.getCalorias());
 					
 					for (Component compo : panel.getComponents()) {
 						if(compo instanceof JScrollPane)

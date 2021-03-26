@@ -79,6 +79,13 @@ public class DatasFormatadas {
 			return Month.JANUARY;
 		}
 	}
+	
+	public int getMesNumber() {		
+		SimpleDateFormat formatarMes = new SimpleDateFormat("M");
+		String mes = formatarMes.format(data);
+		
+		return Integer.parseInt(mes.intern());
+	}
 
 
 	public String getAno() {
@@ -121,6 +128,11 @@ public class DatasFormatadas {
 		return diaMes;
 	}
 
-
+	public int getDiaMesNumber() {
+		SimpleDateFormat formatarDiaMes = new SimpleDateFormat("dd");
+		String diaMes = formatarDiaMes.format(data);
+		
+		return Integer.parseInt(diaMes);
+	}
 	
 }

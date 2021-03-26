@@ -4,6 +4,7 @@ import Util.*;
 import Validation.DadosVaziosException;
 import Validation.OperacaoNaoConcluidaRepositorioExeception;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -83,12 +84,36 @@ public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao
 	
 	/**
 	 * 
-	 * @param dataIni
-	 * @param dataFim
+	 * @param dia
 	 */
-	public Refeicao buscar(Date dataIni, Date dataFim) {
-		// TODO - implement ControllerRefeicao.buscar
-		throw new UnsupportedOperationException();
+	public ArrayList<Refeicao> buscarPorData(Date date) {
+		ArrayList<Refeicao> list = new ArrayList<Refeicao>();
+		try {
+			for(Refeicao ref: this.buscar(null)) {
+			  	SimpleDateFormat dayFormat = new SimpleDateFormat("dd/MM/yyyy");
+				String dataBusca = dayFormat.format(date);
+				String dataRefeicao = dayFormat.format(ref.getData());
+				System.out.println("databusca: "+dataBusca+ "\n datarefeicao "+dataRefeicao);
+				if(dataBusca.equals(dataRefeicao))
+					list.add(ref);
+			}
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DadosVaziosException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return (list.size()==0)? null: list;
+	}
+	
+	public int getCaloriasRefeicoes(Date date) {
+		int calorias = 0;
+		for(Refeicao ref :buscarPorData(date))
+			calorias += ref.getCalorias();
+		
+		return calorias;
 	}
 
 	@Override

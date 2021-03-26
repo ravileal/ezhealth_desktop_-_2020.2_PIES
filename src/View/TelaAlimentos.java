@@ -19,8 +19,10 @@ import java.awt.Graphics2D;
 import javax.swing.SwingConstants;
 import Controller.ControllerAlimento;
 import Controller.ControllerRefeicao;
+import Controller.ControllerUsuario;
 import Model.Alimento;
 import Model.Refeicao;
+import Model.Usuario;
 import Util.DatasFormatadas;
 import Util.ScrollList;
 import Util.ViewUtils;
@@ -233,6 +235,7 @@ public class TelaAlimentos extends LayoutMain {
 					refeicao.addAlimento(x);
 					
 					atualizarRefeicao();
+					new ControllerUsuario().adicionarCaloriasConsumidas(obj.getCalorias());
 					
 					for (Component compo : panel.getComponents()) {
 						if(compo instanceof JScrollPane)
@@ -279,10 +282,10 @@ public class TelaAlimentos extends LayoutMain {
 			@Override
 			public void mouseAdapter(String nome) {
 				for(Alimento obj: refeicao.getListAlimento())
-					if(obj.getNome().equals(nome))
+					if(obj.getNome().equals(nome)) {
 						PopupEditarAlimentos.main(obj);
-				
-				atualizarRefeicao();
+						break;
+					}
 			}
 		};
 		
@@ -291,11 +294,12 @@ public class TelaAlimentos extends LayoutMain {
 			public void mouseAdapter(String nome) {
 				for(Alimento obj: refeicao.getListAlimento())
 					if(obj.getNome().equals(nome)) {
+						new ControllerUsuario().removerCaloriasConsumidas(obj.getCalorias());
 						refeicao.delAlimento(obj);
 						break;
 					}
-				atualizarRefeicao();
 				
+				atualizarRefeicao();
 				for (Component compo : panel.getComponents()) 
 					if(compo instanceof JScrollPane)
 						panel.remove(compo);
@@ -340,5 +344,7 @@ public class TelaAlimentos extends LayoutMain {
 			e.printStackTrace();
 		}
 	}
+	
+
 	
 }

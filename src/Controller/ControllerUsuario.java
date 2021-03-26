@@ -139,5 +139,21 @@ public class ControllerUsuario implements CRUD<Usuario> {
 	public static void setUsuarioLogado(Usuario usuarioLogado) {
 		ControllerUsuario.usuarioLogado = usuarioLogado;
 	}
+	
+	public void adicionarCaloriasConsumidas(int kcal) {
+		usuarioLogado.addCaloriasConsumidas(kcal);
+	}
+	
+	public void removerCaloriasConsumidas(int kcal) {	
+		usuarioLogado.decCaloriasConsumidas(kcal);
+	}
+	
+	public void adicionarCaloriasGastas(int kcal) {
+		usuarioLogado.addCaloriasGastas(kcal);
+	}
+	
+	public void removerCaloriasGastas(int kcal) {	
+		usuarioLogado.decCaloriasGastas(kcal);
+	}
 
 }

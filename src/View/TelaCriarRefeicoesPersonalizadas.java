@@ -38,9 +38,11 @@ import javax.swing.text.MaskFormatter;
 import Controller.ControllerAlimento;
 import Controller.ControllerExercicios;
 import Controller.ControllerRefeicao;
+import Controller.ControllerUsuario;
 import Model.Alimento;
 import Model.Exercicio;
 import Model.Refeicao;
+import Model.Usuario;
 import Util.CRUD;
 import Util.DatasFormatadas;
 import Util.ScrollList;
@@ -123,7 +125,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 				Graphics2D graphics2D = (Graphics2D)graphics.create();
 				graphics2D.setFont(getFont().deriveFont(Font.LAYOUT_LEFT_TO_RIGHT));
 		        graphics2D.setColor(Color.GRAY);
-		        graphics2D.drawString("Digite o nome do alimento", 5, 20);
+		        graphics2D.drawString("Digite o nome do alimento", 5, 20); 
 		        graphics2D.dispose();
 			}
 		};
@@ -195,7 +197,8 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 				try {
 					refeicao.setData(new Date());	
 					refeicao.setNome(txtNomeRefeicao.getText());
-					new ControllerRefeicao(true).adicionar(refeicao);
+					new ControllerRefeicao(false).adicionar(refeicao);
+					
 					JOptionPane.showMessageDialog(null, "Refeição cadastrada");
 					frame.dispose();
 					TelaRefeicoesPersonalizadas.main(null);
@@ -226,7 +229,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		
 		JButton buttonVoltar = new JButton("Voltar");
 		buttonVoltar.addMouseListener(new MouseAdapter() {
-			@Override
+			@Override 
 			public void mouseClicked(MouseEvent e) {
 				frame.dispose();
 				TelaRefeicoesPersonalizadas.main(null);

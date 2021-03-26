@@ -42,7 +42,7 @@ public class Popular {
 
 		popuparAlimentos();
 		popuparExercicio();
-		popuparExercicioRealizado();
+		//popuparExercicioRealizado();
 		popuparRefeicao();
 		popuparRefeicaoRealizada();
 		popuparUsuario();
@@ -67,6 +67,7 @@ public class Popular {
 	private void popuparExercicio() {
 		Exercicio exercicio = new Exercicio();
 		exercicio.setData(new Date());
+		exercicio.setCalorias(70);
 		exercicio.setNome("Correr");
 		
 		repositorioExercicio.adicionar(exercicio);
@@ -75,6 +76,7 @@ public class Popular {
 	private void popuparExercicioRealizado() {
 		Exercicio exercicio = new Exercicio();
 		exercicio.setData(new Date());
+		exercicio.setCalorias(30);
 		exercicio.setNome("Musculação");
 		
 		repositorioExercicioRealizado.adicionar(exercicio);

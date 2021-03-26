@@ -162,7 +162,7 @@ public class PopupCadastro extends LayoutPopup {
 		lblAltura.setVerticalAlignment(SwingConstants.TOP);
 		lblAltura.setHorizontalAlignment(SwingConstants.LEFT);
 		lblAltura.setFont(new Font("Quicksand Light", Font.PLAIN, 16));
-		lblAltura.setBounds(431, 156, 49, 18);
+		lblAltura.setBounds(431, 156, 49, 18); 
 		panel.add(lblAltura);
 		
 		JLabel lblKg_2 = new JLabel("(cm)");
@@ -355,6 +355,8 @@ public class PopupCadastro extends LayoutPopup {
 				
 				usuario.setColesterolAlto(checkbox_colesterolAlto.isSelected());
 				usuario.setDiabetes(checkbox_diabetes.isSelected());
+				
+				usuario.setMetaCaloria();
 				
 				try {
 					new ControllerUsuario().adicionar(usuario);

@@ -1,6 +1,9 @@
 package Model;
 
 import java.time.LocalDate;
+import java.util.Date;
+
+import Util.DatasFormatadas;
 
 public class Usuario extends Model{
 
@@ -12,7 +15,10 @@ public class Usuario extends Model{
 	private String senha;
 	private String confirmaSenha;
 	private String objetivo;
-	private String caloriasMeta;
+	private int caloriasGastas;
+	private int caloriasConsumidas;
+	private int caloriasMeta;
+	private int caloriasMetaOriginal;
 	private boolean lactose;
 	private boolean gluten;
 	private boolean diabetes;
@@ -105,22 +111,6 @@ public class Usuario extends Model{
 		this.objetivo = objetivo;
 	}
 
-	public String getCaloriasMeta() {
-		return this.caloriasMeta;
-	}
-
-	/**
-	 * 
-	 * @param caloriasMeta
-	 */
-	public void setCaloriasMeta(String caloriasMeta) {
-		this.caloriasMeta = caloriasMeta;
-	}
-
-	public float calculoIMC() {
-		// TODO - implement Usuario.calculoIMC
-		throw new UnsupportedOperationException();
-	}
 
 	public String getConfirmaSenha() {
 		return confirmaSenha;
@@ -165,9 +155,102 @@ public class Usuario extends Model{
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
-
+ 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+	
+	// GASTAS
+	public int getCaloriasGastas() {
+		return this.caloriasGastas;
+	}
+	
+	public void addCaloriasGastas(int calorias) {
+		this.caloriasGastas += calorias;
+		this.addCaloriasMeta(calorias);
+	}
+
+	public void decCaloriasGastas(int calorias) {
+		this.caloriasGastas -= calorias;
+		this.decCaloriasMeta(calorias);
+	}
+	
+	// CONSUMIDAS
+	public int getCaloriasConsumidas() {
+		return this.caloriasConsumidas;
+	}
+	
+	public void addCaloriasConsumidas(int calorias) {
+		this.caloriasConsumidas += calorias;
+		this.decCaloriasMeta(calorias);
+	}
+
+	public void decCaloriasConsumidas(int calorias) {
+		this.caloriasConsumidas -= calorias;
+		this.addCaloriasMeta(calorias);
+	}
+
+	// META CONSUMIR POR DIA
+	public int getCaloriasMeta() {
+		return this.caloriasMeta;
+	}
+
+	public void addCaloriasMeta(int calorias) {
+		this.caloriasMeta += calorias;
+	}
+
+	public void decCaloriasMeta(int calorias) {
+		this.caloriasMeta -= calorias;
+	}
+	
+	//
+	public void setMetaCaloria() {
+		int idade = getIdade();
+		
+		float coeficientePeso   = (float) ((this.sexo.equals("Feminino"))? 9.56: 13.75);
+		float coeficientealtura = (float) ((this.sexo.equals("Feminino"))? 1.85: 5    );
+		float coeficienteIdade  = (float) ((this.sexo.equals("Feminino"))? 4.68: 6.76 );
+		float temp = (float) (coeficientePeso*Float.parseFloat(peso)) + (coeficientealtura * Float.parseFloat(altura)) - (coeficienteIdade * idade) + 665;
+		int kcal = 500;
+		
+		switch (this.objetivo) {
+		case "Perder Peso":
+			temp -= kcal;				
+			break;
+		case "Ganhar Peso":
+			temp += kcal;
+			break;
+		case "Manter Peso":
+			break;
+		default:
+			temp = 0;
+			break;
+		}
+		this.caloriasMetaOriginal = Math.round(temp);
+		this.caloriasMeta = Math.round(temp);
+	}
+	
+	private int getIdade() {
+		String[] datNascimento = this.dataNascimento.toString().split("-");
+		
+		int anoNascimento = Integer.parseInt(datNascimento[0]);
+		int anoAtual = Integer.parseInt(new DatasFormatadas(new Date()).getAno());
+		int idade = anoAtual - anoNascimento;
+		
+		int mesNascimento = Integer.parseInt(datNascimento[1]);
+		int mesAtual = new DatasFormatadas(new Date()).getMesNumber();
+		
+		int diaNascimento = Integer.parseInt(datNascimento[2]);
+		int diaAtual = new DatasFormatadas(new Date()).getDiaMesNumber();
+		
+		if(mesAtual < mesNascimento)
+			idade--;
+		else if(mesAtual == mesNascimento) {
+			if(diaAtual < diaNascimento)
+				idade--;
+		}
+			
+		return idade;
 	}
 
 }

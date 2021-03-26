@@ -55,6 +55,7 @@ public class Refeicao extends AbstractAlimentacao {
 	 * @param alimento
 	 */
 	public void delAlimento(Alimento alimento) {
+		setCalorias(getCalorias()-alimento.getCalorias());
 		this.listAlimento.remove(alimento);
 	}
 

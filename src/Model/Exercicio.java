@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class Exercicio extends Model {
 
-	private float calorias;
+	private int calorias;
 	private String duracao;
 	private Date data;
 
-	public float getCalorias() {
+	public int getCalorias() {
 		return this.calorias;
 	}
 
@@ -16,7 +16,7 @@ public class Exercicio extends Model {
 	 * 
 	 * @param calorias
 	 */
-	public void setCalorias(float calorias) {
+	public void setCalorias(int calorias) {
 		this.calorias = calorias;
 	}
 

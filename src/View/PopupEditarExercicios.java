@@ -166,7 +166,7 @@ public class PopupEditarExercicios extends LayoutPopup {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String kcal = textField_caloriasTotais.getText();
-				exercicio.setCalorias(Float.parseFloat(kcal));
+				exercicio.setCalorias(Integer.parseInt(kcal));
 				String qtd = textFieldMinutosExercicios.getText();
 				exercicio.setDuracao(qtd);
 				JOptionPane.showMessageDialog(null, "Exercicio atualizado");

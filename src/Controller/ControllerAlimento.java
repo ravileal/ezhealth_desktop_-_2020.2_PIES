@@ -23,7 +23,7 @@ public class ControllerAlimento implements IAlimentacao<Alimento>, CRUD<Alimento
 	@Override
 	public boolean adicionar(Alimento obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
 		if(obj == null)
-			throw new NullPointerException("Impossível adicionar! Objeto Alimento null");
+			throw new NullPointerException("Impossível adicionar! Objeto Alimento null"); 
 		else if(obj.getNome().equals(""))
 			throw new DadosVaziosException("Impossível adicionar! Nome vazio");
 		else if(!rep.adicionar(obj))

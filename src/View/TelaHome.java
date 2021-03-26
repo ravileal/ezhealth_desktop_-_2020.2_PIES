@@ -9,19 +9,24 @@ import java.awt.Panel;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.UIManager;
 
 import Controller.ControllerRefeicao;
+import Controller.ControllerUsuario;
 import Model.Refeicao;
+import Model.Usuario;
 import Util.DatasFormatadas;
 import Validation.DadosVaziosException;
 
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class TelaHome extends LayoutMain {
-
+	
+	private Usuario usuario;
 	/**
 	 * Launch the application.
 	 */
@@ -44,6 +49,7 @@ public class TelaHome extends LayoutMain {
 	 * @wbp.parser.entryPoint
 	 */
 	public TelaHome() {
+		usuario = ControllerUsuario.getUsuarioLogado();
 		initialize();
 	}
 
@@ -57,7 +63,7 @@ public class TelaHome extends LayoutMain {
 	
 	private void configureContent() {
 		JPanel panel = new JPanel();
-		panel.setBounds(136, 106, 922, 497);
+		panel.setBounds(136, 106, 922, 497); 
 		panel.setBackground(Color.decode("#DFE4EA"));
 		panel.setLayout(null);
 		
@@ -96,34 +102,39 @@ public class TelaHome extends LayoutMain {
 		panel.add(lbl_calorias_title);
 		
 		JLabel lbl_caloriasConsumir_title = new JLabel("Consumir");
+		lbl_caloriasConsumir_title.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_caloriasConsumir_title.setFont(new Font("Quicksand Medium", Font.PLAIN, 14));
-		lbl_caloriasConsumir_title.setBounds(144, 48, 68, 45);
+		lbl_caloriasConsumir_title.setBounds(121, 48, 101, 45);
 		panel.add(lbl_caloriasConsumir_title);
 		
-		JLabel lbl_caloriasConsumir = new JLabel("0 kcal");
+		JLabel lbl_caloriasConsumir = new JLabel(usuario.getCaloriasMeta()+" kcal");
+		lbl_caloriasConsumir.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_caloriasConsumir.setFont(new Font("Quicksand Medium", Font.PLAIN, 12));
-		lbl_caloriasConsumir.setBounds(154, 72, 68, 45);
+		lbl_caloriasConsumir.setBounds(121, 72, 101, 45);
 		panel.add(lbl_caloriasConsumir);
-		
+		 
 		JLabel lbl_caloriasConsumidas_title = new JLabel("Consumidas");
+		lbl_caloriasConsumidas_title.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_caloriasConsumidas_title.setFont(new Font("Quicksand Medium", Font.PLAIN, 14));
-		lbl_caloriasConsumidas_title.setBounds(23, 42, 88, 45);
-		panel.add(lbl_caloriasConsumidas_title);
+		lbl_caloriasConsumidas_title.setBounds(10, 42, 101, 45);
+		panel.add(lbl_caloriasConsumidas_title); 
 		
-		
-		JLabel lbl_caloriasConsumidas = new JLabel("0 kcal");
+		JLabel lbl_caloriasConsumidas = new JLabel(usuario.getCaloriasConsumidas()+" kcal");
+		lbl_caloriasConsumidas.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_caloriasConsumidas.setFont(new Font("Quicksand Medium", Font.PLAIN, 12));
-		lbl_caloriasConsumidas.setBounds(44, 87, 46, 14);
+		lbl_caloriasConsumidas.setBounds(10, 87, 101, 14);
 		panel.add(lbl_caloriasConsumidas);
 		
 		JLabel lbl_caloriasGastas_title = new JLabel("Gastas");
+		lbl_caloriasGastas_title.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_caloriasGastas_title.setFont(new Font("Quicksand Medium", Font.PLAIN, 14));
-		lbl_caloriasGastas_title.setBounds(256, 42, 88, 45);
+		lbl_caloriasGastas_title.setBounds(232, 42, 92, 45);
 		panel.add(lbl_caloriasGastas_title);
 		
-		JLabel lbl_caloriasGastas = new JLabel("0 kcal");
+		JLabel lbl_caloriasGastas = new JLabel(usuario.getCaloriasGastas()+" kcal");
+		lbl_caloriasGastas.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_caloriasGastas.setFont(new Font("Quicksand Medium", Font.PLAIN, 12));
-		lbl_caloriasGastas.setBounds(263, 87, 46, 14);
+		lbl_caloriasGastas.setBounds(232, 87, 92, 14);
 		panel.add(lbl_caloriasGastas);
 		
 		panel_content.add(panel);
