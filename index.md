@@ -6,7 +6,9 @@ Pensando nisso, o sistema desktop "EzHealth", oferece uma aplicação que aborda
 
 Além dessas doenças citadas, também há suporte à hipertensão, que afeta boa parte da população. O EzHealth vem com a proposta de facilitar a vida dos portadores dessas doenças, que precisam seguir uma dieta rigorosa e praticar exercícios, sejam eles na academia ou esporadicamente. Qualquer uma das pessoas que possua essa necessidade se encaixa no perfil de usuário do sistema.
 
-[![Watch the video](https://i.imgur.com/lQFeaOH.png)](https://www.youtube.com/watch?v=flt8S7HRK_4)
+Entenda melhor nosso sistema no vídeo abaixo.
+
+[![Watch the video](https://i.imgur.com/OQwqkR6.png)](https://www.youtube.com/watch?v=flt8S7HRK_4)
 
 ## Sistema prático e intuitivo
 
@@ -20,7 +22,7 @@ Porém, sabemos que nem todo usuário está acostumado com certos tipos de siste
 
 Abaixo você tem acesso ao link para acessar o Wiki do sistema, onde ensinamos, utilizando prints das próprias telas da nossa aplicação, como realizar as principais atividades contidas no sistema.
 
-[![Wiki EzHealth](https://i.imgur.com/NPJabth.png)](https://github.com/ravileal/ezhealth_desktop_-_2020.2_PIES/wiki)
+[![Wiki EzHealth](https://i.imgur.com/MVgnoix.png)](https://github.com/ravileal/ezhealth_desktop_-_2020.2_PIES/wiki)
 
 
 ### Autores
