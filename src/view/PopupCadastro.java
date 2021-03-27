@@ -334,14 +334,10 @@ public class PopupCadastro extends LayoutPopup {
 				usuario.setAltura(textFieldAltura.getText());
 
 				if(textFieldNascimento.getText().equals("__/__/____")) {
-					usuario.setDataNascimento(LocalDate.of(2000, 01, 01));
+					usuario.setDataNascimento("01/01/2000");
 				} else {
 					String[] data = textFieldNascimento.getText().split("/");
-					usuario.setDataNascimento(
-							LocalDate.of(
-									Integer.parseInt(data[2]), 
-									Integer.parseInt(data[1]), 
-									Integer.parseInt(data[0])));
+					usuario.setDataNascimento(data[0]+"/"+data[1]+"/"+data[2]);
 				}
 				usuario.setUsuario(textFieldUsuario.getText());
 				usuario.setSenha(String.valueOf(textFieldSenha.getPassword()));
@@ -355,10 +351,10 @@ public class PopupCadastro extends LayoutPopup {
 				usuario.setColesterolAlto(checkbox_colesterolAlto.isSelected());
 				usuario.setDiabetes(checkbox_diabetes.isSelected());
 				
-				usuario.setMetaCaloria();
+				usuario.calularMetaCaloria();
 				
 				try {
-					new ControllerUsuario().adicionar(usuario);
+					new ControllerUsuario().adicionarTeste(usuario);
 					JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
 					dialog.dispose();
 				} catch (NullPointerException e1) {

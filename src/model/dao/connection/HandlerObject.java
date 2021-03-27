@@ -1,4 +1,4 @@
-package model.connection;
+package model.dao.connection;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,13 +15,25 @@ public class HandlerObject {
 		return instance;
 	}
 	
-	public <T> void create(T obj) {		
-		connection.execute((Session session, Transaction transaction) -> {
+	public <T> boolean create(T obj) {		
+		return connection.execute((Session session, Transaction transaction) -> {
 				session.save(obj);
 				transaction.commit();
 				System.out.println("successfully saved");	
 			}
 		);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T,K> T readUser(Class<T> class1, K id) {
+		connection.execute(
+			(Session session, Transaction transaction) -> {
+				object = (id instanceof String)?
+						session.byNaturalId(class1).using("usuario", id).load():
+						session.find(class1, id);
+			}
+		);
+		return (T) object;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -36,8 +48,8 @@ public class HandlerObject {
 		return (T) object;
 	}
 	
-	public <T, K> void update(Class<T> class1, T objectUpdate) {	
-		connection.execute(
+	public <T, K> boolean update(Class<T> class1, T objectUpdate) {	
+		return connection.execute(
 			(Session session, Transaction transaction) -> {
 				session.update(object);
 				transaction.commit();
@@ -46,8 +58,8 @@ public class HandlerObject {
 		);
 	}
 	
-	public <T> void delete(T object) {	
-		connection.execute(
+	public <T> boolean delete(T object) {	
+		return connection.execute(
 			(Session session, Transaction transaction) -> {
 				session.remove(object);
 				transaction.commit();

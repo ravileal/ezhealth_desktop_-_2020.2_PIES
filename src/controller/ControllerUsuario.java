@@ -3,6 +3,7 @@ package controller;
 import model.Exercicio;
 import model.Refeicao;
 import model.Usuario;
+import model.dao.connection.HandlerObject;
 import repository.RepositorioUsuario;
 import util.*;
 import validation.CredenciaisInvalidasException;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class ControllerUsuario implements CRUD<Usuario> {
 
 	private static RepositorioUsuario rep = new RepositorioUsuario();
-	
+	private static HandlerObject handlerObject = HandlerObject.getInstance();
 	private static Usuario usuarioLogado;
 	
 	public ControllerUsuario() {
@@ -24,6 +25,8 @@ public class ControllerUsuario implements CRUD<Usuario> {
 //			usuarioLogado = this.buscar("Admin").get(0);
 //		} catch (NullPointerException | DadosVaziosException e) {e.printStackTrace();}
 	}
+	
+	
 	
 	/* -----------------------------
 	 * 		Métodos do CRUD
@@ -45,7 +48,7 @@ public class ControllerUsuario implements CRUD<Usuario> {
 				buscar(obj.getUsuario());
 				throw new UsuarioDuplicadoException("Impossível concluir cadastro! Usuário digitado já esta cadastrado");
 			} catch (NullPointerException e) {
-				if(!rep.adicionar(obj))
+				if(!handlerObject.create(obj))
 					throw new OperacaoNaoConcluidaRepositorioExeception("Impossível concluir cadastro! Erro ao tentar adicionar o usuario '"+obj.getNome()+"' ao repositorio");
 				else
 					return true;

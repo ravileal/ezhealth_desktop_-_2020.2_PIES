@@ -27,5 +27,6 @@
 	<classpathentry kind="lib" path="C:/Users/paulo/Downloads/hibernate-release-5.4.30.Final/hibernate-release-5.4.30.Final/lib/required/stax-ex-1.8.jar"/>
 	<classpathentry kind="lib" path="C:/Users/paulo/Downloads/hibernate-release-5.4.30.Final/hibernate-release-5.4.30.Final/lib/required/txw2-2.3.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/paulo/Downloads/hibernate-release-5.4.30.Final/hibernate-release-5.4.30.Final/lib/jpa-metamodel-generator/hibernate-jpamodelgen-5.4.30.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/paulo/Documents/GitHub/ezhealth_-_2020.2_PIES/postgresql-42.2.19.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

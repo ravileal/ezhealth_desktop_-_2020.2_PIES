@@ -7,7 +7,7 @@ import util.DatasFormatadas;
 
 public class Usuario extends Model{
 
-	private LocalDate dataNascimento;
+	private String dataNascimento;
 	private String altura;
 	private String peso;
 	private String sexo;
@@ -152,15 +152,27 @@ public class Usuario extends Model{
 		this.colesterolAlto = colesterolAlto;
 	}
 
-	public LocalDate getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
  
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	
+	public int getCaloriasMetaOriginal() {
+		return caloriasMetaOriginal;
+	}
+
+	public void setCaloriasMetaOriginal(int caloriasMetaOriginal) {
+		this.caloriasMetaOriginal = caloriasMetaOriginal;
+	}
+	
 	// GASTAS
+	public void setCaloriasGastas(int caloriasGastas) {
+		this.caloriasGastas = caloriasGastas;
+	}
+	
 	public int getCaloriasGastas() {
 		return this.caloriasGastas;
 	}
@@ -176,6 +188,10 @@ public class Usuario extends Model{
 	}
 	
 	// CONSUMIDAS
+	public void setCaloriasConsumidas(int caloriasConsumidas) {
+		this.caloriasConsumidas = caloriasConsumidas;
+	}
+	
 	public int getCaloriasConsumidas() {
 		return this.caloriasConsumidas;
 	}
@@ -191,6 +207,10 @@ public class Usuario extends Model{
 	}
 
 	// META CONSUMIR POR DIA
+	public void setCaloriasMeta(int caloriasMeta) {
+		this.caloriasMeta = caloriasMeta;
+	}
+	
 	public int getCaloriasMeta() {
 		return this.caloriasMeta;
 	}
@@ -204,7 +224,7 @@ public class Usuario extends Model{
 	}
 	
 	//
-	public void setMetaCaloria() {
+	public void calularMetaCaloria() {
 		int idade = getIdade();
 		
 		float coeficientePeso   = (float) ((this.sexo.equals("Feminino"))? 9.56: 13.75);
@@ -226,21 +246,21 @@ public class Usuario extends Model{
 			temp = 0;
 			break;
 		}
-		this.caloriasMetaOriginal = Math.round(temp);
+		this.setCaloriasMetaOriginal(Math.round(temp));
 		this.caloriasMeta = Math.round(temp);
 	}
 	
 	private int getIdade() {
-		String[] datNascimento = this.dataNascimento.toString().split("-");
+		String[] datNascimento = this.dataNascimento.toString().split("/");
 		
-		int anoNascimento = Integer.parseInt(datNascimento[0]);
+		int anoNascimento = Integer.parseInt(datNascimento[2]);
 		int anoAtual = Integer.parseInt(new DatasFormatadas(new Date()).getAno());
 		int idade = anoAtual - anoNascimento;
 		
 		int mesNascimento = Integer.parseInt(datNascimento[1]);
 		int mesAtual = new DatasFormatadas(new Date()).getMesNumber();
 		
-		int diaNascimento = Integer.parseInt(datNascimento[2]);
+		int diaNascimento = Integer.parseInt(datNascimento[0]);
 		int diaAtual = new DatasFormatadas(new Date()).getDiaMesNumber();
 		
 		if(mesAtual < mesNascimento)
@@ -252,5 +272,7 @@ public class Usuario extends Model{
 			
 		return idade;
 	}
+
+
 
 }

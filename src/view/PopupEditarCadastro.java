@@ -103,8 +103,7 @@ public class PopupEditarCadastro extends LayoutPopup {
 		lblDataDeNascimento.setBounds(114, 93, 218, 30);
 		panel.add(lblDataDeNascimento);
 		
-		LocalDate date = ControllerUsuario.getUsuarioLogado().getDataNascimento();
-		String dateFormated = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		String dateFormated = ControllerUsuario.getUsuarioLogado().getDataNascimento();
 		JFormattedTextField textFieldNascimento = new JFormattedTextField(dateFormated);
 		textFieldNascimento.setColumns(10);
 		textFieldNascimento.setBounds(114, 116, 218, 30);
@@ -345,9 +344,7 @@ public class PopupEditarCadastro extends LayoutPopup {
 				usuario.setPeso(textFieldPeso.getText());
 				usuario.setAltura(textFieldAltura.getText());
 				
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-				LocalDate dt = LocalDate.parse(textFieldNascimento.getText(), formatter);
-				usuario.setDataNascimento(dt);
+				usuario.setDataNascimento(textFieldNascimento.getText());
 				
 				usuario.setUsuario(textFieldUsuario.getText());
 				usuario.setSenha(String.valueOf(textFieldSenha.getPassword()));

@@ -1,4 +1,4 @@
-package model.connection;
+package model.dao.connection;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -37,16 +37,19 @@ public class Connection {
 		transaction = session.beginTransaction();
 	}
 	
-	public void execute(Query query) {
+	public boolean execute(Query query) {
 		setConfiguration();
+		boolean result = false;
 		try {
-			query.executeQuery(session, transaction);		
+			query.executeQuery(session, transaction);	
+			result = true;
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			session.close();
 			factory.close();			
 		}
+		return result;
 	}
 	
 }

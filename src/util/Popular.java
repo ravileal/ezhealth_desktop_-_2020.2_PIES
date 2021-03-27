@@ -105,7 +105,7 @@ public class Popular {
 		u.setColesterolAlto(true);
 		u.setNome("Administrador");
 		u.setSexo("Masculino");
-		u.setDataNascimento(LocalDate.of(2021, Month.MARCH, 13));
+		u.setDataNascimento("13/03/2021");
 		u.setObjetivo("Manter Peso");
 		u.setPeso("02.52");
 		u.setAltura("5.00");
