@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+
+ <hibernate-mapping>  
+  <class name="Model.Usuario" table="usuario">  
+
+    <id name="id">  
+     <generator class="increment"></generator>  
+    </id>
+
+    <natural-id mutable="true">
+        <property name="usuario" unique="true" />
+    </natural-id>
+
+    <property name="nome"></property>  
+    <property name="dataNascimento"></property>  
+    <property name="altura"></property>  
+    <property name="peso"></property>   
+    <property name="sexo"></property>   
+    <property name="senha"></property>   
+    <property name="confirmaSenha"></property>   
+    <property name="objetivo"></property>   
+    <property name="caloriasGastas" type="integer" ></property>   
+    <property name="caloriasConsumidas" type="integer" ></property>   
+    <property name="caloriasMeta" type="integer" ></property>   
+    <property name="caloriasMetaOriginal" type="integer" ></property>   
+    <property name="lactose" type="boolean" ></property>   
+    <property name="gluten" type="boolean" ></property>   
+    <property name="diabetes" type="boolean" ></property>   
+    <property name="colesterolAlto" type="boolean" ></property>   
+            
+  </class>  
+ </hibernate-mapping>  
+ 
+
