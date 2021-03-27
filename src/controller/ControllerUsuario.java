@@ -110,17 +110,13 @@ public class ControllerUsuario implements CRUD<Usuario> {
 	 */
 	public static boolean validarLogin(String usuario, String senha) throws CredenciaisInvalidasException {
 		
-		ArrayList<Usuario> list = rep.buscar(usuario);
-		if(list == null)
+		Usuario user = handlerObject.readUser(Usuario.class, usuario);
+		if(user == null)
 			throw new NullPointerException("Nenhum usuario encontrado");
-		
-		Usuario u = rep.buscar(usuario).get(0);
-		if( u == null )
-			throw new NullPointerException("Usuario não encontrado");
-		else if( !u.getSenha().equals(senha) || !u.getUsuario().equals(usuario))
+		else if( !user.getSenha().equals(senha) || !user.getUsuario().equals(usuario))
 			throw new CredenciaisInvalidasException("Login ou senha inválidos");
 		
-		usuarioLogado = u;
+		usuarioLogado = user;
 		return true;
 	}
 
