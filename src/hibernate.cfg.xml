@@ -13,9 +13,6 @@
         <property name="connection.password">XnkZTDBOgLYBGkL4oxbV94R6bT10h2aJ</property>  
         <property name="connection.driver_class">org.postgresql.Driver</property>  
     <mapping resource="usuario.hbm.xml"/>
-    <mapping resource="alimento.hbm.xml"/>
-    <mapping resource="refeicao.hbm.xml"/>
-    <mapping resource="refeicao_realizada.hbm.xml"/>
     </session-factory>  
  
 </hibernate-configuration>  

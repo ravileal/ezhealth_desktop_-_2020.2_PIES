@@ -1,6 +1,6 @@
 package util;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import validation.DadosVaziosException;
 import validation.OperacaoNaoConcluidaRepositorioExeception;
@@ -24,10 +24,8 @@ public interface CRUD<T> {
 	 * @param id
 	 * @throws DadosVaziosException 
 	 */
-	T buscar(String nome) throws DadosVaziosException;
+	ArrayList<T> buscar(String nome) throws DadosVaziosException;
 
-	List<T> buscarTodos() throws DadosVaziosException;
-	
 	/**
 	 * 
 	 * @param obj

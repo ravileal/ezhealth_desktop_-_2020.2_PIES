@@ -3,12 +3,23 @@ package view;
 import java.awt.EventQueue;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.FocusManager;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+
+import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.function.Consumer;
@@ -20,18 +31,29 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.KeyboardFocusManager;
 
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
+
 import controller.ControllerAlimento;
+import controller.ControllerExercicios;
 import controller.ControllerRefeicao;
+import controller.ControllerUsuario;
 import model.Alimento;
+import model.Exercicio;
 import model.Refeicao;
+import model.Usuario;
+import util.CRUD;
 import util.DatasFormatadas;
 import util.ScrollList;
+import util.ViewUtils;
 import util.ScrollList.MouseAdapterNome;
 import validation.DadosVaziosException;
 import validation.OperacaoNaoConcluidaRepositorioExeception;
+import validation.SenhaInvalidaException;
+import validation.UsuarioDuplicadoException;
+
+import java.awt.Button;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
@@ -97,7 +119,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 			protected void paintComponent(Graphics graphics) {
 				super.paintComponent(graphics);
 				if(!(getText().isEmpty() && 
-				   !(KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this)))
+				   !(FocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this)))
 					return;
 					
 				Graphics2D graphics2D = (Graphics2D)graphics.create();
@@ -144,7 +166,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 			protected void paintComponent(Graphics graphics) {
 				super.paintComponent(graphics);
 				if(!(getText().isEmpty() && 
-				   !(KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this)))
+				   !(FocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this)))
 					return;
 				Graphics2D graphics2D = (Graphics2D)graphics.create();
 				graphics2D.setFont(getFont().deriveFont(Font.LAYOUT_LEFT_TO_RIGHT));
@@ -173,10 +195,7 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					refeicao.setData(
-							new DatasFormatadas(new Date()).getDiaMesNumber() + "/" +
-							new DatasFormatadas(new Date()).getMesNumber() + "/" +
-							new DatasFormatadas(new Date()).getAno());	
+					refeicao.setData(new Date());	
 					refeicao.setNome(txtNomeRefeicao.getText());
 					new ControllerRefeicao(false).adicionar(refeicao);
 					
@@ -234,57 +253,55 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 	}
 	
 	private void configureListAlimentos(JPanel panel){
+		MouseAdapterNome btnAdicionar = new MouseAdapterNome() {
+			@Override
+			public void mouseAdapter(String nome) {
+				try {
+					Alimento obj = new ControllerAlimento().buscar(nome).get(0);
+					Alimento x = new Alimento();
+					x.setNome(obj.getNome());
+					x.setCalorias(obj.getCalorias());
+					x.setQuantidade(obj.getQuantidade());
+					refeicao.addAlimento(x);
+					refeicao.setData(new Date());
+					
+					for (Component compo : panel.getComponents()) {
+						if(compo instanceof JScrollPane)
+							panel.remove(compo);
+					}
+					configureListAlimentos(panel);
+					configureListAlimentosRefeicao(panel); 
+				
+					
+					frame.revalidate();
+					frame.repaint();
+				} catch (NullPointerException e) {
+					JOptionPane.showMessageDialog(null, "Alimento não encontrado");
+					e.printStackTrace();
+				} catch (DadosVaziosException e) {
+					JOptionPane.showMessageDialog(null, "Alimento com nome inválido");
+					e.printStackTrace();
+				}
+			}
+		};
+		
+		
 		ScrollList<Alimento> list = new ScrollList<Alimento>();
+		list.setAdapterAdicionar(btnAdicionar);
 		list.getVerticalScrollBar().setUnitIncrement(4);
 		list.setBorder(BorderFactory.createEmptyBorder());
 		list.setBounds(534, 168, 336, 307);
 		list.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		
 		try {
-			final ArrayList<Alimento> listAlimento = new ControllerAlimento().buscarTodos();
-			
-			MouseAdapterNome btnAdicionar = new MouseAdapterNome() {
-				@Override
-				public void mouseAdapter(String nome) {
-					try {						
-						for(Alimento alimento: listAlimento)
-							if(alimento.getNome().equals(nome)) {
-								refeicao.addAlimento(alimento);
-								refeicao.setData(
-										new DatasFormatadas(new Date()).getDiaMesNumber() + "/" +
-										new DatasFormatadas(new Date()).getMesNumber() + "/" +
-										new DatasFormatadas(new Date()).getAno());								
-							}
-						
-						for (Component compo : panel.getComponents()) 
-							if(compo instanceof JScrollPane)
-								panel.remove(compo);
-							
-						configureListAlimentos(panel);
-						configureListAlimentosRefeicao(panel); 
-						
-						frame.revalidate();
-						frame.repaint();
-					} catch (NullPointerException e) {
-						JOptionPane.showMessageDialog(null, "Alimento não encontrado");
-						e.printStackTrace();
-					} 
-				}
-			};
-		
-			list.setAdapterAdicionar(btnAdicionar);
-			list.configureList(panel, listAlimento);
-		
+			list.configureList(panel, new ControllerAlimento().buscar(null));
 		} catch (NullPointerException e1) {
 			JOptionPane.showMessageDialog(null, "Alimento não encontrado");
 			e1.printStackTrace();
 		} catch (DadosVaziosException e1) {
 			JOptionPane.showMessageDialog(null, "Alimento com nome inválido");
 			e1.printStackTrace();
-		} finally {
-			panel.add(list);			
 		}
-		
+		panel.add(list);
 	}
 	
 	private void configureListAlimentosRefeicao(JPanel panel){

@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import util.DatasFormatadas;
@@ -229,7 +230,7 @@ public class Usuario extends Model{
 		float coeficientePeso   = (float) ((this.sexo.equals("Feminino"))? 9.56: 13.75);
 		float coeficientealtura = (float) ((this.sexo.equals("Feminino"))? 1.85: 5    );
 		float coeficienteIdade  = (float) ((this.sexo.equals("Feminino"))? 4.68: 6.76 );
-		float temp = coeficientePeso*Float.parseFloat(peso) + (coeficientealtura * Float.parseFloat(altura)) - (coeficienteIdade * idade) + 665;
+		float temp = (float) (coeficientePeso*Float.parseFloat(peso)) + (coeficientealtura * Float.parseFloat(altura)) - (coeficienteIdade * idade) + 665;
 		int kcal = 500;
 		
 		switch (this.objetivo) {

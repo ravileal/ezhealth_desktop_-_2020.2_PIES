@@ -17,8 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controller.ControllerSystem;
-
 public class ViewUtils {
 	
 	private Window window;
@@ -119,10 +117,9 @@ public class ViewUtils {
 		btnNewButton_close.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(close) {
-					new ControllerSystem().stopConnection();
+				if(close)
 					System.exit(0);
-				} else
+				else
 					window.dispose();
 			}
 			@Override

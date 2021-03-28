@@ -1,5 +1,7 @@
 package util;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Date;
 
 import model.Alimento;
@@ -82,10 +84,7 @@ public class Popular {
 	
 	private void popuparRefeicao() {
 		Refeicao refeicao = new Refeicao();
-		refeicao.setData(
-				new DatasFormatadas(new Date()).getDiaMesNumber() + "/" +
-				new DatasFormatadas(new Date()).getMesNumber() + "/" +
-				new DatasFormatadas(new Date()).getAno());
+		refeicao.setData(new Date());
 		refeicao.setNome("Cafe da manha");
 		
 		repositorioRefeicao.adicionar(refeicao);
@@ -93,10 +92,7 @@ public class Popular {
 	
 	private void popuparRefeicaoRealizada() {
 		Refeicao refeicao = new Refeicao();
-		refeicao.setData(
-				new DatasFormatadas(new Date()).getDiaMesNumber() + "/" +
-				new DatasFormatadas(new Date()).getMesNumber() + "/" +
-				new DatasFormatadas(new Date()).getAno());
+		refeicao.setData(new Date());
 		refeicao.setNome("Cafe da manha");
 		
 		repositorioRefeicaoRealizada.adicionar(refeicao);

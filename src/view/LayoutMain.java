@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
-import controller.ControllerSystem;
 import controller.ControllerUsuario;
 import util.ViewUtils;
 
@@ -233,7 +232,6 @@ public class LayoutMain {
 		labelSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new ControllerSystem().stopConnection();
 				ControllerUsuario.setUsuarioLogado(null);
 				frame.dispose();
 				Login.main(null);

@@ -3,16 +3,21 @@ package view;
 import java.awt.EventQueue;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import controller.ControllerAlimento;
 import controller.ControllerRefeicao;
+import model.Alimento;
 import model.Refeicao;
 import util.DatasFormatadas;
 import util.ScrollList;
+import util.ViewUtils;
 import util.ScrollList.MouseAdapterNome;
 import validation.DadosVaziosException;
 import validation.OperacaoNaoConcluidaRepositorioExeception;
@@ -24,8 +29,10 @@ import java.awt.event.MouseEvent;
 import java.util.Date;
 
 import javax.swing.JScrollPane;
+import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import javax.swing.JSeparator;
 import javax.swing.JPanel;
 
@@ -155,7 +162,7 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 		list_2.setBounds(28, 92, 820, 337);
 		list_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		try {
-			list_2.configureList(panel,  new ControllerRefeicao(true).buscarTodos() );
+			list_2.configureList(panel,  new ControllerRefeicao(true).buscar(null) );
 		} catch (NullPointerException e1) {
 			JOptionPane.showMessageDialog(null, "Refeição não encontrada");
 			e1.printStackTrace();
