@@ -1,5 +1,10 @@
 package model.dao.connection;
 
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -7,6 +12,7 @@ public class HandlerObject {
 	
 	private Connection connection = Connection.getInstance();
 	private static volatile Object object;
+	private static volatile List<Object> list;
 	private static HandlerObject instance;
 	
 	public static HandlerObject getInstance() {
@@ -22,6 +28,19 @@ public class HandlerObject {
 				System.out.println("successfully saved");	
 			}
 		);
+	}
+    
+	@SuppressWarnings("unchecked")
+	public <T,K> List<T> readAll(Class<T> class1) {
+		connection.execute(
+			(Session session, Transaction transaction) -> {
+			    CriteriaBuilder builder = session.getCriteriaBuilder();
+			    CriteriaQuery<T> criteria = builder.createQuery(class1);
+			    criteria.from(class1);
+			    list = (List<Object>) session.createQuery(criteria).getResultList();
+			}
+		);
+		return (List<T>) list;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -41,7 +60,7 @@ public class HandlerObject {
 		connection.execute(
 			(Session session, Transaction transaction) -> {
 				object = (id instanceof String)?
-						session.byNaturalId(class1).using("name", id).load():
+						session.byNaturalId(class1).using("nome", id).load():
 						session.find(class1, id);
 			}
 		);

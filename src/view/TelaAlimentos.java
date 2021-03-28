@@ -2,19 +2,18 @@ package view;
 
 import java.awt.EventQueue;
 
-import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.KeyboardFocusManager;
 
 import javax.swing.SwingConstants;
 
@@ -23,25 +22,19 @@ import controller.ControllerRefeicao;
 import controller.ControllerUsuario;
 import model.Alimento;
 import model.Refeicao;
-import model.Usuario;
 import util.DatasFormatadas;
 import util.ScrollList;
-import util.ViewUtils;
 import util.ScrollList.MouseAdapterNome;
 import validation.DadosVaziosException;
 import validation.OperacaoNaoConcluidaRepositorioExeception;
 
-import java.awt.Dimension;
-
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.JSeparator;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
 import javax.swing.FocusManager;
 import javax.swing.JButton;
 
@@ -92,9 +85,7 @@ public class TelaAlimentos extends LayoutMain {
 
 	private TelaAlimentos(String nome) {
 		try {
-			for(Refeicao ref : new ControllerRefeicao(true).buscar(nome)) {
-					refeicao = ref;				
-			}
+			refeicao = new ControllerRefeicao(true).buscar(nome);		
 //			new ControllerRefeicao(true)
 //			.buscar(nome)
 //			.forEach((ref) -> {
@@ -104,7 +95,10 @@ public class TelaAlimentos extends LayoutMain {
 		} catch (NullPointerException e) {
 			refeicao = new Refeicao();
 			refeicao.setNome(nome);
-			refeicao.setData(new Date());
+			refeicao.setData(
+					new DatasFormatadas(new Date()).getDiaMesNumber() + "/" +
+					new DatasFormatadas(new Date()).getMesNumber() + "/" +
+					new DatasFormatadas(new Date()).getAno());
 			try {
 				new ControllerRefeicao(true).adicionar(refeicao);
 			} catch (NullPointerException e1) {
@@ -147,8 +141,7 @@ public class TelaAlimentos extends LayoutMain {
 		lblMinhaRefeio.setBounds(20, 11, 341, 30);
 		panel.add(lblMinhaRefeio);
 
-		DatasFormatadas dataFormatada = new DatasFormatadas(refeicao.getData());
-		JLabel labelData = new JLabel( dataFormatada.getDiaSemana() + " - " + dataFormatada.getDiaMes());
+		JLabel labelData = new JLabel( refeicao.getData() );
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
 		labelData.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
@@ -186,7 +179,7 @@ public class TelaAlimentos extends LayoutMain {
 			protected void paintComponent(Graphics graphics) {
 				super.paintComponent(graphics);
 				if(!(getText().isEmpty() && 
-				   !(FocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this)))
+				   !(KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this)))
 					return;
 					
 				Graphics2D graphics2D = (Graphics2D)graphics.create();
@@ -223,58 +216,57 @@ public class TelaAlimentos extends LayoutMain {
 	}
 
 	private void configureListAlimentos(JPanel panel){
-		MouseAdapterNome btnAdicionar = new MouseAdapterNome() {
-			@Override
-			public void mouseAdapter(String nome) {
-				try {
-					Alimento obj = new ControllerAlimento().buscar(nome).get(0);
-					
-					Alimento x = new Alimento();
-					x.setNome(obj.getNome());
-					x.setCalorias(obj.getCalorias());
-					x.setQuantidade(obj.getQuantidade());
-					refeicao.addAlimento(x);
-					
-					atualizarRefeicao();
-					new ControllerUsuario().adicionarCaloriasConsumidas(obj.getCalorias());
-					
-					for (Component compo : panel.getComponents()) {
-						if(compo instanceof JScrollPane)
-							panel.remove(compo);
-					}
-					configureListAlimentos(panel);
-					configureListAlimentosRefeicao(panel); 
-					
-					frame.revalidate();
-					frame.repaint();
-				} catch (NullPointerException e) {
-					JOptionPane.showMessageDialog(null, "Alimento não encontrado");
-					e.printStackTrace();
-				} catch (DadosVaziosException e) {
-					JOptionPane.showMessageDialog(null, "Alimento com nome inválido");
-					e.printStackTrace();
-				}
-			}
-		};
-		
-		
 		ScrollList<Alimento> list = new ScrollList<Alimento>();
-		list.setAdapterAdicionar(btnAdicionar);
 		list.getVerticalScrollBar().setUnitIncrement(4);
 		list.setBorder(BorderFactory.createEmptyBorder());
-		list.setBounds(534, 151, 336, 324);
+		list.setBounds(534, 168, 336, 307);
 		list.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		
 		try {
-			list.configureList(panel, new ControllerAlimento().buscar(null));
+			final ArrayList<Alimento> listAlimento = new ControllerAlimento().buscarTodos();
+			
+			MouseAdapterNome btnAdicionar = new MouseAdapterNome() {
+				@Override
+				public void mouseAdapter(String nome) {
+					try {						
+						for(Alimento alimento: listAlimento)
+							if(alimento.getNome().equals(nome)) {
+								refeicao.addAlimento(alimento);
+								refeicao.setData(
+										new DatasFormatadas(new Date()).getDiaMesNumber() + "/" +
+										new DatasFormatadas(new Date()).getMesNumber() + "/" +
+										new DatasFormatadas(new Date()).getAno());								
+							}
+						
+						for (Component compo : panel.getComponents()) 
+							if(compo instanceof JScrollPane)
+								panel.remove(compo);
+							
+						configureListAlimentos(panel);
+						configureListAlimentosRefeicao(panel); 
+						
+						frame.revalidate();
+						frame.repaint();
+					} catch (NullPointerException e) {
+						JOptionPane.showMessageDialog(null, "Alimento não encontrado");
+						e.printStackTrace();
+					} 
+				}
+			};
+		
+			list.setAdapterAdicionar(btnAdicionar);
+			list.configureList(panel, listAlimento);
+		
 		} catch (NullPointerException e1) {
 			JOptionPane.showMessageDialog(null, "Alimento não encontrado");
 			e1.printStackTrace();
 		} catch (DadosVaziosException e1) {
 			JOptionPane.showMessageDialog(null, "Alimento com nome inválido");
 			e1.printStackTrace();
+		} finally {
+			panel.add(list);			
 		}
-		panel.add(list);
-	
+		
 	}
 	
 	

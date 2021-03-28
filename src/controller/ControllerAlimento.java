@@ -3,14 +3,16 @@ package controller;
 import java.util.ArrayList;
 
 import model.Alimento;
+import model.dao.connection.HandlerObject;
 import repository.RepositorioAlimento;
 import util.*;
 import validation.DadosVaziosException;
 import validation.OperacaoNaoConcluidaRepositorioExeception;
 
-public class ControllerAlimento implements IAlimentacao<Alimento>, CRUD<Alimento> {
+public class ControllerAlimento implements CRUD<Alimento> {
 
 	private RepositorioAlimento rep;
+	private static HandlerObject handlerObject = HandlerObject.getInstance();
 
 	public ControllerAlimento() {
 		Popular.getInstance();
@@ -32,17 +34,26 @@ public class ControllerAlimento implements IAlimentacao<Alimento>, CRUD<Alimento
 			return true;
 	}
 
-	@Override
-	public ArrayList<Alimento> buscar(String nome) throws DadosVaziosException, NullPointerException {
-		if(nome != null && nome.equals(""))
-			throw new DadosVaziosException("Impossível buscar! Nome vazio");
-		
-		ArrayList<Alimento> list = rep.buscar(nome);
+
+	public ArrayList<Alimento> buscarTodos() throws DadosVaziosException, NullPointerException {
+		ArrayList<Alimento> list = (ArrayList<Alimento>) handlerObject.readAll(Alimento.class);
 		
 		if(list == null)
 			throw new NullPointerException("Não foi possível encontrar exercicio a partir do nome");
 		else 
 			return list;
+	}
+	
+	public Alimento buscar(String nome) throws DadosVaziosException, NullPointerException {
+		if(nome != null && nome.equals(""))
+			throw new DadosVaziosException("Impossível buscar! Nome vazio");
+		
+		Alimento alimento = handlerObject.read(Alimento.class, nome);
+		
+		if(alimento == null)
+			throw new NullPointerException("Não foi possível encontrar exercicio a partir do nome");
+		else 
+			return alimento;
 	}
 
 	@Override
@@ -67,9 +78,9 @@ public class ControllerAlimento implements IAlimentacao<Alimento>, CRUD<Alimento
 			return true;
 	}
 
-	@Override
-	public ArrayList<Alimento> buscar(boolean glutem, boolean lactose, int taxaAcucar) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public ArrayList<Alimento> buscar(boolean glutem, boolean lactose, int taxaAcucar) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }

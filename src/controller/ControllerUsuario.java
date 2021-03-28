@@ -13,6 +13,7 @@ import validation.SenhaInvalidaException;
 import validation.UsuarioDuplicadoException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ControllerUsuario implements CRUD<Usuario> {
 
@@ -55,18 +56,23 @@ public class ControllerUsuario implements CRUD<Usuario> {
 			}
 		} 
 	}
+	
+	@Override
+	public List<Usuario> buscarTodos() throws DadosVaziosException {
+		return handlerObject.readAll(Usuario.class);
+	}
 
 	@Override
-	public ArrayList<Usuario> buscar(String usuario) throws DadosVaziosException, NullPointerException {
+	public Usuario buscar(String usuario) throws DadosVaziosException, NullPointerException {
 		if(usuario != null && usuario.equals(""))
 			throw new DadosVaziosException("Impossível buscar! Campo usuário vazio");
 		
-		ArrayList<Usuario> list = rep.buscar(usuario);
+		Usuario user = handlerObject.readUser(Usuario.class, usuario);
 		
-		if(list == null)
+		if(user == null)
 			throw new NullPointerException("Não foi possível encontrar usuarios a partir do nome de usuario");
 		else 
-			return list;
+			return user;
 			
 	}
 

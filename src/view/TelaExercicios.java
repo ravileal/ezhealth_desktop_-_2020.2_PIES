@@ -14,10 +14,8 @@ import javax.swing.JSeparator;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-import controller.ControllerAlimento;
 import controller.ControllerExercicios;
 import controller.ControllerUsuario;
-import model.Alimento;
 import model.Exercicio;
 import util.DatasFormatadas;
 import util.ScrollList;
@@ -26,8 +24,6 @@ import validation.DadosVaziosException;
 import validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import java.awt.SystemColor;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.Date;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;

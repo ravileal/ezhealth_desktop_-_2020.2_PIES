@@ -6,7 +6,7 @@ import validation.DadosVaziosException;
 
 public class Refeicao extends AbstractAlimentacao {
 
-	private Date data;
+	private String data;
 	private String tipo;
 	private ArrayList<Alimento> listAlimento;
 
@@ -14,7 +14,7 @@ public class Refeicao extends AbstractAlimentacao {
 		listAlimento = new ArrayList<Alimento>();
 	}
 	
-	public Date getData() {
+	public String getData() {
 		return this.data;
 	}
 
@@ -22,7 +22,7 @@ public class Refeicao extends AbstractAlimentacao {
 	 * 
 	 * @param data
 	 */
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 

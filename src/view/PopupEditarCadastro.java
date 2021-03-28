@@ -32,8 +32,6 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class PopupEditarCadastro extends LayoutPopup {
 	

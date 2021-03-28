@@ -9,7 +9,6 @@ import java.awt.Panel;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.UIManager;
@@ -330,7 +329,7 @@ public class TelaHome extends LayoutMain {
 		Refeicao ref;
 		String calorias="0";
 		try {
-			ref = new ControllerRefeicao(true).buscar(nomeRefeicao).get(0);
+			ref = new ControllerRefeicao(true).buscar(nomeRefeicao);
 			calorias = String.valueOf(ref.getCalorias());
 		} catch (NullPointerException e1) {
 		} catch (DadosVaziosException e1) {

@@ -28,8 +28,13 @@ public class Connection {
 			instance = new Connection();
 		return instance;
 	}
+	
+	public void stopConnection() {
+		session.close();
+		factory.close();
+	}
 
-	private void setConfiguration() {
+	public void startConnection() {
 		ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		meta = new MetadataSources(ssr).getMetadataBuilder().build();
 		factory = meta.getSessionFactoryBuilder().build();
@@ -38,16 +43,12 @@ public class Connection {
 	}
 	
 	public boolean execute(Query query) {
-		setConfiguration();
 		boolean result = false;
 		try {
 			query.executeQuery(session, transaction);	
 			result = true;
 		} catch(Exception e) {
 			e.printStackTrace();
-		} finally {
-			session.close();
-			factory.close();			
 		}
 		return result;
 	}

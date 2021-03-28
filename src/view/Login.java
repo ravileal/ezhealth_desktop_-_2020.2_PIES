@@ -7,9 +7,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import controller.ControllerRefeicao;
+import controller.ControllerSystem;
 import controller.ControllerUsuario;
+import model.Alimento;
+import model.Refeicao;
+import model.RefeicaoRealizada;
+import model.dao.connection.HandlerObject;
+import util.DatasFormatadas;
 import util.ViewUtils;
 import validation.CredenciaisInvalidasException;
+import validation.DadosVaziosException;
+import validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 
@@ -48,7 +58,7 @@ public class Login {
 				try {
 					Login window = new Login();
 					window.frame.setVisible(true);
-//					Popular.getInstance();
+					new ControllerSystem().startConnection();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -130,6 +140,30 @@ public class Login {
 				
 				try {
 					ControllerUsuario.validarLogin(campoLogin.getText(), String.valueOf(campoSenha.getPassword()));
+					
+//					
+//					RefeicaoRealizada refeicao = new RefeicaoRealizada();
+//					refeicao.setIdUsuario(ControllerUsuario.getUsuarioLogado().getId());
+//					refeicao.setData(
+//							new DatasFormatadas(new Date()).getDiaMesNumber() + "/" +
+//							new DatasFormatadas(new Date()).getMesNumber() + "/" +
+//							new DatasFormatadas(new Date()).getAno());
+//					refeicao.setNome("Cafe da manha");
+//					
+//					try {
+//						new ControllerRefeicao(true).adicionar(refeicao);
+//					} catch (NullPointerException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					} catch (DadosVaziosException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
+					
+					
 					frame.dispose();
 					TelaHome.main(null);
 				} catch (CredenciaisInvalidasException e1) {
@@ -202,6 +236,11 @@ public class Login {
 		 
 		panel.add(lblImgHospital); // adiciona a label ao painel
 		// ---- Label da imagem hospital ---- Fim
+		
+		
+		
+
+
 		
 	}
 	

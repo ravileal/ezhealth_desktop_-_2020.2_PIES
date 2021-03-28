@@ -3,19 +3,16 @@ package view;
 import java.awt.EventQueue;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.FocusManager;
 import javax.swing.JButton;
 
-import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.SystemColor;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JLabel;
@@ -25,6 +22,7 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.KeyboardFocusManager;
 
 import javax.swing.SwingConstants;
 
@@ -34,19 +32,15 @@ import model.Alimento;
 import model.Refeicao;
 import util.DatasFormatadas;
 import util.ScrollList;
-import util.ViewUtils;
 import util.ScrollList.MouseAdapterNome;
 import validation.DadosVaziosException;
 import validation.OperacaoNaoConcluidaRepositorioExeception;
 
 import javax.swing.JSeparator;
-import java.awt.Button;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 
 import javax.swing.ScrollPaneConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 
@@ -92,7 +86,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 
 	private TelaEditarRefeicaoPersonalizada(String nome) {
 		try {
-			refeicao = new ControllerRefeicao(true).buscar(nome).get(0);
+			refeicao = new ControllerRefeicao(true).buscar(nome);
 		} catch (NullPointerException e) {
 			JOptionPane.showMessageDialog(null, "Refeição não encontrada");
 			e.printStackTrace();
@@ -126,8 +120,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 		lblMinhaRefeio.setBounds(20, 11, 177, 30);
 		panel.add(lblMinhaRefeio);
 
-		DatasFormatadas dataFormatada = new DatasFormatadas(refeicao.getData());
-		JLabel labelData = new JLabel( dataFormatada.getDiaSemana() + " - " + dataFormatada.getDiaMes());
+		JLabel labelData = new JLabel( refeicao.getData() );
 		labelData.setVerticalAlignment(SwingConstants.TOP);
 		labelData.setHorizontalAlignment(SwingConstants.LEFT);
 		labelData.setFont(new Font("Quicksand Light", Font.PLAIN, 13));
@@ -165,7 +158,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 			protected void paintComponent(Graphics graphics) {
 				super.paintComponent(graphics);
 				if(!(getText().isEmpty() && 
-				   !(FocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this)))
+				   !(KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this)))
 					return;
 					
 				Graphics2D graphics2D = (Graphics2D)graphics.create();
@@ -204,7 +197,7 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 			protected void paintComponent(Graphics graphics) {
 				super.paintComponent(graphics);
 				if(!(getText().isEmpty() && 
-				   !(FocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this)))
+				   !(KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this)))
 					return;
 				Graphics2D graphics2D = (Graphics2D)graphics.create();
 				graphics2D.setFont(getFont().deriveFont(Font.LAYOUT_LEFT_TO_RIGHT));
@@ -269,50 +262,57 @@ public class TelaEditarRefeicaoPersonalizada extends LayoutMain {
 	}
 
 	private void configureListAlimentos(JPanel panel){
-		MouseAdapterNome btnAdicionar = new MouseAdapterNome() {
-			@Override
-			public void mouseAdapter(String nome) {
-				try {
-					Alimento obj = new ControllerAlimento().buscar(nome).get(0);
-					refeicao.addAlimento(obj);
-					
-					for (Component compo : panel.getComponents()) {
-						if(compo instanceof JScrollPane)
-							panel.remove(compo);
-					}
-					configureListAlimentos(panel);
-					configureListAlimentosRefeicao(panel); 
-					
-					frame.revalidate();
-					frame.repaint();
-				} catch (NullPointerException e) {
-					JOptionPane.showMessageDialog(null, "Alimento não encontrado");
-					e.printStackTrace();
-				} catch (DadosVaziosException e) {
-					JOptionPane.showMessageDialog(null, "Alimento com nome inválido");
-					e.printStackTrace();
-				}
-			}
-		};
-		
-		
 		ScrollList<Alimento> list = new ScrollList<Alimento>();
-		list.setAdapterAdicionar(btnAdicionar);
 		list.getVerticalScrollBar().setUnitIncrement(4);
 		list.setBorder(BorderFactory.createEmptyBorder());
 		list.setBounds(534, 168, 336, 307);
 		list.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		
 		try {
-			list.configureList(panel, new ControllerAlimento().buscar(null));
+			final ArrayList<Alimento> listAlimento = new ControllerAlimento().buscarTodos();
+			
+			MouseAdapterNome btnAdicionar = new MouseAdapterNome() {
+				@Override
+				public void mouseAdapter(String nome) {
+					try {						
+						for(Alimento alimento: listAlimento)
+							if(alimento.getNome().equals(nome)) {
+								refeicao.addAlimento(alimento);
+								refeicao.setData(
+										new DatasFormatadas(new Date()).getDiaMesNumber() + "/" +
+										new DatasFormatadas(new Date()).getMesNumber() + "/" +
+										new DatasFormatadas(new Date()).getAno());								
+							}
+						
+						for (Component compo : panel.getComponents()) 
+							if(compo instanceof JScrollPane)
+								panel.remove(compo);
+							
+						configureListAlimentos(panel);
+						configureListAlimentosRefeicao(panel); 
+						
+						frame.revalidate();
+						frame.repaint();
+					} catch (NullPointerException e) {
+						JOptionPane.showMessageDialog(null, "Alimento não encontrado");
+						e.printStackTrace();
+					} 
+				}
+			};
+		
+			list.setAdapterAdicionar(btnAdicionar);
+			list.configureList(panel, listAlimento);
+		
 		} catch (NullPointerException e1) {
 			JOptionPane.showMessageDialog(null, "Alimento não encontrado");
 			e1.printStackTrace();
 		} catch (DadosVaziosException e1) {
 			JOptionPane.showMessageDialog(null, "Alimento com nome inválido");
 			e1.printStackTrace();
+		} finally {
+			panel.add(list);			
 		}
-		panel.add(list);
-	
+		
 	}
 	
 	

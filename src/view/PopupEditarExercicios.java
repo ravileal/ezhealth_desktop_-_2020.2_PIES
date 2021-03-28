@@ -10,14 +10,11 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-import model.Alimento;
 import model.Exercicio;
 import util.DatasFormatadas;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Date;
-
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.JButton;

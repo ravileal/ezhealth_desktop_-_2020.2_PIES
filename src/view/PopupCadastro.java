@@ -13,7 +13,6 @@ import javax.swing.text.MaskFormatter;
 
 import controller.ControllerUsuario;
 import model.Usuario;
-import util.DatasFormatadas;
 import validation.DadosVaziosException;
 import validation.OperacaoNaoConcluidaRepositorioExeception;
 import validation.SenhaInvalidaException;
@@ -32,9 +31,6 @@ import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.Date;
 
 public class PopupCadastro extends LayoutPopup {
 
