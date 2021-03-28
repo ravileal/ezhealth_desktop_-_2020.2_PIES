@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -19,9 +20,12 @@ import javax.swing.SwingConstants;
 
 import controller.ControllerAlimento;
 import controller.ControllerRefeicao;
+import controller.ControllerRefeicaoAlimentoUsuario;
 import controller.ControllerUsuario;
 import model.Alimento;
+import model.AlimentoModel;
 import model.Refeicao;
+import model.to.ToRefeicao;
 import util.DatasFormatadas;
 import util.ScrollList;
 import util.ScrollList.MouseAdapterNome;
@@ -43,7 +47,7 @@ import java.awt.event.FocusEvent;
 
 public class TelaAlimentos extends LayoutMain {
 	
-	private Refeicao refeicao;
+	private ToRefeicao refeicao;
 
 	/**
 	 * Launch the application.
@@ -85,7 +89,8 @@ public class TelaAlimentos extends LayoutMain {
 
 	private TelaAlimentos(String nome) {
 		try {
-			refeicao = new ControllerRefeicao(true).buscar(nome);		
+			refeicao = new ControllerRefeicao().buscar(nome).toToRefeicao();
+			refeicao.setListAlimento(new ControllerRefeicaoAlimentoUsuario().buscarTodosAlimentosPorIdRefeicao(refeicao.getId()));  
 //			new ControllerRefeicao(true)
 //			.buscar(nome)
 //			.forEach((ref) -> {
@@ -93,14 +98,15 @@ public class TelaAlimentos extends LayoutMain {
 //					refeicao = ref;
 //			});
 		} catch (NullPointerException e) {
-			refeicao = new Refeicao();
+			refeicao = new ToRefeicao();
 			refeicao.setNome(nome);
 			refeicao.setData(
 					new DatasFormatadas(new Date()).getDiaMesNumber() + "/" +
 					new DatasFormatadas(new Date()).getMesNumber() + "/" +
 					new DatasFormatadas(new Date()).getAno());
+			refeicao.setListAlimento(new ArrayList<Alimento>());
 			try {
-				new ControllerRefeicao(true).adicionar(refeicao);
+				refeicao.setId(new ControllerRefeicao().adicionar(refeicao));
 			} catch (NullPointerException e1) {
 				JOptionPane.showMessageDialog(null, "Refeição nula");
 				e1.printStackTrace();
@@ -223,19 +229,32 @@ public class TelaAlimentos extends LayoutMain {
 		list.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		try {
-			final ArrayList<Alimento> listAlimento = new ControllerAlimento().buscarTodos();
+			final List<AlimentoModel> listAlimento = new ControllerAlimento().buscarTodosModel();
 			
 			MouseAdapterNome btnAdicionar = new MouseAdapterNome() {
 				@Override
 				public void mouseAdapter(String nome) {
 					try {						
-						for(Alimento alimento: listAlimento)
+						for(AlimentoModel alimento: listAlimento)
 							if(alimento.getNome().equals(nome)) {
-								refeicao.addAlimento(alimento);
-								refeicao.setData(
-										new DatasFormatadas(new Date()).getDiaMesNumber() + "/" +
-										new DatasFormatadas(new Date()).getMesNumber() + "/" +
-										new DatasFormatadas(new Date()).getAno());								
+								try {
+									String idAlimento = new ControllerAlimento().adicionar(alimento.toAlimento());
+									Alimento ali = new ControllerAlimento().buscar(idAlimento);
+									new ControllerRefeicaoAlimentoUsuario().adicionar(ali, refeicao.toRefeicao());
+									
+									refeicao.addAlimento(ali);
+									refeicao.setData(
+											new DatasFormatadas(new Date()).getDiaMesNumber() + "/" +
+											new DatasFormatadas(new Date()).getMesNumber() + "/" +
+											new DatasFormatadas(new Date()).getAno());
+									
+								} catch (DadosVaziosException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								} catch (OperacaoNaoConcluidaRepositorioExeception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 							}
 						
 						for (Component compo : panel.getComponents()) 
@@ -325,7 +344,7 @@ public class TelaAlimentos extends LayoutMain {
 	
 	private void atualizarRefeicao() {
 		try {
-			new ControllerRefeicao(true).editar(refeicao.getNome(), refeicao);
+			new ControllerRefeicao().editar(refeicao);
 		} catch (NullPointerException e) {
 			JOptionPane.showMessageDialog(null, "Refeição nula");
 			e.printStackTrace();

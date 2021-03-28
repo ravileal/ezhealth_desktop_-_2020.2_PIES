@@ -1,7 +1,9 @@
 package controller;
 
 import model.*;
+import model.dao.DAORefeicaoAlimentoUsuario;
 import model.dao.connection.HandlerObject;
+import model.to.ToRefeicao;
 import repository.RepositorioRefeicao;
 import repository.RepositorioRefeicaoRealizada;
 import util.*;
@@ -12,55 +14,42 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao> {
+public class ControllerRefeicao {
 
-	private RepositorioRefeicao rep;
 	private static HandlerObject handlerObject = HandlerObject.getInstance();
-	private RepositorioRefeicaoRealizada repRealizada;
-	private boolean refeicaoRealizada;
 	
-	public ControllerRefeicao(boolean refeicaoRealizada) {
-		Popular.getInstance();
-		this.rep = new RepositorioRefeicao();
-		this.repRealizada = new RepositorioRefeicaoRealizada();
-		this.refeicaoRealizada = refeicaoRealizada;
-	}
 	
 	/* -----------------------------
 	 * 		Métodos do CRUD
 	 * -----------------------------*/
 	
-	@Override
-	public boolean adicionar(Refeicao obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
+	
+	public String adicionar(Refeicao obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
 		if(obj == null)
 			throw new NullPointerException("Impossível adicionar! Objeto Refeicao null");
 		else if(obj.getNome() == null)
 			throw new DadosVaziosException("Impossível adicionar! Nome vazio");
 		else if(obj.getNome().equals(""))
 			throw new DadosVaziosException("Impossível adicionar! Nome vazio");
-		else if(!handlerObject.create(obj))
-			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível adicionar! Erro ao tentar adicionar a refeicao '"+obj.getNome()+"' ao repositorio");
-		else 
-			return true;
+		
+		return handlerObject.create(obj);
 	}
 	
-
-	@Override
 	public ArrayList<Refeicao> buscarTodos() throws DadosVaziosException, NullPointerException {
-		ArrayList<Refeicao> list = (ArrayList<Refeicao>) handlerObject.readAll(Refeicao.class);
+		ArrayList<Refeicao> list = new ArrayList<Refeicao>();
 		
-		if(list == null)
-			throw new NullPointerException("Não foi possível encontrar refeicao a partir do nome");
-		else 
-			return list;
+		for(Refeicao refeicao: handlerObject.readAll(Refeicao.class))
+			list.add(refeicao);
+				
+		return list;
 	}
 
-	@Override
+	
 	public Refeicao buscar(String nome) throws DadosVaziosException, NullPointerException {
 		if(nome != null && nome.equals(""))
 			throw new DadosVaziosException("Impossível buscar! Nome vazio");
 		
-		Refeicao refeicao = handlerObject.read(Refeicao.class, nome);
+		Refeicao refeicao = handlerObject.readNome(Refeicao.class, nome);
 		
 		if(refeicao == null)
 			throw new NullPointerException("Não foi possível encontrar refeicao a partir do nome");
@@ -68,24 +57,26 @@ public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao
 			return refeicao;
 	}
 
-	@Override
-	public boolean editar(String nome, Refeicao obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
+
+	public boolean editar(Refeicao obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
 		if(obj == null)
 			throw new NullPointerException("Impossível editar! Objeto Refeicao null");
 		else if(obj.getNome().equals(""))
 			throw new DadosVaziosException("Impossível editar! Nome vazio");
 		else if(!handlerObject.update(Refeicao.class, obj))
-			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível editar! Erro ao tentar editar o refeicao '"+nome+"' no repositorio");
+			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível editar! Erro ao tentar editar o refeicao '"+obj.getNome()+"' no repositorio");
 		else 
 			return true;
 	}
 
-	@Override
-	public boolean remover(String nome) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
-		if(nome.equals(""))
-			throw new DadosVaziosException("Impossível excluir! Nome vazio");
-		else if(handlerObject.create(buscar(nome)))
-			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível excluir! Erro ao tentar excluir o refeicao '"+nome+"' no repositorio");
+	public boolean remover(String id) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+//		if(id < 1)
+//			throw new DadosVaziosException("Impossível excluir! Refeicao não existe");
+		
+		boolean result = handlerObject.delete(id);
+		
+		if(!result)
+			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível excluir! Erro ao tentar excluir a refeicao no repositorio");
 		else 
 			return true;
 	}
@@ -126,12 +117,6 @@ public class ControllerRefeicao implements CRUD<Refeicao>, IAlimentacao<Refeicao
 			calorias += ref.getCalorias();
 		
 		return calorias;
-	}
-
-	@Override
-	public ArrayList<Refeicao> buscar(boolean glutem, boolean lactose, int taxaAcucar) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

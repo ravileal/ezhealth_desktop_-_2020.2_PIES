@@ -49,7 +49,7 @@ public class ControllerUsuario implements CRUD<Usuario> {
 				buscar(obj.getUsuario());
 				throw new UsuarioDuplicadoException("Impossível concluir cadastro! Usuário digitado já esta cadastrado");
 			} catch (NullPointerException e) {
-				if(!handlerObject.create(obj))
+				if(handlerObject.create(obj) == null)
 					throw new OperacaoNaoConcluidaRepositorioExeception("Impossível concluir cadastro! Erro ao tentar adicionar o usuario '"+obj.getNome()+"' ao repositorio");
 				else
 					return true;

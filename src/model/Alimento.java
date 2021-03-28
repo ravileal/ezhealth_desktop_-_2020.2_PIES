@@ -2,7 +2,7 @@ package model;
 
 public class Alimento extends AbstractAlimentacao {
 
-	private int quantidade;
+	protected int quantidade;
 
 	public int getQuantidade() {
 		return this.quantidade;

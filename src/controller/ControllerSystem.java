@@ -4,7 +4,7 @@ import model.dao.connection.Connection;
 
 public class ControllerSystem {
 	
-	private Connection connection = Connection.getInstance();
+	private static Connection connection = Connection.getInstance();
 	
 	public void startConnection() {
 		connection.startConnection();

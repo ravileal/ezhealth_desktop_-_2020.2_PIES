@@ -14,8 +14,9 @@
         <property name="connection.driver_class">org.postgresql.Driver</property>  
     <mapping resource="usuario.hbm.xml"/>
     <mapping resource="alimento.hbm.xml"/>
+    <mapping resource="alimentoModel.hbm.xml"/>
     <mapping resource="refeicao.hbm.xml"/>
-    <mapping resource="refeicao_realizada.hbm.xml"/>
+    <mapping resource="refeicaoAlimentoUsuario.hbm.xml"/>
     </session-factory>  
  
 </hibernate-configuration>  

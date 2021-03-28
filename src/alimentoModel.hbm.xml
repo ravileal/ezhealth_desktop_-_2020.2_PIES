@@ -4,20 +4,17 @@
  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
 
  <hibernate-mapping>  
-  <class name="model.RefeicaoRealizada" table="refeicaoRealizada">  
+  <class name="model.AlimentoModel" table="alimentoModel">  
 
     <id name="id">  
-     <generator class="increment"></generator>  
+     <generator class="assigned"></generator>  
     </id>
 
     <natural-id mutable="true">
         <property name="nome" unique="true" />
     </natural-id>
 
-    <property name="data" ></property>
-    <property name="tipo" ></property>     
-    <property name="listAlimento" ></property>
-    <property name="idUsuario" ></property> 
+    <property name="quantidade" type="integer" ></property>   
     <property name="calorias" type="integer" ></property>   
     <property name="proteina" type="integer" ></property>   
     <property name="carboidrato" type="integer" ></property>   
@@ -26,7 +23,7 @@
     <property name="glutem" type="boolean" ></property>   
     <property name="lactose" type="boolean" ></property>   
     <property name="favorito" type="boolean" ></property>   
-    
+            
   </class>  
  </hibernate-mapping>  
  

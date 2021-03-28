@@ -7,16 +7,15 @@
   <class name="model.Refeicao" table="refeicao">  
 
     <id name="id">  
-     <generator class="increment"></generator>  
+     <generator class="assigned"></generator>  
     </id>
 
     <natural-id mutable="true">
-        <property name="nome" unique="true" />
+        <property name="nome"  />
     </natural-id>
 
     <property name="data" ></property>
     <property name="tipo" ></property>     
-    <property name="listAlimento" ></property> 
     <property name="calorias" type="integer" ></property>   
     <property name="proteina" type="integer" ></property>   
     <property name="carboidrato" type="integer" ></property>   
