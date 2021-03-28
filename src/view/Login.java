@@ -141,6 +141,29 @@ public class Login {
 				try {
 					ControllerUsuario.validarLogin(campoLogin.getText(), String.valueOf(campoSenha.getPassword()));
 					
+//					
+//					RefeicaoRealizada refeicao = new RefeicaoRealizada();
+//					refeicao.setIdUsuario(ControllerUsuario.getUsuarioLogado().getId());
+//					refeicao.setData(
+//							new DatasFormatadas(new Date()).getDiaMesNumber() + "/" +
+//							new DatasFormatadas(new Date()).getMesNumber() + "/" +
+//							new DatasFormatadas(new Date()).getAno());
+//					refeicao.setNome("Cafe da manha");
+//					
+//					try {
+//						new ControllerRefeicao(true).adicionar(refeicao);
+//					} catch (NullPointerException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					} catch (DadosVaziosException e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
+//						// TODO Auto-generated catch block
+//						e1.printStackTrace();
+//					}
+					
+					
 					frame.dispose();
 					TelaHome.main(null);
 				} catch (CredenciaisInvalidasException e1) {
