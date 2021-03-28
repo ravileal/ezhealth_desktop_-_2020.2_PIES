@@ -12,7 +12,7 @@ import controller.ControllerSystem;
 import controller.ControllerUsuario;
 import model.Alimento;
 import model.Refeicao;
-import model.RefeicaoAlimentoUsuario;
+import model.RefeicaoRealizada;
 import model.dao.connection.HandlerObject;
 import util.DatasFormatadas;
 import util.ViewUtils;
@@ -56,9 +56,9 @@ public class Login {
 			@Override
 			public void run() {
 				try {
-					new ControllerSystem().startConnection();
 					Login window = new Login();
 					window.frame.setVisible(true);
+					new ControllerSystem().startConnection();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -49,7 +49,7 @@ public class ScrollList<Object extends Model> extends JScrollPane {
 		this.adapterAdicionar = adapterAdicionar;
 	}
 
-	public <T> void configureList(JPanel panel, List<T> list) {
+	public void configureList(JPanel panel, List<Object> list) {
 	
 		JPanel panel_refeicoes = new JPanel();
 		panel_refeicoes.setLayout(new BoxLayout(panel_refeicoes, BoxLayout.Y_AXIS));
@@ -58,14 +58,14 @@ public class ScrollList<Object extends Model> extends JScrollPane {
 		
 		JPanel panel_item = null;
 		
-		for (T obj : list) {
+		for (Object obj : list) {
 			panel_item = new JPanel();
 			panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
 			panel_item.setMaximumSize(new Dimension(getWidth(), 10));
 			panel_item.setBackground(Color.decode("#DFE4EA"));
 			panel_refeicoes.add(panel_item);
 			
-			panel_refeicoes.add(configureItemList(((Model) obj).getNome(), panel));
+			panel_refeicoes.add(configureItemList(obj.getNome(), panel));
 			
 			panel_item = new JPanel();
 			panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));

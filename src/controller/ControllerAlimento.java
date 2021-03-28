@@ -3,16 +3,13 @@ package controller;
 import java.util.ArrayList;
 
 import model.Alimento;
-import model.AlimentoModel;
-import model.RefeicaoAlimentoUsuario;
-import model.dao.DAORefeicaoAlimentoUsuario;
 import model.dao.connection.HandlerObject;
 import repository.RepositorioAlimento;
 import util.*;
 import validation.DadosVaziosException;
 import validation.OperacaoNaoConcluidaRepositorioExeception;
 
-public class ControllerAlimento  {
+public class ControllerAlimento implements CRUD<Alimento> {
 
 	private RepositorioAlimento rep;
 	private static HandlerObject handlerObject = HandlerObject.getInstance();
@@ -25,30 +22,19 @@ public class ControllerAlimento  {
 	/* -----------------------------
 	 * 		Métodos do CRUD
 	 * -----------------------------*/
-	public String adicionar(Alimento obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
+	@Override
+	public boolean adicionar(Alimento obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
 		if(obj == null)
 			throw new NullPointerException("Impossível adicionar! Objeto Alimento null"); 
 		else if(obj.getNome().equals(""))
 			throw new DadosVaziosException("Impossível adicionar! Nome vazio");
-		
-		String id = handlerObject.create(obj);
-		
-		if(id == null)
+		else if(!rep.adicionar(obj))
 			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível adicionar! Erro ao tentar adicionar o alimento '"+obj.getNome()+"' ao repositorio");
 		else 
-			return id;
+			return true;
 	}
 
-	public ArrayList<AlimentoModel> buscarTodosModel() throws DadosVaziosException, NullPointerException {
-		ArrayList<AlimentoModel> list = (ArrayList<AlimentoModel>) handlerObject.readAll(AlimentoModel.class);
-		
-		if(list == null)
-			throw new NullPointerException("Não foi possível encontrar exercicio a partir do nome");
-		else 
-			return list;
-	}
-	
-	
+
 	public ArrayList<Alimento> buscarTodos() throws DadosVaziosException, NullPointerException {
 		ArrayList<Alimento> list = (ArrayList<Alimento>) handlerObject.readAll(Alimento.class);
 		
@@ -58,18 +44,19 @@ public class ControllerAlimento  {
 			return list;
 	}
 	
-	public Alimento buscar(String id) throws DadosVaziosException, NullPointerException {
-		if(id != null && id.equals(""))
-			throw new DadosVaziosException("Impossível buscar! Id vazio");
+	public Alimento buscar(String nome) throws DadosVaziosException, NullPointerException {
+		if(nome != null && nome.equals(""))
+			throw new DadosVaziosException("Impossível buscar! Nome vazio");
 		
-		Alimento alimento = handlerObject.read(Alimento.class, id);
+		Alimento alimento = handlerObject.read(Alimento.class, nome);
 		
 		if(alimento == null)
-			throw new NullPointerException("Não foi possível encontrar exercicio a partir do id");
+			throw new NullPointerException("Não foi possível encontrar exercicio a partir do nome");
 		else 
 			return alimento;
 	}
 
+	@Override
 	public boolean editar(String nome, Alimento obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException {
 		if(obj == null)
 			throw new NullPointerException("Impossível editar! Objeto Alimento null");
@@ -81,6 +68,7 @@ public class ControllerAlimento  {
 			return true;
 	}
 
+	@Override
 	public boolean remover(String nome) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
 		if(nome.equals(""))
 			throw new DadosVaziosException("Impossível excluir! Nome vazio");
@@ -89,8 +77,6 @@ public class ControllerAlimento  {
 		else 
 			return true;
 	}
-	
-	
 
 //	@Override
 //	public ArrayList<Alimento> buscar(boolean glutem, boolean lactose, int taxaAcucar) {

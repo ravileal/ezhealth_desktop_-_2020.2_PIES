@@ -2,7 +2,7 @@ package model;
 
 public abstract class Model {
 	
-	protected String id; 
+	protected int id; 
 	protected String nome;
 
 	public String getNome() {
@@ -13,11 +13,11 @@ public abstract class Model {
 		this.nome = nome;
 	}    
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	

@@ -2,14 +2,14 @@ package model;
 
 public abstract class AbstractAlimentacao extends Model{
 
-	protected int calorias; 
-	protected int proteina;
-	protected int carboidrato;
-	protected int gordura;
-	protected int taxaAcucar;
-	protected boolean glutem;
-	protected boolean lactose;
-	protected boolean favorito;
+	private int calorias; 
+	private int proteina;
+	private int carboidrato;
+	private int gordura;
+	private int taxaAcucar;
+	private boolean glutem;
+	private boolean lactose;
+	private boolean favorito;
 
 	@Override
 	public String getNome() {

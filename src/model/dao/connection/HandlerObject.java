@@ -1,23 +1,19 @@
 package model.dao.connection;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.resource.transaction.spi.TransactionStatus;
-
-import model.Model;
 
 public class HandlerObject {
 	
-	protected Connection connection = Connection.getInstance();
-	protected static volatile Object object;
-	protected static volatile List<Object> list;
-	protected static HandlerObject instance;
+	private Connection connection = Connection.getInstance();
+	private static volatile Object object;
+	private static volatile List<Object> list;
+	private static HandlerObject instance;
 	
 	public static HandlerObject getInstance() {
 		if(instance == null)
@@ -25,19 +21,13 @@ public class HandlerObject {
 		return instance;
 	}
 	
-	public String create(Model obj) {	
-		connection.execute((Session session, Transaction transaction) -> {
-				object = null;
-		        obj.setId(UUID.randomUUID().toString());
+	public <T> boolean create(T obj) {		
+		return connection.execute((Session session, Transaction transaction) -> {
 				session.save(obj);
-				if (!transaction.getStatus().equals(TransactionStatus.ACTIVE))
-					transaction = session.beginTransaction();
 				transaction.commit();
-				object = obj.getId();
 				System.out.println("successfully saved");	
 			}
 		);
-		return (String) object;
 	}
     
 	@SuppressWarnings("unchecked")
@@ -55,25 +45,25 @@ public class HandlerObject {
 	
 	@SuppressWarnings("unchecked")
 	public <T,K> T readUser(Class<T> class1, K id) {
-		connection.execute((Session session, Transaction transaction) -> {
-			object = session.byNaturalId(class1).using("usuario", id).load();
-		});
-		return (T) object;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public <T,K> T readNome(Class<T> class1, String nome) {
-		connection.execute((Session session, Transaction transaction) -> {
-			object = session.byNaturalId(class1).using("nome", nome).load();
-		});
+		connection.execute(
+			(Session session, Transaction transaction) -> {
+				object = (id instanceof String)?
+						session.byNaturalId(class1).using("usuario", id).load():
+						session.find(class1, id);
+			}
+		);
 		return (T) object;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public <T,K> T read(Class<T> class1, K id) {
-		connection.execute((Session session, Transaction transaction) -> {
-			object = session.find(class1, id);
-		});
+		connection.execute(
+			(Session session, Transaction transaction) -> {
+				object = (id instanceof String)?
+						session.byNaturalId(class1).using("nome", id).load():
+						session.find(class1, id);
+			}
+		);
 		return (T) object;
 	}
 	

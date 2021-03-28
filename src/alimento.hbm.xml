@@ -7,10 +7,12 @@
   <class name="model.Alimento" table="alimento">  
 
     <id name="id">  
-     <generator class="assigned"></generator>  
+     <generator class="increment"></generator>  
     </id>
 
-    <property name="nome"/>
+    <natural-id mutable="true">
+        <property name="nome" unique="true" />
+    </natural-id>
 
     <property name="quantidade" type="integer" ></property>   
     <property name="calorias" type="integer" ></property>   

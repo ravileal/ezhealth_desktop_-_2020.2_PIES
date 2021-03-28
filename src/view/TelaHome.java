@@ -329,7 +329,7 @@ public class TelaHome extends LayoutMain {
 		Refeicao ref;
 		String calorias="0";
 		try {
-			ref = new ControllerRefeicao().buscar(nomeRefeicao);
+			ref = new ControllerRefeicao(true).buscar(nomeRefeicao);
 			calorias = String.valueOf(ref.getCalorias());
 		} catch (NullPointerException e1) {
 		} catch (DadosVaziosException e1) {
