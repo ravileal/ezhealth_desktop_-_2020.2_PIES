@@ -20,9 +20,11 @@ O EzHealth possui telas simples e intuitivas onde o usuário poderá aproveitar 
 
 Porém, sabemos que nem todo usuário está acostumado com certos tipos de sistema, logo, criamos essa área para lhe ensinar como utilizá-lo.
 
-Abaixo você tem acesso ao link para acessar o Wiki do sistema, onde ensinamos, utilizando prints das próprias telas da nossa aplicação, como realizar as principais atividades contidas no sistema.
+Abaixo você encontrará links de acesso a Wiki do sistema, onde ensinamos, utilizando prints das próprias telas da nossa aplicação, como realizar as principais atividades contidas no sistema, e também da Documentação do sistema.
 
 [![Wiki EzHealth](https://i.imgur.com/MVgnoix.png)](https://github.com/ravileal/ezhealth_desktop_-_2020.2_PIES/wiki)
+
+[![Documentação EzHealth](https://i.imgur.com/ZZr4KAq.png)](https://github.com/ravileal/ezhealth_desktop_-_2020.2_PIES/wiki/Documentação-do-sistema)
 
 
 ### Autores
