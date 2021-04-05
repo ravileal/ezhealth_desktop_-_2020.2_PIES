@@ -14,21 +14,27 @@ import javax.swing.JSeparator;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-import controller.ControllerAlimento;
-import controller.ControllerExercicios;
+import controller.ControllerExercicioPronto;
 import controller.ControllerUsuario;
 import model.Alimento;
 import model.Exercicio;
+import model.ExercicioPronto;
+import model.Model;
+import model.Usuario;
 import util.DatasFormatadas;
 import util.ScrollList;
 import util.ScrollList.MouseAdapterNome;
 import validation.DadosVaziosException;
 import validation.OperacaoNaoConcluidaRepositorioExeception;
+import validation.SenhaInvalidaException;
 
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import java.awt.event.FocusAdapter;
@@ -36,6 +42,7 @@ import java.awt.event.FocusEvent;
 
 public class TelaExercicios extends LayoutMain {
 
+	private Usuario user = ControllerUsuario.getUsuarioLogado();
 	
 	/**
 	 * Launch the application.
@@ -144,50 +151,48 @@ public class TelaExercicios extends LayoutMain {
 	}
 	
 	private void configureListExerciciosRealizados(JPanel panel){
-		MouseAdapterNome btnEditar = new MouseAdapterNome() {
-			@Override
-			public void mouseAdapter(String nome) {
-				try {
-					for(Exercicio obj: new ControllerExercicios(true).buscar(null))
-						if(obj.getNome().equals(nome)) {
-							PopupEditarExercicios.main(obj);
-							break;
-						}
-				} catch (NullPointerException e) {
-					JOptionPane.showMessageDialog(null, "Não foi possível encontrar o exercicio");
-					e.printStackTrace();
-				} catch (DadosVaziosException e) {
-					JOptionPane.showMessageDialog(null, "Exercicio com nome vazio");
-					e.printStackTrace();
-				}
+		MouseAdapterNome btnEditar = (Model objModel) -> {
+			try {
+				PopupEditarExercicios.main((Exercicio) objModel);
+				ControllerUsuario.editar();
+				JOptionPane.showMessageDialog(null, "Exercicio atualizado");
+				resetScreen(panel);
+			} catch (NullPointerException e) {
+				JOptionPane.showMessageDialog(null, "Não foi possível encontrar o exercicio");
+				e.printStackTrace();
+			} catch (DadosVaziosException e1) {
+				JOptionPane.showMessageDialog(null, "Erro ao tentar editar, exercicio com nome vazio");
+				e1.printStackTrace();
+			} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
+				JOptionPane.showMessageDialog(null, "Erro ao tentar editar");
+				e1.printStackTrace();
+			} catch (SenhaInvalidaException e) {
+				JOptionPane.showMessageDialog(null, "Erro ao tentar editar, senha de usuario inválida");
+				e.printStackTrace();
 			}
 		};
 		
-		MouseAdapterNome btnExcluir = new MouseAdapterNome() {
-			@Override
-			public void mouseAdapter(String nome) {
-				try {
-					Exercicio obj = new ControllerExercicios(true).buscar(nome).get(0);
-					int calorias = obj.getCalorias();
-					new ControllerExercicios(true).remover(nome);
-					new ControllerUsuario().removerCaloriasGastas(calorias);
-				} catch (DadosVaziosException e1) {
-					JOptionPane.showMessageDialog(null, "Exercicio com nome vazio");
-					e1.printStackTrace();
-				} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
-					JOptionPane.showMessageDialog(null, "Erro ao tentar remover");
-					e1.printStackTrace();
-				}
+		MouseAdapterNome btnExcluir = (Model objModel) -> {
+			try {
+				Exercicio exer = (Exercicio) objModel;
+				user.decCaloriasGastas(exer.getCalorias());
+				user.getListExercicio().remove(exer);
 				
-				for (Component compo : panel.getComponents()) 
-					if(compo instanceof JScrollPane)
-						panel.remove(compo);
-				
-				configureListExercicios(panel);
-				configureListExerciciosRealizados(panel);
-				
-				frame.revalidate();
-				frame.repaint();
+				ControllerUsuario.setUsuarioLogado(user);
+				ControllerUsuario.editar();
+				resetScreen(panel);
+			} catch (DadosVaziosException e1) {
+				JOptionPane.showMessageDialog(null, "Exercicio com nome vazio");
+				e1.printStackTrace();
+			} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
+				JOptionPane.showMessageDialog(null, "Erro ao tentar remover");
+				e1.printStackTrace();
+			} catch (NullPointerException e) {
+				JOptionPane.showMessageDialog(null, "Erro ao tentar remover, exercicio não encontrado");
+				e.printStackTrace();
+			} catch (SenhaInvalidaException e) {
+				JOptionPane.showMessageDialog(null, "Erro ao tentar remover, senha de usuario inválida");
+				e.printStackTrace();
 			}
 		};
 		
@@ -200,65 +205,80 @@ public class TelaExercicios extends LayoutMain {
 		listExerciciosRealizados.setBounds(20, 117, 466, 358);
 		listExerciciosRealizados.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		try {
-			listExerciciosRealizados.configureList(panel, new ControllerExercicios(true).buscar(null));
+			List<Exercicio> list = ControllerUsuario.getUsuarioLogado().getListExercicio();
+			System.out.println("eeeeeeeeeeeeeeeeee "+list.size());
+			for(Exercicio e: list)
+				if(e == null)
+					System.out.println(" e is null");
+				else
+					System.out.println("aaaaaaaaaaaaaaaaaa "+e.getNome());
+			
+			listExerciciosRealizados.configureList(panel, list);
 		} catch (NullPointerException e1) {
-			JOptionPane.showMessageDialog(null, "Exercicio não encontrado");
 			e1.printStackTrace();
-		} catch (DadosVaziosException e1) {
-			JOptionPane.showMessageDialog(null, "Exercicio com nome inválido");
-			e1.printStackTrace();
-		}
+		} 
+		
 		panel.add(listExerciciosRealizados);
 	}
 	
 	private void configureListExercicios(JPanel panel){
-		MouseAdapterNome btnAdicionar = new MouseAdapterNome() {
-			@Override
-			public void mouseAdapter(String nome) {
-				try {
-					Exercicio obj = new ControllerExercicios(false).buscar(nome).get(0);
-					obj.setData(new Date());
-					new ControllerExercicios(true).adicionar(obj);
-					new ControllerUsuario().adicionarCaloriasGastas(obj.getCalorias());
-					
-					for (Component compo : panel.getComponents()) {
-						if(compo instanceof JScrollPane)
-							panel.remove(compo);
-					}
-					configureListExercicios(panel);
-					configureListExerciciosRealizados(panel);
-					
-					frame.revalidate();
-					frame.repaint();
-				} catch (NullPointerException e) {
-					JOptionPane.showMessageDialog(null, "Exercicio não encontrado");
-					e.printStackTrace();
-				} catch (DadosVaziosException e) {
-					JOptionPane.showMessageDialog(null, "Exercicio com nome inválido");
-					e.printStackTrace();
-				} catch (OperacaoNaoConcluidaRepositorioExeception e) {
-					JOptionPane.showMessageDialog(null, "Não foi possível adicionar exercicio a lista de realizados");
-					e.printStackTrace();
-				}
+		MouseAdapterNome btnAdicionar = (Model objModel) -> {
+			try {
+				Exercicio exer = ((Exercicio) objModel).clone();
+				
+				exer.setId(null);
+				exer.setData(new Date());
+				if(user.getListExercicio()==null)
+					user.setListExercicio(new ArrayList<>());
+				user.getListExercicio().add(exer);
+				
+				user.addCaloriasGastas(exer.getCalorias());
+				
+				ControllerUsuario.setUsuarioLogado(user);
+				ControllerUsuario.editar();
+				resetScreen(panel);
+			} catch (NullPointerException e) {
+				JOptionPane.showMessageDialog(null, "Exercicio não encontrado");
+				e.printStackTrace();
+			} catch (DadosVaziosException e) {
+				JOptionPane.showMessageDialog(null, "Exercicio com nome inválido");
+				e.printStackTrace();
+			} catch (OperacaoNaoConcluidaRepositorioExeception e) {
+				JOptionPane.showMessageDialog(null, "Não foi possível adicionar exercicio a lista de realizados");
+				e.printStackTrace();
+			} catch (SenhaInvalidaException e) {
+				JOptionPane.showMessageDialog(null, "Não foi possível adicionar exercicio, senha de usuário inválida");
+				e.printStackTrace();
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		};
 		
 		
-		ScrollList<Exercicio> listExercicios = new ScrollList<Exercicio>();
+		ScrollList<ExercicioPronto> listExercicios = new ScrollList<ExercicioPronto>();
 		listExercicios.setAdapterAdicionar(btnAdicionar);
 		listExercicios.getVerticalScrollBar().setUnitIncrement(4);
 		listExercicios.setBorder(BorderFactory.createEmptyBorder());
 		listExercicios.setBounds(534, 168, 336, 307);
 		listExercicios.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		try {
-			listExercicios.configureList(panel, new ControllerExercicios(false).buscar(null));
+			listExercicios.configureList(panel, ControllerExercicioPronto.buscarTodos());
 		} catch (NullPointerException e1) {
-			JOptionPane.showMessageDialog(null, "Exercicio não encontrado");
 			e1.printStackTrace();
-		} catch (DadosVaziosException e1) {
-			JOptionPane.showMessageDialog(null, "Exercicio com nome inválido");
-			e1.printStackTrace();
-		}
+		} 
 		panel.add(listExercicios);
+	}
+	
+	private void resetScreen(JPanel panel) {
+		for (Component compo : panel.getComponents()) 
+			if(compo instanceof JScrollPane)
+				panel.remove(compo);
+		
+		configureListExercicios(panel);
+		configureListExerciciosRealizados(panel);
+		
+		frame.revalidate();
+		frame.repaint();
 	}
 }

@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.function.Consumer;
 
 import javax.swing.JLabel;
@@ -35,12 +36,12 @@ import java.awt.Graphics2D;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
-import controller.ControllerAlimento;
-import controller.ControllerExercicios;
-import controller.ControllerRefeicao;
+import controller.ControllerAlimentoPronto;
 import controller.ControllerUsuario;
 import model.Alimento;
+import model.AlimentoPronto;
 import model.Exercicio;
+import model.Model;
 import model.Refeicao;
 import model.Usuario;
 import util.CRUD;
@@ -195,9 +196,18 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
+					Usuario user = ControllerUsuario.getUsuarioLogado();
+					
+					refeicao.setId(null);
 					refeicao.setData(new Date());	
 					refeicao.setNome(txtNomeRefeicao.getText());
-					new ControllerRefeicao(false).adicionar(refeicao);
+					
+					if(user.getListRefeicao() == null)
+						user.setListRefeicao(new ArrayList<>());
+					
+					user.getListRefeicao().add(refeicao);
+					user.addCaloriasConsumidas(refeicao.getCalorias());
+					ControllerUsuario.editar();
 					
 					JOptionPane.showMessageDialog(null, "Refeição cadastrada");
 					frame.dispose();
@@ -210,6 +220,9 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 					e1.printStackTrace();
 				} catch (OperacaoNaoConcluidaRepositorioExeception e1) {
 					JOptionPane.showMessageDialog(null, "Não foi possivel salvar a refeição");
+					e1.printStackTrace();
+				} catch (SenhaInvalidaException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -253,85 +266,61 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 	}
 	
 	private void configureListAlimentos(JPanel panel){
-		MouseAdapterNome btnAdicionar = new MouseAdapterNome() {
-			@Override
-			public void mouseAdapter(String nome) {
-				try {
-					Alimento obj = new ControllerAlimento().buscar(nome).get(0);
-					Alimento x = new Alimento();
-					x.setNome(obj.getNome());
-					x.setCalorias(obj.getCalorias());
-					x.setQuantidade(obj.getQuantidade());
-					refeicao.addAlimento(x);
-					refeicao.setData(new Date());
-					
-					for (Component compo : panel.getComponents()) {
-						if(compo instanceof JScrollPane)
-							panel.remove(compo);
-					}
-					configureListAlimentos(panel);
-					configureListAlimentosRefeicao(panel); 
-				
-					
-					frame.revalidate();
-					frame.repaint();
-				} catch (NullPointerException e) {
-					JOptionPane.showMessageDialog(null, "Alimento não encontrado");
-					e.printStackTrace();
-				} catch (DadosVaziosException e) {
-					JOptionPane.showMessageDialog(null, "Alimento com nome inválido");
-					e.printStackTrace();
-				}
+		MouseAdapterNome btnAdicionar = (Model objModel) -> {
+			try {					
+				Alimento ali = ((Alimento) objModel).clone();				
+				ali.setId(null);
+				refeicao.setData(new Date());
+				refeicao.addAlimento(ali);
+				resetScreen(panel);
+			} catch (NullPointerException e) {
+				JOptionPane.showMessageDialog(null, "Não foi possível adicionar refeicao. Refeicao null");
+				e.printStackTrace();
+			} catch (CloneNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		};
 		
 		
-		ScrollList<Alimento> list = new ScrollList<Alimento>();
+		ScrollList<AlimentoPronto> list = new ScrollList<AlimentoPronto>();
 		list.setAdapterAdicionar(btnAdicionar);
 		list.getVerticalScrollBar().setUnitIncrement(4);
 		list.setBorder(BorderFactory.createEmptyBorder());
 		list.setBounds(534, 168, 336, 307);
 		list.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		try {
-			list.configureList(panel, new ControllerAlimento().buscar(null));
+			list.configureList(panel, ControllerAlimentoPronto.buscarTodos());
 		} catch (NullPointerException e1) {
-			JOptionPane.showMessageDialog(null, "Alimento não encontrado");
+			JOptionPane.showMessageDialog(null, "Lista de alimentos vazia");
 			e1.printStackTrace();
-		} catch (DadosVaziosException e1) {
-			JOptionPane.showMessageDialog(null, "Alimento com nome inválido");
-			e1.printStackTrace();
-		}
+		} 
 		panel.add(list);
 	}
 	
 	private void configureListAlimentosRefeicao(JPanel panel){
-		MouseAdapterNome btnEditar = new MouseAdapterNome() {
-			@Override
-			public void mouseAdapter(String nome) {
-				for(Alimento obj: refeicao.getListAlimento())
-					if(obj.getNome().equals(nome))
-						PopupEditarAlimentos.main(obj);
-			}
+		MouseAdapterNome btnEditar = (Model objModel) -> {
+			try {
+				PopupEditarAlimentos.main((Alimento) objModel);
+				refeicao.setAlimento((Alimento) objModel);
+				JOptionPane.showMessageDialog(null, "Alimento atualizado");
+				resetScreen(panel);
+			}  catch (NullPointerException e) {
+				JOptionPane.showMessageDialog(null, "Não foi possível editar refeicao. Refeicao null");
+				e.printStackTrace();
+			} catch (DadosVaziosException e) {
+				JOptionPane.showMessageDialog(null, "Não foi possível editar refeicao. Refeicao com nome inválido");
+				e.printStackTrace();
+			} 
 		};
 		
-		MouseAdapterNome btnExcluir = new MouseAdapterNome() {
-			@Override
-			public void mouseAdapter(String nome) {
-				for(Alimento obj: refeicao.getListAlimento())
-					if(obj.getNome().equals(nome)) {
-						refeicao.delAlimento(obj);
-						break;
-					}
-				
-				for (Component compo : panel.getComponents()) 
-					if(compo instanceof JScrollPane)
-						panel.remove(compo);
-				
-				configureListAlimentos(panel);
-				configureListAlimentosRefeicao(panel);
-				
-				frame.revalidate();
-				frame.repaint();
+		MouseAdapterNome btnExcluir = (Model objModel) -> {
+			try {
+				refeicao.delAlimento((Alimento) objModel);
+				resetScreen(panel);
+			}  catch (NullPointerException e) {
+				JOptionPane.showMessageDialog(null, "Não foi possível excluir refeicao. Refeicao null");
+				e.printStackTrace();
 			}
 		};
 		
@@ -346,9 +335,21 @@ public class TelaCriarRefeicoesPersonalizadas extends LayoutMain {
 		try {
 			list_2.configureList(panel, refeicao.getListAlimento());
 		} catch (NullPointerException e1) {
-			JOptionPane.showMessageDialog(null, "Alimento não encontrado");
 			e1.printStackTrace();
 		} 
 		panel.add(list_2);
 	}
+	
+	private void resetScreen(JPanel panel) {
+		for (Component compo : panel.getComponents()) 
+			if(compo instanceof JScrollPane)
+				panel.remove(compo);
+		
+		configureListAlimentos(panel);
+		configureListAlimentosRefeicao(panel);
+		
+		frame.revalidate();
+		frame.repaint();
+	}
+	
 }

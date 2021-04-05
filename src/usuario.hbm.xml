@@ -13,14 +13,13 @@
     <natural-id mutable="true">
         <property name="usuario" unique="true" />
     </natural-id>
-
+    
     <property name="nome"></property>  
     <property name="dataNascimento"></property>  
     <property name="altura"></property>  
-    <property name="peso"></property>   
+    <property name="peso"></property>
     <property name="sexo"></property>   
     <property name="senha"></property>   
-    <property name="confirmaSenha"></property>   
     <property name="objetivo"></property>   
     <property name="caloriasGastas" type="integer" ></property>   
     <property name="caloriasConsumidas" type="integer" ></property>   
@@ -30,6 +29,18 @@
     <property name="gluten" type="boolean" ></property>   
     <property name="diabetes" type="boolean" ></property>   
     <property name="colesterolAlto" type="boolean" ></property>   
+            
+    <list name="listRefeicao" cascade="all">  
+         <key column="qid"></key>  
+         <index column="type"></index>  
+         <one-to-many class="model.Refeicao"/>  
+   	</list>
+   	
+    <list name="listExercicio"  cascade="all">  
+         <key column="qid" ></key>  
+         <index column="type"></index>  
+         <one-to-many class="model.Exercicio"/>  
+   	</list>
             
   </class>  
  </hibernate-mapping>  

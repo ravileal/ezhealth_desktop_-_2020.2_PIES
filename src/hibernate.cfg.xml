@@ -12,7 +12,13 @@
         <property name="connection.username">tzmqebap</property>  
         <property name="connection.password">XnkZTDBOgLYBGkL4oxbV94R6bT10h2aJ</property>  
         <property name="connection.driver_class">org.postgresql.Driver</property>  
-    <mapping resource="usuario.hbm.xml"/>
+        <property name="show_sql">true</property> 
+    	<mapping resource="usuario.hbm.xml"/>
+    	<mapping resource="alimento.hbm.xml"/>
+    	<mapping resource="alimentoPronto.hbm.xml"/>
+    	<mapping resource="refeicao.hbm.xml"/>
+    	<mapping resource="exercicio.hbm.xml"/>
+    	<mapping resource="exercicioPronto.hbm.xml"/>
     </session-factory>  
- 
+
 </hibernate-configuration>  

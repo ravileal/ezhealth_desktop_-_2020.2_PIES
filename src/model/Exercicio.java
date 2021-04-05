@@ -2,11 +2,12 @@ package model;
 
 import java.util.Date;
 
-public class Exercicio extends Model {
+public class Exercicio extends Model implements Cloneable {
 
 	private int calorias;
-	private String duracao;
+	private Integer duracao;
 	private Date data;
+	private Usuario usuario;
 
 	public int getCalorias() {
 		return this.calorias;
@@ -20,7 +21,7 @@ public class Exercicio extends Model {
 		this.calorias = calorias;
 	}
 
-	public String getDuracao() {
+	public Integer getDuracao() {
 		return this.duracao;
 	}
 
@@ -28,7 +29,7 @@ public class Exercicio extends Model {
 	 * 
 	 * @param duracao
 	 */
-	public void setDuracao(String duracao) {
+	public void setDuracao(Integer duracao) {
 		this.duracao = duracao;
 	}
 
@@ -53,7 +54,17 @@ public class Exercicio extends Model {
 	public void setData(Date data) {
 		this.data = data;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
-	
+	public Exercicio clone() throws CloneNotSupportedException {
+        return (Exercicio) super.clone();
+    }
 
 }

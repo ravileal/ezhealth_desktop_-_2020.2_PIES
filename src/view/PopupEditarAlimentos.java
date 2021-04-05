@@ -10,8 +10,6 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-import controller.ControllerAlimento;
-import controller.ControllerRefeicao;
 import model.Alimento;
 import model.Refeicao;
 import util.DatasFormatadas;
@@ -181,9 +179,10 @@ public class PopupEditarAlimentos extends LayoutPopup {
 			public void mouseClicked(MouseEvent e) {
 				String kcal = txt_kcal.getText();
 				alimento.setCalorias(Integer.parseInt(kcal));
+				
 				String qtd = textFieldQuantidadedoAlimento.getText();
 				alimento.setQuantidade(Integer.parseInt(qtd));
-				JOptionPane.showMessageDialog(null, "Alimento atualizado");
+				
 				dialog.dispose();
 			}
 		});

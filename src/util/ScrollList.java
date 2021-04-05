@@ -15,10 +15,12 @@ import javax.swing.JScrollPane;
 
 import model.Model;
 
-public class ScrollList<Object extends Model> extends JScrollPane {
+public class ScrollList<T extends Model> extends JScrollPane {
+	public ScrollList() {
+	}
 	
 	public interface MouseAdapterNome{
-		void mouseAdapter(String nome);
+		void mouseAdapter(Model obj);
 	}
 	
 	private MouseAdapterNome adapterEditar;
@@ -49,7 +51,7 @@ public class ScrollList<Object extends Model> extends JScrollPane {
 		this.adapterAdicionar = adapterAdicionar;
 	}
 
-	public void configureList(JPanel panel, List<Object> list) {
+	public void configureList(JPanel panel, List<T> list) {
 	
 		JPanel panel_refeicoes = new JPanel();
 		panel_refeicoes.setLayout(new BoxLayout(panel_refeicoes, BoxLayout.Y_AXIS));
@@ -58,14 +60,14 @@ public class ScrollList<Object extends Model> extends JScrollPane {
 		
 		JPanel panel_item = null;
 		
-		for (Object obj : list) {
+		for (T obj : list) {
 			panel_item = new JPanel();
 			panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
 			panel_item.setMaximumSize(new Dimension(getWidth(), 10));
 			panel_item.setBackground(Color.decode("#DFE4EA"));
 			panel_refeicoes.add(panel_item);
 			
-			panel_refeicoes.add(configureItemList(obj.getNome(), panel));
+			panel_refeicoes.add(configureItemList(obj, panel));
 			
 			panel_item = new JPanel();
 			panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
@@ -81,7 +83,7 @@ public class ScrollList<Object extends Model> extends JScrollPane {
 		}
 	}
 	
-	public Panel configureItemList(String nome, JPanel panel) {
+	public Panel configureItemList(T obj, JPanel panel) {
 		Panel panel_item = new Panel();
 		panel_item.setLayout(new BoxLayout(panel_item, BoxLayout.X_AXIS));
 		panel_item.setPreferredSize(new Dimension(0, 50));
@@ -90,58 +92,58 @@ public class ScrollList<Object extends Model> extends JScrollPane {
 	
 		// configurações da label
 		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-		panel_item.add(new JLabel(nome));
+		panel_item.add(new JLabel(obj.getNome()));
 		panel_item.add(Box.createVerticalStrut(10)); 
 		
 		// configurações dos botões
 		if(adapterEditar != null) {
 			panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-			new ViewUtils().setImageInLabel("/Images/edit.png", botaoEditar(nome), panel_item);
+			new ViewUtils().setImageInLabel("/Images/edit.png", botaoEditar(obj), panel_item);
 		} 
 		if(adapterExcluir != null) {
 			panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-			new ViewUtils().setImageInLabel("/Images/remove.png", botaoExcluir(nome), panel_item);
+			new ViewUtils().setImageInLabel("/Images/remove.png", botaoExcluir(obj), panel_item);
 		}
 		if(adapterAdicionar != null) {
 			panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
-			new ViewUtils().setImageInLabel("/Images/add.png", botaoAdicionar(nome), panel_item);
+			new ViewUtils().setImageInLabel("/Images/add.png", botaoAdicionar(obj), panel_item);
 		}
 		panel_item.add(Box.createRigidArea(new Dimension(10, 0)));
 		return panel_item;
 	}
 	
-	private JLabel botaoEditar(String nome) {
+	private JLabel botaoEditar(T obj) {
 		JLabel botaoEditar = new JLabel();
 		botaoEditar.setSize(20, 20);
 		botaoEditar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				adapterEditar.mouseAdapter(nome);
+				adapterEditar.mouseAdapter(obj);
 				super.mouseClicked(e);
 			}
 		});
 		return botaoEditar;
 	}
 
-	private JLabel botaoExcluir(String nome) {
+	private JLabel botaoExcluir(T obj) {
 		JLabel botaoExcluir = new JLabel();
 		botaoExcluir.setSize(20, 20);
 		botaoExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				adapterExcluir.mouseAdapter(nome);
+				adapterExcluir.mouseAdapter(obj);
 			}
 		});
 		return botaoExcluir;
 	}
 	
-	private JLabel botaoAdicionar(String nome) {
+	private JLabel botaoAdicionar(T obj) {
 		JLabel botaoExcluir = new JLabel();
 		botaoExcluir.setSize(20, 20);
 		botaoExcluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				adapterAdicionar.mouseAdapter(nome);
+				adapterAdicionar.mouseAdapter(obj);
 			}
 		});
 		return botaoExcluir;

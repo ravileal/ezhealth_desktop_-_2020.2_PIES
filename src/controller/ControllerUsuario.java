@@ -4,7 +4,6 @@ import model.Exercicio;
 import model.Refeicao;
 import model.Usuario;
 import model.dao.connection.HandlerObject;
-import repository.RepositorioUsuario;
 import util.*;
 import validation.CredenciaisInvalidasException;
 import validation.DadosVaziosException;
@@ -14,25 +13,18 @@ import validation.UsuarioDuplicadoException;
 
 import java.util.ArrayList;
 
-public class ControllerUsuario implements CRUD<Usuario> {
+public class ControllerUsuario {
 
-	private static RepositorioUsuario rep = new RepositorioUsuario();
 	private static HandlerObject handlerObject = HandlerObject.getInstance();
 	private static Usuario usuarioLogado;
-	
-	public ControllerUsuario() {
-//		try { // usuario de teste
-//			usuarioLogado = this.buscar("Admin").get(0);
-//		} catch (NullPointerException | DadosVaziosException e) {e.printStackTrace();}
-	}
-	
+
 	
 	
 	/* -----------------------------
 	 * 		Métodos do CRUD
 	 * -----------------------------*/
-	@Override
-	public boolean adicionar(Usuario obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException, SenhaInvalidaException, UsuarioDuplicadoException {
+	
+	public static boolean adicionar(Usuario obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException, SenhaInvalidaException, UsuarioDuplicadoException {
 		if(obj == null)
 			throw new NullPointerException("Impossível concluir cadastro! Objeto Usuario null");
 		else if(obj.getNome().equals(""))
@@ -56,43 +48,43 @@ public class ControllerUsuario implements CRUD<Usuario> {
 		} 
 	}
 
-	@Override
-	public ArrayList<Usuario> buscar(String usuario) throws DadosVaziosException, NullPointerException {
+
+	public static Usuario buscar(String usuario) throws DadosVaziosException, NullPointerException {
 		if(usuario != null && usuario.equals(""))
 			throw new DadosVaziosException("Impossível buscar! Campo usuário vazio");
 		
-		ArrayList<Usuario> list = rep.buscar(usuario);
+		Usuario user = handlerObject.read(Usuario.class, "usuario", usuario);
 		
-		if(list == null)
+		if(user == null)
 			throw new NullPointerException("Não foi possível encontrar usuarios a partir do nome de usuario");
 		else 
-			return list;
+			return user;
 			
 	}
 
-	@Override
-	public boolean editar(String nome, Usuario obj) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException, SenhaInvalidaException {
-		if(obj == null)
+
+	public static boolean editar() throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, NullPointerException, SenhaInvalidaException {
+		if(usuarioLogado == null)
 			throw new NullPointerException("Impossível editar! Objeto Usuario null");
-		else if(obj.getNome().equals(""))
+		else if(usuarioLogado.getNome().equals(""))
 			throw new DadosVaziosException("Impossível editar! Nome vazio");
-		else if(obj.getUsuario().equals(""))
+		else if(usuarioLogado.getUsuario().equals(""))
 			throw new DadosVaziosException("Impossível concluir cadastro! Campo usuário vazio");
-		else if(obj.getSenha().equals(""))
+		else if(usuarioLogado.getSenha().equals(""))
 			throw new DadosVaziosException("Impossível concluir cadastro! Senha vazia");
-		else if(!obj.getSenha().equals(obj.getConfirmaSenha()))
+		else if(!usuarioLogado.getSenha().equals(usuarioLogado.getConfirmaSenha()))
 			throw new SenhaInvalidaException("Impossível concluir cadastro! As senhas não coincidem");
-		else if(!rep.editar(nome, obj))
-			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível editar! Erro ao tentar editar o usuario '"+nome+"' no repositorio");
+		else if(!handlerObject.update(Usuario.class, usuarioLogado))
+			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível editar! Erro ao tentar editar o usuario '"+usuarioLogado.getNome()+"' no repositorio");
 		else 
 			return true;
 	}
 
-	@Override
-	public boolean remover(String nome) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
+
+	public static boolean remover(String nome) throws DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception {
 		if(nome.equals(""))
 			throw new DadosVaziosException("Impossível excluir! Nome vazio");
-		else if(!rep.remover(nome))
+		else if(!handlerObject.delete(nome))
 			throw new OperacaoNaoConcluidaRepositorioExeception("Impossível excluir! Erro ao tentar excluir o usuario '"+nome+"' no repositorio");
 		else 
 			return true;
@@ -110,25 +102,31 @@ public class ControllerUsuario implements CRUD<Usuario> {
 	 */
 	public static boolean validarLogin(String usuario, String senha) throws CredenciaisInvalidasException {
 		
-		Usuario user = handlerObject.readUser(Usuario.class, usuario);
-		if(user == null)
+		try {
+			Usuario user = buscar(usuario);
+			
+			if( !user.getSenha().equals(senha) || !user.getUsuario().equals(usuario))
+				throw new CredenciaisInvalidasException("Login ou senha inválidos");
+			user.setConfirmaSenha(senha);
+			
+			if(user.getListRefeicao() == null)
+				user.setListRefeicao(new ArrayList<>());
+			
+			if(user.getListExercicio() == null)
+				user.setListExercicio(new ArrayList<>());
+			
+			usuarioLogado = user;
+		} catch (NullPointerException e) {
+			e.printStackTrace();
 			throw new NullPointerException("Nenhum usuario encontrado");
-		else if( !user.getSenha().equals(senha) || !user.getUsuario().equals(usuario))
-			throw new CredenciaisInvalidasException("Login ou senha inválidos");
+		} catch (DadosVaziosException e) {
+			e.printStackTrace();
+			throw new NullPointerException("Dados vazios");
+		}		
 		
-		usuarioLogado = user;
 		return true;
 	}
 
-	/**
-	 * 
-	 * @param refeicao
-	 * @param exercicio
-	 */
-	public void calculoObjetivoCalorias(Refeicao refeicao, Exercicio exercicio) {
-		// TODO - implement ControllerUsuario.calculoObjetivoCalorias
-		throw new UnsupportedOperationException();
-	}
 
 	public static Usuario getUsuarioLogado() {
 		return usuarioLogado;
@@ -150,8 +148,12 @@ public class ControllerUsuario implements CRUD<Usuario> {
 		usuarioLogado.addCaloriasGastas(kcal);
 	}
 	
-	public void removerCaloriasGastas(int kcal) {	
+	public static void removerCaloriasGastas(int kcal) {	
 		usuarioLogado.decCaloriasGastas(kcal);
+	}
+	
+	public static void atualizarUsuarioLogado() throws NullPointerException, DadosVaziosException, OperacaoNaoConcluidaRepositorioExeception, SenhaInvalidaException {	
+		editar();
 	}
 
 }

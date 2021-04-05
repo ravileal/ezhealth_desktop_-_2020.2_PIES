@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 import controller.ControllerUsuario;
+import model.dao.connection.Connection;
 import util.ViewUtils;
 
 public class LayoutMain {
@@ -232,6 +233,7 @@ public class LayoutMain {
 		labelSair.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Connection.getInstance().closeConnection();
 				ControllerUsuario.setUsuarioLogado(null);
 				frame.dispose();
 				Login.main(null);

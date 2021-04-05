@@ -8,6 +8,8 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import controller.ControllerUsuario;
+import model.dao.connection.Connection;
+import model.dao.connection.HandlerObject;
 import util.ViewUtils;
 import validation.CredenciaisInvalidasException;
 
@@ -46,6 +48,7 @@ public class Login {
 			@Override
 			public void run() {
 				try {
+					Connection.getInstance().startConnection();
 					Login window = new Login();
 					window.frame.setVisible(true);
 //					Popular.getInstance();

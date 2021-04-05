@@ -7,8 +7,9 @@ import validation.DadosVaziosException;
 public class Refeicao extends AbstractAlimentacao {
 
 	private Date data;
-	private String tipo;
-	private ArrayList<Alimento> listAlimento;
+	private boolean isDiaria;
+	private List<Alimento> listAlimento;
+	private Usuario usuario;
 
 	public Refeicao(){
 		listAlimento = new ArrayList<Alimento>();
@@ -26,19 +27,16 @@ public class Refeicao extends AbstractAlimentacao {
 		this.data = data;
 	}
 
-	public String getTipo() {
-		return this.tipo;
+
+	public boolean getIsDiaria() {
+		return isDiaria;
 	}
 
-	/**
-	 * 
-	 * @param tipo
-	 */
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setIsDiaria(boolean isDiaria) {
+		this.isDiaria = isDiaria;
 	}
 
-	public ArrayList<Alimento> getListAlimento() {
+	public List<Alimento> getListAlimento() {
 		return this.listAlimento;
 	}
 
@@ -46,17 +44,22 @@ public class Refeicao extends AbstractAlimentacao {
 	 * 
 	 * @param listAlimento
 	 */
-	public void setListAlimento(ArrayList<Alimento> listAlimento) {
+	public void setListAlimento(List<Alimento> listAlimento) {
 		this.listAlimento = listAlimento;
 	}
 
 	/**
 	 * 
 	 * @param alimento
+	 * @return 
 	 */
-	public void delAlimento(Alimento alimento) {
-		setCalorias(getCalorias()-alimento.getCalorias());
-		this.listAlimento.remove(alimento);
+	public boolean delAlimento(Alimento alimento) {
+		setCalorias( getCalorias() - alimento.getCalorias() );
+		setProteina( getProteina() - alimento.getProteina() );
+		setCarboidrato( getCarboidrato() - alimento.getCarboidrato() );
+		setGordura( getGordura() - alimento.getGordura() );
+		setTaxaAcucar( getTaxaAcucar() - alimento.getTaxaAcucar() );
+		return this.listAlimento.remove(alimento);
 	}
 
 	/**
@@ -66,7 +69,11 @@ public class Refeicao extends AbstractAlimentacao {
 	public void addAlimento(Alimento alimento) {
 		if(this.listAlimento==null) this.listAlimento = new ArrayList<Alimento>();
 		this.listAlimento.add(alimento);
-		setCalorias(getCalorias()+alimento.getCalorias());
+		setCalorias( getCalorias() + alimento.getCalorias() );
+		setProteina( getProteina() + alimento.getProteina() );
+		setCarboidrato( getCarboidrato() + alimento.getCarboidrato() );
+		setGordura( getGordura() + alimento.getGordura() );
+		setTaxaAcucar( getTaxaAcucar() + alimento.getTaxaAcucar() );
 	}
 
 	/**
@@ -82,7 +89,7 @@ public class Refeicao extends AbstractAlimentacao {
 		int i = 0;
 		boolean find = false;
 		for(; i<listAlimento.size(); i++){
-			if(listAlimento.get(i).getNome().equals(alimento.getNome())) {
+			if(listAlimento.get(i).getId() == alimento.getId()) {
 				find = true;
 				this.listAlimento.set(i, alimento);
 				break;
@@ -90,6 +97,14 @@ public class Refeicao extends AbstractAlimentacao {
 		}
 		if(!find) 
 			throw new NullPointerException();
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

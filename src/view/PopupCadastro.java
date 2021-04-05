@@ -354,7 +354,7 @@ public class PopupCadastro extends LayoutPopup {
 				usuario.calularMetaCaloria();
 				
 				try {
-					new ControllerUsuario().adicionar(usuario);
+					ControllerUsuario.adicionar(usuario);
 					JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
 					dialog.dispose();
 				} catch (NullPointerException e1) {

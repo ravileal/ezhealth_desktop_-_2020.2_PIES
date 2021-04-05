@@ -11,16 +11,18 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-import controller.ControllerAlimento;
-import controller.ControllerRefeicao;
+import controller.ControllerUsuario;
 import model.Alimento;
+import model.Model;
 import model.Refeicao;
+import model.Usuario;
 import util.DatasFormatadas;
 import util.ScrollList;
 import util.ViewUtils;
 import util.ScrollList.MouseAdapterNome;
 import validation.DadosVaziosException;
 import validation.OperacaoNaoConcluidaRepositorioExeception;
+import validation.SenhaInvalidaException;
 
 import javax.swing.ScrollPaneConstants;
 
@@ -121,36 +123,43 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 	}
 	
 	private void configureListRefeicoes(JPanel panel){
-		MouseAdapterNome btnEditar = new MouseAdapterNome() {
-			@Override
-			public void mouseAdapter(String nome) {
-				frame.dispose();
-				TelaEditarRefeicaoPersonalizada.main(nome);
-			}
+		MouseAdapterNome btnEditar = (Model obj) -> {
+			frame.dispose();
+			TelaEditarRefeicaoPersonalizada.main((Refeicao) obj);
 		};
 		
-		MouseAdapterNome btnExcluir = new MouseAdapterNome() {
-			@Override
-			public void mouseAdapter(String nome) {
-				try {
-					new ControllerRefeicao(true).remover(nome);
-				} catch (DadosVaziosException e) {
-					JOptionPane.showMessageDialog(null, "Refeição com nova vazio");
-					e.printStackTrace();
-				} catch (OperacaoNaoConcluidaRepositorioExeception e) {
-					JOptionPane.showMessageDialog(null, "Erro ao tentar remover");
-					e.printStackTrace();
-				}
+		MouseAdapterNome btnExcluir = (Model obj) -> {
+			try {
+				Usuario usuario = ControllerUsuario.getUsuarioLogado();
 				
-				for (Component compo : panel.getComponents()) 
-					if(compo instanceof JScrollPane)
-						panel.remove(compo);
+				Refeicao ref = (Refeicao) obj;
+				usuario.decCaloriasConsumidas(ref.getCalorias());
+				usuario.getListRefeicao().remove(ref);
 				
-				configureListRefeicoes(panel);
-				
-				frame.revalidate();
-				frame.repaint();
-			}
+				ControllerUsuario.setUsuarioLogado(usuario);
+				ControllerUsuario.editar();
+			} catch (NullPointerException e) {
+				JOptionPane.showMessageDialog(null, "Erro ao tentar remover, refeição não encontrada");
+				e.printStackTrace();
+			} catch (DadosVaziosException e) {
+				JOptionPane.showMessageDialog(null, "Erro ao tentar remover, algum dados está em branco");
+				e.printStackTrace();
+			} catch (OperacaoNaoConcluidaRepositorioExeception e) {
+				JOptionPane.showMessageDialog(null, "Erro ao tentar remover, erro ao salvar no banco");
+				e.printStackTrace();
+			} catch (SenhaInvalidaException e) {
+				JOptionPane.showMessageDialog(null, "Erro ao tentar remover, usuario com senha inválida");
+				e.printStackTrace();
+			} 
+			
+			for (Component compo : panel.getComponents()) 
+				if(compo instanceof JScrollPane)
+					panel.remove(compo);
+			
+			configureListRefeicoes(panel);
+			
+			frame.revalidate();
+			frame.repaint();
 		};
 		
 		
@@ -162,14 +171,11 @@ public class TelaRefeicoesPersonalizadas extends LayoutMain {
 		list_2.setBounds(28, 92, 820, 337);
 		list_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		try {
-			list_2.configureList(panel,  new ControllerRefeicao(true).buscar(null) );
+			list_2.configureList(panel,  ControllerUsuario.getUsuarioLogado().getListRefeicao() );
 		} catch (NullPointerException e1) {
-			JOptionPane.showMessageDialog(null, "Refeição não encontrada");
+			JOptionPane.showMessageDialog(null, "Nenhum refeição personalizada cadastrada");
 			e1.printStackTrace();
-		} catch (DadosVaziosException e1) {
-			JOptionPane.showMessageDialog(null, "Refeição com nova vazio");
-			e1.printStackTrace();
-		} 
+		}
 		panel.add(list_2);
 	}
 	

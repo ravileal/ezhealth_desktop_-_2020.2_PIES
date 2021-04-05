@@ -1,7 +1,9 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import util.DatasFormatadas;
 
@@ -23,6 +25,15 @@ public class Usuario extends Model{
 	private boolean gluten;
 	private boolean diabetes;
 	private boolean colesterolAlto;
+	
+	private List<Refeicao> listRefeicao;
+	private List<Exercicio> listExercicio;
+	
+	
+	public Usuario() {
+		this.listRefeicao = new ArrayList<Refeicao>();
+		this.listExercicio = new ArrayList<Exercicio>();
+	}
 
 	@Override
 	public String getNome() {
@@ -187,6 +198,22 @@ public class Usuario extends Model{
 		this.decCaloriasMeta(calorias);
 	}
 	
+	public List<Refeicao> getListRefeicao() {
+		return listRefeicao;
+	}
+
+	public void setListRefeicao(List<Refeicao> listRefeicao) {
+		this.listRefeicao = listRefeicao;
+	}
+
+	public List<Exercicio> getListExercicio() {
+		return listExercicio;
+	}
+
+	public void setListExercicio(List<Exercicio> listExercicio) {
+		this.listExercicio = listExercicio;
+	}
+
 	// CONSUMIDAS
 	public void setCaloriasConsumidas(int caloriasConsumidas) {
 		this.caloriasConsumidas = caloriasConsumidas;

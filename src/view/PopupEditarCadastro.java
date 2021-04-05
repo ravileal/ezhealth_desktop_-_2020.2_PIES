@@ -338,7 +338,7 @@ public class PopupEditarCadastro extends LayoutPopup {
 		salvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Usuario usuario = new Usuario();
+				Usuario usuario = ControllerUsuario.getUsuarioLogado();
 				usuario.setNome(textFieldNome.getText());
 				usuario.setSexo(comboBoxSexo.getSelectedItem().toString());
 				usuario.setPeso(textFieldPeso.getText());
@@ -347,8 +347,10 @@ public class PopupEditarCadastro extends LayoutPopup {
 				usuario.setDataNascimento(textFieldNascimento.getText());
 				
 				usuario.setUsuario(textFieldUsuario.getText());
-				usuario.setSenha(String.valueOf(textFieldSenha.getPassword()));
-				usuario.setConfirmaSenha(String.valueOf(textFieldConfirmaSenha.getPassword()));
+				
+				if(!String.valueOf(textFieldSenha.getPassword()).isEmpty() || !String.valueOf(textFieldConfirmaSenha.getPassword()).isEmpty())
+					usuario.setSenha(String.valueOf(textFieldSenha.getPassword()));
+					usuario.setConfirmaSenha(String.valueOf(textFieldConfirmaSenha.getPassword()));
 				
 				usuario.setObjetivo(buttonGroupMeta.getSelection().getActionCommand());
 				
@@ -358,12 +360,11 @@ public class PopupEditarCadastro extends LayoutPopup {
 				usuario.setColesterolAlto(checkbox_colesterolAlto.isSelected());
 				usuario.setDiabetes(checkbox_diabetes.isSelected());
 				
+				ControllerUsuario.setUsuarioLogado(usuario);
+				
 				try {
-					new ControllerUsuario().editar(ControllerUsuario.getUsuarioLogado().getUsuario(), usuario);
+					ControllerUsuario.editar();
 					JOptionPane.showMessageDialog(null, "Dados atualizados");
-					ControllerUsuario.setUsuarioLogado(usuario);
-					usuario = null;
-					usuario = ControllerUsuario.getUsuarioLogado();
 					frameOld.atualizarTela();
 					dialog.dispose();
 				} catch (DadosVaziosException e1) {

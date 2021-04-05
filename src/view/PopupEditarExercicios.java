@@ -108,7 +108,7 @@ public class PopupEditarExercicios extends LayoutPopup {
 		panel.add(lblMinutos);
 		
 		JTextField textFieldMinutosExercicios = new JTextField();
-		textFieldMinutosExercicios.setText(exercicio.getDuracao());
+		textFieldMinutosExercicios.setText(String.valueOf(exercicio.getDuracao()));
 		textFieldMinutosExercicios.setFont(new Font("Quicksand Light", Font.PLAIN, 12));
 		textFieldMinutosExercicios.setColumns(10);
 		textFieldMinutosExercicios.setBounds(86, 94, 169, 30);
@@ -167,9 +167,10 @@ public class PopupEditarExercicios extends LayoutPopup {
 			public void mouseClicked(MouseEvent e) {
 				String kcal = textField_caloriasTotais.getText();
 				exercicio.setCalorias(Integer.parseInt(kcal));
+				
 				String qtd = textFieldMinutosExercicios.getText();
-				exercicio.setDuracao(qtd);
-				JOptionPane.showMessageDialog(null, "Exercicio atualizado");
+				exercicio.setDuracao(Integer.parseInt(qtd));
+				
 				dialog.dispose();
 			}
 		});

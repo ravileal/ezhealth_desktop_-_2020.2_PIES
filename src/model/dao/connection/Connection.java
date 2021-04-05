@@ -28,28 +28,30 @@ public class Connection {
 			instance = new Connection();
 		return instance;
 	}
-
-	private void setConfiguration() {
+	
+	public void startConnection() {
 		ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		meta = new MetadataSources(ssr).getMetadataBuilder().build();
 		factory = meta.getSessionFactoryBuilder().build();
 		session = factory.openSession();
-		transaction = session.beginTransaction();
+	}
+	
+	public void closeConnection() {
+		session.close();
+		factory.close();	
 	}
 	
 	public boolean execute(Query query) {
-		setConfiguration();
 		boolean result = false;
 		try {
-			query.executeQuery(session, transaction);	
+			query.executeQuery(session, transaction);
 			result = true;
 		} catch(Exception e) {
 			e.printStackTrace();
-		} finally {
-			session.close();
-			factory.close();			
 		}
 		return result;
 	}
+	
+	
 	
 }
