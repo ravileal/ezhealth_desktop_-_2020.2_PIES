@@ -22,10 +22,11 @@ Porém, sabemos que nem todo usuário está acostumado com certos tipos de siste
 
 Abaixo você encontrará links de acesso a Wiki do sistema, onde ensinamos, utilizando prints das próprias telas da nossa aplicação, como realizar as principais atividades contidas no sistema, e também da Documentação do sistema.
 
+[Clique aqui para realizar ir para página de download](https://github.com/ravileal/ezhealth_desktop_-_2020.2_PIES/releases)
+
 [![Wiki EzHealth](https://i.imgur.com/MVgnoix.png)](https://github.com/ravileal/ezhealth_desktop_-_2020.2_PIES/wiki)
 
 [![Documentação EzHealth](https://i.imgur.com/ZZr4KAq.png)](https://github.com/ravileal/ezhealth_desktop_-_2020.2_PIES/wiki/Documentação-do-sistema)
-
 
 ### Autores
 
