@@ -34,19 +34,6 @@ public class HandlerObject {
 			);
 		return (T) object;
 	}
-//	
-//	@SuppressWarnings("unchecked")
-//	public <T,K> T readUser(Class<T> class1, K id) {
-//		connection.execute(
-//				(Session session, Transaction transaction) -> {
-//					object = null;
-//					object = (id instanceof String)?
-//							session.byNaturalId(class1).using("usuario", id).load():
-//								session.find(class1, id);
-//				}
-//			);
-//		return (T) object;
-//	}
 	
 	@SuppressWarnings("unchecked")
 	public <T,K> T read(Class<T> class1, String fildName, K value) {

@@ -23,6 +23,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -183,10 +186,16 @@ public class Login {
 		panel.add(btnCadastro);
 		
 		JLabel jLabelImagemLogin1 = new JLabel("");
-		ImageIcon imgLogin1 = new ImageIcon(this.getClass().getResource("/Images/imagemlogin1.png"));
-		jLabelImagemLogin1.setIcon(imgLogin1);
-		jLabelImagemLogin1.setBounds(60, 143, 468, 355);
-		panel.add(jLabelImagemLogin1);
+		try {
+			URL location = Paths.get("Images/imagemlogin1.png").toUri().toURL();
+			ImageIcon imgLogin1 = new ImageIcon(location);
+			jLabelImagemLogin1.setIcon(imgLogin1);
+			jLabelImagemLogin1.setBounds(60, 143, 468, 355);
+			panel.add(jLabelImagemLogin1);
+		} catch (MalformedURLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
 		
 		// ---- Label da imagem hospital ---- Inicio
